@@ -1,4 +1,4 @@
-﻿// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
+// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
 using System;
@@ -70,6 +70,7 @@ public abstract class AsyncService : IAsyncDisposable, IDisposable
                 return _disposed.Value ? AsyncServiceState.Disposed : _state;
             }
         }
+
         private set
         {
             lock (_stateSyncRoot)

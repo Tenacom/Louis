@@ -1,4 +1,4 @@
-﻿// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
+// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
 #if NET6_0_OR_GREATER
@@ -101,12 +101,14 @@ public struct FalseConditionInterpolatedStringHandler
     public void AppendFormatted(ReadOnlySpan<char> value) => _handler.AppendFormatted(value);
 
     /// <inheritdoc cref="StringBuilder.AppendInterpolatedStringHandler.AppendFormatted(ReadOnlySpan{char}, int, string?)"/>
+    // ReSharper disable once MethodOverloadWithOptionalParameter // the compiler reaches it with named arguments, as in the BCL
     public void AppendFormatted(ReadOnlySpan<char> value, int alignment = 0, string? format = null) => _handler.AppendFormatted(value, alignment, format);
 
     /// <inheritdoc cref="StringBuilder.AppendInterpolatedStringHandler.AppendFormatted(string?)"/>
     public void AppendFormatted(string? value) => _handler.AppendFormatted(value);
 
     /// <inheritdoc cref="StringBuilder.AppendInterpolatedStringHandler.AppendFormatted(string?, int, string?)"/>
+    // ReSharper disable once MethodOverloadWithOptionalParameter // the compiler reaches it with named arguments, as in the BCL
     public void AppendFormatted(string? value, int alignment = 0, string? format = null) => _handler.AppendFormatted(value, alignment, format);
 
     /// <inheritdoc cref="StringBuilder.AppendInterpolatedStringHandler.AppendFormatted(object?, int, string?)"/>

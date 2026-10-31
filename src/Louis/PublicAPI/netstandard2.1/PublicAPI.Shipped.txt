@@ -333,6 +333,12 @@ static Louis.Threading.InterlockedReference<T>.operator ==(Louis.Threading.Inter
 static Louis.Threading.ValueTaskUtility.WhenAll(System.Collections.Generic.IEnumerable<System.Threading.Tasks.ValueTask>! valueTasks) -> System.Threading.Tasks.ValueTask
 static Louis.Threading.ValueTaskUtility.WhenAll(params System.Threading.Tasks.ValueTask[]! valueTasks) -> System.Threading.Tasks.ValueTask
 static readonly Louis.Text.Utf8Utility.Utf8NoBomEncoding -> System.Text.Encoding!
+virtual Louis.Fluency.FluentAction<T, TArg1, TArg2, TArg3, TArg4>.Invoke(T obj, TArg1 arg1, TArg2 arg2, TArg3 arg3, TArg4 arg4) -> T
+virtual Louis.Fluency.FluentAction<T, TArg1, TArg2, TArg3>.Invoke(T obj, TArg1 arg1, TArg2 arg2, TArg3 arg3) -> T
+virtual Louis.Fluency.FluentAction<T, TArg1, TArg2>.Invoke(T obj, TArg1 arg1, TArg2 arg2) -> T
+virtual Louis.Fluency.FluentAction<T, TArg>.Invoke(T obj, TArg arg) -> T
+virtual Louis.Fluency.FluentAction<T>.Invoke(T obj) -> T
+virtual Louis.ReadOnlySpanFunc<T>.Invoke() -> System.ReadOnlySpan<T>
 virtual Louis.Threading.AsyncService.DisposeResourcesAsync() -> System.Threading.Tasks.ValueTask
 virtual Louis.Threading.AsyncService.LogBeforeExecute() -> void
 virtual Louis.Threading.AsyncService.LogBeforeSetup() -> void

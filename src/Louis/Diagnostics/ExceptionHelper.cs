@@ -1,4 +1,4 @@
-﻿// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
+// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
 using System;
@@ -73,7 +73,7 @@ public static class ExceptionHelper
     public static string FormatObject(object? obj, string? format = null)
         => obj switch {
             null => NullText,
-            string str => str.ToClippedQuotedLiteral(20, 20, false),
+            string str => str.ToClippedQuotedLiteral(20, 20),
             IFormattable formattable => FormatFormattable(formattable, format),
             _ => FormatNonFormattable(obj),
         };
@@ -114,7 +114,8 @@ public static class ExceptionHelper
             return $"<{obj.GetType().Name}:{e.GetType().Name}>";
         }
 
-        return result == null ? ToStringNullText
+        // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract // object.ToString() returns string? in the BCL
+        return result is null ? ToStringNullText
             : result.Length == 0 ? ToStringEmptyText
             : result;
     }

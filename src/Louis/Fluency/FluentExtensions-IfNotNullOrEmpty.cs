@@ -1,4 +1,4 @@
-﻿// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
+// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
 using System;
@@ -27,7 +27,7 @@ partial class FluentExtensions
         Guard.IsNotNull(then);
 
 #pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
-        return string.IsNullOrEmpty(arg) ? @this : then(@this, arg!);
+        return arg is { Length: > 0 } ? then(@this, arg) : @this;
 #pragma warning restore CA1062 // Validate arguments of public methods
     }
 
@@ -49,10 +49,10 @@ partial class FluentExtensions
         Guard.IsNotNull(@this);
         Guard.IsNotNull(then);
 
-        if (!string.IsNullOrEmpty(arg))
+        if (arg is { Length: > 0 })
         {
 #pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
-            then(@this, arg!);
+            then(@this, arg);
 #pragma warning restore CA1062 // Validate arguments of public methods
         }
 

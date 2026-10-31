@@ -1,4 +1,4 @@
-﻿// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
+// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
 using System;
@@ -53,6 +53,8 @@ public abstract class SimpleStringConverter<T> : TypeConverter
     /// <param name="value">The <see cref="object"/> to convert.</param>
     /// <returns>An <see cref="object"/> that represents the converted value.</returns>
     /// <exception cref="NotSupportedException">The conversion cannot be performed.</exception>
+    // ReSharper disable AssignNullToNotNullAttribute // the overrides follow the BCL contract; JetBrains annotations differ
+    // ReSharper disable once NullnessAnnotationConflictWithJetBrainsAnnotations // value is CanBeNull in JetBrains annotations only
     public sealed override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
         => _convertFromString is not null && value is string str
             ? _convertFromString(context, culture, str)
@@ -85,4 +87,6 @@ public abstract class SimpleStringConverter<T> : TypeConverter
         => _convertToString is not null && value is T typedValue && destinationType == typeof(string)
             ? ConvertToString(context, culture, typedValue)
             : base.ConvertTo(context, culture, value, destinationType);
+
+    // ReSharper restore AssignNullToNotNullAttribute
 }

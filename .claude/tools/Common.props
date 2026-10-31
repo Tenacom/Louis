@@ -1,0 +1,24 @@
+<Project>
+
+  <!--
+    Build options for Claude's tools.
+  -->
+  <PropertyGroup>
+
+    <!--
+      A tool is a single-file app: it has no XML docs to generate, no public API, and cannot be packed.
+    -->
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <UsePublicApiAnalyzers>false</UsePublicApiAnalyzers>
+    <IsPackable>false</IsPackable>
+
+    <!--
+      Suppress some warnings that have no business being enforced here.
+    -->
+    <NoWarn>$(NoWarn);SA1402</NoWarn> <!-- File may only contain a single type - not so important in single-file apps. -->
+    <NoWarn>$(NoWarn);SA1636</NoWarn> <!-- File header copyright text should match - Claude's tools may have a different copyright from the solution. -->
+    <NoWarn>$(NoWarn);SA1649</NoWarn> <!-- File name should match first type name - makes no sense in single-file apps. -->
+
+  </PropertyGroup>
+
+</Project>

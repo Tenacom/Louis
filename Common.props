@@ -36,7 +36,7 @@
 
   <!-- Solution-wide build options -->
   <PropertyGroup>
-    <IsTrimmable>true</IsTrimmable>
+    <IsTrimmable Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">true</IsTrimmable>
     <EmitCompilerGeneratedFiles Condition="'$(Configuration)' == 'Debug'">true</EmitCompilerGeneratedFiles>
   </PropertyGroup>
 

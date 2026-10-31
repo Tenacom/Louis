@@ -1,5 +1,9 @@
 name: Publish a release
 
+permissions:
+  contents: read
+  packages: read
+
 concurrency:
   group: release-${{ github.ref }}
   cancel-in-progress: true
@@ -7,100 +11,85 @@ concurrency:
 on:
   workflow_dispatch:
     inputs:
-      versionSpecChange:
+      bump:
         description: 'Version spec change'
         required: true
         type: choice
-        default: 'None'
+        default: 'none'
         options:
-        - None
-        - Unstable
-        - Stable
-        - Minor
-        - Major
-      checkPublicApi:
-        description: 'Check public API files'
-        required: false
-        default: true
-        type: boolean
-      forceUpdateChangelog:
-        description: 'Update changelog on preview'
-        required: false
-        default: false
-        type: boolean
-      checkChangelog:
-        description: 'Check changelog before update'
-        required: false
-        default: true
-        type: boolean
-      cakeVerbosity:
-        description: 'Cake verbosity'
+        - none
+        - unstable
+        - stable
+        - minor
+        - major
+      buildvanaVerbosity:
+        description: 'Buildvana verbosity'
         required: true
         type: choice
-        default: 'Normal'
+        default: 'minimal'
         options:
-        - Normal
-        - Verbose
-        - Diagnostic
+        - quiet
+        - minimal
+        - normal
+        - detailed
+        - diagnostic
 jobs:
   release:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     env:
       DOTNET_NOLOGO: 'true'
       DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 'true'
       DOTNET_CLI_UI_LANGUAGE: 'en-US'
-      FEEDZ_IO_PRIVATE_TOKEN: ${{ secrets.FEEDZ_IO_PRIVATE_TOKEN }}
+      # Secrets consumed by bv. Which environment variable carries each one is named in buildvana.jsonc:
+      # - hosts.github.tokenEnv (implicitly GITHUB_TOKEN) holds the token used for release operations and Git pushes;
+      #   here it is the release PAT, which - unlike the automatic token - can push to a protected branch.
+      # - nuget.feeds.prerelease.apiKeyEnv is FEEDZ_IO_PRIVATE_TOKEN (public Feedz.io preview feed);
+      # - nuget.feeds.release.apiKeyEnv is NUGET_DEPLOYMENT_KEY (nuget.org).
       GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+      FEEDZ_IO_PRIVATE_TOKEN: ${{ secrets.FEEDZ_IO_PRIVATE_TOKEN }}
+      NUGET_DEPLOYMENT_KEY: ${{ secrets.NUGET_DEPLOYMENT_KEY }}
 
-      # Deploy non-prerelease public packages on NuGet
-      RELEASE_NUGET_SOURCE: 'https://api.nuget.org/v3/index.json'
-      RELEASE_NUGET_KEY: ${{ secrets.NUGET_DEPLOYMENT_KEY }}
-      # Deploy prerelease public packages on a public Feedz.io feed
-      PRERELEASE_NUGET_SOURCE: 'https://f.feedz.io/tenacom/preview/nuget/index.json'
-      PRERELEASE_NUGET_KEY: ${{ secrets.FEEDZ_IO_PRIVATE_TOKEN }}
-      # Deploy all private packages on a private Feedz.io feed
-      PRIVATE_NUGET_SOURCE: 'https://f.feedz.io/tenacom/private/nuget/index.json'
-      PRIVATE_NUGET_KEY: ${{ secrets.FEEDZ_IO_PRIVATE_TOKEN }}
-
-      VERSION_SPEC_CHANGE: ${{ inputs.versionSpecChange }}
-      CHECK_PUBLIC_API: ${{ inputs.checkPublicApi }}
-      FORCE_UPDATE_CHANGELOG: ${{ inputs.forceUpdateChangelog }}
-      CHECK_CHANGELOG: ${{ inputs.checkChangelog }}
-      CAKE_VERBOSITY: ${{ inputs.cakeVerbosity }}
+      BV_BUMP: ${{ inputs.bump }}
+      BV_VERBOSITY: ${{ inputs.buildvanaVerbosity }}
     steps:
+    - name: Set bogus local NuGet package directory (to keep nuget.config formally correct)
+      shell: bash
+      run: echo "NUGET_LOCAL_PACKAGES=$RUNNER_TEMP" >> "$GITHUB_ENV"
     - name: Log workflow inputs
-      shell: cmd
+      shell: bash
       run: |
-        echo Version spec change           : %VERSION_SPEC_CHANGE%
-        echo Check public API files        : %CHECK_PUBLIC_API%
-        echo Update changelog on preview   : %FORCE_UPDATE_CHANGELOG%
-        echo Check changelog before update : %CHECK_CHANGELOG%
-        echo Cake verbosity                : %CAKE_VERBOSITY%
+        echo "Version spec change : $BV_BUMP"
+        echo "Buildvana verbosity : $BV_VERBOSITY"
     - name: Checkout repository with full history
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
-        fetch-depth: 0 # Checkout with full history so nbgv can compute Git height correctly.
+        fetch-depth: 0 # Checkout with full history so Buildvana can compute the Git height of the version line correctly.
         token: ${{ secrets.RELEASE_TOKEN }}
-        persist-credentials: true # We need auth set up in the Cake script
+        persist-credentials: true # Buildvana pushes release commits and tags over the checkout's credentials.
     - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v6
       with:
         global-json-file: global.json
+        cache: true
+        cache-dependency-path: |
+          global.json
+          dotnet-tools.json
+          Directory.Packages.props
     - name: Restore .NET tools
-      shell: cmd
+      shell: bash
       run: dotnet tool restore
-    - name: Run build script
+    - name: Run Buildvana release
       id: build
-      shell: cmd
+      shell: bash
       run: |
-        if [%CAKE_VERBOSITY%]==[] set CAKE_VERBOSITY=Normal
-        if [%RUNNER_DEBUG%]==[1] set CAKE_VERBOSITY=Diagnostic
-        dotnet cake --target Release --verbosity %CAKE_VERBOSITY%
+        if [ "$RUNNER_DEBUG" = "1" ]; then BV_VERBOSITY=diagnostic; fi
+        dotnet bv release --verbosity "$BV_VERBOSITY" --bump "$BV_BUMP"
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v4
+      if: ${{ hashFiles('TestResults/*.cobertura.xml') != '' }}
+      uses: codecov/codecov-action@v7
       with:
-        working-directory: ./TestResults/
-        files: Cobertura.xml
+        files: TestResults/*.cobertura.xml
         name: v${{ steps.build.outputs.version }}
+        token: ${{ secrets.CODECOV_GLOBAL_UPLOAD_TOKEN }}
         verbose: true

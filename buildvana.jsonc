@@ -1,0 +1,53 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Tenacom/Buildvana/2.1.887/schemas/buildvana.schema.json",
+
+  "repository": {
+    "url": "https://github.com/Tenacom/Louis",
+  },
+
+  "release": {
+    "branches": ["^main$", "^v\\d+\\.\\d+$"],
+    "checkPublicApi": true,
+    "changelogUpdates": "stable",
+  },
+
+  "versioning": {
+    "prereleaseTag": "preview",
+    "assemblyVersionPrecision": "major",
+  },
+
+  "dotnet": {
+    "configuration": "Release",
+    "test": {
+      "args": ["--coverage", "--coverage-output-format", "cobertura"],
+      "env": {},
+    },
+  },
+
+  "nuget": {
+    "feeds": {
+      "prerelease": {
+        "source": "https://f.feedz.io/tenacom/preview/nuget/index.json",
+        "apiKeyEnv": "FEEDZ_IO_PRIVATE_TOKEN",
+      },
+      "release": {
+        "source": "https://api.nuget.org/v3/index.json",
+        "apiKeyEnv": "NUGET_DEPLOYMENT_KEY",
+      },
+    },
+  },
+
+  "hosts": {
+    "github": {
+      "tokenEnv": "GITHUB_TOKEN",
+    },
+  },
+
+  "dependencies": {
+    "policies": {
+      "StyleCop.Analyzers": "minor-",
+    },
+  },
+
+  "fileBasedApps": ["/.claude/tools/"],
+}

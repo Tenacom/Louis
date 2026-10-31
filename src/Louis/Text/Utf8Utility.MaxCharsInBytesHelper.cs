@@ -1,4 +1,4 @@
-﻿// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
+// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
 using System;
@@ -16,7 +16,7 @@ partial class Utf8Utility
 
         private int MaxBytes { get; init; }
 
-        public static int GetMaxCharsInBytes(ReadOnlySpan<char> chars, int maxBytes)
+        public static int Compute(ReadOnlySpan<char> chars, int maxBytes)
         {
             if (chars.Length == 0 || maxBytes < 1)
             {

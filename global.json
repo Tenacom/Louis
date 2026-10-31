@@ -1,11 +1,14 @@
 {
   "sdk": {
-    "version": "8.0.205",
+    "version": "10.0.403",
     "rollForward": "latestMinor",
     "allowPrerelease": false
   },
   "msbuild-sdks": {
-    "Buildvana.Sdk": "1.0.154-preview",
-    "Microsoft.Build.NoTargets": "3.7.56"
+    "Buildvana.Sdk": "2.1.887",
+    "Microsoft.Build.NoTargets": "3.7.134"
+  },
+  "test": {
+    "runner": "Microsoft.Testing.Platform"
   }
 }

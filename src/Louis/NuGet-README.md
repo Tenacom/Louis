@@ -2,8 +2,10 @@
 
 ---
 
-L.o.U.I.S. (pronounced _LOO-iss_, just like the name Louis) is a collection of useful types commonly needed in the development of .NET libraries and applications.
+L.o.U.I.S. is a collection of useful types commonly needed in the development of .NET libraries and applications.
+It is pronounced _LOO-iss_, just like the name Louis.
 
 This package contains `Louis.dll`, providing a base set of functionality with the bare minimum external dependencies.
 
-Want to know more? [Here's the complete README.](https://github.com/Tenacom/Louis#readme)
+Want to know more?  
+[Here's the complete README.](https://github.com/Tenacom/Louis#readme)

@@ -1,7 +1,7 @@
 <Project>
 
   <!-- Common build options for test projects -->
-  <PropertyGroup Condition="'$(TestProjectType)' != ''">
+  <PropertyGroup Condition="'$(IsTestingPlatformApplication)' == 'true'">
 
     <!--
         Test assemblies are not going to interoperate much.
@@ -13,15 +13,13 @@
     <!-- No need for public API analyzers -->
     <UsePublicApiAnalyzers>false</UsePublicApiAnalyzers>
 
-    <!-- Disable some warnings that have no sense in test projects -->
-    <NoWarn>$(NoWarn);CA1050</NoWarn> <!-- Declare types in namespaces -->
-    <NoWarn>$(NoWarn);CA1707</NoWarn> <!-- Identifiers should not contain underscores -->
-    <NoWarn>$(NoWarn);IDE0058</NoWarn> <!-- Expression value is never used -->
+    <!-- No sense in packing test projects -->
+    <IsPackable>false</IsPackable>
 
   </PropertyGroup>
 
   <!-- Hide test result files in Visual Studio -->
-  <ItemGroup Condition="'$(TestProjectType)' != ''">
+  <ItemGroup Condition="'$(IsTestingPlatformApplication)' == 'true'">
     <None Remove="TestResults\**" />
   </ItemGroup>
 

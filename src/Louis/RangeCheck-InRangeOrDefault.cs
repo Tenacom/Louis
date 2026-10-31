@@ -1,4 +1,4 @@
-﻿// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
+// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
 using System;
@@ -78,8 +78,8 @@ partial class RangeCheck
     public static T? InRangeOrDefault<T>(T? value, T min, T max, T? defaultValue, bool acceptNull)
         where T : class, IComparable<T>
         => value == null
-            ? (acceptNull ? null : defaultValue)
-            : (Verify(value, min, max) ? value : defaultValue);
+            ? acceptNull ? null : defaultValue
+            : Verify(value, min, max) ? value : defaultValue;
 
     /// <summary>
     /// Returns a value if it is within an inclusive range, or a default value otherwise,
@@ -110,8 +110,8 @@ partial class RangeCheck
     public static T? InRangeOrDefault<T>(T? value, T min, T max, T? defaultValue, bool acceptNull, IComparer<T> comparer)
         where T : class
         => value == null
-            ? (acceptNull ? null : defaultValue)
-            : (Verify(value, min, max, comparer) ? value : defaultValue);
+            ? acceptNull ? null : defaultValue
+            : Verify(value, min, max, comparer) ? value : defaultValue;
 
     /// <summary>
     /// Returns a value if it is within an inclusive range, or a default value otherwise.
@@ -137,8 +137,8 @@ partial class RangeCheck
     public static T? InRangeOrDefault<T>(T? value, T min, T max, T? defaultValue, bool acceptNull)
         where T : struct, IComparable<T>
         => value.HasValue
-            ? (Verify(value.Value, min, max) ? defaultValue : value.Value)
-            : (acceptNull ? null : defaultValue);
+            ? Verify(value.Value, min, max) ? value.Value : defaultValue
+            : acceptNull ? null : defaultValue;
 
     /// <summary>
     /// Returns a value if it is within an inclusive range, or a default value otherwise,
@@ -169,6 +169,6 @@ partial class RangeCheck
     public static T? InRangeOrDefault<T>(T? value, T min, T max, T? defaultValue, bool acceptNull, IComparer<T> comparer)
         where T : struct
         => value.HasValue
-            ? (Verify(value.Value, min, max, comparer) ? defaultValue : value.Value)
-            : (acceptNull ? null : defaultValue);
+            ? Verify(value.Value, min, max, comparer) ? value.Value : defaultValue
+            : acceptNull ? null : defaultValue;
 }

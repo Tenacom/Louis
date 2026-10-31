@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "bv": {
+      "version": "2.1.887",
+      "commands": [
+        "bv"
+      ],
+      "rollForward": false
+    },
+    "nullable.extended.mcp": {
+      "version": "1.19.0",
+      "commands": [
+        "nullable-extended-mcp"
+      ],
+      "rollForward": false
+    }
+  }
+}

@@ -1,14 +1,10 @@
 <Project>
 
-  <!-- SourceLink -->
+  <!-- SourceLink. The .NET SDK bundles the Microsoft.SourceLink.GitHub package since .NET 8, so no package reference is needed. -->
   <PropertyGroup>
-    <IsPackable Condition="'$(IsPackable)' == '' And '$(IsTestProject)' == 'true'">false</IsPackable>
     <IsPackable Condition="'$(IsPackable)' == ''">true</IsPackable>
     <IsPackable Condition="'$(IsPackable)' != 'true'">false</IsPackable>
   </PropertyGroup>
-  <ItemGroup Condition="$(IsPackable)">
-    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="all" />
-  </ItemGroup>
   <PropertyGroup Condition="$(IsPackable)">
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>

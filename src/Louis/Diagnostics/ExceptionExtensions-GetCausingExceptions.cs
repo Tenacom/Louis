@@ -1,4 +1,4 @@
-﻿// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
+// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
 using System;
@@ -50,6 +50,7 @@ partial class ExceptionExtensions
                 var current = enumerator.Current;
 
                 // Early bailout for common cases - don't allocate an extra enumerator unless necessary.
+                // ReSharper disable once PossibleNullReferenceException // Current is CanBeNull in JetBrains annotations only
                 if (current is not AggregateException && current.InnerException is null)
                 {
                     yield return current;
@@ -59,6 +60,7 @@ partial class ExceptionExtensions
                     using var innerEnumerator = GetCausingExceptionsCore(current);
                     while (innerEnumerator.MoveNext())
                     {
+                        // ReSharper disable once AssignNullToNotNullAttribute // Current is CanBeNull in JetBrains annotations only
                         yield return innerEnumerator.Current;
                     }
                 }
@@ -78,6 +80,7 @@ partial class ExceptionExtensions
                     using var enumerator = GetCausingExceptionsCore(innerException);
                     while (enumerator.MoveNext())
                     {
+                        // ReSharper disable once AssignNullToNotNullAttribute // Current is CanBeNull in JetBrains annotations only
                         yield return enumerator.Current;
                     }
                 }

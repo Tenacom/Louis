@@ -1,4 +1,4 @@
-﻿// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
+// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
 using System;
@@ -173,6 +173,7 @@ public static class SelfCheck
     private static string BuildMessage(string message, string filePath, int lineNumber)
     {
         // No point in throwing an exception if message is null.
+        // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract // CA1062 wants a check in the public callers
         message ??= "<no message>";
 
         // Skip this method and the calling method when getting the stack frame.

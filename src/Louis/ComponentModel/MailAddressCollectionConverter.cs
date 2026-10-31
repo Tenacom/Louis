@@ -1,4 +1,4 @@
-﻿// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
+// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
 using System;
@@ -24,7 +24,7 @@ public sealed class MailAddressCollectionConverter : SimpleStringConverter<MailA
 
     private static MailAddressCollection DoConvertFromString(ITypeDescriptorContext? context, CultureInfo? culture, string value)
     {
-        Guard.IsNotEmpty(value, nameof(value));
+        Guard.IsNotEmpty(value);
         var result = new MailAddressCollection();
         try
         {

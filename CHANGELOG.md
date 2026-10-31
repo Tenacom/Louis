@@ -1,20 +1,26 @@
+<!-- markdownlint-disable MD024 MD034 -->
+
 # Changelog
 
 All notable changes to L.o.U.I.S. will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased changes
 
 ### New features
 
-- Structs `Louis.Text.TrueConditionInterpolatedStringHandler` and `Louis.Text.FalseConditionInterpolatedStringHandler` are interpolated string handlers that only perform formatting if a given condition is true or false, respectively.  
-They can help implement, for example, conditional logging methods that take a condition and an interpolated string as a parameter, ensuring that string interpolation will only be performed if the result is actually used.
+- Struct `Louis.Text.TrueConditionInterpolatedStringHandler` only performs formatting if a given condition is true.
+- Struct `Louis.Text.FalseConditionInterpolatedStringHandler` only performs formatting if a given condition is false.
 
 ### Changes to existing features
 
+- **BREAKING CHANGE**: `Louis` packages no longer target .NET 6.0, .NET 7.0, and .NET 8.0, which are out of support, and target .NET 10.0 instead.
+
 ### Bugs fixed in this release
+
+- The `RangeCheck.InRangeOrDefault` overloads for nullable value types with `acceptNull` returned `defaultValue` for a value in range, and the value otherwise.
 
 ### Known problems introduced by this release
 

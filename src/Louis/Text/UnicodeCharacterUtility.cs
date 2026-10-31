@@ -1,4 +1,4 @@
-﻿// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
+// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
 using System;
@@ -82,12 +82,12 @@ public static class UnicodeCharacterUtility
     /// </returns>
     public static bool IsValidIdentifier([NotNullWhen(true)] string? name)
     {
-        if (string.IsNullOrEmpty(name))
+        if (name is null || name.Length == 0)
         {
             return false;
         }
 
-        if (!IsIdentifierStartCharacter(name![0]))
+        if (!IsIdentifierStartCharacter(name[0]))
         {
             return false;
         }

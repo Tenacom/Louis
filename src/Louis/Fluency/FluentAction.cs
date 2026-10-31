@@ -1,9 +1,10 @@
-﻿// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
+// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
 namespace Louis.Fluency;
 
-#pragma warning disable SA1402 // File may only contain a single type
+#pragma warning disable SA1402 // File may only contain a single type - it would be inconvenient and gain no real benefit in this context.
+#pragma warning disable SA1649 // File name should match first type name - the file name is intentionally different to group related delegates together.
 
 /// <summary>
 /// Encapsulates a method that has one parameter and returns a value of the same type as the parameter.

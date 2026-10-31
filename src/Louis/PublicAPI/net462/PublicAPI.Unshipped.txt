@@ -1,1 +1,5 @@
 #nullable enable
+*REMOVED*Louis.IO.ReadOnlyMemoryStream.ReadAsync(System.Memory<byte> buffer, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask<int>
+*REMOVED*Louis.IO.ReadOnlyMemoryStream.WriteAsync(System.ReadOnlyMemory<byte> buffer, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask
+Louis.IO.ReadOnlyMemoryStream.ReadAsync(System.Memory<byte> buffer, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<int>
+Louis.IO.ReadOnlyMemoryStream.WriteAsync(System.ReadOnlyMemory<byte> buffer, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask

@@ -1,5 +1,5 @@
 {
-  "projectName": "AaaLib",
+  "projectName": "L.o.U.I.S.",
   "projectOwner": "Tenacom",
   "repoType": "github",
   "repoHost": "https://github.com",
@@ -20,13 +20,18 @@
   "skipCi": true,
   "contributors": [
     {
-      "login": "ric15ni",
+      "login": "rdeago",
       "name": "Riccardo De Agostini",
-      "avatar_url": "https://avatars.githubusercontent.com/u/115504873?v=4",
-      "profile": "https://github.com/ric15ni",
+      "avatar_url": "https://avatars.githubusercontent.com/u/139223?v=4",
+      "profile": "https://github.com/rdeago",
       "contributions": [
-        "bug",
-        "doc"
+        "doc",
+        "code",
+        "projectManagement",
+        "ideas",
+        "maintenance",
+        "question",
+        "review"
       ]
     }
   ]

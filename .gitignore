@@ -1,11 +1,11 @@
+# Buildvana temporary files
+.buildvana-temp/
+
 # Build artifacts
 artifacts/
 
 # Local build logs
 logs/
-
-# Cake build
-tools/
 
 # Testing
 **/TestResults/
@@ -20,13 +20,7 @@ tools/
 # ReSharper
 *.DotSettings.user
 _ReSharper.*/
+*.sarif
 
 # Windows thumbnails
 Thumbs.db
-
-# DocFx
-docs/globalMetadata.json
-docs/api/.manifest
-docs/api/*.yml
-docs/obj/
-docs/_site/

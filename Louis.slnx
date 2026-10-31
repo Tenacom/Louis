@@ -1,0 +1,42 @@
+<Solution>
+  <Folder Name="/- Configuration/">
+    <File Path=".editorconfig" />
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path=".globalconfig" />
+    <File Path=".markdownlint-cli2.jsonc" />
+    <File Path="buildvana.jsonc" />
+    <File Path="Common.props" />
+    <File Path="Common.targets" />
+    <File Path="nuget.config" />
+    <File Path="VERSION" />
+  </Folder>
+  <Folder Name="/- Dependencies/">
+    <File Path="Directory.Packages.props" />
+    <File Path="dotnet-tools.json" />
+    <File Path="global.json" />
+  </Folder>
+  <Folder Name="/- Documentation/">
+    <File Path="CHANGELOG.md" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+    <File Path="THIRD-PARTY-NOTICES.md" />
+  </Folder>
+  <Folder Name="/- Documentation/docs/">
+    <File Path="docs/README.md" />
+    <File Path="docs/disposing.md" />
+    <File Path="docs/exceptions.md" />
+    <File Path="docs/fluency.md" />
+  </Folder>
+  <Folder Name="/- Documentation/graphics/">
+    <File Path="graphics/README.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Louis.Hosting/Louis.Hosting.csproj" />
+    <Project Path="src/Louis/Louis.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <File Path="tests/.editorconfig" />
+    <File Path="tests/Common.targets" />
+  </Folder>
+</Solution>

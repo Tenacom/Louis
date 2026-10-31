@@ -1,4 +1,4 @@
-﻿// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
+// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
 using System;
@@ -42,7 +42,7 @@ public static partial class Utf8Utility
         Guard.IsNotNull(str);
         Guard.IsGreaterThanOrEqualTo(maxBytes, 0);
 
-        return MaxCharsInBytesHelper.GetMaxCharsInBytes(str.AsSpan(), maxBytes);
+        return MaxCharsInBytesHelper.Compute(str.AsSpan(), maxBytes);
     }
 
     /// <summary>
@@ -68,6 +68,6 @@ public static partial class Utf8Utility
     {
         Guard.IsGreaterThanOrEqualTo(maxBytes, 0);
 
-        return MaxCharsInBytesHelper.GetMaxCharsInBytes(chars, maxBytes);
+        return MaxCharsInBytesHelper.Compute(chars, maxBytes);
     }
 }

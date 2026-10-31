@@ -1,16 +1,22 @@
-﻿// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
+// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
 using System;
+#if !(NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER)
 using System.Buffers;
+#endif
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+#if !(NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER)
 using System.Runtime.InteropServices;
+#endif
 using System.Threading;
 using System.Threading.Tasks;
 using CommunityToolkit.Diagnostics;
 using Louis.Diagnostics;
+#if !NET6_0_OR_GREATER
 using PolyKit.Diagnostics.CodeAnalysis;
+#endif
 
 namespace Louis.IO;
 
@@ -80,6 +86,7 @@ public sealed class ReadOnlyMemoryStream : Stream
             EnsureNotClosed();
             return _position;
         }
+
         set
         {
             Guard.IsGreaterThan(value, 0);
@@ -259,11 +266,13 @@ public sealed class ReadOnlyMemoryStream : Stream
     /// .NET 5 and newer, .NET Standard 2.1 and newer). On older runtimes, this method is present as a method of <see cref="ReadOnlyMemoryStream"/>
     /// and depends on the <c>System.Memory</c> NuGet package.</para>
     /// </remarks>
+#pragma warning disable RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads - as in Stream
     public
 #if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     override
 #endif
-    ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken)
+    ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+#pragma warning restore RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads
     {
         EnsureNotClosed();
         if (cancellationToken.IsCancellationRequested)
@@ -378,7 +387,7 @@ public sealed class ReadOnlyMemoryStream : Stream
         }
 
         // If destination is not a MemoryStream, write to it asynchronously.
-        if (destination is not MemoryStream destinationMemoryStream)
+        if (destination is not MemoryStream)
         {
 #if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
             // On runtimes that have Stream.WriteAsync(ReadOnlyMemory<byte>, CancellationToken), just use that.
@@ -391,10 +400,10 @@ public sealed class ReadOnlyMemoryStream : Stream
             // Fortunately, MemoryMarshal can tell us whether this is the case
             // and provide us with a reference to the array and the starting index
             // of the ReadOnlyMemory, sparing us the use of ArrayPool for a temporary array.
-            if (MemoryMarshal.TryGetArray(_data, out var dataArray))
+            if (MemoryMarshal.TryGetArray(_data, out var segment) && segment.Array is { } array)
             {
                 // If our data is actually in an array, write directly from that.
-                return destination.WriteAsync(dataArray.Array, dataArray.Offset + originalPosition, remaining, cancellationToken);
+                return destination.WriteAsync(array, segment.Offset + originalPosition, remaining, cancellationToken);
             }
 
             // In the worst case, we have to use a temporary array as a buffer.
@@ -552,12 +561,15 @@ public sealed class ReadOnlyMemoryStream : Stream
     /// and depends on the <c>System.Memory</c> NuGet package.</para>
     /// </remarks>
 #pragma warning disable CA1822 // Mark members as static - false positive, as this is an override
+#pragma warning disable RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads - as in Stream
     public
 #if NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     override
 #endif
-    ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken) => ThrowUnwritableStream<ValueTask>();
-#pragma warning disable CA1822 // Mark members as static
+    ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+        => ThrowUnwritableStream<ValueTask>();
+#pragma warning restore RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads
+#pragma warning restore CA1822 // Mark members as static
 
     /// <summary>
     /// <para>Writes a byte to the current stream at the current position.</para>
@@ -656,10 +668,10 @@ public sealed class ReadOnlyMemoryStream : Stream
         // and provide us with a reference to the array and the starting index
         // of the ReadOnlyMemory, sparing us the use of ArrayPool for a temporary array.
         var remaining = _position - originalPosition;
-        if (MemoryMarshal.TryGetArray(_data, out var dataArray))
+        if (MemoryMarshal.TryGetArray(_data, out var segment) && segment.Array is { } array)
         {
             // If our data is actually in an array, write directly from that.
-            destination.Write(dataArray.Array, dataArray.Offset + originalPosition, remaining);
+            destination.Write(array, segment.Offset + originalPosition, remaining);
             return;
         }
 
