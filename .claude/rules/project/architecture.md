@@ -62,8 +62,14 @@ A namespace named `Internal` holds types that are not part of the public surface
 
 ### Subfolders of `docs/`
 
-None. Every page sits in `docs/` itself.
+`api/`, the generated folder below. Every hand-written page sits in `docs/` itself.
 
 ### Generated regions
 
 None.
+
+### Generated folders
+
+`docs/api/<AssemblyName>/` holds the API reference of each package, flat: `README.md` for the assembly, which GitHub renders in the directory view, a page per namespace, and a page per type with its members. The hook `.buildvana/hooks/release/post-pack.cs` writes it with DefaultDocumentation at every release, prereleases included, so the pages on `main` describe the latest release. The hook reads the assembly and the XML documentation file of one target framework, the newest `net<major>.<minor>` one. A `netstandard` build may lack a member the pages hold, and the XML comment of the member says so, as "Target frameworks" above requires.
+
+The summary of a namespace page comes from the `NamespaceDoc` class of the namespace, and the summary of `README.md` from the `AssemblyDoc` class of the package. Both are `internal static`, and a new namespace gets its `NamespaceDoc` class in the same change. The entry pages are the namespace pages, and `docs/README.md` links each one.
