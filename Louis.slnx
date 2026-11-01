@@ -24,9 +24,6 @@
   </Folder>
   <Folder Name="/- Documentation/docs/">
     <File Path="docs/README.md" />
-    <File Path="docs/disposing.md" />
-    <File Path="docs/exceptions.md" />
-    <File Path="docs/fluency.md" />
   </Folder>
   <Folder Name="/- Documentation/graphics/">
     <File Path="graphics/README.md" />
