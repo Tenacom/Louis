@@ -1,17 +1,19 @@
-# L.o.U.I.S.
+# L.o.U.I.S. documentation
 
-L.o.U.I.S. was born to replace a number of small closed-source, internal-use libraries written over the course of seven years.  
-Some of them have become obsolete; for some others we've found 3rd-party alternatives.  
-What's left, once polished up and documented, became the seed from which L.o.U.I.S. blossomed.
+The API reference of each package is generated from the XML comments of the code at every release, and describes the latest release.
+Each line below links the page of a namespace, which lists its types and links the page of each one.
 
-L.o.U.I.S. also contains a bunch of new material, originally written in part for Tenacom's business projects, in part for other open source projects.
+## `Louis`
 
----
+- [`Louis`](api/Louis/Louis.md): disposables that invoke a callback, utility methods for dates and times, and range checks.
+- [`Louis.Collections`](api/Louis/Louis.Collections.md): extension methods for enumerable types.
+- [`Louis.ComponentModel`](api/Louis/Louis.ComponentModel.md): type converters between a type and strings, and base classes to write such converters.
+- [`Louis.Diagnostics`](api/Louis/Louis.Diagnostics.md): types to create, inspect, and rethrow exceptions, to identify critical errors, and to perform self-checks.
+- [`Louis.Fluency`](api/Louis/Louis.Fluency.md): extension methods that embed conditional logic and other operations in a fluent call chain.
+- [`Louis.IO`](api/Louis/Louis.IO.md): stream implementations.
+- [`Louis.Text`](api/Louis/Louis.Text.md): C# string literals, Unicode and UTF-8 utilities, and conditional interpolated string handlers.
+- [`Louis.Threading`](api/Louis/Louis.Threading.md): a base class for long-running services, thread-safe flags and references, and utility methods for `ValueTask`.
 
-## Features
+## `Louis.Hosting`
 
-L.o.U.I.S. features are illustrated in the following articles:
-
-- [Exceptions](exceptions.md)
-- [Fluency](fluency.md)
-- [Disposing anything](disposing.md)
+- [`Louis.Hosting`](api/Louis.Hosting/Louis.Hosting.md): types that run an `AsyncService` as a hosted service.

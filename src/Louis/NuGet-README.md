@@ -7,5 +7,4 @@ It is pronounced _LOO-iss_, just like the name Louis.
 
 This package contains `Louis.dll`, providing a base set of functionality with the bare minimum external dependencies.
 
-Want to know more?  
-[Here's the complete README.](https://github.com/Tenacom/Louis#readme)
+See [the complete README](https://github.com/Tenacom/Louis#readme) for more information.

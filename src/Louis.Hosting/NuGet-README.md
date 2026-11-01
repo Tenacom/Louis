@@ -7,5 +7,4 @@ It is pronounced _LOO-iss_, just like the name Louis.
 
 This package contains `Louis.Hosting.dll`, that integrates L.o.U.I.S. with Microsoft's hosting extensions.
 
-Want to know more?  
-[Here's the complete README.](https://github.com/Tenacom/Louis#readme)
+See [the complete README](https://github.com/Tenacom/Louis#readme) for more information.

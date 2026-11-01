@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Struct `Louis.Text.TrueConditionInterpolatedStringHandler` only performs formatting if a given condition is true.
 - Struct `Louis.Text.FalseConditionInterpolatedStringHandler` only performs formatting if a given condition is false.
+- A complete [API reference](docs/README.md) replaces the documentation articles under `docs/`.
 
 ### Changes to existing features
 
