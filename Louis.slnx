@@ -29,8 +29,8 @@
     <File Path="graphics/README.md" />
   </Folder>
   <Folder Name="/src/">
-    <Project Path="src/Louis.Hosting/Louis.Hosting.csproj" />
     <Project Path="src/Louis/Louis.csproj" />
+    <Project Path="src/Louis.Hosting/Louis.Hosting.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <File Path="tests/.editorconfig" />
