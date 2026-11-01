@@ -33,6 +33,10 @@
  * Only inline links, `[text](target)`, are checked. A reference-style link is not. A link inside a code span or
  * a fenced block is not a link. A relative target must match the case of the file name, so that a link that
  * resolves on Windows and not on Linux is a finding on both.
+ *
+ * A generated folder, named in `generatedFolders` below, is a subfolder of docs/ that a tool writes in full. Its
+ * files are not checked, and the index need not link them. A link into it is checked for its shape alone, not
+ * for the existence of its target, because a page the tool writes at release does not exist before the release.
  */
 
 using System;
@@ -62,6 +66,10 @@ string[] todoExemptFiles = [];
 // Files the sentence check leaves alone. None here: the released sections of CHANGELOG.md, whose lines exceed the
 // limit and are never edited, are skipped by section. A copy of this tool may name some.
 string[] sentenceExemptFiles = [];
+
+// The generated folders, as paths relative to the root with forward slashes. The "Documentation" section of
+// `.claude/rules/project/architecture.md` lists them, with the tool that owns each.
+string[] generatedFolders = ["docs/api"];
 
 if (args.Length > 1)
 {
@@ -96,9 +104,10 @@ var nestedListRegex = new Regex(@"^\s+(?:[-*+]|\d+\.)\s", RegexOptions.CultureIn
 
 var findings = new List<(string File, int Line, int Column, string Code, string Message)>();
 
-// The documentation set, as relative paths with forward slashes.
+// The documentation set, as relative paths with forward slashes. The files of a generated folder are not in it.
 var pages = Directory.EnumerateFiles(docsDirectory, "*.md", SearchOption.AllDirectories)
     .Select(path => ToRelative(root, path))
+    .Where(page => !IsGenerated(page))
     .Order(StringComparer.Ordinal)
     .ToList();
 var files = new List<string> { "README.md", ChangelogPath };
@@ -115,10 +124,15 @@ if (Directory.Exists(srcDirectory))
 
 files = files.Where(file => File.Exists(Path.Combine(root, file))).ToList();
 
-// File and folder names under docs/.
+// File and folder names under docs/. A generated folder, and everything under it, is named by its tool.
 foreach (var entry in Directory.EnumerateFileSystemEntries(docsDirectory, "*", SearchOption.AllDirectories))
 {
     var relative = ToRelative(root, entry);
+    if (IsGenerated(relative))
+    {
+        continue;
+    }
+
     var segments = relative.Split('/');
     var name = segments[^1];
     if (Directory.Exists(entry))
@@ -447,6 +461,14 @@ void CheckLink(string file, int lineNumber, int column, string target, HashSet<s
         return;
     }
 
+    // A page of a generated folder may not exist before the release that writes it, and its anchors are the
+    // tool's, not GitHub's heading anchors.
+    if (IsGenerated(relativeTarget))
+    {
+        _ = targets.Add(relativeTarget);
+        return;
+    }
+
     if (!ExistsWithExactCase(relativeTarget))
     {
         Report(file, lineNumber, column, "DocsLink", $"the link target \"{target}\" names no file");
@@ -664,6 +686,13 @@ void CheckToc(
             return;
         }
     }
+}
+
+// Whether a relative path, with forward slashes, is a generated folder or lies under one.
+bool IsGenerated(string relativePath)
+{
+    var withSlash = relativePath + "/";
+    return generatedFolders.Any(folder => withSlash.StartsWith(folder + "/", StringComparison.Ordinal));
 }
 
 static string ToRelative(string root, string path)

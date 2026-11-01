@@ -1,8 +1,8 @@
 {
   "gitignore": true,
 
-  // Globs of files to ignore
-  "ignores": ["CLAUDE.md", ".claude/**/*.md", "**/AnalyzerReleases.*.md"],
+  // Globs of files to ignore. docs/api is the generated folder of .claude/rules/project/architecture.md.
+  "ignores": ["CLAUDE.md", ".claude/**/*.md", "**/AnalyzerReleases.*.md", "docs/api/**"],
 
   "config":{
     // Default state for all rules

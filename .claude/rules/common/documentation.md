@@ -2,13 +2,13 @@
 
 This file is the same in every repository that copies `.claude`. A fact specific to one repository lives in another rule file.
 
-User documentation is Markdown, rendered by GitHub. There is no separate site. The rules below say what counts as documentation, how it is written, and how it is checked. `file-formats.md` holds the Markdown format rules, such as emphasis markers and indentation. `output-styles/simple-tech.md` holds the register. `terminology.md` holds the name of each thing the repository documents. The "Documentation" section of `architecture.md` lists the repository's documentation files, the subfolders of `docs/`, and the generated regions.
+User documentation is Markdown, rendered by GitHub. There is no separate site. The rules below say what counts as documentation, how it is written, and how it is checked. `file-formats.md` holds the Markdown format rules, such as emphasis markers and indentation. `output-styles/simple-tech.md` holds the register. `terminology.md` holds the name of each thing the repository documents. The "Documentation" section of `architecture.md` lists the repository's documentation files, the subfolders of `docs/`, the generated regions, and the generated folders.
 
 ## What is documentation
 
 - `README.md` at the repository root.
 - `CHANGELOG.md`.
-- Every file under `docs/`.
+- Every file under `docs/`. A file under a generated folder is documentation that a tool writes, and "Generated folders" below says which rules it follows.
 - The `NuGet-README.md` of each packaged project. nuget.org renders it. It points at the root README and holds no documentation of its own.
 
 Every other Markdown file is not documentation: third-party notices, analyzer release files, and the files under `.claude/`. The rules below do not apply to them.
@@ -34,7 +34,7 @@ Every other Markdown file is not documentation: third-party notices, analyzer re
 - Link a file in the repository with a relative path. A tag then links to the files of the tag. The `NuGet-README.md` files are the exception, because nuget.org renders them outside the repository.
 - Link an external site with its full URL.
 - Link a section with GitHub's anchor form: lowercase, punctuation removed, spaces as hyphens. markdownlint MD051 checks an anchor within the same file. `lint-docs.cs` checks an anchor in another file.
-- Never link a page or a section that does not exist.
+- Never link a page or a section that does not exist. The one exception is a page of a generated folder that the next release adds, as "Generated folders" says.
 - Do not write `#1` for "number 1". It reads as an issue reference. GitHub links it in an issue, a pull request, a comment, or a release body, and a reader takes it for one even in a file, where GitHub does not.
 
 ## Pages describe the present
@@ -43,15 +43,19 @@ A page under `docs/` describes the code next to it. It does not say when a featu
 
 A migration section is the exception. It describes the old behavior, because the reader is coming from it.
 
+A page of a generated folder describes the latest release, as "Generated folders" says.
+
 ## The root README
 
 The root README is the entry point. It holds what a visitor needs in order to decide whether to read on: what the product is, in two sentences, the packages with their badges, and links to the introduction, the getting-started page, and the index of `docs/`. It documents nothing itself.
 
 ## Structure of `docs/`
 
+The rules of this section apply to the hand-written pages. A generated folder follows "Generated folders" below, and the index links it as that section says.
+
 ### The index
 
-`docs/README.md` is the index. It links every other page under `docs/`, with one line saying what the page covers. It has no table of contents, because it is one. Its shape:
+`docs/README.md` is the index. It links every hand-written page under `docs/`, with one line saying what the page covers. It has no table of contents, because it is one. Its shape:
 
 - a title
 - one paragraph
@@ -144,6 +148,17 @@ A region a tool maintains sits between two HTML comment markers:
 - Nothing edits the region by hand. The prose around it is hand-written.
 - The "Documentation" section of `architecture.md` names each region and the tool that owns it.
 
+## Generated folders
+
+A generated folder is a subfolder of `docs/` that a tool writes in full at release. An API reference built from the XML comments of the code is one.
+
+- The "Documentation" section of `architecture.md` names each generated folder, the tool that owns it, and which of its pages are the entry pages.
+- Nothing edits a generated page by hand. A fix goes in the source the tool reads, such as an XML comment.
+- The tool decides the names, the depth, and the shape of its pages. The file-name rules, the page template, the page kinds, and the sentence rules do not apply. `lint-docs.cs` skips the folder, and `.markdownlint-cli2.jsonc` lists it under `ignores`.
+- The index links the entry pages of the folder, one line each. It does not link the other pages.
+- The pages describe the latest release. On `main`, the page of a type that no release holds yet does not exist, and it arrives with the release that adds the type.
+- A link into a generated folder is checked for its shape, and not for the existence of its target. A bullet under "Unreleased changes" links the page of a type whose release comes later, and `bv release` pins the link to the release tag, where the page exists.
+
 ## Changelog
 
 `CHANGELOG.md` follows Keep a Changelog. `ChangelogUpdater` in `bv` owns the section skeleton: the "Unreleased changes" section, the release headings, and the four subsections "New features", "Changes to existing features", "Bugs fixed in this release", and "Known problems introduced by this release". The rules below govern what goes inside.
@@ -152,6 +167,7 @@ A region a tool maintains sits between two HTML comment markers:
 - The bullet names what changed, with an identifier: a command, a property, a file, a diagnostic id.
 - It does not say "now". Every bullet describes a change.
 - The docs page that describes the feature is linked inline, on the phrase that names the feature. Do not add a trailing "See X.", which would be a second sentence.
+- A bullet that names a type links the page of the type in the generated folder that holds the API reference, when the repository has one. The page may not exist until the release, as "Generated folders" says.
 - A breaking change starts with `**BREAKING CHANGE**:` and names the behavior that is gone.
 - Breaking changes come first in their subsection.
 - Migration steps go in a section of the feature's page, and the bullet links there.
@@ -168,10 +184,10 @@ Example:
 ## Checks
 
 - markdownlint runs with the configuration in `.markdownlint-cli2.jsonc`. `file-formats.md` says which rules it enforces.
-- `.claude/tools/lint-docs.cs` runs as a phase of `inspect.cs --gate`. It checks:
+- `.claude/tools/lint-docs.cs` runs as a phase of `inspect.cs --gate`. Its `generatedFolders` array names the generated folders, which it skips. It checks:
   - file names under `docs/` are kebab-case, and subfolders are one level deep;
   - every page follows the template: summary paragraph, rulers, and a table of contents that matches the headings;
-  - the index links every page, and no link points at a missing file or anchor;
+  - the index links every hand-written page, and no link points at a missing file or anchor, except a link into a generated folder;
   - every fenced block has a tag from the list above;
   - a prose line, outside a fenced block, a table, and a released changelog section, holds one sentence of at most 25 words, counting a code span as one word and a link as the words of its text;
   - no documentation file contains "TODO";
