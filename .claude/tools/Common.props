@@ -1,15 +1,15 @@
 <Project>
 
-  <!--
-    Build options for Claude's tools.
-  -->
+  <!-- Build options for Claude's tools. -->
   <PropertyGroup>
 
-    <!--
-      A tool is a single-file app: it has no XML docs to generate, no public API, and cannot be packed.
-    -->
+    <!-- A tool is a script, and nobody reads the documentation of its helpers. -->
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
+
+    <!-- A tool has no public API. -->
     <UsePublicApiAnalyzers>false</UsePublicApiAnalyzers>
+
+    <!-- A tool is never packed. -->
     <IsPackable>false</IsPackable>
 
     <!--
