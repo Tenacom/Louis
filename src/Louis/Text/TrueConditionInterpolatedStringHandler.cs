@@ -16,6 +16,7 @@ namespace Louis.Text;
 /// <para>Provides an interpolated string handler that only performs formatting if a given condition is <see langword="true"/>.</para>
 /// <para>This type is only available on .NET 6.0 and greater.</para>
 /// <para>This type is only meant to be used by compiler-generated code. As such, it performs no parameter validation whatsoever.</para>
+/// </summary>
 /// <example>
 /// <para>The following code shows how this type can be used as an interpolated string handler:</para>
 /// <code>
@@ -37,7 +38,6 @@ namespace Louis.Text;
 /// }
 /// </code>
 /// </example>
-/// </summary>
 [InterpolatedStringHandler]
 public struct TrueConditionInterpolatedStringHandler
 {
