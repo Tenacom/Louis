@@ -18,8 +18,9 @@
  * else the newest `netstandard` one.
  * A `netstandard` build may lack members that the other builds have, and the XML comment
  * of a framework-specific member says which frameworks get it.
- * The pages of a library are flat: an `index.md` for the assembly, a page per namespace,
+ * The pages of a library are flat: a `README.md` for the assembly, a page per namespace,
  * and a page per type with its members.
+ * GitHub renders the `README.md` when a reader browses the directory of the library.
  * The generator deletes the stale pages of its output directory itself,
  * and the hook deletes the directory of a library the solution no longer has.
  *
@@ -204,7 +205,9 @@ static int RunGenerator(DocumentedLibrary library, string outputDirectory, strin
     // - A page per namespace and per type, with the members inlined in the page of their type:
     //   a page per member would be named after the full signature of the member, and such a path
     //   exceeds the 260 characters Windows allows by default.
-    // - `index` names the assembly page of every library, whatever its number of namespaces.
+    // - `README` names the assembly page of every library, whatever its number of namespaces,
+    //   and GitHub renders it in the directory view. The generator keeps a `readme.md` when it
+    //   deletes the stale pages, and overwrites it when it writes the assembly page.
     // - The links file states its URLs relative to the sibling directory of the library,
     //   which is where the pages of another library read them.
     string[] arguments =
@@ -216,7 +219,7 @@ static int RunGenerator(DocumentedLibrary library, string outputDirectory, strin
         "--OutputDirectoryPath", outputDirectory,
         "--GeneratedAccessModifiers", "Api",
         "--GeneratedPages", "Namespaces,Types",
-        "--AssemblyPageName", "index",
+        "--AssemblyPageName", "README",
         "--LinksOutputFilePath", Path.Combine(linksDirectory, library.AssemblyName),
         "--LinksBaseUrl", $"../{library.AssemblyName}/",
         "--ExternLinksFilePaths", Path.Combine(linksDirectory, "*"),
