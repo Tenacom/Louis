@@ -23,6 +23,7 @@
  * GitHub renders the `README.md` when a reader browses the directory of the library.
  * The generator deletes the stale pages of its output directory itself,
  * and the hook deletes the directory of a library the solution no longer has.
+ * The pages get LF line endings on every platform.
  *
  * A library that references another documented library gets its pages after it.
  * Each run writes a links file to the scratch directory of `bv`,
@@ -85,12 +86,15 @@ Directory.CreateDirectory(linksDirectory);
 foreach (var library in OrderByReferences(libraries))
 {
     Console.Error.WriteLine($"Generating the documentation of {library.AssemblyName}...");
-    var exitCode = RunGenerator(library, Path.Combine(ApiDirectory, library.AssemblyName), linksDirectory);
+    var outputDirectory = Path.Combine(ApiDirectory, library.AssemblyName);
+    var exitCode = RunGenerator(library, outputDirectory, linksDirectory);
     if (exitCode != 0)
     {
         Console.Error.WriteLine($"defaultdocumentation exited with code {exitCode} on {library.AssemblyName}.");
         return 1;
     }
+
+    ConvertLineEndingsToLf(outputDirectory);
 }
 
 return 0;
@@ -239,6 +243,21 @@ static int RunGenerator(DocumentedLibrary library, string outputDirectory, strin
 
     process.WaitForExit();
     return process.ExitCode;
+}
+
+// The generator writes the line endings of the platform it runs on, and the repository uses LF.
+// A replay on Windows then writes the same pages as a release on Linux.
+static void ConvertLineEndingsToLf(string directory)
+{
+    foreach (var file in Directory.EnumerateFiles(directory, "*.md"))
+    {
+        var text = File.ReadAllText(file);
+        var converted = text.Replace("\r\n", "\n", StringComparison.Ordinal);
+        if (converted != text)
+        {
+            File.WriteAllText(file, converted);
+        }
+    }
 }
 
 internal sealed record DocumentedLibrary(string AssemblyPath, string DocumentationFilePath)
