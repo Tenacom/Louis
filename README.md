@@ -1,37 +1,53 @@
 # ![L.o.U.I.S.](graphics/Readme.png)
 
-[![License](https://img.shields.io/github/license/Tenacom/Louis.svg)](https://github.com/Tenacom/Louis/blob/main/LICENSE)
-[![Latest GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/Tenacom/Louis?include_prereleases)](https://github.com/Tenacom/Louis/releases)
-[![Changelog](https://img.shields.io/badge/changelog-Keep%20a%20Changelog%20v1.0.0-%23E05735)](https://github.com/Tenacom/Louis/blob/main/CHANGELOG.md)
+Releases:
+[![Latest release](https://badgen.net/github/release/Tenacom/Louis?label=latest)](https://github.com/Tenacom/Louis/releases)
+[![Latest stable release](https://badgen.net/github/release/Tenacom/Louis/stable?label=stable)](https://github.com/Tenacom/Louis/releases)
+[![Changelog](https://badgen.net/badge/changelog/Keep%20a%20Changelog%20v1.1.0/orange)](https://github.com/Tenacom/Louis/blob/main/CHANGELOG.md)
 
+CI:
+[![CI](https://github.com/Tenacom/Louis/actions/workflows/ci.yml/badge.svg)](https://github.com/Tenacom/Louis/actions/workflows/ci.yml)
+[![Code coverage](https://codecov.io/gh/Tenacom/Louis/graph/badge.svg?token=70O2IH9GRT)](https://codecov.io/gh/Tenacom/Louis)
+
+Licensing and attributions:
+[![License](https://badgen.net/badge/license/MIT/blue)](https://github.com/Tenacom/Louis/blob/main/LICENSE)
+[![Third-party code](https://badgen.net/badge/Third-party/code/blue)](https://github.com/Tenacom/Louis/blob/main/THIRD-PARTY-NOTICES.md)
+[![Third-party graphics](https://badgen.net/badge/Third-party/graphics/blue)](https://github.com/Tenacom/Louis/blob/main/THIRD-PARTY-GRAPHICS.md)
+
+Contributing:
 [![Code of Conduct](https://img.shields.io/badge/conduct-code-orange)](https://github.com/Tenacom/.github/blob/main/CODE_OF_CONDUCT.md)
 [![Contributing guide](https://img.shields.io/badge/contributing-guide-orange)](https://github.com/Tenacom/.github/blob/main/CONTRIBUTING.md)
 
-[![Build, run tests, and pack](https://github.com/Tenacom/Louis/actions/workflows/ci.yml/badge.svg)](https://github.com/Tenacom/Louis/actions/workflows/ci.yml)
-
 ![Repobeats analytics image](https://repobeats.axiom.co/api/embed/cfee72019568722653b1a5e8e8d4e55a02cff219.svg "Repobeats analytics image")
-
-L.o.U.I.S. is a collection of types commonly needed in the development of .NET libraries and applications.
-It is pronounced _LOO-iss_, like the name Louis.
 
 ---
 
 ## Packages
 
-| Package         | Holds                                                                                        | NuGet                                                                                                                                  | Feedz                                                                                                         |
-| --------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Package name    | Description                                                                                  | NuGet<br>(stable)                                                                                                                      | Feedz.io<br>(preview)                                                                                         |
+| --------------- | -------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: |
 | `Louis`         | A base set of general-purpose types, with the minimum of external dependencies.              | [![Louis @ NuGet](https://img.shields.io/nuget/v/Louis?label=&color=009900)](https://nuget.org/packages/Louis)                         | ![Louis @ Feedz](https://img.shields.io/feedz/vpre/tenacom/preview/Louis?label=&color=orange)                 |
 | `Louis.Hosting` | `AsyncHostedService`, which runs an `AsyncService` as a hosted service.                      | [![Louis.Hosting @ NuGet](https://img.shields.io/nuget/v/Louis.Hosting?label=&color=009900)](https://nuget.org/packages/Louis.Hosting) | ![Louis.Hosting @ Feedz](https://img.shields.io/feedz/vpre/tenacom/preview/Louis.Hosting?label=&color=orange) |
 
-Tenacom publishes preview packages to a feed on [Feedz.io](https://feedz.io).
-Its NuGet v3 URL is `https://f.feedz.io/tenacom/preview/nuget/index.json`.
+**Preview versions of L.o.U.I.S. packages are on Tenacom's preview feed at [Feedz.io](https://feedz.io).**
+**The NuGet v3 URL is `https://f.feedz.io/tenacom/preview/nuget/index.json`.**
 
 ---
 
+L.o.U.I.S. is a collection of types commonly needed in the development of .NET libraries and applications.
+It is pronounced _LOO-iss_, like the name Louis.
+
 ## Documentation
 
-The [documentation index](docs/README.md) links the API reference of each package, one page per namespace.
+The [documentation index](docs/README.md) links the API reference of each package.
+
 [CHANGELOG.md](CHANGELOG.md) lists the changes of each release.
+
+---
+
+## Contributing
+
+_Of course_ we accept contributions! :smiley: Just take a look at our [Code of Conduct](https://github.com/Tenacom/.github/blob/main/CODE_OF_CONDUCT.md) and [Contributors guide](https://github.com/Tenacom/.github/blob/main/CONTRIBUTING.md), create your fork, and let's party! :tada:
 
 ---
 

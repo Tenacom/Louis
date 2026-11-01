@@ -4,13 +4,9 @@ This document lists the third-party libraries, fonts, and graphic elements incor
 
 If we have accidentally failed to list a required notice, please bring it to our attention. Either open an issue, or email us at [`info@tenacom.it`](mailto:info@tenacom.it).
 
+<!-- markdownlint-disable MD036 -->
 _Last reviewed: 2026-10-30_
-
----
-
-## Third-party graphic elements
-
-The copyright notices for the fonts and icons used to produce the graphic elements of this project are in [graphics/README.md](graphics/README.md).
+<!-- markdownlint-enable MD036 -->
 
 ---
 
