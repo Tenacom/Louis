@@ -1,6 +1,6 @@
 # L.o.U.I.S. documentation
 
-The API reference of each package is generated from the XML comments of the code at every release, and describes the latest release.
+Every release of L.o.U.I.S. has its own API reference, generated from XML comments.
 Each line below links the page of a namespace, which lists its types and links the page of each one.
 
 ## `Louis`
