@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changes to existing features
 
 - **BREAKING CHANGE**: `Louis` packages no longer target .NET 6.0, .NET 7.0, and .NET 8.0, which are out of support, and target .NET 10.0 instead.
+- **BREAKING CHANGE**: `Louis` no longer depends on [PolyKit](https://github.com/Tenacom/PolyKit); projects that relied on the transitive reference for polyfills must add their own polyfill package.
 - **BREAKING CHANGE**: [`DateOnlyExtensions`](docs/api/Louis/Louis.DateOnlyExtensions.md) and [`DateOnlyUtility`](docs/api/Louis/Louis.DateOnlyUtility.md) are only available on .NET 6.0 and greater, where `DateOnly` is part of the BCL.
 
 ### Bugs fixed in this release
