@@ -30,6 +30,9 @@
  *                  one sentence; a code span counts as one word, and a link as the words of its text. The
  *                  released sections of CHANGELOG.md are not checked.
  *
+ * `todoExemptFiles` and `sentenceExemptFiles` below hold globs. A file whose root-relative path matches one is
+ * not checked for TODO, or for sentences. The comment above the arrays states the glob syntax.
+ *
  * Only inline links, `[text](target)`, are checked. A reference-style link is not. A link inside a code span or
  * a fenced block is not a link. A relative target must match the case of the file name, so that a link that
  * resolves on Windows and not on Linux is a finding on both.
@@ -60,12 +63,17 @@ const int MaxSentenceWords = 25;
 // The language tags `.claude/rules/common/documentation.md` admits on a fenced block.
 string[] fenceTags = ["csharp", "json", "jsonc", "markdown", "powershell", "shell", "text", "xml", "yaml"];
 
-// Files the TODO check leaves alone. None here; a copy of this tool may name some.
+// The two arrays below hold globs, matched against the path of a file relative to the root, with forward slashes.
+// In a glob, `*` matches any run of characters within a path segment, `?` matches one such character, and `**`
+// matches any run of characters, slashes included. `**/README.md` matches a README.md at the root and in any folder.
+
+// Globs of the files the TODO check leaves alone. None here; a copy of this tool may add some.
 string[] todoExemptFiles = [];
 
-// Files the sentence check leaves alone. None here: the released sections of CHANGELOG.md, whose lines exceed the
-// limit and are never edited, are skipped by section. A copy of this tool may name some.
-string[] sentenceExemptFiles = [];
+// Globs of the files the sentence check leaves alone: the non-technical documentation that "What is documentation"
+// in `.claude/rules/common/documentation.md` lists. The released sections of CHANGELOG.md, whose lines exceed the
+// limit and are never edited, are skipped by section. A copy of this tool may add some.
+string[] sentenceExemptFiles = ["**/README.md", "**/NuGet-README.md", "docs/articles/**"];
 
 // The generated folders, as paths relative to the root with forward slashes. The "Documentation" section of
 // `.claude/rules/project/architecture.md` lists them, with the tool that owns each.
@@ -172,8 +180,8 @@ foreach (var file in files)
     var inFence = inFenceByFile[file];
     var isPage = file.StartsWith("docs/", StringComparison.Ordinal) && !string.Equals(file, IndexPath, StringComparison.Ordinal);
     var isChangelog = string.Equals(file, ChangelogPath, StringComparison.Ordinal);
-    var checkTodo = !todoExemptFiles.Contains(file, StringComparer.Ordinal);
-    var checkSentences = !sentenceExemptFiles.Contains(file, StringComparer.Ordinal);
+    var checkTodo = !MatchesAny(todoExemptFiles, file);
+    var checkSentences = !MatchesAny(sentenceExemptFiles, file);
     var openRegions = new Dictionary<string, int>(StringComparer.Ordinal);
     var releasedSection = string.Empty;
     var inUnreleased = false;
@@ -693,6 +701,50 @@ bool IsGenerated(string relativePath)
 {
     var withSlash = relativePath + "/";
     return generatedFolders.Any(folder => withSlash.StartsWith(folder + "/", StringComparison.Ordinal));
+}
+
+// Whether a relative path, with forward slashes, matches one of the globs. The comment above `todoExemptFiles` states
+// the glob syntax.
+static bool MatchesAny(string[] globs, string relativePath)
+{
+    return globs.Any(glob => Regex.IsMatch(relativePath, GlobToRegex(glob), RegexOptions.CultureInvariant));
+}
+
+static string GlobToRegex(string glob)
+{
+    var builder = new StringBuilder("^");
+    for (var i = 0; i < glob.Length; i++)
+    {
+        var ch = glob[i];
+        if (ch == '*' && i + 1 < glob.Length && glob[i + 1] == '*')
+        {
+            i++;
+            if (i + 1 < glob.Length && glob[i + 1] == '/')
+            {
+                // `**/` matches zero or more whole segments, so that `**/README.md` also matches the root README.md.
+                i++;
+                _ = builder.Append("(?:.*/)?");
+            }
+            else
+            {
+                _ = builder.Append(".*");
+            }
+        }
+        else if (ch == '*')
+        {
+            _ = builder.Append("[^/]*");
+        }
+        else if (ch == '?')
+        {
+            _ = builder.Append("[^/]");
+        }
+        else
+        {
+            _ = builder.Append(Regex.Escape(ch.ToString()));
+        }
+    }
+
+    return builder.Append('$').ToString();
 }
 
 static string ToRelative(string root, string path)

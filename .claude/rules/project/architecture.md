@@ -53,13 +53,21 @@ A namespace named `Internal` holds types that are not part of the public surface
 
 ### Files
 
-- `README.md`
+The following are technical documentation:
+
 - `CHANGELOG.md`
 - `docs/`
-- `src/Louis/NuGet-README.md`
-- `src/Louis.Hosting/NuGet-README.md`
 
-`graphics/README.md` is not documentation. It holds the copyright notices of the graphic elements, and `THIRD-PARTY-NOTICES.md` points at it.
+The following are not technical documentation. Check them for accuracy, but they are allowed a less formal register:
+
+- `README.md`
+- `graphics/README.md`
+- `src/<project>/NuGet-README.md`
+
+The following are not documentation:
+
+- `THIRD-PARTY-NOTICES.md` holds the copyright notices of code dependencies;
+- `THIRD-PARTY-GRAPHICS.md` holds the copyright notices of the graphic elements in `graphics/`.
 
 ### Subfolders of `docs/`
 
