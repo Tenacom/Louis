@@ -94,7 +94,7 @@ public struct InterlockedReference<T> : IEquatable<InterlockedReference<T>>, IEq
     public bool Equals(T? other) => Interlocked.CompareExchange(ref _value, null, null) == other;
 
     /// <inheritdoc/>
-    public override int GetHashCode() => HashCode.Combine(Value);
+    public override int GetHashCode() => Value?.GetHashCode() ?? 0;
 
     /// <inheritdoc/>
     public override string ToString() => Value?.ToString() ?? string.Empty;

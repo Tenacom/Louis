@@ -6,7 +6,6 @@
     <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="10.0.14" />
     <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="10.0.14" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.14" />
-    <PackageVersion Include="PolyKit" Version="3.0.9" />
     <PackageVersion Include="System.Memory" Version="4.6.3" />
     <PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
     <PackageVersion Include="System.ValueTuple" Version="4.6.2" />
@@ -18,6 +17,7 @@
 
   <!-- Development dependencies -->
   <ItemGroup>
+    <PackageVersion Include="PolySharp" Version="1.16.0" />
   </ItemGroup>
 
 </Project>

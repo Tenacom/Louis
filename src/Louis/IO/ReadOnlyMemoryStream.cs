@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 using CommunityToolkit.Diagnostics;
 using Louis.Diagnostics;
 #if !NET6_0_OR_GREATER
-using PolyKit.Diagnostics.CodeAnalysis;
+using Louis.Diagnostics.Internal;
 #endif
 
 namespace Louis.IO;
