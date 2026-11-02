@@ -8,7 +8,6 @@
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.14" />
     <PackageVersion Include="System.Memory" Version="4.6.3" />
     <PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
-    <PackageVersion Include="System.ValueTuple" Version="4.6.2" />
   </ItemGroup>
 
   <!-- Test dependencies -->

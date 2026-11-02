@@ -34,13 +34,13 @@ A namespace named `Internal` holds types that are not part of the public surface
 
 ## Target frameworks
 
-`Louis` packages target `netstandard2.0`, `netstandard2.1`, `net462`, `net47`, and `net10.0`. The `.NET Framework` targets exist next to `netstandard2.0` because a framework-specific build gets better optimization in .NET Framework applications.
+`Louis` packages target `netstandard2.0`, `netstandard2.1`, `net48`, and `net10.0`. The `.NET Framework` target exists next to `netstandard2.0` because a framework-specific build gets better optimization in .NET Framework applications.
 
 - A target framework leaves the list when Microsoft ends its support. The removal is a breaking change, and gets a `**BREAKING CHANGE**:` bullet in `CHANGELOG.md`.
 - Code that differs per framework sits under `#if` with an `_OR_GREATER` symbol, such as `NET7_0_OR_GREATER` or `NETSTANDARD2_1_OR_GREATER`. A symbol for one framework alone, such as `NET10_0`, never appears, so that a new framework needs no source change.
 - A type or member that only some frameworks get says so in its XML comment. The comment names the builds of the package that lack it, and the BCL type they lack, as the comment of `DateOnlyUtility` does.
 - `Common.props` turns `IsTrimmable` on for the frameworks compatible with `net8.0`.
-- The projects reference `System.Memory`, `System.Threading.Tasks.Extensions`, `Microsoft.Bcl.AsyncInterfaces`, and `System.ValueTuple` only on the frameworks that lack the types. `Louis.csproj` holds one `ItemGroup` per such framework.
+- The projects reference `System.Memory`, `System.Threading.Tasks.Extensions`, and `Microsoft.Bcl.AsyncInterfaces` only on the frameworks that lack the types. `Louis.csproj` holds one `ItemGroup` per such framework.
 - PolySharp generates every other polyfill, as internal types. A public BCL type that an older framework lacks, such as `DateOnly`, gets no polyfill, because a consumer's own polyfill of the type would conflict with it. A member that uses such a type goes under `#if`, as `DateOnlyExtensions` does.
 
 ### Public API files

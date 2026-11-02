@@ -17,10 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changes to existing features
 
-- **BREAKING CHANGE**: `Louis` packages no longer target .NET 6.0, .NET 7.0, and .NET 8.0, which are out of support, and target .NET 10.0 instead.
+- **BREAKING CHANGE**: L.o.U.I.S. packages no longer target .NET 6.0, .NET 7.0, and .NET 8.0, which are out of support, and target .NET 10.0 instead.
+- **BREAKING CHANGE**: L.o.U.I.S. packages no longer target .NET Framework 4.6.2 and .NET Framework 4.7, and target .NET Framework 4.8 instead.
 - **BREAKING CHANGE**: `Louis` no longer depends on [PolyKit](https://github.com/Tenacom/PolyKit), so a project that used its polyfills through `Louis` must add its own polyfill package.
 - **BREAKING CHANGE**: [`DateOnlyExtensions`](docs/api/Louis/Louis.DateOnlyExtensions.md) and [`DateOnlyUtility`](docs/api/Louis/Louis.DateOnlyUtility.md) are no longer available in the `netstandard` and .NET Framework builds of `Louis`, which have no `DateOnly`.
-- `Louis.Hosting` targets `net47`, as `Louis` does.
 
 ### Bugs fixed in this release
 
