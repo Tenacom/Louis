@@ -9,7 +9,7 @@ User documentation is Markdown, rendered by GitHub. There is no separate site. T
 The following files are technical documentation:
 
 - `CHANGELOG.md`.
-- Every file under `docs/`, except the articles below. A file under a generated folder is documentation that a tool writes, and "Generated folders" below says which rules it follows.
+- Every file under `docs/`, except its `README.md` and the articles below. A file under a generated folder is documentation that a tool writes, and "Generated folders" below says which rules it follows.
 
 The following are non-technical documentation:
 
@@ -28,7 +28,7 @@ Every other Markdown file is not documentation: third-party notices, analyzer re
 - No rhetorical questions, no jokes, no asides.
 - One name per thing. `terminology.md` lists the names. When a thing has no name there, add one before using it in a second page.
 
-**Non-technical documentation** is allowed a less formal register, because a visitor reads them before the documentation. Check it for accuracy and consistency, not for compliance to the rules above. The `sentenceExemptFiles` array of `lint-docs.cs` holds the globs of these files, so that the sentence check leaves them alone. The other checks still apply to them.
+**Non-technical documentation** is allowed a less formal register, because a visitor reads them before the documentation. Check it for accuracy and consistency, not for compliance to the rules above. The `sentenceExemptFiles` array of `lint-docs.cs` holds the globs of these files, so that the sentence check leaves them alone. The other checks of `lint-docs.cs` apply to the files it reads: the root `README.md`, `docs/README.md`, the `NuGet-README.md` files, and the articles. A `README.md` elsewhere gets no check.
 
 ## Lines
 
