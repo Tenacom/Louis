@@ -1,5 +1,18 @@
 #nullable enable
 *REMOVED*override Louis.IO.ReadOnlyMemoryStream.ReadAsync(System.Memory<byte> buffer, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask<int>
 *REMOVED*override Louis.IO.ReadOnlyMemoryStream.WriteAsync(System.ReadOnlyMemory<byte> buffer, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask
+*REMOVED*Louis.DateOnlyExtensions
+*REMOVED*Louis.DateOnlyUtility
+*REMOVED*static Louis.DateOnlyExtensions.GetEndOfMonth(this System.DateOnly this) -> System.DateOnly
+*REMOVED*static Louis.DateOnlyExtensions.GetEndOfWeek(this System.DateOnly this) -> System.DateOnly
+*REMOVED*static Louis.DateOnlyExtensions.GetEndOfWeek(this System.DateOnly this, System.DayOfWeek firstDayOfWeek) -> System.DateOnly
+*REMOVED*static Louis.DateOnlyExtensions.GetEndOfWeek(this System.DateOnly this, System.Globalization.CultureInfo! culture) -> System.DateOnly
+*REMOVED*static Louis.DateOnlyExtensions.GetEndOfWeek(this System.DateOnly this, System.Globalization.DateTimeFormatInfo! dateTimeFormat) -> System.DateOnly
+*REMOVED*static Louis.DateOnlyExtensions.GetStartOfMonth(this System.DateOnly this) -> System.DateOnly
+*REMOVED*static Louis.DateOnlyExtensions.GetStartOfWeek(this System.DateOnly this) -> System.DateOnly
+*REMOVED*static Louis.DateOnlyExtensions.GetStartOfWeek(this System.DateOnly this, System.DayOfWeek firstDayOfWeek) -> System.DateOnly
+*REMOVED*static Louis.DateOnlyExtensions.GetStartOfWeek(this System.DateOnly this, System.Globalization.CultureInfo! culture) -> System.DateOnly
+*REMOVED*static Louis.DateOnlyExtensions.GetStartOfWeek(this System.DateOnly this, System.Globalization.DateTimeFormatInfo! dateTimeFormat) -> System.DateOnly
+*REMOVED*static Louis.DateOnlyUtility.Today.get -> System.DateOnly
 override Louis.IO.ReadOnlyMemoryStream.ReadAsync(System.Memory<byte> buffer, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<int>
 override Louis.IO.ReadOnlyMemoryStream.WriteAsync(System.ReadOnlyMemory<byte> buffer, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask

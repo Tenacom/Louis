@@ -1,12 +1,15 @@
 // Copyright (c) Tenacom and contributors. Licensed under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
+#if NET6_0_OR_GREATER
+
 using System;
 
 namespace Louis;
 
 /// <summary>
-/// Provides extension methods for instances of <see cref="DateOnly"/>.
+/// <para>Provides extension methods for instances of <see cref="DateOnly"/>.</para>
+/// <para>This type is only available on .NET 6.0 and greater.</para>
 /// </summary>
 public static partial class DateOnlyExtensions
 {
@@ -26,3 +29,5 @@ public static partial class DateOnlyExtensions
     public static DateOnly GetEndOfMonth(this DateOnly @this)
         => @this.AddDays(DateTime.DaysInMonth(@this.Year, @this.Month) - @this.Day);
 }
+
+#endif
