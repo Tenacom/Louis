@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/Tenacom/Buildvana/2.2.1-preview/schemas/buildvana.schema.json",
+  "$schema": "https://raw.githubusercontent.com/Tenacom/Buildvana/2.2.6-preview/schemas/buildvana.schema.json",
 
   "repository": {
     "url": "https://github.com/Tenacom/Louis",
