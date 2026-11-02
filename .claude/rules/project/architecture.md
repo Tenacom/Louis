@@ -34,7 +34,7 @@ A namespace named `Internal` holds types that are not part of the public surface
 
 ## Target frameworks
 
-`Louis` targets `netstandard2.0`, `netstandard2.1`, `net462`, `net47`, and `net10.0`. `Louis.Hosting` targets the same set without `net47`. The `.NET Framework` targets exist next to `netstandard2.0` because a framework-specific build gets better optimization in .NET Framework applications.
+`Louis` packages target `netstandard2.0`, `netstandard2.1`, `net462`, `net47`, and `net10.0`. The `.NET Framework` targets exist next to `netstandard2.0` because a framework-specific build gets better optimization in .NET Framework applications.
 
 - A target framework leaves the list when Microsoft ends its support. The removal is a breaking change, and gets a `**BREAKING CHANGE**:` bullet in `CHANGELOG.md`.
 - Code that differs per framework sits under `#if` with an `_OR_GREATER` symbol, such as `NET7_0_OR_GREATER` or `NETSTANDARD2_1_OR_GREATER`. A symbol for one framework alone, such as `NET10_0`, never appears, so that a new framework needs no source change.
