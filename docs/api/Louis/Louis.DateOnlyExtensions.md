@@ -3,7 +3,11 @@
 
 ## DateOnlyExtensions Class
 
-Provides extension methods for instances of [System\.DateOnly](https://learn.microsoft.com/en-us/dotnet/api/system.dateonly 'System\.DateOnly')\.
+
+Provides extension methods for instances of [System\.DateOnly](https://learn.microsoft.com/en-us/dotnet/api/system.dateonly 'System\.DateOnly').
+
+This type is not available in the `netstandard` and .NET Framework builds of Louis,
+            because their BCL has no [System\.DateOnly](https://learn.microsoft.com/en-us/dotnet/api/system.dateonly 'System\.DateOnly').
 
 ```csharp
 public static class DateOnlyExtensions
@@ -27,11 +31,11 @@ public static System.DateOnly GetEndOfMonth(this System.DateOnly @this);
 
 `this` [System\.DateOnly](https://learn.microsoft.com/en-us/dotnet/api/system.dateonly 'System\.DateOnly')
 
-The instance of [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime') on which this method is called\.
+The instance of [System\.DateOnly](https://learn.microsoft.com/en-us/dotnet/api/system.dateonly 'System\.DateOnly') on which this method is called\.
 
 #### Returns
 [System\.DateOnly](https://learn.microsoft.com/en-us/dotnet/api/system.dateonly 'System\.DateOnly')  
-An instance of [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime') whose value represents the last day of the month of [this](Louis.DateOnlyExtensions.md#Louis.DateOnlyExtensions.GetEndOfMonth(thisSystem.DateOnly).this 'Louis\.DateOnlyExtensions\.GetEndOfMonth\(this System\.DateOnly\)\.this')\.
+An instance of [System\.DateOnly](https://learn.microsoft.com/en-us/dotnet/api/system.dateonly 'System\.DateOnly') whose value represents the last day of the month of [this](Louis.DateOnlyExtensions.md#Louis.DateOnlyExtensions.GetEndOfMonth(thisSystem.DateOnly).this 'Louis\.DateOnlyExtensions\.GetEndOfMonth\(this System\.DateOnly\)\.this')\.
 
 <a name='Louis.DateOnlyExtensions.GetEndOfWeek(thisSystem.DateOnly)'></a>
 
@@ -180,11 +184,11 @@ public static System.DateOnly GetStartOfMonth(this System.DateOnly @this);
 
 `this` [System\.DateOnly](https://learn.microsoft.com/en-us/dotnet/api/system.dateonly 'System\.DateOnly')
 
-The instance of [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime') on which this method is called\.
+The instance of [System\.DateOnly](https://learn.microsoft.com/en-us/dotnet/api/system.dateonly 'System\.DateOnly') on which this method is called\.
 
 #### Returns
 [System\.DateOnly](https://learn.microsoft.com/en-us/dotnet/api/system.dateonly 'System\.DateOnly')  
-An instance of [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/system.datetime 'System\.DateTime') whose value represents the first day of the month of [this](Louis.DateOnlyExtensions.md#Louis.DateOnlyExtensions.GetStartOfMonth(thisSystem.DateOnly).this 'Louis\.DateOnlyExtensions\.GetStartOfMonth\(this System\.DateOnly\)\.this')\.
+An instance of [System\.DateOnly](https://learn.microsoft.com/en-us/dotnet/api/system.dateonly 'System\.DateOnly') whose value represents the first day of the month of [this](Louis.DateOnlyExtensions.md#Louis.DateOnlyExtensions.GetStartOfMonth(thisSystem.DateOnly).this 'Louis\.DateOnlyExtensions\.GetStartOfMonth\(this System\.DateOnly\)\.this')\.
 
 <a name='Louis.DateOnlyExtensions.GetStartOfWeek(thisSystem.DateOnly)'></a>
 

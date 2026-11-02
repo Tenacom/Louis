@@ -3,7 +3,11 @@
 
 ## DateOnlyUtility Class
 
-Provides utility methods to work with [System\.DateOnly](https://learn.microsoft.com/en-us/dotnet/api/system.dateonly 'System\.DateOnly')\.
+
+Provides utility methods to work with [System\.DateOnly](https://learn.microsoft.com/en-us/dotnet/api/system.dateonly 'System\.DateOnly').
+
+This type is not available in the `netstandard` and .NET Framework builds of Louis,
+            because their BCL has no [System\.DateOnly](https://learn.microsoft.com/en-us/dotnet/api/system.dateonly 'System\.DateOnly').
 
 ```csharp
 public static class DateOnlyUtility

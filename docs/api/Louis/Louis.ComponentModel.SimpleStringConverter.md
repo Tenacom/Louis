@@ -40,8 +40,12 @@ The type of the converter to use\.
 
 ## SimpleStringConverter\.AddToTypeDescriptor\<T\>\(\) Method
 
+
 Registers a type converter for use by [System\.ComponentModel\.TypeDescriptor](https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.typedescriptor 'System\.ComponentModel\.TypeDescriptor') methods, where the type to convert to
-implements the [System\.IParsable&lt;&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.iparsable-1 'System\.IParsable\`1') interface\.
+            implements the [System\.IParsable&lt;&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.iparsable-1 'System\.IParsable\`1') interface.
+
+This method is not available in the `netstandard` and .NET Framework builds of Louis,
+            because their BCL has no [System\.IParsable&lt;&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.iparsable-1 'System\.IParsable\`1').
 
 ```csharp
 public static void AddToTypeDescriptor<T>()

@@ -6,7 +6,8 @@
 
 Provides an interpolated string handler that only performs formatting if a given condition is [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool').
 
-This type is only available on .NET 6.0 and greater.
+This type is not available in the `netstandard` and .NET Framework builds of Louis,
+             because their BCL has no [System\.Text\.StringBuilder\.AppendInterpolatedStringHandler](https://learn.microsoft.com/en-us/dotnet/api/system.text.stringbuilder.appendinterpolatedstringhandler 'System\.Text\.StringBuilder\.AppendInterpolatedStringHandler').
 
 This type is only meant to be used by compiler-generated code. As such, it performs no parameter validation whatsoever.
 

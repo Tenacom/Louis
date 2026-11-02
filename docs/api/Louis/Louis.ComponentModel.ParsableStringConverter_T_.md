@@ -8,6 +8,9 @@ A type converters that uses the [System\.IParsable&lt;&gt;](https://learn.micros
 
 If the type also implements [System\.IFormattable](https://learn.microsoft.com/en-us/dotnet/api/system.iformattable 'System\.IFormattable'), it is used to perform the opposite conversion.
 
+This type is not available in the `netstandard` and .NET Framework builds of Louis,
+            because their BCL has no [System\.IParsable&lt;&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.iparsable-1 'System\.IParsable\`1').
+
 ```csharp
 public class ParsableStringConverter<T> : Louis.ComponentModel.SimpleStringConverter<T>
     where T : System.IParsable<T>
