@@ -23,8 +23,10 @@ public static class SimpleStringConverter
 #if NET7_0_OR_GREATER
 
     /// <summary>
-    /// Registers a type converter for use by <see cref="TypeDescriptor"/> methods, where the type to convert to
-    /// implements the <see cref="System.IParsable{TSelf}"/> interface.
+    /// <para>Registers a type converter for use by <see cref="TypeDescriptor"/> methods, where the type to convert to
+    /// implements the <see cref="System.IParsable{TSelf}"/> interface.</para>
+    /// <para>This method is not available in the <c>netstandard</c> and .NET Framework builds of Louis,
+    /// because their BCL has no <see cref="System.IParsable{TSelf}"/>.</para>
     /// </summary>
     /// <typeparam name="T">The type of the object to convert to / from <see cref="string"/>. The type must implement the <see cref="System.IParsable{TSelf}"/> interface.</typeparam>
     public static void AddToTypeDescriptor<T>()

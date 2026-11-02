@@ -13,6 +13,8 @@ namespace Louis.ComponentModel;
 /// <summary>
 /// <para>A type converters that uses the <see cref="IParsable{TSelf}"/> interface to convert strings to instances of a type.</para>
 /// <para>If the type also implements <see cref="IFormattable"/>, it is used to perform the opposite conversion.</para>
+/// <para>This type is not available in the <c>netstandard</c> and .NET Framework builds of Louis,
+/// because their BCL has no <see cref="IParsable{TSelf}"/>.</para>
 /// </summary>
 /// <typeparam name="T">The type to convert.</typeparam>
 public class ParsableStringConverter<T> : SimpleStringConverter<T>
