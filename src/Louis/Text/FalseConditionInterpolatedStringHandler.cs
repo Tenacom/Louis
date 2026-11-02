@@ -14,7 +14,8 @@ namespace Louis.Text;
 
 /// <summary>
 /// <para>Provides an interpolated string handler that only performs formatting if a given condition is <see langword="false"/>.</para>
-/// <para>This type is only available on .NET 6.0 and greater.</para>
+/// <para>This type is not available in the <c>netstandard</c> and .NET Framework builds of Louis,
+/// because their BCL has no <see cref="StringBuilder.AppendInterpolatedStringHandler"/>.</para>
 /// <para>This type is only meant to be used by compiler-generated code. As such, it performs no parameter validation whatsoever.</para>
 /// </summary>
 /// <example>

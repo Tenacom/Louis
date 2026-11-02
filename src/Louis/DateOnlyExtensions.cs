@@ -9,7 +9,8 @@ namespace Louis;
 
 /// <summary>
 /// <para>Provides extension methods for instances of <see cref="DateOnly"/>.</para>
-/// <para>This type is only available on .NET 6.0 and greater.</para>
+/// <para>This type is not available in the <c>netstandard</c> and .NET Framework builds of Louis,
+/// because their BCL has no <see cref="DateOnly"/>.</para>
 /// </summary>
 public static partial class DateOnlyExtensions
 {
