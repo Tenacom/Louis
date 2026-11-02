@@ -1,6 +1,8 @@
 // Copyright (c) Tenacom and contributors. Licensed under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
+#if NET6_0_OR_GREATER
+
 using System;
 using System.Globalization;
 using CommunityToolkit.Diagnostics;
@@ -68,3 +70,5 @@ partial class DateOnlyExtensions
     public static DateOnly GetEndOfWeek(this DateOnly @this, DayOfWeek firstDayOfWeek)
         => @this.AddDays(6 - DateUtility.GetDaysFromStartOfWeek(@this.DayOfWeek, firstDayOfWeek));
 }
+
+#endif
