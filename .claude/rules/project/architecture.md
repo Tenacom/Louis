@@ -8,7 +8,7 @@ Louis is a library of general-purpose types for .NET libraries and applications.
 
 `Louis.slnx` is the authoritative list of projects.
 
-- `src/Louis`: the `Louis` package. It depends on `CommunityToolkit.Diagnostics`, for argument checks, and on `PolyKit`, for polyfills of BCL types missing on the older target frameworks.
+- `src/Louis`: the `Louis` package. It depends on `CommunityToolkit.Diagnostics`, for argument checks.
 - `src/Louis.Hosting`: the `Louis.Hosting` package. `AsyncHostedService` adapts `AsyncService` to the `IHostedService` contract of `Microsoft.Extensions.Hosting.Abstractions`, and logs through `Microsoft.Extensions.Logging.Abstractions`. It references `src/Louis` as a project.
 
 The repository has no test project. `tests/Common.targets` holds the settings a test project gets when one arrives, and `testing.md` says what framework it uses.
@@ -28,7 +28,7 @@ Each namespace of `Louis` groups types by the BCL area they extend or complete.
 | `Louis.Text`          | String literals: `StringExtensions`, `CharReadOnlySpanExtensions`, `StringBuilderExtensions`, `StringLiteralKind`. Also `UnicodeCharacterUtility`, `Utf8Utility`, and the conditional interpolated string handlers. |
 | `Louis.Threading`     | `AsyncService` with its enums, `InterlockedFlag`, `InterlockedReference<T>`, `ValueTaskUtility`.                                                                                    |
 
-A namespace named `Internal` holds types that are not part of the public surface. `Louis.Text.Internal` and `Louis.Hosting.Internal` are the two.
+A namespace named `Internal` holds types that are not part of the public surface. `Louis.Text.Internal`, `Louis.Diagnostics.Internal`, and `Louis.Hosting.Internal` are the three.
 
 `UnicodeCharacterUtility` is adapted from Roslyn, and `THIRD-PARTY-NOTICES.md` carries the attribution. "Conformance with the toolchain we belong to" in `design-principles.md` says what copying costs. Do not add a second copied file without adding its notice in the same commit.
 
@@ -41,6 +41,7 @@ A namespace named `Internal` holds types that are not part of the public surface
 - A type or member that only some frameworks get says so in its XML comment, as `ParsableStringConverter<T>` does.
 - `Common.props` turns `IsTrimmable` on for the frameworks compatible with `net8.0`.
 - The projects reference `System.Memory`, `System.Threading.Tasks.Extensions`, `Microsoft.Bcl.AsyncInterfaces`, and `System.ValueTuple` only on the frameworks that lack the types. `Louis.csproj` holds one `ItemGroup` per such framework.
+- PolySharp generates every other polyfill, as internal types. A public BCL type that an older framework lacks, such as `DateOnly`, gets no polyfill, because a consumer's own polyfill of the type would conflict with it. A member that uses such a type goes under `#if`, as `DateOnlyExtensions` does.
 
 ### Public API files
 
