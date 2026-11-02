@@ -6,21 +6,29 @@ User documentation is Markdown, rendered by GitHub. There is no separate site. T
 
 ## What is documentation
 
-- `README.md` at the repository root.
+The following files are technical documentation:
+
 - `CHANGELOG.md`.
-- Every file under `docs/`. A file under a generated folder is documentation that a tool writes, and "Generated folders" below says which rules it follows.
-- The `NuGet-README.md` of each packaged project. nuget.org renders it. It points at the root README and holds no documentation of its own.
+- Every file under `docs/`, except the articles below. A file under a generated folder is documentation that a tool writes, and "Generated folders" below says which rules it follows.
+
+The following are non-technical documentation:
+
+- `README.md` files are either entry points, read before proper documentation, or mere indexes.
+- `NuGet-README.md` files of packaged projects are entry points, too.
+- Articles, under `docs/articles/`, aim for easy reading rather than formality.
 
 Every other Markdown file is not documentation: third-party notices, analyzer release files, and the files under `.claude/`. The rules below do not apply to them.
 
 ## Register
 
-`output-styles/simple-tech.md` applies to every documentation file. On top of it:
+`output-styles/simple-tech.md` applies to every **technical documentation** file. On top of it:
 
 - Address the reader as "you". Name the product as the actor: "Buildvana SDK reads", "`bv` writes".
 - No first person. No "we", no "let's".
 - No rhetorical questions, no jokes, no asides.
 - One name per thing. `terminology.md` lists the names. When a thing has no name there, add one before using it in a second page.
+
+**Non-technical documentation** is allowed a less formal register, because a visitor reads them before the documentation. Check it for accuracy and consistency, not for compliance to the rules above. The `sentenceExemptFiles` array of `lint-docs.cs` holds the globs of these files, so that the sentence check leaves them alone. The other checks still apply to them.
 
 ## Lines
 
@@ -189,7 +197,7 @@ Example:
   - every page follows the template: summary paragraph, rulers, and a table of contents that matches the headings;
   - the index links every hand-written page, and no link points at a missing file or anchor, except a link into a generated folder;
   - every fenced block has a tag from the list above;
-  - a prose line, outside a fenced block, a table, and a released changelog section, holds one sentence of at most 25 words, counting a code span as one word and a link as the words of its text;
+  - a prose line, outside a fenced block, a table, a released changelog section, and a file matching a glob of its `sentenceExemptFiles` array, holds one sentence of at most 25 words, counting a code span as one word and a link as the words of its text;
   - no documentation file contains "TODO";
   - generated-region markers exist and pair;
   - a bullet under "Unreleased changes" holds no nested list, and the breaking changes of a subsection come before its other bullets;
