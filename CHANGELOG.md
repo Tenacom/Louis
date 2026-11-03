@@ -35,6 +35,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The [`Louis.Text`](docs/api/Louis/Louis.Text.md) methods that build a string literal escaped a control character as `\xHH`, which C# reads together with the hex digits that follow.
 - [`Utf8Utility.GetMaxCharsInBytes`](docs/api/Louis/Louis.Text.Utf8Utility.md) counted a surrogate pair whose low surrogate is `U+DFFF`, such as the one of `U+10FFFF`, as six bytes instead of four.
 - `Utf8Utility.GetMaxCharsInBytes` did not count a high surrogate at the end of the input, even when its three-byte replacement character fit.
+- [`ReadOnlyMemoryStream.Position`](docs/api/Louis/Louis.IO.ReadOnlyMemoryStream.md) threw `ArgumentOutOfRangeException` when set to 0.
+- The `ArgumentOutOfRangeException` that `ReadOnlyMemoryStream.Position` throws for a value above `int.MaxValue` had its message, not `value`, as its `ParamName`.
+- The `ObjectDisposedException` that a closed `ReadOnlyMemoryStream` throws had `Cannot access a closed Stream.` as its `ObjectName` instead of its `Message`.
+- `ReadOnlyMemoryStream.Read(byte[], int, int)` threw `ArgumentOutOfRangeException` when `count` exceeded the bytes left in the stream, instead of reading them.
+- `ReadOnlyMemoryStream.CopyTo` and `CopyToAsync` threw `ArgumentException` when the position of the stream was beyond its end, instead of copying nothing.
+- On the `netstandard2.0` and .NET Framework builds, `ReadOnlyMemoryStream.CopyToAsync` returned the buffer it rents for memory without a backing array before the destination consumed it.
 
 ### Known problems introduced by this release
 

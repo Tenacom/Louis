@@ -89,11 +89,11 @@ public sealed class ReadOnlyMemoryStream : Stream
 
         set
         {
-            Guard.IsGreaterThan(value, 0);
+            Guard.IsGreaterThanOrEqualTo(value, 0);
             EnsureNotClosed();
             if (value > int.MaxValue)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException("Stream position must be non-negative and less than 2^31.");
+                ThrowHelper.ThrowArgumentOutOfRangeException(nameof(value), "Stream position must be non-negative and less than 2^31.");
             }
 
             _position = (int)value;
@@ -166,7 +166,7 @@ public sealed class ReadOnlyMemoryStream : Stream
             return 0;
         }
 
-        var span = _data.Span.Slice(_position, count);
+        var span = _data.Span.Slice(_position, n);
         span.CopyTo(buffer.AsSpan(offset));
         _position += span.Length;
         return span.Length;
@@ -407,16 +407,7 @@ public sealed class ReadOnlyMemoryStream : Stream
             }
 
             // In the worst case, we have to use a temporary array as a buffer.
-            var buffer = ArrayPool<byte>.Shared.Rent(remaining);
-            try
-            {
-                _data.Span[originalPosition.._position].CopyTo(buffer);
-                return destination.WriteAsync(buffer, 0, remaining, cancellationToken);
-            }
-            finally
-            {
-                ArrayPool<byte>.Shared.Return(buffer);
-            }
+            return CopyToAsyncThroughBuffer(destination, originalPosition, remaining, cancellationToken);
 #endif
         }
 
@@ -521,12 +512,12 @@ public sealed class ReadOnlyMemoryStream : Stream
     /// <param name="buffer">A region of memory.</param>
     /// <exception cref="NotSupportedException">Always thrown, because instances of <see cref="ReadOnlyMemoryStream"/> are read-only.</exception>
     /// <remarks>
-    /// <para>This method overrides the corresponding method of <see cref="Stream"/> on runtimes where it is available (.NET Core 2.0 and newer,
+    /// <para>This method overrides the corresponding method of <see cref="Stream"/> on runtimes where it is available (.NET Core 2.1 and newer,
     /// .NET 5 and newer, .NET Standard 2.1 and newer). On older runtimes, this method is present as a method of <see cref="ReadOnlyMemoryStream"/>
     /// and depends on the <c>System.Memory</c> NuGet package.</para>
     /// </remarks>
     public
-#if NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     override
 #endif
 #pragma warning disable CA1822 // Mark members as static - false positive, as this is an override
@@ -556,14 +547,14 @@ public sealed class ReadOnlyMemoryStream : Stream
     /// <returns>A task that represents the asynchronous write operation.</returns>
     /// <exception cref="NotSupportedException">Always thrown, because instances of <see cref="ReadOnlyMemoryStream"/> are read-only.</exception>
     /// <remarks>
-    /// <para>This method overrides the corresponding method of <see cref="Stream"/> on runtimes where it is available (.NET Core 2.0 and newer,
+    /// <para>This method overrides the corresponding method of <see cref="Stream"/> on runtimes where it is available (.NET Core 2.1 and newer,
     /// .NET 5 and newer, .NET Standard 2.1 and newer). On older runtimes, this method is present as a method of <see cref="ReadOnlyMemoryStream"/>
     /// and depends on the <c>System.Memory</c> NuGet package.</para>
     /// </remarks>
 #pragma warning disable CA1822 // Mark members as static - false positive, as this is an override
 #pragma warning disable RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads - as in Stream
     public
-#if NETCOREAPP2_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+#if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
     override
 #endif
     ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
@@ -638,7 +629,7 @@ public sealed class ReadOnlyMemoryStream : Stream
 
     [DoesNotReturn]
     private static void ThrowClosedStream()
-        => ThrowHelper.ThrowObjectDisposedException("Cannot access a closed Stream.");
+        => ThrowHelper.ThrowObjectDisposedException(null, "Cannot access a closed Stream.");
 
     private void EnsureNotClosed()
     {
@@ -651,10 +642,32 @@ public sealed class ReadOnlyMemoryStream : Stream
     private int EmulateRead(int count)
     {
         EnsureNotClosed();
-        var n = RangeCheck.Clamp(_data.Length - _position, 0, count);
+        var n = Math.Max(Math.Min(_data.Length - _position, count), 0);
         _position += n;
         return n;
     }
+
+#if !(NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER)
+
+    private async Task CopyToAsyncThroughBuffer(
+        Stream destination,
+        int originalPosition,
+        int remaining,
+        CancellationToken cancellationToken)
+    {
+        var buffer = ArrayPool<byte>.Shared.Rent(remaining);
+        try
+        {
+            _data.Span.Slice(originalPosition, remaining).CopyTo(buffer);
+            await destination.WriteAsync(buffer, 0, remaining, cancellationToken).ConfigureAwait(false);
+        }
+        finally
+        {
+            ArrayPool<byte>.Shared.Return(buffer);
+        }
+    }
+
+#endif
 
     private void CopyToInternal(Stream destination, int originalPosition)
     {
