@@ -55,12 +55,14 @@ public static class ExceptionHelper
     /// <item><description>try to format <paramref name="obj"/> using the specified <paramref name="format"/>
     /// and the <see cref="CultureInfo.InvariantCulture">invariant culture</see>;</description></item>
     /// <item><description>if an exception is thrown, try again using an empty format string;</description></item>
-    /// <item><description>if another exception is thrown, treat <paramref name="obj"/> as if it didn't implement <see cref="IFormattable"/>.</description></item>
+    /// <item><description>if another exception is thrown, treat <paramref name="obj"/>
+    /// as if it didn't implement <see cref="IFormattable"/>.</description></item>
     /// </list>
     /// <para>If <paramref name="obj"/> does not implement <see cref="IFormattable"/>:</para>
     /// <list type="bullet">
     /// <item><description>call <paramref name="obj"/>.<see cref="object.ToString">ToString()</see>;</description></item>
-    /// <item><description>if <c>ToString</c> throws an exception, return a string of the form <c>&lt;{objType}:{exceptionType}&gt;</c>;</description></item>
+    /// <item><description>if <c>ToString</c> throws an exception,
+    /// return a string of the form <c>&lt;{objType}:{exceptionType}&gt;</c>;</description></item>
     /// <item><description>if <c>ToString</c> returns <see langword="null"/>, return <see cref="ToStringNullText"/>;</description></item>
     /// <item><description>if <c>ToString</c> returns the empty string, return <see cref="ToStringEmptyText"/>;</description></item>
     /// <item><description>otherwise, return the result of <c>ToString</c>.</description></item>

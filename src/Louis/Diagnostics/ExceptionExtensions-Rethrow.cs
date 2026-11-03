@@ -16,7 +16,7 @@ partial class ExceptionExtensions
     /// <param name="this">The exception to rethrow.</param>
     /// <exception cref="ArgumentNullException"><paramref name="this"/> is <see langword="null"/>.</exception>
     [DoesNotReturn]
-#pragma warning disable CS8763 // A method marked [DoesNotReturn] should not return - ExceptionDispatchInfo methods do not return but have no DoesNotReturn attribute.
+#pragma warning disable CS8763 // A method marked [DoesNotReturn] should not return - ExceptionDispatchInfo.Throw has no DoesNotReturn.
     public static void Rethrow(this Exception @this)
     {
         Guard.IsNotNull(@this, nameof(@this));
