@@ -45,6 +45,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [`SelfCheck.FailCritically<T>`](docs/api/Louis/Louis.Diagnostics.SelfCheck.md) threw `InternalErrorException` instead of `CriticalInternalErrorException`.
 - [`SelfCheck`](docs/api/Louis/Louis.Diagnostics.SelfCheck.md) messages named `System.Private.CoreLib` or `mscorlib` as the assembly of the failed check, instead of the assembly of the calling method.
 - [`SimpleStringConverter<T>.ConvertTo`](docs/api/Louis/Louis.ComponentModel.SimpleStringConverter_T_.md) overflowed the stack on a conversion to `string`.
+- [`AsyncService.Start`](docs/api/Louis/Louis.Threading.AsyncService.md) and `StartAndWaitAsync` did not throw `InvalidOperationException` when the service had already been started.
+- [`AsyncService.DoneToken`](docs/api/Louis/Louis.Threading.AsyncService.md) was not canceled when the service was stopped before starting.
+- [`AsyncService`](docs/api/Louis/Louis.Threading.AsyncService.md) called both `LogExecuteCompleted` and `LogExecuteCanceled` when `ExecuteAsync` returned after a stop request.
+- [`AsyncService.Start`](docs/api/Louis/Louis.Threading.AsyncService.md) and `StartAndWaitAsync` faulted a task nobody observed when `ExecuteAsync` or `TeardownAsync` threw, which raised `TaskScheduler.UnobservedTaskException`.
 
 ### Known problems introduced by this release
 

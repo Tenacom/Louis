@@ -44,6 +44,7 @@ public abstract class AsyncService : IAsyncDisposable, IDisposable
 
     private InterlockedFlag _disposed;
     private AsyncServiceState _state = AsyncServiceState.Created;
+    private bool _stoppedBeforeStart;
 
     static AsyncService()
     {
@@ -99,11 +100,13 @@ public abstract class AsyncService : IAsyncDisposable, IDisposable
     /// </exception>
     /// <remarks>
     /// <para>Only one of <see cref="RunAsync"/>, <see cref="Start"/>, and <see cref="StartAndWaitAsync"/> may be called, at most once.</para>
+    /// <para>If the service was stopped before starting, the returned task is already completed.</para>
     /// </remarks>
-    public Task RunAsync(CancellationToken cancellationToken) => RunAsyncCore(false, cancellationToken);
+    public Task RunAsync(CancellationToken cancellationToken)
+        => TryBeginStart() ? RunAsyncCore(false, cancellationToken) : WaitUntilStoppedAsync();
 
     /// <summary>
-    /// Starts an asynchronous service, then return while it continues to run in the background.
+    /// Starts an asynchronous service, then returns while it continues to run in the background.
     /// </summary>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to stop the service.</param>
     /// <exception cref="InvalidOperationException">
@@ -113,8 +116,15 @@ public abstract class AsyncService : IAsyncDisposable, IDisposable
     /// <para>Only one of <see cref="RunAsync"/>, <see cref="Start"/>, and <see cref="StartAndWaitAsync"/> may be called, at most once.</para>
     /// <para>If your program needs to know the exact reason why a service stops or fails to start,
     /// do not use this method; call <see cref="RunAsync"/> from a separate task instead.</para>
+    /// <para>If the service was stopped before starting, this method does nothing.</para>
     /// </remarks>
-    public void Start(CancellationToken cancellationToken) => _ = RunAsyncCore(true, cancellationToken);
+    public void Start(CancellationToken cancellationToken)
+    {
+        if (TryBeginStart())
+        {
+            _ = RunAsyncCore(true, cancellationToken);
+        }
+    }
 
     /// <summary>
     /// Asynchronously starts an asynchronous service and waits for its <see cref="SetupAsync"/> method to complete.
@@ -128,14 +138,21 @@ public abstract class AsyncService : IAsyncDisposable, IDisposable
     /// The service has already been started, either by calling <see cref="RunAsync"/>, <see cref="Start"/>,  or <see cref="StartAndWaitAsync"/>.
     /// </exception>
     /// <remarks>
-    /// <para>You may call one of <see cref="RunAsync"/> and <see cref="StartAndWaitAsync"/> at most once.</para>
+    /// <para>Only one of <see cref="RunAsync"/>, <see cref="Start"/>, and <see cref="StartAndWaitAsync"/>
+    /// may be called, at most once.</para>
     /// <para>If your program needs to know the exact reason why a service stops or fails to start,
     /// do not use this method; call <see cref="RunAsync"/> from a separate task instead.</para>
+    /// <para>If the service was stopped before starting, the returned task is already completed
+    /// with <see cref="AsyncServiceSetupResult.NotStarted"/>.</para>
     /// </remarks>
     /// <seealso cref="AsyncServiceSetupResult"/>
     public Task<AsyncServiceSetupResult> StartAndWaitAsync(CancellationToken cancellationToken)
     {
-        _ = RunAsyncCore(true, cancellationToken);
+        if (TryBeginStart())
+        {
+            _ = RunAsyncCore(true, cancellationToken);
+        }
+
         return WaitUntilStartedAsync();
     }
 
@@ -178,9 +195,9 @@ public abstract class AsyncService : IAsyncDisposable, IDisposable
     /// (in which case the result will be <see langword="false"/>).
     /// </returns>
     /// <remarks>
-    /// <para>If neither <see cref="RunAsync"/> nor <see cref="StartAndWaitAsync"/> have been called,
-    /// the returned task will not complete until one of them is called.</para>
-    /// <para>If the service has already finished starting, the returned task is already completed.</para>
+    /// <para>If none of <see cref="RunAsync"/>, <see cref="Start"/>, <see cref="StartAndWaitAsync"/>, and <see cref="Stop()"/>
+    /// have been called, the returned task will not complete until one of them is called.</para>
+    /// <para>If the service has already finished starting, or was stopped before starting, the returned task is already completed.</para>
     /// </remarks>
     public Task<AsyncServiceSetupResult> WaitUntilStartedAsync() => _startedCompletionSource.Task;
 
@@ -191,8 +208,8 @@ public abstract class AsyncService : IAsyncDisposable, IDisposable
     /// A <see cref="Task"/> that will complete as soon as the service has started and then stopped,
     /// or until it has failed to start.</returns>
     /// <remarks>
-    /// <para>If neither <see cref="RunAsync"/> nor <see cref="StartAndWaitAsync"/> have been called,
-    /// the returned task will not complete until one of them is called.</para>
+    /// <para>If none of <see cref="RunAsync"/>, <see cref="Start"/>, <see cref="StartAndWaitAsync"/>, and <see cref="Stop()"/>
+    /// have been called, the returned task will not complete until one of them is called.</para>
     /// <para>If the service has already stopped, the returned task is already completed.</para>
     /// </remarks>
     public Task WaitUntilStoppedAsync() => _stoppedCompletionSource.Task;
@@ -417,20 +434,32 @@ public abstract class AsyncService : IAsyncDisposable, IDisposable
         }
     }
 
-    private async Task RunAsyncCore(bool runInBackground, CancellationToken cancellationToken)
+    // Moves the service from Created to Starting and returns true.
+    // Returns false when the service was stopped before starting, so that the caller skips the run.
+    // Throws when the service has been disposed, or has already started.
+    private bool TryBeginStart()
     {
         lock (_stateSyncRoot)
         {
             EnsureNotDisposed();
-            if (_state != AsyncServiceState.Created)
+            switch (_state)
             {
-                ThrowHelper.ThrowInvalidOperationException("An async service cannot be started more than once.");
+                case AsyncServiceState.Created:
+                    UnsafeSetState(AsyncServiceState.Starting);
+                    return true;
+
+                case AsyncServiceState.Stopped when _stoppedBeforeStart:
+                    return false;
+
+                default:
+                    return ThrowHelper.ThrowInvalidOperationException<bool>("An async service cannot be started more than once.");
             }
-
-            UnsafeSetState(AsyncServiceState.Starting);
         }
+    }
 
-        // Return immediately when called from Start or StartAsync;
+    private async Task RunAsyncCore(bool runInBackground, CancellationToken cancellationToken)
+    {
+        // Return immediately when called from Start or StartAndWaitAsync;
         // continue synchronously when called from RunAsync.
         if (runInBackground)
         {
@@ -472,7 +501,12 @@ public abstract class AsyncService : IAsyncDisposable, IDisposable
         var teardownException = await RunTeardownAsync().ConfigureAwait(false);
         State = AsyncServiceState.Stopped;
         _stoppedCompletionSource.SetResult(true);
-        AggregateAndThrowIfNeeded(exception, teardownException);
+
+        // Only propagate exceptions if there is a caller to propagate to.
+        if (!runInBackground)
+        {
+            AggregateAndThrowIfNeeded(exception, teardownException);
+        }
     }
 
     private async Task<(AsyncServiceSetupResult Result, Exception? Exception)> RunSetupAsync(CancellationToken cancellationToken)
@@ -510,11 +544,11 @@ public abstract class AsyncService : IAsyncDisposable, IDisposable
             // Execute the service.
             LogBeforeExecute();
             await ExecuteAsync(cancellationToken).ConfigureAwait(false);
-            LogExecuteCompleted();
 
             // Check the cancellation token again, in case cancellation has been requested
-            // but ExecuteAsync has not honored the request.
+            // but ExecuteAsync has returned instead of throwing.
             cancellationToken.ThrowIfCancellationRequested();
+            LogExecuteCompleted();
             return null;
         }
         catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
@@ -566,9 +600,11 @@ public abstract class AsyncService : IAsyncDisposable, IDisposable
             switch (_state)
             {
                 case AsyncServiceState.Created:
+                    _stoppedBeforeStart = true;
                     _ = _startedCompletionSource.TrySetResult(AsyncServiceSetupResult.NotStarted);
                     _ = _stoppedCompletionSource.TrySetResult(true);
                     UnsafeSetState(AsyncServiceState.Stopped);
+                    _doneTokenSource.Cancel();
                     return false;
 
                 case AsyncServiceState.Starting:
