@@ -43,4 +43,5 @@ The `.claude` directory is meant to be copied whole into other projects. This in
 - `rules/project/dependency-management.md`: the run-time dependencies of each package and the reason each is allowed, the polyfill packages, and the test and development dependency groups. The common part is in `rules/common/buildvana.md`.
 - `rules/project/terminology.md`: the one name for each thing the repository documents. Entirely about this repo.
 - `rules/project/pr-checks.md`: the checks of a pull request whose failure does not stop a review. The Codecov section applies to any repository whose CI uploads to Codecov, and a copy adds its own checks.
+- `rules/project/people.md`: who holds each role the rule files name. Entirely about this repo.
 - this file: repository coordinates, and the index itself.
