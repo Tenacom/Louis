@@ -258,6 +258,8 @@ Pick the form that shows the content most clearly. No form wins in every case, s
 
 A line of C# is at most 140 characters, including indentation. The limit covers code, ordinary comments, and XML documentation comments. Prose files, such as Markdown, have no line-length limit.
 
+A URL is never broken, and no line is wrapped to fit one. A line that holds a URL complies when its length without the URL is within the limit.
+
 The limit is a review rule, not a formatter setting. `.editorconfig` has no `max_line_length` on purpose, so no tool reformats existing code on its own.
 
 New and modified lines always comply. When you work in a file, by adding to it, reworking it, or fixing something in it, bring the whole file within the limit. Commit those extra wraps separately, so that the change under review stays readable. A mechanical sweep that touches a line or two in many files does not count as working in them. There, comply on the lines you touch and leave the rest.
