@@ -35,15 +35,19 @@ internal sealed class AsyncServiceStartAndWaitAsyncTests : AsyncServiceTestsBase
     }
 
     [Test]
-    public async Task StartAndWaitAsync_WhenSetupThrows_ReturnsFaulted(CancellationToken cancellationToken)
+    public async Task StartAndWaitAsync_WhenSetupThrows_ThrowsSetupException(CancellationToken cancellationToken)
     {
         var exception = new InvalidOperationException("Setup failed.");
         Service.SetupGate.SetException(exception);
 
-        var setupResult = await Service.StartAndWaitAsync(cancellationToken);
+        Task Act() => Service.StartAndWaitAsync(cancellationToken);
 
-        await Assert.That(setupResult).IsEqualTo(AsyncServiceSetupResult.Faulted);
+        var thrown = await Assert.That(Act).Throws<InvalidOperationException>();
+
+        await Assert.That(thrown).IsSameReferenceAs(exception);
         await Assert.That(Service.SetupException).IsSameReferenceAs(exception);
+        var setupResult = await Service.WaitUntilStartedAsync();
+        await Assert.That(setupResult).IsEqualTo(AsyncServiceSetupResult.Faulted);
         await Assert.That(Service.State).IsEqualTo(AsyncServiceState.Stopped);
     }
 

@@ -1,7 +1,7 @@
 // Copyright (c) Tenacom and contributors. Licensed under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
-internal sealed partial class AsyncHostedServiceTests
+internal sealed class AsyncHostedServiceTests
 {
     [Test]
     public async Task Constructor_WithNullLogger_ThrowsArgumentNullException()
@@ -9,7 +9,7 @@ internal sealed partial class AsyncHostedServiceTests
         static void Act()
         {
             // ! Null on purpose: testing null detection
-            using var service = new TestService(null!);
+            using var service = new TestAsyncHostedService(null!);
         }
 
         var exception = Assert.Throws<ArgumentNullException>(Act);
