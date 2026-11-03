@@ -19,8 +19,8 @@ partial class RangeCheck
     /// <param name="defaultValue">The value to return if <paramref name="value"/>
     /// is not within the specified range.</param>
     /// <returns>
-    /// If <paramref name="value"/> is within <paramref name="min"/> and <paramref name="max"/>, including boundaries, <paramref name="value"/>;
-    /// otherwise, <paramref name="defaultValue"/>.
+    /// If <paramref name="value"/> is within <paramref name="min"/> and <paramref name="max"/>, including boundaries,
+    /// <paramref name="value"/>; otherwise, <paramref name="defaultValue"/>.
     /// </returns>
     /// <exception cref="ArgumentException">
     /// <paramref name="min"/> is greater than <paramref name="max"/>.
@@ -44,8 +44,8 @@ partial class RangeCheck
     /// is not within the specified range.</param>
     /// <param name="comparer">The comparer to use for comparisons.</param>
     /// <returns>
-    /// If <paramref name="value"/> is within <paramref name="min"/> and <paramref name="max"/>, including boundaries, <paramref name="value"/>;
-    /// otherwise, <paramref name="defaultValue"/>.
+    /// If <paramref name="value"/> is within <paramref name="min"/> and <paramref name="max"/>, including boundaries,
+    /// <paramref name="value"/>; otherwise, <paramref name="defaultValue"/>.
     /// </returns>
     /// <exception cref="ArgumentNullException">
     /// <paramref name="comparer"/> is <see langword="null"/>.
@@ -74,9 +74,12 @@ partial class RangeCheck
     /// <param name="acceptNull"><see langword="true"/> to consider <see langword="null"/> values
     /// as if within range; <see langword="false"/> otherwise.</param>
     /// <returns>
-    /// <para>If <paramref name="value"/> is <see langword="null"/> and <paramref name="acceptNull"/> is <see langword="true"/>, <see langword="null"/>.</para>
-    /// <para>If <paramref name="value"/> is <see langword="null"/> and <paramref name="acceptNull"/> is <see langword="false"/>, <paramref name="defaultValue"/>.</para>
-    /// <para>If <paramref name="value"/> is within <paramref name="min"/> and <paramref name="max"/>, including boundaries, <paramref name="value"/>.</para>
+    /// <para>If <paramref name="value"/> is <see langword="null"/> and <paramref name="acceptNull"/> is <see langword="true"/>,
+    /// <see langword="null"/>.</para>
+    /// <para>If <paramref name="value"/> is <see langword="null"/> and <paramref name="acceptNull"/> is <see langword="false"/>,
+    /// <paramref name="defaultValue"/>.</para>
+    /// <para>If <paramref name="value"/> is within <paramref name="min"/> and <paramref name="max"/>, including boundaries,
+    /// <paramref name="value"/>.</para>
     /// <para>Otherwise, <paramref name="defaultValue"/>.</para>
     /// </returns>
     /// <exception cref="ArgumentException">
@@ -108,9 +111,12 @@ partial class RangeCheck
     /// as if within range; <see langword="false"/> otherwise.</param>
     /// <param name="comparer">The comparer to use for comparisons.</param>
     /// <returns>
-    /// <para>If <paramref name="value"/> is <see langword="null"/> and <paramref name="acceptNull"/> is <see langword="true"/>, <see langword="null"/>.</para>
-    /// <para>If <paramref name="value"/> is <see langword="null"/> and <paramref name="acceptNull"/> is <see langword="false"/>, <paramref name="defaultValue"/>.</para>
-    /// <para>If <paramref name="value"/> is within <paramref name="min"/> and <paramref name="max"/>, including boundaries, <paramref name="value"/>.</para>
+    /// <para>If <paramref name="value"/> is <see langword="null"/> and <paramref name="acceptNull"/> is <see langword="true"/>,
+    /// <see langword="null"/>.</para>
+    /// <para>If <paramref name="value"/> is <see langword="null"/> and <paramref name="acceptNull"/> is <see langword="false"/>,
+    /// <paramref name="defaultValue"/>.</para>
+    /// <para>If <paramref name="value"/> is within <paramref name="min"/> and <paramref name="max"/>, including boundaries,
+    /// <paramref name="value"/>.</para>
     /// <para>Otherwise, <paramref name="defaultValue"/>.</para>
     /// </returns>
     /// <exception cref="ArgumentNullException">
@@ -120,7 +126,13 @@ partial class RangeCheck
     /// <paramref name="min"/> is greater than <paramref name="max"/>.
     /// </exception>
     [return:NotNullIfNotNull("value")]
-    public static T? InRangeOrDefault<T>(T? value, T min, T max, T? defaultValue, bool acceptNull, IComparer<T> comparer)
+    public static T? InRangeOrDefault<T>(
+        T? value,
+        T min,
+        T max,
+        T? defaultValue,
+        bool acceptNull,
+        IComparer<T> comparer)
         where T : class
     {
 #pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
@@ -143,9 +155,12 @@ partial class RangeCheck
     /// <param name="acceptNull"><see langword="true"/> to consider <see langword="null"/> values
     /// as if within range; <see langword="false"/> otherwise.</param>
     /// <returns>
-    /// <para>If <paramref name="value"/> is <see langword="null"/> and <paramref name="acceptNull"/> is <see langword="true"/>, <see langword="null"/>.</para>
-    /// <para>If <paramref name="value"/> is <see langword="null"/> and <paramref name="acceptNull"/> is <see langword="false"/>, <paramref name="defaultValue"/>.</para>
-    /// <para>If <paramref name="value"/> is within <paramref name="min"/> and <paramref name="max"/>, including boundaries, <paramref name="value"/>.</para>
+    /// <para>If <paramref name="value"/> is <see langword="null"/> and <paramref name="acceptNull"/> is <see langword="true"/>,
+    /// <see langword="null"/>.</para>
+    /// <para>If <paramref name="value"/> is <see langword="null"/> and <paramref name="acceptNull"/> is <see langword="false"/>,
+    /// <paramref name="defaultValue"/>.</para>
+    /// <para>If <paramref name="value"/> is within <paramref name="min"/> and <paramref name="max"/>, including boundaries,
+    /// <paramref name="value"/>.</para>
     /// <para>Otherwise, <paramref name="defaultValue"/>.</para>
     /// </returns>
     /// <exception cref="ArgumentException">
@@ -175,9 +190,12 @@ partial class RangeCheck
     /// as if within range; <see langword="false"/> otherwise.</param>
     /// <param name="comparer">The comparer to use for comparisons.</param>
     /// <returns>
-    /// <para>If <paramref name="value"/> is <see langword="null"/> and <paramref name="acceptNull"/> is <see langword="true"/>, <see langword="null"/>.</para>
-    /// <para>If <paramref name="value"/> is <see langword="null"/> and <paramref name="acceptNull"/> is <see langword="false"/>, <paramref name="defaultValue"/>.</para>
-    /// <para>If <paramref name="value"/> is within <paramref name="min"/> and <paramref name="max"/>, including boundaries, <paramref name="value"/>.</para>
+    /// <para>If <paramref name="value"/> is <see langword="null"/> and <paramref name="acceptNull"/> is <see langword="true"/>,
+    /// <see langword="null"/>.</para>
+    /// <para>If <paramref name="value"/> is <see langword="null"/> and <paramref name="acceptNull"/> is <see langword="false"/>,
+    /// <paramref name="defaultValue"/>.</para>
+    /// <para>If <paramref name="value"/> is within <paramref name="min"/> and <paramref name="max"/>, including boundaries,
+    /// <paramref name="value"/>.</para>
     /// <para>Otherwise, <paramref name="defaultValue"/>.</para>
     /// </returns>
     /// <exception cref="ArgumentNullException">
@@ -187,7 +205,13 @@ partial class RangeCheck
     /// <paramref name="min"/> is greater than <paramref name="max"/>.
     /// </exception>
     [return:NotNullIfNotNull("value")]
-    public static T? InRangeOrDefault<T>(T? value, T min, T max, T? defaultValue, bool acceptNull, IComparer<T> comparer)
+    public static T? InRangeOrDefault<T>(
+        T? value,
+        T min,
+        T max,
+        T? defaultValue,
+        bool acceptNull,
+        IComparer<T> comparer)
         where T : struct
     {
 #pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843

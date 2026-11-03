@@ -10,7 +10,8 @@ namespace Louis;
 partial class DateUtility
 {
     /// <summary>
-    /// Returns the amount of full days separating a given day of the week from the first day of the same week, according to the current culture.
+    /// Returns the amount of full days separating a given day of the week from the first day of the same week,
+    /// according to the current culture.
     /// </summary>
     /// <param name="today">A <see cref="DayOfWeek"/> value.</param>
     /// <returns>An integer number between 0 and 6 representing the days between the start of the week and <paramref name="today"/>,
@@ -22,7 +23,8 @@ partial class DateUtility
         => GetDaysFromStartOfWeek(today, CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek);
 
     /// <summary>
-    /// Returns the amount of full days separating a given day of the week from the first day of the same week, according to the specified culture.
+    /// Returns the amount of full days separating a given day of the week from the first day of the same week,
+    /// according to the specified culture.
     /// </summary>
     /// <param name="today">A <see cref="DayOfWeek"/> value.</param>
     /// <param name="culture">An object that supplies culture-specific information.</param>
@@ -41,7 +43,8 @@ partial class DateUtility
     }
 
     /// <summary>
-    /// Returns the amount of full days separating a given day of the week from the first day of the same week, according to the specified formatting information.
+    /// Returns the amount of full days separating a given day of the week from the first day of the same week,
+    /// according to the specified formatting information.
     /// </summary>
     /// <param name="today">A <see cref="DayOfWeek"/> value.</param>
     /// <param name="dateTimeFormat">An object that supplies culture-specific date formatting information.</param>
@@ -58,7 +61,8 @@ partial class DateUtility
     }
 
     /// <summary>
-    /// Returns the amount of full days separating a given day of the week from the first day of the same week, if a given day is considered the first of the week.
+    /// Returns the amount of full days separating a given day of the week from the first day of the same week,
+    /// if a given day is considered the first of the week.
     /// </summary>
     /// <param name="today">A <see cref="DayOfWeek"/> value.</param>
     /// <param name="firstDayOfWeek">A <see cref="DayOfWeek"/> value representing the day that starts the week.</param>
