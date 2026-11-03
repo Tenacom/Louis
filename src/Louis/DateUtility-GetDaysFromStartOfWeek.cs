@@ -66,5 +66,5 @@ partial class DateUtility
     /// if weeks are considered starting with <paramref name="firstDayOfWeek"/>.</returns>
     /// <seealso cref="DayOfWeek"/>
     public static int GetDaysFromStartOfWeek(DayOfWeek today, DayOfWeek firstDayOfWeek)
-        => (7 + (int)today - (int)firstDayOfWeek) & 7;
+        => (7 + (int)today - (int)firstDayOfWeek) % 7;
 }
