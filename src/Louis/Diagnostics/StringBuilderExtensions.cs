@@ -24,7 +24,7 @@ public static class StringBuilderExtensions
     /// <exception cref="ArgumentNullException"><paramref name="this"/> is <see langword="null"/>.</exception>
     public static StringBuilder AppendFormattedObject(this StringBuilder @this, object? obj, string? format = null)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
 
         return @this.Append(ExceptionHelper.FormatObject(obj, format));
     }

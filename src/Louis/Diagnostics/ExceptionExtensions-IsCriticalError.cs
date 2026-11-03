@@ -52,7 +52,7 @@ partial class ExceptionExtensions
     /// </remarks>
     public static bool IsCriticalError(this Exception @this)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
 
         return AnyCausingExceptionCore(@this, IsCriticalErrorCore);
     }

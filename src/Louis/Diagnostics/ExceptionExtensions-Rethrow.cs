@@ -19,7 +19,7 @@ partial class ExceptionExtensions
 #pragma warning disable CS8763 // A method marked [DoesNotReturn] should not return - ExceptionDispatchInfo methods do not return but have no DoesNotReturn attribute.
     public static void Rethrow(this Exception @this)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
 
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_0_OR_GREATER
         ExceptionDispatchInfo.Throw(@this);

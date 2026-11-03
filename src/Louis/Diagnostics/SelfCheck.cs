@@ -13,6 +13,11 @@ namespace Louis.Diagnostics;
 /// <summary>
 /// Provides methods to perform self-checks in library or application code.
 /// </summary>
+/// <remarks>
+/// <para>The message of every exception created by this class names the assembly of the calling method,
+/// as the call stack reports it. When the JIT compiler removes the frame of the calling method,
+/// by inlining it into its own caller or by a tail call, the message names the assembly of the next frame instead.</para>
+/// </remarks>
 public static class SelfCheck
 {
     /// <summary>
@@ -20,9 +25,9 @@ public static class SelfCheck
     /// </summary>
     /// <param name="message">The exception message.</param>
     /// <param name="filePath">The path of the source file where this method is called.
-    /// This parameter is automatically added by the compiler amd should never be provided explicitly.</param>
+    /// This parameter is automatically added by the compiler and should never be provided explicitly.</param>
     /// <param name="lineNumber">The line number in source where this method is called.
-    /// This parameter is automatically added by the compiler amd should never be provided explicitly.</param>
+    /// This parameter is automatically added by the compiler and should never be provided explicitly.</param>
     /// <returns>
     /// A newly-created instance of <see cref="InternalErrorException"/>.
     /// </returns>
@@ -46,9 +51,9 @@ public static class SelfCheck
     /// </summary>
     /// <param name="message">The exception message.</param>
     /// <param name="filePath">The path of the source file where this method is called.
-    /// This parameter is automatically added by the compiler amd should never be provided explicitly.</param>
+    /// This parameter is automatically added by the compiler and should never be provided explicitly.</param>
     /// <param name="lineNumber">The line number in source where this method is called.
-    /// This parameter is automatically added by the compiler amd should never be provided explicitly.</param>
+    /// This parameter is automatically added by the compiler and should never be provided explicitly.</param>
     /// <returns>
     /// A newly-created instance of <see cref="CriticalInternalErrorException"/>.
     /// </returns>
@@ -75,9 +80,9 @@ public static class SelfCheck
     /// </summary>
     /// <param name="message">The exception message.</param>
     /// <param name="filePath">The path of the source file where this method is called.
-    /// This parameter is automatically added by the compiler amd should never be provided explicitly.</param>
+    /// This parameter is automatically added by the compiler and should never be provided explicitly.</param>
     /// <param name="lineNumber">The line number in source where this method is called.
-    /// This parameter is automatically added by the compiler amd should never be provided explicitly.</param>
+    /// This parameter is automatically added by the compiler and should never be provided explicitly.</param>
     /// <remarks>
     /// <para>The thrown exception will be of type <see cref="InternalErrorException"/>; its
     /// <see cref="Exception.Message">Message</see> property will contain the specified
@@ -97,9 +102,9 @@ public static class SelfCheck
     /// </summary>
     /// <param name="message">The exception message.</param>
     /// <param name="filePath">The path of the source file where this method is called.
-    /// This parameter is automatically added by the compiler amd should never be provided explicitly.</param>
+    /// This parameter is automatically added by the compiler and should never be provided explicitly.</param>
     /// <param name="lineNumber">The line number in source where this method is called.
-    /// This parameter is automatically added by the compiler amd should never be provided explicitly.</param>
+    /// This parameter is automatically added by the compiler and should never be provided explicitly.</param>
     /// <remarks>
     /// <para>The thrown exception will be of type <see cref="CriticalInternalErrorException"/>; its
     /// <see cref="Exception.Message">Message</see> property will contain the specified
@@ -123,9 +128,9 @@ public static class SelfCheck
     /// <typeparam name="T">The expected return type.</typeparam>
     /// <param name="message">The exception message.</param>
     /// <param name="filePath">The path of the source file where this method is called.
-    /// This parameter is automatically added by the compiler amd should never be provided explicitly.</param>
+    /// This parameter is automatically added by the compiler and should never be provided explicitly.</param>
     /// <param name="lineNumber">The line number in source where this method is called.
-    /// This parameter is automatically added by the compiler amd should never be provided explicitly.</param>
+    /// This parameter is automatically added by the compiler and should never be provided explicitly.</param>
     /// <returns>This method never returns.</returns>
     /// <remarks>
     /// <para>The thrown exception will be of type <see cref="InternalErrorException"/>; its
@@ -147,9 +152,9 @@ public static class SelfCheck
     /// <typeparam name="T">The expected return type.</typeparam>
     /// <param name="message">The exception message.</param>
     /// <param name="filePath">The path of the source file where this method is called.
-    /// This parameter is automatically added by the compiler amd should never be provided explicitly.</param>
+    /// This parameter is automatically added by the compiler and should never be provided explicitly.</param>
     /// <param name="lineNumber">The line number in source where this method is called.
-    /// This parameter is automatically added by the compiler amd should never be provided explicitly.</param>
+    /// This parameter is automatically added by the compiler and should never be provided explicitly.</param>
     /// <returns>This method never returns.</returns>
     /// <remarks>
     /// <para>The thrown exception will be of type <see cref="CriticalInternalErrorException"/>; its
@@ -166,10 +171,15 @@ public static class SelfCheck
         string message,
         [CallerFilePath] string filePath = "",
         [CallerLineNumber] int lineNumber = 0)
-        => throw new InternalErrorException(BuildMessage(message, filePath, lineNumber));
+        => throw new CriticalInternalErrorException(BuildMessage(message, filePath, lineNumber));
 
     // This method MUST be called directly from a public method of this class
     // in order to get the correct stack frame of the caller.
+    [MethodImpl(MethodImplOptions.NoInlining)] // Keep this method a frame of its own, so that frame 2 is the caller of the public method
+    [UnconditionalSuppressMessage(
+        "Trimming",
+        "IL2026",
+        Justification = "Only the assembly name of the method is read. Trimming keeps it, and a null method yields <unknown>.")]
     private static string BuildMessage(string message, string filePath, int lineNumber)
     {
         // No point in throwing an exception if message is null.
@@ -177,7 +187,7 @@ public static class SelfCheck
         message ??= "<no message>";
 
         // Skip this method and the calling method when getting the stack frame.
-        var assemblyName = new StackFrame(2).GetType().Assembly.GetName().Name ?? "<unknown>";
+        var assemblyName = new StackFrame(2).GetMethod()?.Module.Assembly.GetName().Name ?? "<unknown>";
 
         // Ignore the line number if there is no source file to refer to.
         var haveFilePath = !string.IsNullOrEmpty(filePath);
