@@ -18,7 +18,7 @@ Buildvana SDK adds the analyzers to every project, so `Directory.Packages.props`
 
 ## Test dependencies
 
-The "Test dependencies" group of `Directory.Packages.props` is empty. `testing.md` says what the first test project gets: TUnit on Microsoft.Testing.Platform, with `Microsoft.Testing.Extensions.CodeCoverage`.
+The "Test dependencies" group of `Directory.Packages.props` pins `TUnit`, the test framework `testing.md` names. `TUnit` depends on `TUnit.Engine`, `TUnit.Assertions`, and `Microsoft.Testing.Extensions.CodeCoverage`, so the group pins nothing else. The `netstandard2.0` test projects reference `Microsoft.Bcl.AsyncInterfaces` through its run-time pin, because the `netstandard2.0` build of `Louis` needs it and NuGet restore does not follow that build. "Every build of a package gets tested" in `testing.md` says why.
 
 ## The Buildvana family
 

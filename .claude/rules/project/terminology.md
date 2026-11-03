@@ -19,3 +19,5 @@ One name per thing, in every kind of prose: documentation, chat, commit messages
 | A `PublicAPI.Shipped.txt` or `PublicAPI.Unshipped.txt` file                                   | public API file            | API file                                 |
 | The code under `#if` that serves one group of target frameworks                               | framework-specific code    | platform-specific code, conditional code |
 | A package that supplies a BCL type to a target framework that lacks it                        | polyfill                   | shim, compatibility package              |
+| A test project that targets the frameworks its package runs on, such as `tests/Louis.Tests`   | main test project          | test project proper, full test project   |
+| A test project that compiles the files of a main test project against a `netstandard` build   | `netstandard` test project | flavor project, mirror project           |

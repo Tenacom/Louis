@@ -16,6 +16,9 @@
     <!-- No sense in packing test projects -->
     <IsPackable>false</IsPackable>
 
+    <!-- Common.props turns trimming on for the packaged libraries. A test project is an application that runs as built. -->
+    <IsTrimmable>false</IsTrimmable>
+
   </PropertyGroup>
 
   <!-- Hide test result files in Visual Studio -->

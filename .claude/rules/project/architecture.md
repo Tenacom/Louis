@@ -11,7 +11,18 @@ Louis is a library of general-purpose types for .NET libraries and applications.
 - `src/Louis`: the `Louis` package. It depends on `CommunityToolkit.Diagnostics`, for argument checks.
 - `src/Louis.Hosting`: the `Louis.Hosting` package. `AsyncHostedService` adapts `AsyncService` to the `IHostedService` contract of `Microsoft.Extensions.Hosting.Abstractions`, and logs through `Microsoft.Extensions.Logging.Abstractions`. It references `src/Louis` as a project.
 
-The repository has no test project. `tests/Common.targets` holds the settings a test project gets when one arrives, and `testing.md` says what framework it uses.
+### Test projects
+
+Each package `<Package>`, built from `src/<Package>`, has three test projects under `tests/`. "Every build of a package gets tested" in `testing.md` says what each kind does.
+
+- `<Package>.Tests` is the main test project. It targets `net10.0`, and `net48` on Windows.
+- `<Package>.Tests.NetStandard20` and `<Package>.Tests.NetStandard21` are the `netstandard` test projects. They define `LOUIS_NETSTANDARD2_0` or `LOUIS_NETSTANDARD2_1`. The symbol names the build and not the package, so every package uses the same two. A `NetStandard20` project references `Microsoft.Bcl.AsyncInterfaces`, because the `netstandard2.0` build of `Louis` does.
+
+`tests/Common.targets` holds the settings every test project gets.
+
+Louis supports Windows and Linux, and `ci.yml` runs the tests on `ubuntu-latest` and `windows-latest`. The `net48` tests run on the Windows runner alone. "Tests on more than one platform" in `testing.md` holds for every other test.
+
+`ReadOnlyMemoryStream` is the one type with members that bind differently per build, as "Every build of a package gets tested" in `testing.md` describes. `Read(Span<byte>)`, `ReadAsync(Memory<byte>, CancellationToken)`, `CopyTo(Stream, int)`, `Write(ReadOnlySpan<byte>)`, and `WriteAsync(ReadOnlyMemory<byte>, CancellationToken)` are overrides only on the frameworks where `Stream` has them as virtual members. A test calls them through a `ReadOnlyMemoryStream` variable, never through a `Stream` variable.
 
 ### Namespaces of `Louis`
 

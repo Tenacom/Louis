@@ -12,6 +12,7 @@
 
   <!-- Test dependencies -->
   <ItemGroup>
+    <PackageVersion Include="TUnit" Version="1.78.0" />
   </ItemGroup>
 
   <!-- Development dependencies -->
