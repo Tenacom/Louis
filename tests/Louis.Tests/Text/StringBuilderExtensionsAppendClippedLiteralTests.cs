@@ -32,7 +32,7 @@ internal sealed class StringBuilderExtensionsAppendClippedLiteralTests
     {
         var builder = new StringBuilder("x");
 
-        var result = builder.AppendClippedLiteral(literalKind, (string?)null, 3, 3);
+        var result = builder.AppendClippedLiteral(literalKind, null, 3, 3);
 
         await Assert.That(result).IsSameReferenceAs(builder);
         await Assert.That(builder.ToString()).IsEqualTo("xnull");
@@ -64,7 +64,7 @@ internal sealed class StringBuilderExtensionsAppendClippedLiteralTests
     {
         var builder = new StringBuilder("x");
 
-        var result = builder.AppendClippedLiteral(literalKind, (string?)null, 3, 3, true);
+        var result = builder.AppendClippedLiteral(literalKind, null, 3, 3, true);
 
         await Assert.That(result).IsSameReferenceAs(builder);
         await Assert.That(builder.ToString()).IsEqualTo("xnull");
@@ -112,7 +112,7 @@ internal sealed class StringBuilderExtensionsAppendClippedLiteralTests
     {
         // ! Null on purpose: testing null detection
         StringBuilder builder = null!;
-        var kind = StringLiteralKind.Quoted;
+        const StringLiteralKind kind = StringLiteralKind.Quoted;
         void ActWithString() => builder.AppendClippedLiteral(kind, "abc", 3, 3);
         void ActWithStringAndUseUnicodeEllipsis() => builder.AppendClippedLiteral(kind, "abc", 3, 3, true);
         void ActWithSpan() => builder.AppendClippedLiteral(kind, "abc".AsSpan(), 3, 3);
@@ -128,7 +128,7 @@ internal sealed class StringBuilderExtensionsAppendClippedLiteralTests
     public async Task AppendClippedLiteral_WithUndefinedLiteralKind_ThrowsArgumentException()
     {
         var builder = new StringBuilder();
-        var kind = (StringLiteralKind)2;
+        const StringLiteralKind kind = (StringLiteralKind)2;
         void ActWithString() => builder.AppendClippedLiteral(kind, "abc", 3, 3);
         void ActWithStringAndUseUnicodeEllipsis() => builder.AppendClippedLiteral(kind, "abc", 3, 3, true);
         void ActWithSpan() => builder.AppendClippedLiteral(kind, "abc".AsSpan(), 3, 3);
@@ -149,7 +149,7 @@ internal sealed class StringBuilderExtensionsAppendClippedLiteralTests
         string paramName)
     {
         var builder = new StringBuilder();
-        var kind = StringLiteralKind.Quoted;
+        const StringLiteralKind kind = StringLiteralKind.Quoted;
         void ActWithString() => builder.AppendClippedLiteral(kind, "abc", headLength, tailLength);
         void ActWithStringAndUseUnicodeEllipsis() => builder.AppendClippedLiteral(kind, "abc", headLength, tailLength, true);
         void ActWithSpan() => builder.AppendClippedLiteral(kind, "abc".AsSpan(), headLength, tailLength);

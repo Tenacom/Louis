@@ -23,7 +23,7 @@ internal sealed class StringBuilderExtensionsAppendLiteralTests
     {
         var builder = new StringBuilder("x");
 
-        var result = builder.AppendQuotedLiteral((string?)null);
+        var result = builder.AppendQuotedLiteral(null);
 
         await Assert.That(result).IsSameReferenceAs(builder);
         await Assert.That(builder.ToString()).IsEqualTo("xnull");
@@ -70,7 +70,7 @@ internal sealed class StringBuilderExtensionsAppendLiteralTests
     {
         var builder = new StringBuilder("x");
 
-        var result = builder.AppendVerbatimLiteral((string?)null);
+        var result = builder.AppendVerbatimLiteral(null);
 
         await Assert.That(result).IsSameReferenceAs(builder);
         await Assert.That(builder.ToString()).IsEqualTo("xnull");
@@ -122,7 +122,7 @@ internal sealed class StringBuilderExtensionsAppendLiteralTests
     {
         var builder = new StringBuilder("x");
 
-        var result = builder.AppendLiteral(literalKind, (string?)null);
+        var result = builder.AppendLiteral(literalKind, null);
 
         await Assert.That(result).IsSameReferenceAs(builder);
         await Assert.That(builder.ToString()).IsEqualTo("xnull");

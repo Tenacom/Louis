@@ -68,7 +68,7 @@ internal sealed class RangeCheckInRangeOrDefaultTests
     [Arguments(false, "z")]
     public async Task InRangeOrDefault_WithNullString_ReturnsNullOrDefaultValue(bool acceptNull, string? expected)
     {
-        await Assert.That(RangeCheck.InRangeOrDefault((string?)null, "b", "d", "z", acceptNull)).IsEqualTo(expected);
+        await Assert.That(RangeCheck.InRangeOrDefault(null, "b", "d", "z", acceptNull)).IsEqualTo(expected);
     }
 
     [Test]
@@ -101,7 +101,7 @@ internal sealed class RangeCheckInRangeOrDefaultTests
         bool acceptNull,
         string? expected)
     {
-        var result = RangeCheck.InRangeOrDefault((string?)null, "d", "b", "z", acceptNull, ReverseComparer<string>.Instance);
+        var result = RangeCheck.InRangeOrDefault(null, "d", "b", "z", acceptNull, ReverseComparer<string>.Instance);
 
         await Assert.That(result).IsEqualTo(expected);
     }
@@ -143,7 +143,7 @@ internal sealed class RangeCheckInRangeOrDefaultTests
     [Arguments(false, -1)]
     public async Task InRangeOrDefault_WithNullInt32_ReturnsNullOrDefaultValue(bool acceptNull, int? expected)
     {
-        await Assert.That(RangeCheck.InRangeOrDefault((int?)null, 1, 10, -1, acceptNull)).IsEqualTo(expected);
+        await Assert.That(RangeCheck.InRangeOrDefault(null, 1, 10, -1, acceptNull)).IsEqualTo(expected);
     }
 
     [Test]
@@ -178,7 +178,7 @@ internal sealed class RangeCheckInRangeOrDefaultTests
         bool acceptNull,
         int? expected)
     {
-        var result = RangeCheck.InRangeOrDefault((int?)null, 10, 1, -1, acceptNull, ReverseComparer<int>.Instance);
+        var result = RangeCheck.InRangeOrDefault(null, 10, 1, -1, acceptNull, ReverseComparer<int>.Instance);
 
         await Assert.That(result).IsEqualTo(expected);
     }

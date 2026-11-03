@@ -21,8 +21,7 @@ using ClippedRow = (string Input, int HeadLength, int TailLength, bool UseUnicod
 /// </summary>
 internal static class ClippedStringLiteralRows
 {
-    private static readonly ClippedRow[] Rows =
-    [
+    private static readonly ClippedRow[] Rows = [
         // "abcdefghij" has 10 characters.
         ("abcdefghij", 3, 4, false, "abcdefghij", "abcdefghij"),
         ("abcdefghij", 3, 3, false, "abc...hij", "abc...hij"),

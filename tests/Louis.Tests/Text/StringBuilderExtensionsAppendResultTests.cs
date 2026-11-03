@@ -23,7 +23,7 @@ internal sealed class StringBuilderExtensionsAppendResultTests
     {
         var builder = new StringBuilder("x");
 
-        var result = builder.AppendResult(() => (string?)null);
+        var result = builder.AppendResult(() => null);
 
         await Assert.That(result).IsSameReferenceAs(builder);
         await Assert.That(builder.ToString()).IsEqualTo("x");
@@ -42,7 +42,7 @@ internal sealed class StringBuilderExtensionsAppendResultTests
     public async Task AppendResult_WithNullProvider_ThrowsArgumentNullException()
     {
         // ! Null on purpose: testing null detection
-        static void Act() => new StringBuilder().AppendResult((Func<string?>)null!);
+        static void Act() => new StringBuilder().AppendResult(null!);
 
         await Assert.That(Act).Throws<ArgumentNullException>().WithParameterName("provider");
     }

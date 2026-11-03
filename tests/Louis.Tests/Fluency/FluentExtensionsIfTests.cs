@@ -32,7 +32,7 @@ internal sealed class FluentExtensionsIfTests
     public async Task If_WithNullFluentAction_ThrowsArgumentNullException()
     {
         // ! Null on purpose: testing null detection
-        static void Act() => new List<int>().If(true, (FluentAction<List<int>>)null!);
+        static void Act() => new List<int>().If(true, null!);
 
         await Assert.That(Act).Throws<ArgumentNullException>().WithParameterName("then");
     }

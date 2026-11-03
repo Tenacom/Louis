@@ -17,8 +17,7 @@ internal sealed class Utf8UtilityTests
     private const string FirstCharAfterSurrogates = "\xE000";
 
     public static IEnumerable<(string Input, int MaxBytes, int Expected)> MaxCharsRows()
-        =>
-        [
+        => [
             // No bytes available, or nothing to encode
             ("abc", 0, 0),
             (string.Empty, 5, 0),
@@ -89,7 +88,7 @@ internal sealed class Utf8UtilityTests
     public async Task GetMaxCharsInBytes_WithNullString_ThrowsArgumentNullException()
     {
         // ! Null on purpose: testing null detection
-        static void Act() => Utf8Utility.GetMaxCharsInBytes((string)null!, 10);
+        static void Act() => Utf8Utility.GetMaxCharsInBytes(null!, 10);
 
         await Assert.That(Act).Throws<ArgumentNullException>().WithParameterName("str");
     }

@@ -33,7 +33,7 @@ internal sealed class FluentExtensionsIfNotNullOrEmptyTests
     public async Task IfNotNullOrEmpty_WithNullFluentAction_ThrowsArgumentNullException()
     {
         // ! Null on purpose: testing null detection
-        static void Act() => new List<string>().IfNotNullOrEmpty("x", (FluentAction<List<string>, string>)null!);
+        static void Act() => new List<string>().IfNotNullOrEmpty("x", null!);
 
         await Assert.That(Act).Throws<ArgumentNullException>().WithParameterName("then");
     }

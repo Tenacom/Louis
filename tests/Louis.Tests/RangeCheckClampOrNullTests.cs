@@ -19,7 +19,7 @@ internal sealed class RangeCheckClampOrNullTests
     [Test]
     public async Task ClampOrNull_WithNullString_ReturnsNull()
     {
-        await Assert.That(RangeCheck.ClampOrNull((string?)null, "b", "d")).IsNull();
+        await Assert.That(RangeCheck.ClampOrNull(null, "b", "d")).IsNull();
     }
 
     [Test]
@@ -46,7 +46,7 @@ internal sealed class RangeCheckClampOrNullTests
     [Test]
     public async Task ClampOrNull_WithNullStringAndComparer_ReturnsNull()
     {
-        await Assert.That(RangeCheck.ClampOrNull((string?)null, "d", "b", ReverseComparer<string>.Instance)).IsNull();
+        await Assert.That(RangeCheck.ClampOrNull(null, "d", "b", ReverseComparer<string>.Instance)).IsNull();
     }
 
     [Test]
@@ -84,7 +84,7 @@ internal sealed class RangeCheckClampOrNullTests
     [Test]
     public async Task ClampOrNull_WithNullInt32_ReturnsNull()
     {
-        await Assert.That(RangeCheck.ClampOrNull((int?)null, 1, 10)).IsNull();
+        await Assert.That(RangeCheck.ClampOrNull(null, 1, 10)).IsNull();
     }
 
     [Test]
@@ -111,7 +111,7 @@ internal sealed class RangeCheckClampOrNullTests
     [Test]
     public async Task ClampOrNull_WithNullInt32AndComparer_ReturnsNull()
     {
-        await Assert.That(RangeCheck.ClampOrNull((int?)null, 10, 1, ReverseComparer<int>.Instance)).IsNull();
+        await Assert.That(RangeCheck.ClampOrNull(null, 10, 1, ReverseComparer<int>.Instance)).IsNull();
     }
 
     [Test]

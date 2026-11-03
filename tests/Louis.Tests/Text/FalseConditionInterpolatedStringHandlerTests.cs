@@ -113,11 +113,13 @@ internal sealed class FalseConditionInterpolatedStringHandlerTests
         await Assert.That(second).IsEqualTo(string.Empty);
     }
 
+    // ReSharper disable once EntityNameCapturedOnly.Local // InterpolatedStringHandlerArgument passes condition to the handler
     private static string FormatUnless(
         bool condition,
         [InterpolatedStringHandlerArgument(nameof(condition))] ref FalseConditionInterpolatedStringHandler message)
         => message.ToStringAndClear();
 
+    // ReSharper disable once EntityNameCapturedOnly.Local // InterpolatedStringHandlerArgument passes condition to the handler
     private static (string First, string Second) FormatTwiceUnless(
         bool condition,
         [InterpolatedStringHandlerArgument(nameof(condition))] ref FalseConditionInterpolatedStringHandler message)
