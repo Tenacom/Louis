@@ -28,7 +28,7 @@ partial class EnumerableExtensions
     /// </remarks>
     public static async ValueTask DisposeAllAsync(this IEnumerable @this)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
 
         List<Exception>? exceptions = null;
         List<Task>? pendingTasks = null;
@@ -105,7 +105,7 @@ partial class EnumerableExtensions
     /// </remarks>
     public static void DisposeAll(this IEnumerable @this)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
 
         List<Exception>? exceptions = null;
         List<Task>? pendingTasks = null;

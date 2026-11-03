@@ -25,7 +25,7 @@ partial class EnumerableExtensions
     /// </exception>
     public static IEnumerable<T> WhereNot<T>(this IEnumerable<T> @this, Func<T, bool> predicate)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(predicate);
         return @this.Where(x => !predicate(x));
     }

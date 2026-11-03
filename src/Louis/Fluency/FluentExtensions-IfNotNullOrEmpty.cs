@@ -23,7 +23,7 @@ partial class FluentExtensions
     /// </exception>
     public static T IfNotNullOrEmpty<T>(this T @this, string? arg, FluentAction<T, string> then)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(then);
 
 #pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
@@ -46,7 +46,7 @@ partial class FluentExtensions
     /// </exception>
     public static T IfNotNullOrEmpty<T>(this T @this, string? arg, Action<T, string> then)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(then);
 
         if (arg is { Length: > 0 })

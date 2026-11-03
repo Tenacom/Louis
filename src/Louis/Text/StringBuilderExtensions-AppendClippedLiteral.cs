@@ -38,7 +38,7 @@ partial class StringBuilderExtensions
         int headLength,
         int tailLength)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsGreaterThanOrEqualTo(headLength, 0);
         Guard.IsGreaterThanOrEqualTo(tailLength, 0);
 
@@ -81,7 +81,7 @@ partial class StringBuilderExtensions
         int tailLength,
         bool useUnicodeEllipsis)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsGreaterThanOrEqualTo(headLength, 0);
         Guard.IsGreaterThanOrEqualTo(tailLength, 0);
 
@@ -114,7 +114,7 @@ partial class StringBuilderExtensions
         int headLength,
         int tailLength)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsGreaterThanOrEqualTo(headLength, 0);
         Guard.IsGreaterThanOrEqualTo(tailLength, 0);
 
@@ -151,7 +151,7 @@ partial class StringBuilderExtensions
         int tailLength,
         bool useUnicodeEllipsis)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsGreaterThanOrEqualTo(headLength, 0);
         Guard.IsGreaterThanOrEqualTo(tailLength, 0);
 
@@ -186,7 +186,7 @@ partial class StringBuilderExtensions
         int headLength,
         int tailLength)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsGreaterThanOrEqualTo(headLength, 0);
         Guard.IsGreaterThanOrEqualTo(tailLength, 0);
 
@@ -229,7 +229,7 @@ partial class StringBuilderExtensions
         int tailLength,
         bool useUnicodeEllipsis)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsGreaterThanOrEqualTo(headLength, 0);
         Guard.IsGreaterThanOrEqualTo(tailLength, 0);
 
@@ -262,7 +262,7 @@ partial class StringBuilderExtensions
         int headLength,
         int tailLength)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsGreaterThanOrEqualTo(headLength, 0);
         Guard.IsGreaterThanOrEqualTo(tailLength, 0);
 
@@ -299,7 +299,7 @@ partial class StringBuilderExtensions
         int tailLength,
         bool useUnicodeEllipsis)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsGreaterThanOrEqualTo(headLength, 0);
         Guard.IsGreaterThanOrEqualTo(tailLength, 0);
 
@@ -339,7 +339,7 @@ partial class StringBuilderExtensions
         int headLength,
         int tailLength)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         InternalGuard.IsDefinedStringLiteralKind(literalKind);
         Guard.IsGreaterThanOrEqualTo(headLength, 0);
         Guard.IsGreaterThanOrEqualTo(tailLength, 0);
@@ -388,7 +388,7 @@ partial class StringBuilderExtensions
         int tailLength,
         bool useUnicodeEllipsis)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         InternalGuard.IsDefinedStringLiteralKind(literalKind);
         Guard.IsGreaterThanOrEqualTo(headLength, 0);
         Guard.IsGreaterThanOrEqualTo(tailLength, 0);
@@ -427,7 +427,7 @@ partial class StringBuilderExtensions
         int headLength,
         int tailLength)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         InternalGuard.IsDefinedStringLiteralKind(literalKind);
         Guard.IsGreaterThanOrEqualTo(headLength, 0);
         Guard.IsGreaterThanOrEqualTo(tailLength, 0);
@@ -470,7 +470,7 @@ partial class StringBuilderExtensions
         int tailLength,
         bool useUnicodeEllipsis)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         InternalGuard.IsDefinedStringLiteralKind(literalKind);
         Guard.IsGreaterThanOrEqualTo(headLength, 0);
         Guard.IsGreaterThanOrEqualTo(tailLength, 0);

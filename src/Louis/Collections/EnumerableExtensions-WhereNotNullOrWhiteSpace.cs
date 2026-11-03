@@ -20,7 +20,7 @@ partial class EnumerableExtensions
     /// <exception cref="ArgumentNullException"><paramref name="this"/> is <see langword="null"/>.</exception>
     public static IEnumerable<string> WhereNotNullOrWhiteSpace(this IEnumerable<string?> @this)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         return @this.Where(IsNotNullOrWhiteSpace) as IEnumerable<string>;
 
         static bool IsNotNullOrWhiteSpace(string? x) => !string.IsNullOrWhiteSpace(x);
