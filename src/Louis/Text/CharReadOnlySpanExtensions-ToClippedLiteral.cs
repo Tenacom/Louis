@@ -24,7 +24,7 @@ partial class CharReadOnlySpanExtensions
     /// <param name="tailLength">The number of characters to leave after clipping.</param>
     /// <param name="useUnicodeEllipsis">
     /// <see langword="true"/> to use a single Unicode character Ellipsis (<c>'\x2026'</c>, <c>…</c>) to replace the clipped part;
-    /// <see langword="false"/> to use three dots (<c>.</c>) instead. Default is <see langword="false"/>.
+    /// <see langword="false"/> to use three dots (<c>...</c>) instead. Default is <see langword="false"/>.
     /// </param>
     /// <returns>A newly-constructed <see langword="string"/>.</returns>
     /// <exception cref="ArgumentOutOfRangeException">
@@ -62,7 +62,7 @@ partial class CharReadOnlySpanExtensions
     /// <param name="tailLength">The number of characters to leave after clipping.</param>
     /// <param name="useUnicodeEllipsis">
     /// <see langword="true"/> to use a single Unicode character Ellipsis (<c>'\x2026'</c>, <c>…</c>) to replace the clipped part;
-    /// <see langword="false"/> to use three dots (<c>.</c>) instead. Default is <see langword="false"/>.
+    /// <see langword="false"/> to use three dots (<c>...</c>) instead. Default is <see langword="false"/>.
     /// </param>
     /// <returns>A newly-constructed <see langword="string"/>.</returns>
     /// <exception cref="ArgumentOutOfRangeException">
@@ -101,7 +101,7 @@ partial class CharReadOnlySpanExtensions
     /// <param name="tailLength">The number of characters to leave after clipping.</param>
     /// <param name="useUnicodeEllipsis">
     /// <see langword="true"/> to use a single Unicode character Ellipsis (<c>'\x2026'</c>, <c>…</c>) to replace the clipped part;
-    /// <see langword="false"/> to use three dots (<c>.</c>) instead. Default is <see langword="false"/>.
+    /// <see langword="false"/> to use three dots (<c>...</c>) instead. Default is <see langword="false"/>.
     /// </param>
     /// <returns>A newly-constructed <see langword="string"/>.</returns>
     /// <exception cref="ArgumentException"><paramref name="literalKind"/> is neither <see cref="StringLiteralKind.Quoted"/>

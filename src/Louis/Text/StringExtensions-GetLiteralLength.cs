@@ -14,7 +14,7 @@ partial class StringExtensions
     /// </summary>
     /// <param name="this">The <see langword="string"/> on which this method is called.</param>
     /// <returns>The length of the string that would result from calling
-    /// <see cref="ToQuotedLiteral"/>on <paramref name="this"/>.</returns>
+    /// <see cref="ToQuotedLiteral"/> on <paramref name="this"/>.</returns>
     public static int GetQuotedLiteralLength(this string? @this)
         => @this is null ? InternalConstants.QuotedNullLength : @this.AsSpan().GetQuotedLiteralLength();
 
@@ -24,7 +24,7 @@ partial class StringExtensions
     /// </summary>
     /// <param name="this">The <see langword="string"/> on which this method is called.</param>
     /// <returns>The length of the string that would result from calling
-    /// <see cref="ToVerbatimLiteral"/>on <paramref name="this"/>.</returns>
+    /// <see cref="ToVerbatimLiteral"/> on <paramref name="this"/>.</returns>
     public static int GetVerbatimLiteralLength(this string? @this)
         => @this is null ? InternalConstants.QuotedNullLength : @this.AsSpan().GetVerbatimLiteralLength();
 
@@ -35,7 +35,7 @@ partial class StringExtensions
     /// <param name="literalKind">A <see cref="StringLiteralKind"/> constant specifying
     /// the kind of string literal that would be built.</param>
     /// <returns>The length of the string that would result from calling
-    /// <see cref="ToLiteral"/>on <paramref name="this"/>
+    /// <see cref="ToLiteral"/> on <paramref name="this"/>
     /// with <paramref name="literalKind"/> as last parameter.</returns>
     /// <exception cref="ArgumentException"><paramref name="literalKind"/> is neither <see cref="StringLiteralKind.Quoted"/>
     /// nor <see cref="StringLiteralKind.Verbatim"/>.</exception>

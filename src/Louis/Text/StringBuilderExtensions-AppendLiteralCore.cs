@@ -43,8 +43,11 @@ partial class StringBuilderExtensions
             '\x0D' => @this.Append(@"\r"),
             '"' => @this.Append(@"\"""),
             '\\' => @this.Append(@"\\"),
-            '\x7F' => @this.AppendAsciiEscape(c),
-            < '\x7F' => c < '\x20' ? @this.AppendAsciiEscape(c) : @this.Append(c),
+
+            // A \x escape takes up to four hex digits, so a hex digit after it would change the character.
+            // A \u escape always takes four.
+            '\x7F' or < '\x20' => @this.AppendUnicodeEscape(c),
+            < '\x7F' => @this.Append(c),
             _ => char.GetUnicodeCategory(c) switch {
                 UnicodeCategory.UppercaseLetter
                     or UnicodeCategory.LowercaseLetter
@@ -66,14 +69,6 @@ partial class StringBuilderExtensions
                 _ => @this.AppendUnicodeEscape(c),
             },
         };
-
-    private static StringBuilder AppendAsciiEscape(this StringBuilder @this, char c)
-    {
-        var n = (int)c;
-        return @this.Append(@"\x")
-                    .Append(HexDigits[(n >> 4) & 0xF])
-                    .Append(HexDigits[n & 0xF]);
-    }
 
     private static StringBuilder AppendUnicodeEscape(this StringBuilder @this, char c)
     {

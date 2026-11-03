@@ -16,7 +16,7 @@ partial class CharReadOnlySpanExtensions
     /// <param name="this">The <see cref="ReadOnlySpan{T}">ReadOnlySpan&lt;char&gt;</see>
     /// on which this method is called.</param>
     /// <returns>The length of the string that would result from calling
-    /// <see cref="ToQuotedLiteral"/>on <paramref name="this"/>.</returns>
+    /// <see cref="ToQuotedLiteral"/> on <paramref name="this"/>.</returns>
     public static int GetQuotedLiteralLength(this ReadOnlySpan<char> @this)
     {
         var result = 2;
@@ -24,8 +24,8 @@ partial class CharReadOnlySpanExtensions
         {
             result += c switch {
                 '\x00' or '\x07' or '\x08' or '\x09' or '\x0A' or '\x0B' or '\x0C' or '\x0D' or '"' or '\\' => 2,
-                '\x7F' => 4,
-                < '\x7F' => c < '\x20' ? 4 : 1,
+                '\x7F' or < '\x20' => 6,
+                < '\x7F' => 1,
                 _ => char.GetUnicodeCategory(c) switch {
                     UnicodeCategory.UppercaseLetter
                         or UnicodeCategory.LowercaseLetter
@@ -59,7 +59,7 @@ partial class CharReadOnlySpanExtensions
     /// <param name="this">The <see cref="ReadOnlySpan{T}">ReadOnlySpan&lt;char&gt;</see>
     /// on which this method is called.</param>
     /// <returns>The length of the string that would result from calling
-    /// <see cref="ToVerbatimLiteral"/>on <paramref name="this"/>.</returns>
+    /// <see cref="ToVerbatimLiteral"/> on <paramref name="this"/>.</returns>
     public static int GetVerbatimLiteralLength(this ReadOnlySpan<char> @this)
     {
         var result = 3 + @this.Length;
@@ -82,7 +82,7 @@ partial class CharReadOnlySpanExtensions
     /// <param name="literalKind">A <see cref="StringLiteralKind"/> constant specifying
     /// the kind of string literal that would be built.</param>
     /// <returns>The length of the string that would result from calling
-    /// <see cref="ToLiteral"/>on <paramref name="this"/>
+    /// <see cref="ToLiteral"/> on <paramref name="this"/>
     /// with <paramref name="literalKind"/> as last parameter.</returns>
     /// <exception cref="ArgumentException"><paramref name="literalKind"/> is neither <see cref="StringLiteralKind.Quoted"/>
     /// nor <see cref="StringLiteralKind.Verbatim"/>.</exception>
