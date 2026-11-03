@@ -29,7 +29,12 @@ partial class RangeCheck
     [return:NotNullIfNotNull("value")]
     public static T? ClampOrNull<T>(T? value, T min, T max)
         where T : class, IComparable<T>
-        => value == null ? null : Clamp(value, min, max);
+    {
+#pragma warning disable CA1062 // Validate arguments of public methods - min and max are non-nullable, and no overload null-checks them
+        EnsureValidRange(min, max);
+#pragma warning restore CA1062 // Validate arguments of public methods
+        return value is null ? null : UnsafeClamp(value, min, max);
+    }
 
     /// <summary>
     /// Returns <paramref name="value"/>, if it is not <see langword="null"/>,
@@ -57,7 +62,12 @@ partial class RangeCheck
     [return:NotNullIfNotNull("value")]
     public static T? ClampOrNull<T>(T? value, T min, T max, IComparer<T> comparer)
         where T : class
-        => value == null ? null : Clamp(value, min, max, comparer);
+    {
+#pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
+        EnsureValidComparerAndRange(min, max, comparer);
+#pragma warning restore CA1062 // Validate arguments of public methods
+        return value is null ? null : UnsafeClamp(value, min, max, comparer);
+    }
 
     /// <summary>
     /// Returns <paramref name="value"/>, if it is not <see langword="null"/>,
@@ -79,7 +89,10 @@ partial class RangeCheck
     [return:NotNullIfNotNull("value")]
     public static T? ClampOrNull<T>(T? value, T min, T max)
         where T : struct, IComparable<T>
-        => value.HasValue ? Clamp(value.Value, min, max) : null;
+    {
+        EnsureValidRange(min, max);
+        return value.HasValue ? UnsafeClamp(value.Value, min, max) : null;
+    }
 
     /// <summary>
     /// Returns <paramref name="value"/>, if it is not <see langword="null"/>,
@@ -107,5 +120,10 @@ partial class RangeCheck
     [return:NotNullIfNotNull("value")]
     public static T? ClampOrNull<T>(T? value, T min, T max, IComparer<T> comparer)
         where T : struct
-        => value.HasValue ? Clamp(value.Value, min, max, comparer) : null;
+    {
+#pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
+        EnsureValidComparerAndRange(min, max, comparer);
+#pragma warning restore CA1062 // Validate arguments of public methods
+        return value.HasValue ? UnsafeClamp(value.Value, min, max, comparer) : null;
+    }
 }

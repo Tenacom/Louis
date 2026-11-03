@@ -28,9 +28,7 @@ partial class RangeCheck
         where T : IComparable<T>
     {
         EnsureValidRange(min, max);
-        return value.CompareTo(min) < 0 ? min
-                : value.CompareTo(max) > 0 ? max
-                : value;
+        return UnsafeClamp(value, min, max);
     }
 
     /// <summary>
@@ -61,8 +59,17 @@ partial class RangeCheck
 #pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
         EnsureValidComparerAndRange(min, max, comparer);
 #pragma warning restore CA1062 // Validate arguments of public methods
-        return comparer.Compare(value, min) < 0 ? min
-                : comparer.Compare(value, max) > 0 ? max
-                : value;
+        return UnsafeClamp(value, min, max, comparer);
     }
+
+    private static T UnsafeClamp<T>(T value, T min, T max)
+        where T : IComparable<T>
+        => value.CompareTo(min) < 0 ? min
+            : value.CompareTo(max) > 0 ? max
+            : value;
+
+    private static T UnsafeClamp<T>(T value, T min, T max, IComparer<T> comparer)
+        => comparer.Compare(value, min) < 0 ? min
+            : comparer.Compare(value, max) > 0 ? max
+            : value;
 }
