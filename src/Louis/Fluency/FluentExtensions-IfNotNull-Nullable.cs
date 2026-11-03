@@ -9,7 +9,7 @@ namespace Louis.Fluency;
 partial class FluentExtensions
 {
     /// <summary>
-    /// Invokes an action on an object if a nullable value is not <see langword="null"/>, then returns the same object.
+    /// Invokes an action on an object if a nullable value is not <see langword="null"/>, then returns the result of the action.
     /// </summary>
     /// <typeparam name="T">The type of the object.</typeparam>
     /// <typeparam name="T1">The type of the additional argument to pass to <paramref name="then"/>.</typeparam>

@@ -9,7 +9,8 @@ namespace Louis.Fluency;
 partial class FluentExtensions
 {
     /// <summary>
-    /// Invokes an action on an object if a string is neither <see langword="null"/> nor the empty string, then returns the same object.
+    /// Invokes an action on an object if a string is neither <see langword="null"/> nor the empty string,
+    /// then returns the result of the action.
     /// </summary>
     /// <typeparam name="T">The type of the object.</typeparam>
     /// <param name="this">The object on which this method was called.</param>

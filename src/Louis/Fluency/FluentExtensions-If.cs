@@ -9,7 +9,7 @@ namespace Louis.Fluency;
 partial class FluentExtensions
 {
     /// <summary>
-    /// Invokes an action on an object if a condition is verified, then returns the same object.
+    /// Invokes an action on an object if a condition is verified, then returns the result of the action.
     /// </summary>
     /// <typeparam name="T">The type of the object.</typeparam>
     /// <param name="this">The object on which this method was called.</param>
