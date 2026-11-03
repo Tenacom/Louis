@@ -144,7 +144,9 @@ internal sealed class AsyncHostedServiceStartAsyncTests : AsyncHostedServiceTest
         await using var service = new MinimalAsyncHostedService(Logger, setupResult: true);
         _ = service.Stop();
 
-        await Assert.That(() => service.StartAsync(cancellationToken))
+        var startTask = service.StartAsync(cancellationToken);
+
+        await Assert.That(() => startTask)
             .Throws<InvalidOperationException>()
             .WithMessage("Service start failed (NotStarted).", StringComparison.Ordinal);
     }
@@ -155,7 +157,9 @@ internal sealed class AsyncHostedServiceStartAsyncTests : AsyncHostedServiceTest
     {
         await using var service = new MinimalAsyncHostedService(Logger, setupResult: false);
 
-        await Assert.That(() => service.StartAsync(cancellationToken))
+        var startTask = service.StartAsync(cancellationToken);
+
+        await Assert.That(() => startTask)
             .Throws<InvalidOperationException>()
             .WithMessage("Service start failed (Unsuccessful).", StringComparison.Ordinal);
     }
