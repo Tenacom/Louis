@@ -19,7 +19,7 @@ partial class EnumerableExtensions
     /// <exception cref="ArgumentNullException"><paramref name="this"/> is <see langword="null"/>.</exception>
     public static IEnumerable<string> WhereNotNullOrEmpty(this IEnumerable<string?> @this)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         return @this.Where(IsNotNullOrEmpty) as IEnumerable<string>;
 
         static bool IsNotNullOrEmpty(string? x) => !string.IsNullOrEmpty(x);

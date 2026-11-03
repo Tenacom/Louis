@@ -24,7 +24,7 @@ public static class AsyncDisposableExtensions
     /// </remarks>
     public static void DisposeSynchronously(this IAsyncDisposable @this)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
 
 #pragma warning disable CA2012 // Use ValueTasks correctly - ValueTask gets consumed only once, hence this is correct usage.
         @this.DisposeAsync().GetAwaiter().GetResult();

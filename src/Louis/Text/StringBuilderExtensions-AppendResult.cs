@@ -22,7 +22,7 @@ partial class StringBuilderExtensions
     /// </exception>
     public static StringBuilder AppendResult(this StringBuilder @this, Func<string?> provider)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(provider);
 
 #pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
@@ -43,7 +43,7 @@ partial class StringBuilderExtensions
     /// </exception>
     public static StringBuilder AppendResult(this StringBuilder @this, ReadOnlySpanFunc<char> func)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(func);
 
 #if NETSTANDARD2_1 || NETCOREAPP2_1_OR_GREATER

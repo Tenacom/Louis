@@ -26,7 +26,7 @@ partial class FluentExtensions
     /// </exception>
     public static T IfElse<T>(this T @this, bool condition, FluentAction<T> then, FluentAction<T> @else)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(then);
         Guard.IsNotNull(@else);
 
@@ -53,7 +53,7 @@ partial class FluentExtensions
     /// </exception>
     public static T IfElse<T>(this T @this, bool condition, Action<T> then, Action<T> @else)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(then);
         Guard.IsNotNull(@else);
 

@@ -22,7 +22,7 @@ partial class FluentExtensions
     /// </exception>
     public static T Chain<T>(this T @this, FluentAction<T> func)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(func);
 
 #pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
@@ -46,7 +46,7 @@ partial class FluentExtensions
     /// </exception>
     public static T Chain<T, TArg>(this T @this, TArg arg, FluentAction<T, TArg> func)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(func);
 
 #pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
@@ -72,7 +72,7 @@ partial class FluentExtensions
     /// </exception>
     public static T Chain<T, TArg1, TArg2>(this T @this, TArg1 arg1, TArg2 arg2, FluentAction<T, TArg1, TArg2> func)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(func);
 
 #pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
@@ -100,7 +100,7 @@ partial class FluentExtensions
     /// </exception>
     public static T Chain<T, TArg1, TArg2, TArg3>(this T @this, TArg1 arg1, TArg2 arg2, TArg3 arg3, FluentAction<T, TArg1, TArg2, TArg3> func)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(func);
 
 #pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
@@ -130,7 +130,7 @@ partial class FluentExtensions
     /// </exception>
     public static T Chain<T, TArg1, TArg2, TArg3, TArg4>(this T @this, TArg1 arg1, TArg2 arg2, TArg3 arg3, TArg4 arg4, FluentAction<T, TArg1, TArg2, TArg3, TArg4> func)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(func);
 
 #pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843

@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Bugs fixed in this release
 
 - The `RangeCheck.InRangeOrDefault` overloads for nullable value types with `acceptNull` returned `defaultValue` for a value in range, and the value otherwise.
+- The `ArgumentNullException` that an extension method throws for a null `this` argument had `@this`, not `this`, as its `ParamName`.
 
 ### Known problems introduced by this release
 

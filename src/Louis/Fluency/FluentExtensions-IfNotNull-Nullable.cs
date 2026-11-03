@@ -25,7 +25,7 @@ partial class FluentExtensions
     public static T IfNotNull<T, T1>(this T @this, T1? arg, FluentAction<T, T1> then)
         where T1 : struct
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(then);
 
 #pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
@@ -50,7 +50,7 @@ partial class FluentExtensions
     public static T IfNotNull<T, T1>(this T @this, T1? arg, Action<T, T1> then)
         where T1 : struct
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(then);
 
         if (arg is not null)

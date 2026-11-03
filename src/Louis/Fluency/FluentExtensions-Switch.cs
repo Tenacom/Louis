@@ -167,7 +167,7 @@ partial class FluentExtensions
     /// </exception>
     public static T Switch<T, TValue>(this T @this, IEqualityComparer<TValue> comparer, TValue value, FluentAction<T>? @default, params (TValue Comparand, FluentAction<T>? Action)[] cases)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(comparer);
         Guard.IsNotNull(cases);
 
@@ -240,7 +240,7 @@ partial class FluentExtensions
     /// </exception>
     public static T Switch<T, TValue>(this T @this, IEqualityComparer<TValue> comparer, TValue value, FluentAction<T>? @default, params (TValue Comparand, Action<T>? Action)[] cases)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(comparer);
         Guard.IsNotNull(cases);
 

@@ -22,7 +22,7 @@ partial class FluentExtensions
     /// </exception>
     public static T Invoke<T>(this T @this, Action<T> action)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(action);
 
 #pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
@@ -47,7 +47,7 @@ partial class FluentExtensions
     /// </exception>
     public static T Invoke<T, TArg>(this T @this, TArg arg, Action<T, TArg> action)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(action);
 
 #pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
@@ -74,7 +74,7 @@ partial class FluentExtensions
     /// </exception>
     public static T Invoke<T, TArg1, TArg2>(this T @this, TArg1 arg1, TArg2 arg2, Action<T, TArg1, TArg2> action)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(action);
 
 #pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
@@ -103,7 +103,7 @@ partial class FluentExtensions
     /// </exception>
     public static T Invoke<T, TArg1, TArg2, TArg3>(this T @this, TArg1 arg1, TArg2 arg2, TArg3 arg3, Action<T, TArg1, TArg2, TArg3> action)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(action);
 
 #pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
@@ -134,7 +134,7 @@ partial class FluentExtensions
     /// </exception>
     public static T Invoke<T, TArg1, TArg2, TArg3, TArg4>(this T @this, TArg1 arg1, TArg2 arg2, TArg3 arg3, TArg4 arg4, Action<T, TArg1, TArg2, TArg3, TArg4> action)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(action);
 
 #pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
