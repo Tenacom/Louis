@@ -77,7 +77,8 @@ public sealed class ReadOnlyMemoryStream : Stream
     /// Gets or sets the current position within the stream.
     /// </summary>
     /// <value>The current position within the stream.</value>
-    /// <exception cref="ArgumentOutOfRangeException">The position is set to a negative value or a value greater than <see cref="int.MaxValue"/>.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">The position is set to a negative value
+    /// or a value greater than <see cref="int.MaxValue"/>.</exception>
     /// <exception cref="ObjectDisposedException">The stream is closed.</exception>
     public override long Position
     {
@@ -117,7 +118,8 @@ public sealed class ReadOnlyMemoryStream : Stream
     /// </summary>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
     /// <returns>A task that represents the asynchronous flush operation.</returns>
-    /// <exception cref="OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
+    /// <exception cref="OperationCanceledException">The cancellation token was canceled.
+    /// This exception is stored into the returned task.</exception>
     /// <remarks>
     /// <para>Since a <see cref="ReadOnlyMemoryStream"/> cannot be written to, this method is redundant.
     /// However, flushing a read-only stream is a valid operation; therefore this method simply returns
@@ -138,15 +140,18 @@ public sealed class ReadOnlyMemoryStream : Stream
     /// Reads a block of bytes from the current stream and writes the data to a buffer.
     /// </summary>
     /// <param name="buffer">When this method returns, contains the specified byte array
-    /// with the values between <c>offset</c> and <c>(offset + count - 1)</c> replaced by the characters read from the current stream.</param>
-    /// <param name="offset">The zero-based byte offset in <paramref name="buffer"/> at which to begin storing data from the current stream.</param>
+    /// with the values between <c>offset</c> and <c>(offset + count - 1)</c>
+    /// replaced by the characters read from the current stream.</param>
+    /// <param name="offset">The zero-based byte offset in <paramref name="buffer"/>
+    /// at which to begin storing data from the current stream.</param>
     /// <param name="count">The maximum number of bytes to read.</param>
     /// <returns>The total number of bytes written into the buffer.
     /// This can be less than the number of bytes requested if that number of bytes are not currently available,
     /// or zero if the end of the stream is reached before any bytes are read.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="buffer"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="offset"/> or <paramref name="count"/> is negative.</exception>
-    /// <exception cref="ArgumentException"><paramref name="offset"/> subtracted from the length of <paramref name="buffer"/> is less than <paramref name="count"/>.</exception>
+    /// <exception cref="ArgumentException"><paramref name="offset"/> subtracted from the length of <paramref name="buffer"/>
+    /// is less than <paramref name="count"/>.</exception>
     /// <exception cref="ObjectDisposedException">The stream is closed.</exception>
     public override int Read(byte[] buffer, int offset, int count)
     {
@@ -175,12 +180,16 @@ public sealed class ReadOnlyMemoryStream : Stream
     /// <summary>
     /// Reads a sequence of bytes from the current stream and advances the position within the stream by the number of bytes read.
     /// </summary>
-    /// <param name="buffer">A region of memory. When this method returns, the contents of this span are replaced by the bytes read from the current stream.</param>
-    /// <returns>The total number of bytes read into the buffer. This can be less than the number of bytes allocated in the buffer if that many bytes are not currently available, or zero (0) if the end of the stream has been reached.</returns>
+    /// <param name="buffer">A region of memory. When this method returns,
+    /// the contents of this span are replaced by the bytes read from the current stream.</param>
+    /// <returns>The total number of bytes read into the buffer.
+    /// This can be less than the number of bytes allocated in the buffer if that many bytes are not currently available,
+    /// or zero (0) if the end of the stream has been reached.</returns>
     /// <exception cref="ObjectDisposedException">The stream is closed.</exception>
     /// <remarks>
-    /// <para>This method overrides the corresponding method of <see cref="Stream"/> on runtimes where it is available (.NET Core 2.1 and newer,
-    /// .NET 5 and newer, .NET Standard 2.1 and newer). On older runtimes, this method is present as a method of <see cref="ReadOnlyMemoryStream"/>
+    /// <para>This method overrides the corresponding method of <see cref="Stream"/> on runtimes where it is available
+    /// (.NET Core 2.1 and newer, .NET 5 and newer, .NET Standard 2.1 and newer).
+    /// On older runtimes, this method is present as a method of <see cref="ReadOnlyMemoryStream"/>
     /// and depends on the <c>System.Memory</c> NuGet package.</para>
     /// </remarks>
     public
@@ -203,7 +212,8 @@ public sealed class ReadOnlyMemoryStream : Stream
     }
 
     /// <summary>
-    /// Asynchronously reads a sequence of bytes from the current stream, advances the position within the stream by the number of bytes read, and monitors cancellation requests.
+    /// Asynchronously reads a sequence of bytes from the current stream,
+    /// advances the position within the stream by the number of bytes read, and monitors cancellation requests.
     /// </summary>
     /// <param name="buffer">The buffer to write the data into.</param>
     /// <param name="offset">The byte offset in <paramref name="buffer"/> at which to begin writing data from the stream.</param>
@@ -211,15 +221,18 @@ public sealed class ReadOnlyMemoryStream : Stream
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
     /// <returns>
     /// <para>A task that represents the asynchronous read operation.</para>
-    /// <para>The <see cref="Task{T}.Result">Result</see> of the returned task will be the total number of bytes read into the buffer.</para>
+    /// <para>The <see cref="Task{T}.Result">Result</see> of the returned task
+    /// will be the total number of bytes read into the buffer.</para>
     /// <para>The result value can be less than the number of bytes requested if the number of bytes currently available
     /// is less than the requested number, or it can be 0 (zero) if the end of the stream has been reached.</para>
     /// </returns>
     /// <exception cref="ArgumentNullException"><paramref name="buffer"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="offset"/> or <paramref name="count"/> is negative.</exception>
-    /// <exception cref="ArgumentException"><paramref name="offset"/> subtracted from the length of <paramref name="buffer"/> is less than <paramref name="count"/>.</exception>
+    /// <exception cref="ArgumentException"><paramref name="offset"/> subtracted from the length of <paramref name="buffer"/>
+    /// is less than <paramref name="count"/>.</exception>
     /// <exception cref="ObjectDisposedException">The stream is closed.</exception>
-    /// <exception cref="OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
+    /// <exception cref="OperationCanceledException">The cancellation token was canceled.
+    /// This exception is stored into the returned task.</exception>
     public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
     {
         EnsureNotClosed();
@@ -255,15 +268,18 @@ public sealed class ReadOnlyMemoryStream : Stream
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
     /// <returns>
     /// <para>A task that represents the asynchronous read operation.</para>
-    /// <para>The <see cref="Task{T}.Result">Result</see> of the returned task will be the total number of bytes read into <paramref name="buffer"/>.</para>
+    /// <para>The <see cref="Task{T}.Result">Result</see> of the returned task
+    /// will be the total number of bytes read into <paramref name="buffer"/>.</para>
     /// <para>The result value can be less than the number of bytes requested if the number of bytes currently available
     /// is less than the requested number, or it can be 0 (zero) if the end of the stream has been reached.</para>
     /// </returns>
     /// <exception cref="ObjectDisposedException">The stream is closed.</exception>
-    /// <exception cref="OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
+    /// <exception cref="OperationCanceledException">The cancellation token was canceled.
+    /// This exception is stored into the returned task.</exception>
     /// <remarks>
-    /// <para>This method overrides the corresponding method of <see cref="Stream"/> on runtimes where it is available (.NET Core 2.1 and newer,
-    /// .NET 5 and newer, .NET Standard 2.1 and newer). On older runtimes, this method is present as a method of <see cref="ReadOnlyMemoryStream"/>
+    /// <para>This method overrides the corresponding method of <see cref="Stream"/> on runtimes where it is available
+    /// (.NET Core 2.1 and newer, .NET 5 and newer, .NET Standard 2.1 and newer).
+    /// On older runtimes, this method is present as a method of <see cref="ReadOnlyMemoryStream"/>
     /// and depends on the <c>System.Memory</c> NuGet package.</para>
     /// </remarks>
 #pragma warning disable RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads - as in Stream
@@ -320,9 +336,11 @@ public sealed class ReadOnlyMemoryStream : Stream
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="bufferSize"/> is zero or negative.</exception>
     /// <exception cref="ObjectDisposedException">Either this stream or <paramref name="destination"/> is closed.</exception>
     /// <remarks>
-    /// <para>This method overrides the corresponding method of <see cref="Stream"/> on runtimes where it is <c>virtual</c> (.NET Core 2.0 and newer,
-    /// .NET 5 and newer, .NET Standard 2.1 and newer). On older runtimes, this method can be accessed as a method of <see cref="ReadOnlyMemoryStream"/>,
-    /// while a <see cref="Stream"/> reference will use the standard implementation, which works but is slower and may allocate more memory.</para>
+    /// <para>This method overrides the corresponding method of <see cref="Stream"/> on runtimes where it is <c>virtual</c>
+    /// (.NET Core 2.0 and newer, .NET 5 and newer, .NET Standard 2.1 and newer).
+    /// On older runtimes, this method can be accessed as a method of <see cref="ReadOnlyMemoryStream"/>,
+    /// while a <see cref="Stream"/> reference will use the standard implementation,
+    /// which works but is slower and may allocate more memory.</para>
     /// <para>Since this method copies all the contents of the stream (starting from the current <see cref="Position"/>) in one go,
     /// the <paramref name="bufferSize"/> parameter is not used; it is still validated for backward compatibility.</para>
     /// </remarks>
@@ -365,7 +383,8 @@ public sealed class ReadOnlyMemoryStream : Stream
     /// <exception cref="ArgumentNullException"><paramref name="destination"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="bufferSize"/> is zero or negative.</exception>
     /// <exception cref="ObjectDisposedException">Either this stream or <paramref name="destination"/> is closed.</exception>
-    /// <exception cref="OperationCanceledException">The cancellation token was canceled. This exception is stored into the returned task.</exception>
+    /// <exception cref="OperationCanceledException">The cancellation token was canceled.
+    /// This exception is stored into the returned task.</exception>
     public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
     {
 #pragma warning disable CA1062 // Validate arguments of public methods - False positive
@@ -426,7 +445,8 @@ public sealed class ReadOnlyMemoryStream : Stream
     /// <summary>
     /// Sets the position within the current stream to the specified value.
     /// </summary>
-    /// <param name="offset">The new position within the stream. This is relative to the <paramref name="origin"/> parameter, and can be positive or negative.</param>
+    /// <param name="offset">The new position within the stream.
+    /// This is relative to the <paramref name="origin"/> parameter, and can be positive or negative.</param>
     /// <param name="origin">A value of type <see cref="SeekOrigin"/>, which acts as the seek reference point.</param>
     /// <returns>The new position within the stream, calculated by combining the initial reference point and the offset.</returns>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="offset"/> is greater than <see cref="int.MaxValue"/>.</exception>
@@ -489,31 +509,40 @@ public sealed class ReadOnlyMemoryStream : Stream
 
     /// <summary>
     /// <para>Sets the length of the current stream to the specified value.</para>
-    /// <para>Since a <see cref="ReadOnlyMemoryStream"/> cannot be written to, this method will always throw a <see cref="NotSupportedException"/>.</para>
+    /// <para>Since a <see cref="ReadOnlyMemoryStream"/> cannot be written to,
+    /// this method will always throw a <see cref="NotSupportedException"/>.</para>
     /// </summary>
     /// <param name="value">The value at which to set the length.</param>
-    /// <exception cref="NotSupportedException">Always thrown, because instances of <see cref="ReadOnlyMemoryStream"/> are read-only.</exception>
+    /// <exception cref="NotSupportedException">Always thrown,
+    /// because instances of <see cref="ReadOnlyMemoryStream"/> are read-only.</exception>
     public override void SetLength(long value) => ThrowUnwritableStream();
 
     /// <summary>
     /// <para>Writes a block of bytes to the current stream using data read from a buffer.</para>
-    /// <para>Since a <see cref="ReadOnlyMemoryStream"/> cannot be written to, this method will always throw a <see cref="NotSupportedException"/>.</para>
+    /// <para>Since a <see cref="ReadOnlyMemoryStream"/> cannot be written to,
+    /// this method will always throw a <see cref="NotSupportedException"/>.</para>
     /// </summary>
     /// <param name="buffer">The buffer to write data from.</param>
-    /// <param name="offset">The zero-based byte offset in <paramref name="buffer"/> at which to begin copying bytes to the current stream.</param>
+    /// <param name="offset">The zero-based byte offset in <paramref name="buffer"/>
+    /// at which to begin copying bytes to the current stream.</param>
     /// <param name="count">The maximum number of bytes to write.</param>
-    /// <exception cref="NotSupportedException">Always thrown, because instances of <see cref="ReadOnlyMemoryStream"/> are read-only.</exception>
+    /// <exception cref="NotSupportedException">Always thrown,
+    /// because instances of <see cref="ReadOnlyMemoryStream"/> are read-only.</exception>
     public override void Write(byte[] buffer, int offset, int count) => ThrowUnwritableStream();
 
     /// <summary>
-    /// <para>Writes a sequence of bytes into the current stream and advances the current position within this stream by the number of bytes written.</para>
-    /// <para>Since a <see cref="ReadOnlyMemoryStream"/> cannot be written to, this method will always throw a <see cref="NotSupportedException"/>.</para>
+    /// <para>Writes a sequence of bytes into the current stream
+    /// and advances the current position within this stream by the number of bytes written.</para>
+    /// <para>Since a <see cref="ReadOnlyMemoryStream"/> cannot be written to,
+    /// this method will always throw a <see cref="NotSupportedException"/>.</para>
     /// </summary>
     /// <param name="buffer">A region of memory.</param>
-    /// <exception cref="NotSupportedException">Always thrown, because instances of <see cref="ReadOnlyMemoryStream"/> are read-only.</exception>
+    /// <exception cref="NotSupportedException">Always thrown,
+    /// because instances of <see cref="ReadOnlyMemoryStream"/> are read-only.</exception>
     /// <remarks>
-    /// <para>This method overrides the corresponding method of <see cref="Stream"/> on runtimes where it is available (.NET Core 2.1 and newer,
-    /// .NET 5 and newer, .NET Standard 2.1 and newer). On older runtimes, this method is present as a method of <see cref="ReadOnlyMemoryStream"/>
+    /// <para>This method overrides the corresponding method of <see cref="Stream"/> on runtimes where it is available
+    /// (.NET Core 2.1 and newer, .NET 5 and newer, .NET Standard 2.1 and newer).
+    /// On older runtimes, this method is present as a method of <see cref="ReadOnlyMemoryStream"/>
     /// and depends on the <c>System.Memory</c> NuGet package.</para>
     /// </remarks>
     public
@@ -525,30 +554,39 @@ public sealed class ReadOnlyMemoryStream : Stream
 #pragma warning disable CA1822 // Mark members as static
 
     /// <summary>
-    /// <para>Asynchronously writes a sequence of bytes to the current stream, advances the current position within this stream by the number of bytes written, and monitors cancellation requests.</para>
-    /// <para>Since a <see cref="ReadOnlyMemoryStream"/> cannot be written to, this method will always throw a <see cref="NotSupportedException"/>.</para>
+    /// <para>Asynchronously writes a sequence of bytes to the current stream,
+    /// advances the current position within this stream by the number of bytes written, and monitors cancellation requests.</para>
+    /// <para>Since a <see cref="ReadOnlyMemoryStream"/> cannot be written to,
+    /// this method will always throw a <see cref="NotSupportedException"/>.</para>
     /// </summary>
     /// <param name="buffer">The buffer to write data from.</param>
-    /// <param name="offset">The zero-based byte offset in <paramref name="buffer"/> from which to begin copying bytes to the stream.</param>
+    /// <param name="offset">The zero-based byte offset in <paramref name="buffer"/>
+    /// from which to begin copying bytes to the stream.</param>
     /// <param name="count">The maximum number of bytes to write.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
     /// <returns>A task that represents the asynchronous write operation.</returns>
-    /// <exception cref="NotSupportedException">Always thrown, because instances of <see cref="ReadOnlyMemoryStream"/> are read-only.</exception>
+    /// <exception cref="NotSupportedException">Always thrown,
+    /// because instances of <see cref="ReadOnlyMemoryStream"/> are read-only.</exception>
 #pragma warning disable CA1822 // Mark members as static - false positive, as this is an override
-    public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken) => ThrowUnwritableStream<Task>();
+    public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        => ThrowUnwritableStream<Task>();
 #pragma warning disable CA1822 // Mark members as static
 
     /// <summary>
-    /// <para>Asynchronously writes a sequence of bytes into the current stream, advances the current position within this stream by the number of bytes written, and monitors cancellation requests.</para>
-    /// <para>Since a <see cref="ReadOnlyMemoryStream"/> cannot be written to, this method will always throw a <see cref="NotSupportedException"/>.</para>
+    /// <para>Asynchronously writes a sequence of bytes into the current stream,
+    /// advances the current position within this stream by the number of bytes written, and monitors cancellation requests.</para>
+    /// <para>Since a <see cref="ReadOnlyMemoryStream"/> cannot be written to,
+    /// this method will always throw a <see cref="NotSupportedException"/>.</para>
     /// </summary>
     /// <param name="buffer">The region of memory to write data from.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
     /// <returns>A task that represents the asynchronous write operation.</returns>
-    /// <exception cref="NotSupportedException">Always thrown, because instances of <see cref="ReadOnlyMemoryStream"/> are read-only.</exception>
+    /// <exception cref="NotSupportedException">Always thrown,
+    /// because instances of <see cref="ReadOnlyMemoryStream"/> are read-only.</exception>
     /// <remarks>
-    /// <para>This method overrides the corresponding method of <see cref="Stream"/> on runtimes where it is available (.NET Core 2.1 and newer,
-    /// .NET 5 and newer, .NET Standard 2.1 and newer). On older runtimes, this method is present as a method of <see cref="ReadOnlyMemoryStream"/>
+    /// <para>This method overrides the corresponding method of <see cref="Stream"/> on runtimes where it is available
+    /// (.NET Core 2.1 and newer, .NET 5 and newer, .NET Standard 2.1 and newer).
+    /// On older runtimes, this method is present as a method of <see cref="ReadOnlyMemoryStream"/>
     /// and depends on the <c>System.Memory</c> NuGet package.</para>
     /// </remarks>
 #pragma warning disable CA1822 // Mark members as static - false positive, as this is an override
@@ -564,10 +602,12 @@ public sealed class ReadOnlyMemoryStream : Stream
 
     /// <summary>
     /// <para>Writes a byte to the current stream at the current position.</para>
-    /// <para>Since a <see cref="ReadOnlyMemoryStream"/> cannot be written to, this method will always throw a <see cref="NotSupportedException"/>.</para>
+    /// <para>Since a <see cref="ReadOnlyMemoryStream"/> cannot be written to,
+    /// this method will always throw a <see cref="NotSupportedException"/>.</para>
     /// </summary>
     /// <param name="value">The byte to write.</param>
-    /// <exception cref="NotSupportedException">Always thrown, because instances of <see cref="ReadOnlyMemoryStream"/> are read-only.</exception>
+    /// <exception cref="NotSupportedException">Always thrown,
+    /// because instances of <see cref="ReadOnlyMemoryStream"/> are read-only.</exception>
 #pragma warning disable CA1822 // Mark members as static - false positive, as this is an override
     public override void WriteByte(byte value) => ThrowUnwritableStream();
 #pragma warning disable CA1822 // Mark members as static
