@@ -248,7 +248,7 @@ partial class FluentExtensions
     public static T Switch<T, TValue>(
         this T @this,
         TValue value,
-        FluentAction<T>? @default,
+        Action<T>? @default,
         params (TValue Comparand, Action<T>? Action)[] cases)
         => Switch(@this, EqualityComparer<TValue>.Default, value, @default, cases);
 
@@ -284,7 +284,7 @@ partial class FluentExtensions
         this T @this,
         IEqualityComparer<TValue> comparer,
         TValue value,
-        FluentAction<T>? @default,
+        Action<T>? @default,
         params (TValue Comparand, Action<T>? Action)[] cases)
     {
         Guard.IsNotNull(@this, nameof(@this));

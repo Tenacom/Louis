@@ -14,5 +14,9 @@
 *REMOVED*static Louis.DateOnlyExtensions.GetStartOfWeek(this System.DateOnly this, System.Globalization.CultureInfo! culture) -> System.DateOnly
 *REMOVED*static Louis.DateOnlyExtensions.GetStartOfWeek(this System.DateOnly this, System.Globalization.DateTimeFormatInfo! dateTimeFormat) -> System.DateOnly
 *REMOVED*static Louis.DateOnlyUtility.Today.get -> System.DateOnly
+*REMOVED*static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, System.Collections.Generic.IEqualityComparer<TValue>! comparer, TValue value, Louis.Fluency.FluentAction<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
+*REMOVED*static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, TValue value, Louis.Fluency.FluentAction<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
 override Louis.IO.ReadOnlyMemoryStream.ReadAsync(System.Memory<byte> buffer, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<int>
 override Louis.IO.ReadOnlyMemoryStream.WriteAsync(System.ReadOnlyMemory<byte> buffer, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, System.Collections.Generic.IEqualityComparer<TValue>! comparer, TValue value, System.Action<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
+static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, TValue value, System.Action<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T

@@ -311,11 +311,7 @@ internal sealed class FluentExtensionsSwitchTests
 
         var result = list.Switch(
             value,
-            l =>
-            {
-                l.Add(0);
-                return l;
-            },
+            l => l.Add(0),
             ("a", l => l.Add(1)),
             ("b", null),
             ("a", l => l.Add(2)),
@@ -329,7 +325,7 @@ internal sealed class FluentExtensionsSwitchTests
     public async Task Switch_WithDefaultAndActionCasesAndNullThis_ThrowsArgumentNullException()
     {
         // ! Null on purpose: testing null detection
-        static void Act() => ((List<int>)null!).Switch("a", l => l, ("a", _ => { }));
+        static void Act() => ((List<int>)null!).Switch("a", _ => { }, ("a", _ => { }));
 
         await Assert.That(Act).Throws<ArgumentNullException>().WithParameterName("this");
     }
@@ -341,7 +337,7 @@ internal sealed class FluentExtensionsSwitchTests
         {
             // ! Null on purpose: testing null detection
             (string Comparand, Action<List<int>>? Action)[] cases = null!;
-            new List<int>().Switch("a", l => l, cases);
+            new List<int>().Switch("a", _ => { }, cases);
         }
 
         await Assert.That(Act).Throws<ArgumentNullException>().WithParameterName("cases");
@@ -359,11 +355,7 @@ internal sealed class FluentExtensionsSwitchTests
         var result = list.Switch(
             StringComparer.OrdinalIgnoreCase,
             value,
-            l =>
-            {
-                l.Add(0);
-                return l;
-            },
+            l => l.Add(0),
             ("a", l => l.Add(1)),
             ("b", null),
             ("a", l => l.Add(2)),
@@ -377,7 +369,7 @@ internal sealed class FluentExtensionsSwitchTests
     public async Task Switch_WithComparerAndDefaultAndActionCasesAndNullThis_ThrowsArgumentNullException()
     {
         // ! Null on purpose: testing null detection
-        static void Act() => ((List<int>)null!).Switch(StringComparer.Ordinal, "a", l => l, ("a", _ => { }));
+        static void Act() => ((List<int>)null!).Switch(StringComparer.Ordinal, "a", _ => { }, ("a", _ => { }));
 
         await Assert.That(Act).Throws<ArgumentNullException>().WithParameterName("this");
     }
@@ -389,7 +381,7 @@ internal sealed class FluentExtensionsSwitchTests
         {
             // ! Null on purpose: testing null detection
             IEqualityComparer<string> comparer = null!;
-            new List<int>().Switch(comparer, "a", l => l, ("a", _ => { }));
+            new List<int>().Switch(comparer, "a", _ => { }, ("a", _ => { }));
         }
 
         await Assert.That(Act).Throws<ArgumentNullException>().WithParameterName("comparer");
@@ -402,7 +394,7 @@ internal sealed class FluentExtensionsSwitchTests
         {
             // ! Null on purpose: testing null detection
             (string Comparand, Action<List<int>>? Action)[] cases = null!;
-            new List<int>().Switch(StringComparer.Ordinal, "a", l => l, cases);
+            new List<int>().Switch(StringComparer.Ordinal, "a", _ => { }, cases);
         }
 
         await Assert.That(Act).Throws<ArgumentNullException>().WithParameterName("cases");
