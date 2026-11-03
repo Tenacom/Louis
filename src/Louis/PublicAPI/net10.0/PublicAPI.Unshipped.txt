@@ -1,6 +1,8 @@
 #nullable enable
 *REMOVED*override Louis.IO.ReadOnlyMemoryStream.ReadAsync(System.Memory<byte> buffer, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask<int>
 *REMOVED*override Louis.IO.ReadOnlyMemoryStream.WriteAsync(System.ReadOnlyMemory<byte> buffer, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask
+*REMOVED*static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, System.Collections.Generic.IEqualityComparer<TValue>! comparer, TValue value, Louis.Fluency.FluentAction<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
+*REMOVED*static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, TValue value, Louis.Fluency.FluentAction<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
 override Louis.IO.ReadOnlyMemoryStream.ReadAsync(System.Memory<byte> buffer, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<int>
 override Louis.IO.ReadOnlyMemoryStream.WriteAsync(System.ReadOnlyMemory<byte> buffer, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
 Louis.Text.FalseConditionInterpolatedStringHandler
@@ -31,3 +33,5 @@ Louis.Text.TrueConditionInterpolatedStringHandler.AppendLiteral(string! value) -
 Louis.Text.TrueConditionInterpolatedStringHandler.ToStringAndClear() -> string!
 Louis.Text.TrueConditionInterpolatedStringHandler.TrueConditionInterpolatedStringHandler() -> void
 Louis.Text.TrueConditionInterpolatedStringHandler.TrueConditionInterpolatedStringHandler(int literalLength, int formattedCount, bool condition, out bool shouldAppend) -> void
+static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, System.Collections.Generic.IEqualityComparer<TValue>! comparer, TValue value, System.Action<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
+static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, TValue value, System.Action<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
