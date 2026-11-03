@@ -14,8 +14,10 @@ partial class FluentExtensions
     /// <typeparam name="T">The type of the object.</typeparam>
     /// <param name="this">The object on which this method was called.</param>
     /// <param name="condition">The condition to test.</param>
-    /// <param name="then">The action to perform on <paramref name="this"/> if <paramref name="condition"/> is <see langword="true"/>.</param>
-    /// <param name="else">The action to perform on <paramref name="this"/> if <paramref name="condition"/> is <see langword="false"/>.</param>
+    /// <param name="then">The action to perform on <paramref name="this"/>
+    /// if <paramref name="condition"/> is <see langword="true"/>.</param>
+    /// <param name="else">The action to perform on <paramref name="this"/>
+    /// if <paramref name="condition"/> is <see langword="false"/>.</param>
     /// <returns>The result of <paramref name="then"/> if <paramref name="condition"/> is <see langword="true"/>;
     /// otherwise, the result of <paramref name="else"/>.</returns>
     /// <exception cref="ArgumentNullException">
@@ -42,8 +44,10 @@ partial class FluentExtensions
     /// <typeparam name="T">The type of the object.</typeparam>
     /// <param name="this">The object on which this method was called.</param>
     /// <param name="condition">The condition to test.</param>
-    /// <param name="then">The action to perform on <paramref name="this"/> if <paramref name="condition"/> is <see langword="true"/>.</param>
-    /// <param name="else">The action to perform on <paramref name="this"/> if <paramref name="condition"/> is <see langword="false"/>.</param>
+    /// <param name="then">The action to perform on <paramref name="this"/>
+    /// if <paramref name="condition"/> is <see langword="true"/>.</param>
+    /// <param name="else">The action to perform on <paramref name="this"/>
+    /// if <paramref name="condition"/> is <see langword="false"/>.</param>
     /// <returns>A reference to <paramref name="this"/> after either <paramref name="then"/> or <paramref name="else"/> returns.</returns>
     /// <exception cref="ArgumentNullException">
     /// <para><paramref name="this"/> is <see langword="null"/>.</para>

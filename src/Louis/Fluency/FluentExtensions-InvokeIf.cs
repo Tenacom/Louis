@@ -83,7 +83,12 @@ partial class FluentExtensions
     /// <para>- or -</para>
     /// <para><paramref name="action"/> is <see langword="null"/>.</para>
     /// </exception>
-    public static T InvokeIf<T, TArg1, TArg2>(this T @this, bool condition, TArg1 arg1, TArg2 arg2, Action<T, TArg1, TArg2> action)
+    public static T InvokeIf<T, TArg1, TArg2>(
+        this T @this,
+        bool condition,
+        TArg1 arg1,
+        TArg2 arg2,
+        Action<T, TArg1, TArg2> action)
     {
         Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(action);
@@ -117,7 +122,13 @@ partial class FluentExtensions
     /// <para>- or -</para>
     /// <para><paramref name="action"/> is <see langword="null"/>.</para>
     /// </exception>
-    public static T InvokeIf<T, TArg1, TArg2, TArg3>(this T @this, bool condition, TArg1 arg1, TArg2 arg2, TArg3 arg3, Action<T, TArg1, TArg2, TArg3> action)
+    public static T InvokeIf<T, TArg1, TArg2, TArg3>(
+        this T @this,
+        bool condition,
+        TArg1 arg1,
+        TArg2 arg2,
+        TArg3 arg3,
+        Action<T, TArg1, TArg2, TArg3> action)
     {
         Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(action);
@@ -153,7 +164,14 @@ partial class FluentExtensions
     /// <para>- or -</para>
     /// <para><paramref name="action"/> is <see langword="null"/>.</para>
     /// </exception>
-    public static T InvokeIf<T, TArg1, TArg2, TArg3, TArg4>(this T @this, bool condition, TArg1 arg1, TArg2 arg2, TArg3 arg3, TArg4 arg4, Action<T, TArg1, TArg2, TArg3, TArg4> action)
+    public static T InvokeIf<T, TArg1, TArg2, TArg3, TArg4>(
+        this T @this,
+        bool condition,
+        TArg1 arg1,
+        TArg2 arg2,
+        TArg3 arg3,
+        TArg4 arg4,
+        Action<T, TArg1, TArg2, TArg3, TArg4> action)
     {
         Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(action);

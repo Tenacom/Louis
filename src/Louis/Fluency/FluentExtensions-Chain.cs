@@ -98,7 +98,12 @@ partial class FluentExtensions
     /// <para>- or -</para>
     /// <para><paramref name="func"/> is <see langword="null"/>.</para>
     /// </exception>
-    public static T Chain<T, TArg1, TArg2, TArg3>(this T @this, TArg1 arg1, TArg2 arg2, TArg3 arg3, FluentAction<T, TArg1, TArg2, TArg3> func)
+    public static T Chain<T, TArg1, TArg2, TArg3>(
+        this T @this,
+        TArg1 arg1,
+        TArg2 arg2,
+        TArg3 arg3,
+        FluentAction<T, TArg1, TArg2, TArg3> func)
     {
         Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(func);
@@ -128,7 +133,13 @@ partial class FluentExtensions
     /// <para>- or -</para>
     /// <para><paramref name="func"/> is <see langword="null"/>.</para>
     /// </exception>
-    public static T Chain<T, TArg1, TArg2, TArg3, TArg4>(this T @this, TArg1 arg1, TArg2 arg2, TArg3 arg3, TArg4 arg4, FluentAction<T, TArg1, TArg2, TArg3, TArg4> func)
+    public static T Chain<T, TArg1, TArg2, TArg3, TArg4>(
+        this T @this,
+        TArg1 arg1,
+        TArg2 arg2,
+        TArg3 arg3,
+        TArg4 arg4,
+        FluentAction<T, TArg1, TArg2, TArg3, TArg4> func)
     {
         Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(func);
