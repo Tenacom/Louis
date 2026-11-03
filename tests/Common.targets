@@ -19,9 +19,6 @@
     <!-- Common.props turns trimming on for the packaged libraries. A test project is an application that runs as built. -->
     <IsTrimmable>false</IsTrimmable>
 
-    <!-- Suppress warnings that have no business being enforced here. -->
-    <NoWarn>$(NoWarn);CA2007</NoWarn> <!-- Do not directly await a Task - A test project has no synchronization context. -->
-
   </PropertyGroup>
 
   <!-- Hide test result files in Visual Studio -->

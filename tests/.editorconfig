@@ -29,6 +29,9 @@ dotnet_diagnostic.CA1050.severity = none
 # Identifiers should not contain underscores - underscores are the test naming convention
 dotnet_diagnostic.CA1707.severity = none
 
+# Do not directly await a Task - A test project is an executable project with no synchronization context
+dotnet_diagnostic.CA2007.severity = none
+
 # Expression value is never used - a test method may call a method for its side effects, and not use the return value
 dotnet_diagnostic.IDE0058.severity = none
 
