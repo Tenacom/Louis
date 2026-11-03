@@ -52,6 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [`AsyncService.DoneToken`](docs/api/Louis/Louis.Threading.AsyncService.md) was not canceled when the service was stopped before starting.
 - [`AsyncService`](docs/api/Louis/Louis.Threading.AsyncService.md) called both `LogExecuteCompleted` and `LogExecuteCanceled` when `ExecuteAsync` returned after a stop request.
 - [`AsyncService.Start`](docs/api/Louis/Louis.Threading.AsyncService.md) and `StartAndWaitAsync` faulted a task nobody observed when `ExecuteAsync` or `TeardownAsync` threw, which raised `TaskScheduler.UnobservedTaskException`.
+- [`AsyncService`](docs/api/Louis/Louis.Threading.AsyncService.md) threw `ObjectDisposedException` when `DisposeAsync` ran while a failed setup phase was completing.
 
 ### Known problems introduced by this release
 
