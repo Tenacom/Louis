@@ -30,9 +30,13 @@ partial class FluentExtensions
     /// <para><paramref name="cases"/> is <see langword="null"/>.</para>
     /// </exception>
     /// <remarks>
-    /// <para>If <paramref name="value"/> is not equal to any of the values in <paramref name="cases"/>, this method returns immediately.</para>
+    /// <para>If <paramref name="value"/> is not equal to any of the values in <paramref name="cases"/>,
+    /// this method returns immediately.</para>
     /// </remarks>
-    public static T Switch<T, TValue>(this T @this, TValue value, params (TValue Comparand, FluentAction<T>? Action)[] cases)
+    public static T Switch<T, TValue>(
+        this T @this,
+        TValue value,
+        params (TValue Comparand, FluentAction<T>? Action)[] cases)
         => Switch(@this, EqualityComparer<TValue>.Default, value, null, cases);
 
     /// <summary>
@@ -59,9 +63,14 @@ partial class FluentExtensions
     /// <para><paramref name="cases"/> is <see langword="null"/>.</para>
     /// </exception>
     /// <remarks>
-    /// <para>If <paramref name="value"/> is not equal to any of the values in <paramref name="cases"/>, this method returns immediately.</para>
+    /// <para>If <paramref name="value"/> is not equal to any of the values in <paramref name="cases"/>,
+    /// this method returns immediately.</para>
     /// </remarks>
-    public static T Switch<T, TValue>(this T @this, IEqualityComparer<TValue> comparer, TValue value, params (TValue Comparand, FluentAction<T>? Action)[] cases)
+    public static T Switch<T, TValue>(
+        this T @this,
+        IEqualityComparer<TValue> comparer,
+        TValue value,
+        params (TValue Comparand, FluentAction<T>? Action)[] cases)
         => Switch(@this, comparer, value, null, cases);
 
     /// <summary>
@@ -84,7 +93,8 @@ partial class FluentExtensions
     /// <para><paramref name="cases"/> is <see langword="null"/>.</para>
     /// </exception>
     /// <remarks>
-    /// <para>If <paramref name="value"/> is not equal to any of the values in <paramref name="cases"/>, this method returns immediately.</para>
+    /// <para>If <paramref name="value"/> is not equal to any of the values in <paramref name="cases"/>,
+    /// this method returns immediately.</para>
     /// </remarks>
     public static T Switch<T, TValue>(this T @this, TValue value, params (TValue Comparand, Action<T>? Action)[] cases)
         => Switch(@this, EqualityComparer<TValue>.Default, value, null, cases);
@@ -112,9 +122,14 @@ partial class FluentExtensions
     /// <para><paramref name="cases"/> is <see langword="null"/>.</para>
     /// </exception>
     /// <remarks>
-    /// <para>If <paramref name="value"/> is not equal to any of the values in <paramref name="cases"/>, this method returns immediately.</para>
+    /// <para>If <paramref name="value"/> is not equal to any of the values in <paramref name="cases"/>,
+    /// this method returns immediately.</para>
     /// </remarks>
-    public static T Switch<T, TValue>(this T @this, IEqualityComparer<TValue> comparer, TValue value, params (TValue Comparand, Action<T>? Action)[] cases)
+    public static T Switch<T, TValue>(
+        this T @this,
+        IEqualityComparer<TValue> comparer,
+        TValue value,
+        params (TValue Comparand, Action<T>? Action)[] cases)
         => Switch(@this, comparer, value, null, cases);
 
     /// <summary>
@@ -144,7 +159,11 @@ partial class FluentExtensions
     /// <para>- or -</para>
     /// <para><paramref name="cases"/> is <see langword="null"/>.</para>
     /// </exception>
-    public static T Switch<T, TValue>(this T @this, TValue value, FluentAction<T>? @default, params (TValue Comparand, FluentAction<T>? Action)[] cases)
+    public static T Switch<T, TValue>(
+        this T @this,
+        TValue value,
+        FluentAction<T>? @default,
+        params (TValue Comparand, FluentAction<T>? Action)[] cases)
         => Switch(@this, EqualityComparer<TValue>.Default, value, @default, cases);
 
     /// <summary>
@@ -177,7 +196,12 @@ partial class FluentExtensions
     /// <para>- or -</para>
     /// <para><paramref name="cases"/> is <see langword="null"/>.</para>
     /// </exception>
-    public static T Switch<T, TValue>(this T @this, IEqualityComparer<TValue> comparer, TValue value, FluentAction<T>? @default, params (TValue Comparand, FluentAction<T>? Action)[] cases)
+    public static T Switch<T, TValue>(
+        this T @this,
+        IEqualityComparer<TValue> comparer,
+        TValue value,
+        FluentAction<T>? @default,
+        params (TValue Comparand, FluentAction<T>? Action)[] cases)
     {
         Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(comparer);
@@ -221,7 +245,11 @@ partial class FluentExtensions
     /// <para>- or -</para>
     /// <para><paramref name="cases"/> is <see langword="null"/>.</para>
     /// </exception>
-    public static T Switch<T, TValue>(this T @this, TValue value, FluentAction<T>? @default, params (TValue Comparand, Action<T>? Action)[] cases)
+    public static T Switch<T, TValue>(
+        this T @this,
+        TValue value,
+        FluentAction<T>? @default,
+        params (TValue Comparand, Action<T>? Action)[] cases)
         => Switch(@this, EqualityComparer<TValue>.Default, value, @default, cases);
 
     /// <summary>
@@ -252,7 +280,12 @@ partial class FluentExtensions
     /// <para>- or -</para>
     /// <para><paramref name="cases"/> is <see langword="null"/>.</para>
     /// </exception>
-    public static T Switch<T, TValue>(this T @this, IEqualityComparer<TValue> comparer, TValue value, FluentAction<T>? @default, params (TValue Comparand, Action<T>? Action)[] cases)
+    public static T Switch<T, TValue>(
+        this T @this,
+        IEqualityComparer<TValue> comparer,
+        TValue value,
+        FluentAction<T>? @default,
+        params (TValue Comparand, Action<T>? Action)[] cases)
     {
         Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(comparer);

@@ -105,7 +105,10 @@ partial class FluentExtensions
     /// </exception>
     /// <seealso cref="ForEach{T,TElement}(T,IEnumerable{TElement},Action{T,TElement,int})"/>
     /// <seealso cref="ForEach{T,TElement}(T,ReadOnlySpan{TElement},FluentAction{T,TElement,int})"/>
-    public static T ForEach<T, TElement>(this T @this, IEnumerable<TElement> sequence, FluentAction<T, TElement, int> action)
+    public static T ForEach<T, TElement>(
+        this T @this,
+        IEnumerable<TElement> sequence,
+        FluentAction<T, TElement, int> action)
     {
         Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(action);
@@ -250,7 +253,10 @@ partial class FluentExtensions
     /// </exception>
     /// <seealso cref="ForEach{T,TElement}(T,ReadOnlySpan{TElement},Action{T,TElement,int})"/>
     /// <seealso cref="ForEach{T,TElement}(T,IEnumerable{TElement},FluentAction{T,TElement,int})"/>
-    public static T ForEach<T, TElement>(this T @this, ReadOnlySpan<TElement> span, FluentAction<T, TElement, int> action)
+    public static T ForEach<T, TElement>(
+        this T @this,
+        ReadOnlySpan<TElement> span,
+        FluentAction<T, TElement, int> action)
     {
         Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(action);
