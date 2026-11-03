@@ -26,7 +26,7 @@ public struct InterlockedReference<T> : IEquatable<InterlockedReference<T>>, IEq
 
     /// <summary>
     /// <para>Gets or sets the reference stored in an <see cref="InterlockedReference{T}"/>.</para>
-    /// <para>This property if thread-safe.</para>
+    /// <para>This property is thread-safe.</para>
     /// </summary>
     public T? Value
     {
@@ -62,7 +62,7 @@ public struct InterlockedReference<T> : IEquatable<InterlockedReference<T>>, IEq
     public static bool operator !=(InterlockedReference<T> a, InterlockedReference<T> b) => !ReferenceEquals(a.Value, b.Value);
 
     /// <summary>
-    /// Determines whether the value of a specified interlocked references is the same as a specified value.
+    /// Determines whether the value of a specified interlocked reference is the same as a specified value.
     /// </summary>
     /// <param name="a">The interlocked reference to compare.</param>
     /// <param name="b">The reference to compare.</param>

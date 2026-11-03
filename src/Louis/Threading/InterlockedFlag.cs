@@ -24,7 +24,7 @@ public struct InterlockedFlag : IEquatable<InterlockedFlag>, IEquatable<bool>
 
     /// <summary>
     /// <para>Gets or sets a value indicating whether the flag is set.</para>
-    /// <para>This property if thread-safe.</para>
+    /// <para>This property is thread-safe.</para>
     /// </summary>
     /// <value>
     /// The value of the flag.
@@ -63,7 +63,7 @@ public struct InterlockedFlag : IEquatable<InterlockedFlag>, IEquatable<bool>
     public static bool operator ==(InterlockedFlag a, bool b) => a.Value == b;
 
     /// <summary>
-    /// Determines whether a specified interlocked flags has a value different from a specified value.
+    /// Determines whether a specified interlocked flag has a value different from a specified value.
     /// </summary>
     /// <param name="a">The interlocked flag to compare.</param>
     /// <param name="b">The value to compare.</param>
