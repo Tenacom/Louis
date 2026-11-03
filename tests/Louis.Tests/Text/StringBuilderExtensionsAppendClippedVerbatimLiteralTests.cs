@@ -28,7 +28,7 @@ internal sealed class StringBuilderExtensionsAppendClippedVerbatimLiteralTests
     {
         var builder = new StringBuilder("x");
 
-        var result = builder.AppendClippedVerbatimLiteral((string?)null, 3, 3);
+        var result = builder.AppendClippedVerbatimLiteral(null, 3, 3);
 
         await Assert.That(result).IsSameReferenceAs(builder);
         await Assert.That(builder.ToString()).IsEqualTo("xnull");
@@ -56,7 +56,7 @@ internal sealed class StringBuilderExtensionsAppendClippedVerbatimLiteralTests
     {
         var builder = new StringBuilder("x");
 
-        var result = builder.AppendClippedVerbatimLiteral((string?)null, 3, 3, true);
+        var result = builder.AppendClippedVerbatimLiteral(null, 3, 3, true);
 
         await Assert.That(result).IsSameReferenceAs(builder);
         await Assert.That(builder.ToString()).IsEqualTo("xnull");

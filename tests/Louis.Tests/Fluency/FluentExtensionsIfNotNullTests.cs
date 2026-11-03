@@ -32,7 +32,7 @@ internal sealed class FluentExtensionsIfNotNullTests
     public async Task IfNotNull_WithStructArgAndNullFluentAction_ThrowsArgumentNullException()
     {
         // ! Null on purpose: testing null detection
-        static void Act() => new List<int>().IfNotNull((int?)5, (FluentAction<List<int>, int>)null!);
+        static void Act() => new List<int>().IfNotNull(5, (FluentAction<List<int>, int>)null!);
 
         await Assert.That(Act).Throws<ArgumentNullException>().WithParameterName("then");
     }
@@ -64,7 +64,7 @@ internal sealed class FluentExtensionsIfNotNullTests
     public async Task IfNotNull_WithStructArgAndNullAction_ThrowsArgumentNullException()
     {
         // ! Null on purpose: testing null detection
-        static void Act() => new List<int>().IfNotNull((int?)5, (Action<List<int>, int>)null!);
+        static void Act() => new List<int>().IfNotNull(5, (Action<List<int>, int>)null!);
 
         await Assert.That(Act).Throws<ArgumentNullException>().WithParameterName("then");
     }
@@ -95,7 +95,7 @@ internal sealed class FluentExtensionsIfNotNullTests
     public async Task IfNotNull_WithClassArgAndNullFluentAction_ThrowsArgumentNullException()
     {
         // ! Null on purpose: testing null detection
-        static void Act() => new List<string>().IfNotNull("x", (FluentAction<List<string>, string>)null!);
+        static void Act() => new List<string>().IfNotNull("x", null!);
 
         await Assert.That(Act).Throws<ArgumentNullException>().WithParameterName("then");
     }

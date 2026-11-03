@@ -33,7 +33,7 @@ internal sealed class FluentExtensionsIfElseTests
     public async Task IfElse_WithNullThenFluentAction_ThrowsArgumentNullException()
     {
         // ! Null on purpose: testing null detection
-        static void Act() => new List<int>().IfElse(true, (FluentAction<List<int>>)null!, l => l);
+        static void Act() => new List<int>().IfElse(true, null!, l => l);
 
         await Assert.That(Act).Throws<ArgumentNullException>().WithParameterName("then");
     }
@@ -42,7 +42,7 @@ internal sealed class FluentExtensionsIfElseTests
     public async Task IfElse_WithNullElseFluentAction_ThrowsArgumentNullException()
     {
         // ! Null on purpose: testing null detection
-        static void Act() => new List<int>().IfElse(true, l => l, (FluentAction<List<int>>)null!);
+        static void Act() => new List<int>().IfElse(true, l => l, null!);
 
         await Assert.That(Act).Throws<ArgumentNullException>().WithParameterName("else");
     }
@@ -74,7 +74,7 @@ internal sealed class FluentExtensionsIfElseTests
     public async Task IfElse_WithNullThenAction_ThrowsArgumentNullException()
     {
         // ! Null on purpose: testing null detection
-        static void Act() => new List<int>().IfElse(true, (Action<List<int>>)null!, _ => { });
+        static void Act() => new List<int>().IfElse(true, null!, _ => { });
 
         await Assert.That(Act).Throws<ArgumentNullException>().WithParameterName("then");
     }
@@ -83,7 +83,7 @@ internal sealed class FluentExtensionsIfElseTests
     public async Task IfElse_WithNullElseAction_ThrowsArgumentNullException()
     {
         // ! Null on purpose: testing null detection
-        static void Act() => new List<int>().IfElse(true, _ => { }, (Action<List<int>>)null!);
+        static void Act() => new List<int>().IfElse(true, _ => { }, null!);
 
         await Assert.That(Act).Throws<ArgumentNullException>().WithParameterName("else");
     }

@@ -22,8 +22,7 @@ internal sealed class ActionAsyncDisposableTests
     public async Task Dispose_WaitsForCallbackCompletion()
     {
         var completed = false;
-        var disposable = new ActionAsyncDisposable(async () =>
-        {
+        var disposable = new ActionAsyncDisposable(async () => {
             await Task.Yield();
             completed = true;
         });
@@ -37,8 +36,7 @@ internal sealed class ActionAsyncDisposableTests
     public async Task Dispose_WhenCalledAgain_DoesNothing()
     {
         var callCount = 0;
-        var disposable = new ActionAsyncDisposable(() =>
-        {
+        var disposable = new ActionAsyncDisposable(() => {
             callCount++;
             return default;
         });
@@ -53,8 +51,7 @@ internal sealed class ActionAsyncDisposableTests
     public async Task Dispose_AfterDisposeAsync_DoesNothing()
     {
         var callCount = 0;
-        var disposable = new ActionAsyncDisposable(() =>
-        {
+        var disposable = new ActionAsyncDisposable(() => {
             callCount++;
             return default;
         });
@@ -82,8 +79,7 @@ internal sealed class ActionAsyncDisposableTests
     public async Task DisposeAsync_WhenCalledAgain_DoesNothing()
     {
         var callCount = 0;
-        var disposable = new ActionAsyncDisposable(() =>
-        {
+        var disposable = new ActionAsyncDisposable(() => {
             callCount++;
             return default;
         });
@@ -99,8 +95,7 @@ internal sealed class ActionAsyncDisposableTests
     public async Task DisposeAsync_AfterDispose_DoesNothing()
     {
         var callCount = 0;
-        var disposable = new ActionAsyncDisposable(() =>
-        {
+        var disposable = new ActionAsyncDisposable(() => {
             callCount++;
             return default;
         });

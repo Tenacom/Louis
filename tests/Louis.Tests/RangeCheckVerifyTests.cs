@@ -68,7 +68,7 @@ internal sealed class RangeCheckVerifyTests
     [Arguments(false)]
     public async Task Verify_WithNullString_ReturnsAcceptNull(bool acceptNull)
     {
-        await Assert.That(RangeCheck.Verify((string?)null, "b", "d", acceptNull)).IsEqualTo(acceptNull);
+        await Assert.That(RangeCheck.Verify(null, "b", "d", acceptNull)).IsEqualTo(acceptNull);
     }
 
     [Test]
@@ -99,7 +99,7 @@ internal sealed class RangeCheckVerifyTests
     [Arguments(false)]
     public async Task Verify_WithNullStringAndComparer_ReturnsAcceptNull(bool acceptNull)
     {
-        var result = RangeCheck.Verify((string?)null, "d", "b", acceptNull, ReverseComparer<string>.Instance);
+        var result = RangeCheck.Verify(null, "d", "b", acceptNull, ReverseComparer<string>.Instance);
 
         await Assert.That(result).IsEqualTo(acceptNull);
     }
@@ -141,7 +141,7 @@ internal sealed class RangeCheckVerifyTests
     [Arguments(false)]
     public async Task Verify_WithNullInt32_ReturnsAcceptNull(bool acceptNull)
     {
-        await Assert.That(RangeCheck.Verify((int?)null, 1, 10, acceptNull)).IsEqualTo(acceptNull);
+        await Assert.That(RangeCheck.Verify(null, 1, 10, acceptNull)).IsEqualTo(acceptNull);
     }
 
     [Test]
@@ -172,7 +172,7 @@ internal sealed class RangeCheckVerifyTests
     [Arguments(false)]
     public async Task Verify_WithNullInt32AndComparer_ReturnsAcceptNull(bool acceptNull)
     {
-        var result = RangeCheck.Verify((int?)null, 10, 1, acceptNull, ReverseComparer<int>.Instance);
+        var result = RangeCheck.Verify(null, 10, 1, acceptNull, ReverseComparer<int>.Instance);
 
         await Assert.That(result).IsEqualTo(acceptNull);
     }

@@ -109,7 +109,7 @@ internal sealed class DisposingUtilityTests
         static async Task Act()
         {
             // ! Null on purpose: testing null detection
-            await DisposingUtility.DisposeAsync((object?[])null!);
+            await DisposingUtility.DisposeAsync(null!);
         }
 
         await Assert.That(Act).Throws<ArgumentNullException>().WithParameterName("items");
@@ -136,7 +136,7 @@ internal sealed class DisposingUtilityTests
         static void Act()
         {
             // ! Null on purpose: testing null detection
-            DisposingUtility.Dispose((object?[])null!);
+            DisposingUtility.Dispose(null!);
         }
 
         await Assert.That(Act).Throws<ArgumentNullException>().WithParameterName("items");

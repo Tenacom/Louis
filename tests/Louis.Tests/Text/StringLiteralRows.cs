@@ -11,8 +11,7 @@ using LiteralRow = (string Input, string QuotedBody, string VerbatimBody);
 /// </summary>
 internal static class StringLiteralRows
 {
-    private static readonly LiteralRow[] Rows =
-    [
+    private static readonly LiteralRow[] Rows = [
         (string.Empty, string.Empty, string.Empty),
         ("abc", "abc", "abc"),
 
@@ -33,7 +32,7 @@ internal static class StringLiteralRows
         ("\x1B", "\\u001B", "\x1B"),
 
         // A control character followed by a hex digit, which a \x escape would take as its own
-        ("\x0001a", "\\u0001a", "\x0001a"),
+        ("\x0001" + "a", "\\u0001a", "\x0001" + "a"),
 
         // Non-ASCII letters and symbols, kept as they are
         ("é", "é", "é"),
