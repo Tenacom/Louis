@@ -58,7 +58,8 @@ partial class DateTimeExtensions
     }
 
     /// <summary>
-    /// Returns midnight on the earliest date, greater or equal to a given date and time, whose day of the week is the one preceding a specified day of the week.
+    /// Returns midnight on the earliest date, greater or equal to a given date and time,
+    /// whose day of the week is the one preceding a specified day of the week.
     /// </summary>
     /// <param name="this">The instance of <see cref="DateTime"/> on which this method is called.</param>
     /// <param name="firstDayOfWeek">A <see cref="DayOfWeek"/> value representing the day that starts the week.</param>

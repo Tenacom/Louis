@@ -34,5 +34,7 @@ public static partial class RangeCheck
     }
 
     private static void ThrowInvalidRange<T>(T min, T max)
-        => throw new ArgumentException($"{ExceptionHelper.FormatObject(min)} cannot be greater than {ExceptionHelper.FormatObject(max)}.", nameof(min));
+        => throw new ArgumentException(
+            $"{ExceptionHelper.FormatObject(min)} cannot be greater than {ExceptionHelper.FormatObject(max)}.",
+            nameof(min));
 }
