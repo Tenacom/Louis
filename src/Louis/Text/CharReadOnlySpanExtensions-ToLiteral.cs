@@ -40,6 +40,8 @@ partial class CharReadOnlySpanExtensions
     /// <param name="literalKind">A <see cref="StringLiteralKind"/> constant specifying the kind of string literal
     /// to build.</param>
     /// <returns>A newly-constructed <see langword="string"/>.</returns>
+    /// <exception cref="ArgumentException"><paramref name="literalKind"/> is neither <see cref="StringLiteralKind.Quoted"/>
+    /// nor <see cref="StringLiteralKind.Verbatim"/>.</exception>
     /// <seealso cref="ToQuotedLiteral"/>
     /// <seealso cref="ToVerbatimLiteral"/>
     public static string ToLiteral(this ReadOnlySpan<char> @this, StringLiteralKind literalKind)

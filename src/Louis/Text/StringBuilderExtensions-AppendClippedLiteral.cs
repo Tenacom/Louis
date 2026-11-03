@@ -61,7 +61,7 @@ partial class StringBuilderExtensions
     /// <param name="tailLength">The number of characters to leave after clipping.</param>
     /// <param name="useUnicodeEllipsis">
     /// <see langword="true"/> to use a single Unicode character Ellipsis (<c>'\x2026'</c>, <c>…</c>) to replace the clipped part;
-    /// <see langword="false"/> to use three dots (<c>.</c>) instead. Default is <see langword="false"/>.
+    /// <see langword="false"/> to use three dots (<c>...</c>) instead.
     /// </param>
     /// <returns>A reference to this instance after the append operation has completed.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="this"/> is <see langword="null"/>.</exception>
@@ -93,7 +93,7 @@ partial class StringBuilderExtensions
     /// <summary>
     /// Appends the specified span of characters, expressed as a C# quoted string literal, to the end
     /// of this instance. If the span is longer than the sum of <paramref name="headLength"/>,
-    /// <paramref name="tailLength"/>, and the length of an ellipsis (three dots <c>...</c>1), then it is clipped,
+    /// <paramref name="tailLength"/>, and the length of an ellipsis (three dots <c>...</c>), then it is clipped,
     /// taking only the first <paramref name="headLength"/> characters, followed by the ellipsis
     /// and the last <paramref name="tailLength"/> characters.
     /// </summary>
@@ -135,7 +135,7 @@ partial class StringBuilderExtensions
     /// <param name="tailLength">The number of characters to leave after clipping.</param>
     /// <param name="useUnicodeEllipsis">
     /// <see langword="true"/> to use a single Unicode character Ellipsis (<c>'\x2026'</c>, <c>…</c>) to replace the clipped part;
-    /// <see langword="false"/> to use three dots (<c>...</c>) instead. Default is <see langword="false"/>.
+    /// <see langword="false"/> to use three dots (<c>...</c>) instead.
     /// </param>
     /// <returns>A reference to this instance after the append operation has completed.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="this"/> is <see langword="null"/>.</exception>
@@ -209,7 +209,7 @@ partial class StringBuilderExtensions
     /// <param name="tailLength">The number of characters to leave after clipping.</param>
     /// <param name="useUnicodeEllipsis">
     /// <see langword="true"/> to use a single Unicode character Ellipsis (<c>'\x2026'</c>, <c>…</c>) to replace the clipped part;
-    /// <see langword="false"/> to use three dots (<c>.</c>) instead. Default is <see langword="false"/>.
+    /// <see langword="false"/> to use three dots (<c>...</c>) instead.
     /// </param>
     /// <returns>A reference to this instance after the append operation has completed.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="this"/> is <see langword="null"/>.</exception>
@@ -283,7 +283,7 @@ partial class StringBuilderExtensions
     /// <param name="tailLength">The number of characters to leave after clipping.</param>
     /// <param name="useUnicodeEllipsis">
     /// <see langword="true"/> to use a single Unicode character Ellipsis (<c>'\x2026'</c>, <c>…</c>) to replace the clipped part;
-    /// <see langword="false"/> to use three dots (<c>.</c>) instead. Default is <see langword="false"/>.
+    /// <see langword="false"/> to use three dots (<c>...</c>) instead.
     /// </param>
     /// <returns>A reference to this instance after the append operation has completed.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="this"/> is <see langword="null"/>.</exception>
@@ -365,7 +365,7 @@ partial class StringBuilderExtensions
     /// <param name="tailLength">The number of characters to leave after clipping.</param>
     /// <param name="useUnicodeEllipsis">
     /// <see langword="true"/> to use a single Unicode character Ellipsis (<c>'\x2026'</c>, <c>…</c>) to replace the clipped part;
-    /// <see langword="false"/> to use three dots (<c>.</c>) instead. Default is <see langword="false"/>.
+    /// <see langword="false"/> to use three dots (<c>...</c>) instead.
     /// </param>
     /// <returns>A reference to this instance after the append operation has completed.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="this"/> is <see langword="null"/>.</exception>
@@ -451,7 +451,7 @@ partial class StringBuilderExtensions
     /// <param name="tailLength">The number of characters to leave after clipping.</param>
     /// <param name="useUnicodeEllipsis">
     /// <see langword="true"/> to use a single Unicode character Ellipsis (<c>'\x2026'</c>, <c>…</c>) to replace the clipped part;
-    /// <see langword="false"/> to use three dots (<c>.</c>) instead. Default is <see langword="false"/>.
+    /// <see langword="false"/> to use three dots (<c>...</c>) instead.
     /// </param>
     /// <returns>A reference to this instance after the append operation has completed.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="this"/> is <see langword="null"/>.</exception>

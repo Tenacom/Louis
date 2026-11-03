@@ -16,7 +16,7 @@ partial class StringBuilderExtensions
     /// </summary>
     /// <param name="this">The <see cref="StringBuilder"/> on which this method is called.</param>
     /// <param name="str">The string to append.</param>
-    /// <returns>A reference to this instance after the append operation has completed..</returns>
+    /// <returns>A reference to this instance after the append operation has completed.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="this"/> is <see langword="null"/>.</exception>
     /// <remarks>
     /// <para>If <paramref name="str"/> is <see langword="null"/>, the string <c>null</c>
@@ -39,7 +39,7 @@ partial class StringBuilderExtensions
     /// </summary>
     /// <param name="this">The <see cref="StringBuilder"/> on which this method is called.</param>
     /// <param name="chars">The characters to append.</param>
-    /// <returns>A reference to this instance after the append operation has completed..</returns>
+    /// <returns>A reference to this instance after the append operation has completed.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="this"/> is <see langword="null"/>.</exception>
     /// <seealso cref="AppendVerbatimLiteral(StringBuilder,ReadOnlySpan{char})"/>
     /// <seealso cref="AppendLiteral(StringBuilder,StringLiteralKind,ReadOnlySpan{char})"/>
