@@ -15,8 +15,10 @@ partial class FluentExtensions
     /// <typeparam name="T1">The type of the additional argument to pass to <paramref name="then"/>.</typeparam>
     /// <param name="this">The object on which this method was called.</param>
     /// <param name="arg">The additional argument to pass to <paramref name="then"/>.</param>
-    /// <param name="then">The action to perform on <paramref name="this"/> and <paramref name="arg"/>if <paramref name="arg "/> is not <see langword="null"/>.</param>
-    /// <returns>A reference to <paramref name="this"/> after <paramref name="then"/>, if called, returns.</returns>
+    /// <param name="then">The action to perform on <paramref name="this"/> and <paramref name="arg"/>
+    /// if <paramref name="arg"/> is not <see langword="null"/>.</param>
+    /// <returns>The result of <paramref name="then"/> if <paramref name="arg"/> is not <see langword="null"/>;
+    /// otherwise, a reference to <paramref name="this"/>.</returns>
     /// <exception cref="ArgumentNullException">
     /// <para><paramref name="this"/> is <see langword="null"/>.</para>
     /// <para>- or -</para>
@@ -40,7 +42,8 @@ partial class FluentExtensions
     /// <typeparam name="T1">The type of the additional argument to pass to <paramref name="then"/>.</typeparam>
     /// <param name="this">The object on which this method was called.</param>
     /// <param name="arg">The additional argument to pass to <paramref name="then"/>.</param>
-    /// <param name="then">The action to perform on <paramref name="this"/> and <paramref name="arg"/>if <paramref name="arg "/> is not <see langword="null"/>.</param>
+    /// <param name="then">The action to perform on <paramref name="this"/> and <paramref name="arg"/>
+    /// if <paramref name="arg"/> is not <see langword="null"/>.</param>
     /// <returns>A reference to <paramref name="this"/> after <paramref name="then"/>, if called, returns.</returns>
     /// <exception cref="ArgumentNullException">
     /// <para><paramref name="this"/> is <see langword="null"/>.</para>

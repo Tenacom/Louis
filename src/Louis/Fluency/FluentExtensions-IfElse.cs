@@ -16,7 +16,8 @@ partial class FluentExtensions
     /// <param name="condition">The condition to test.</param>
     /// <param name="then">The action to perform on <paramref name="this"/> if <paramref name="condition"/> is <see langword="true"/>.</param>
     /// <param name="else">The action to perform on <paramref name="this"/> if <paramref name="condition"/> is <see langword="false"/>.</param>
-    /// <returns>A reference to <paramref name="this"/> after either <paramref name="then"/> or <paramref name="else"/> returns.</returns>
+    /// <returns>The result of <paramref name="then"/> if <paramref name="condition"/> is <see langword="true"/>;
+    /// otherwise, the result of <paramref name="else"/>.</returns>
     /// <exception cref="ArgumentNullException">
     /// <para><paramref name="this"/> is <see langword="null"/>.</para>
     /// <para>- or -</para>
@@ -28,7 +29,7 @@ partial class FluentExtensions
     {
         Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(then);
-        Guard.IsNotNull(@else);
+        Guard.IsNotNull(@else, nameof(@else));
 
 #pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
         return condition ? then(@this) : @else(@this);
@@ -55,7 +56,7 @@ partial class FluentExtensions
     {
         Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(then);
-        Guard.IsNotNull(@else);
+        Guard.IsNotNull(@else, nameof(@else));
 
 #pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
         if (condition)

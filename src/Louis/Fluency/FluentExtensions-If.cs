@@ -15,7 +15,8 @@ partial class FluentExtensions
     /// <param name="this">The object on which this method was called.</param>
     /// <param name="condition">The condition to test.</param>
     /// <param name="then">The action to perform on <paramref name="this"/> if <paramref name="condition"/> is <see langword="true"/>.</param>
-    /// <returns>A reference to <paramref name="this"/> after <paramref name="then"/>, if called, returns.</returns>
+    /// <returns>The result of <paramref name="then"/> if <paramref name="condition"/> is <see langword="true"/>;
+    /// otherwise, a reference to <paramref name="this"/>.</returns>
     /// <exception cref="ArgumentNullException">
     /// <para><paramref name="this"/> is <see langword="null"/>.</para>
     /// <para>- or -</para>

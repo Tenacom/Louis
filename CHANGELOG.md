@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The `RangeCheck.InRangeOrDefault` overloads for nullable value types with `acceptNull` returned `defaultValue` for a value in range, and the value otherwise.
 - The [`RangeCheck.Verify`](docs/api/Louis/Louis.RangeCheck.md), `ClampOrNull`, and `InRangeOrDefault` overloads for nullable types skipped the checks on `min`, `max`, and `comparer` for a null `value`.
 - The `ArgumentNullException` that an extension method throws for a null `this` argument had `@this`, not `this`, as its `ParamName`.
+- The `ArgumentNullException` that [`FluentExtensions.IfElse`](docs/api/Louis/Louis.Fluency.FluentExtensions.md) throws for a null `else` argument had `@else`, not `else`, as its `ParamName`.
 - [`DateUtility.GetDaysFromStartOfWeek`](docs/api/Louis/Louis.DateUtility.md), and the `GetStartOfWeek`, `GetLastDayOfWeek`, and `GetEndOfWeek` extension methods, returned wrong results for a day on or after the first day of the week.
 - [`DateTimeExtensions.GetStartOfWeek`](docs/api/Louis/Louis.DateTimeExtensions.md), `GetLastDayOfWeek`, and `GetEndOfWeek` kept the time of day of their argument, instead of returning midnight or the last tick of the day.
 - When an asynchronous disposal was pending, [`EnumerableExtensions.DisposeAll`](docs/api/Louis/Louis.Collections.EnumerableExtensions.md) and `DisposeAllAsync` lost the exceptions of `Dispose` calls, and threw a `DisposeAsync` exception without the `AggregateException` wrapper.

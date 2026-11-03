@@ -54,7 +54,7 @@ partial class FluentExtensions
     /// <param name="this">The object on which this method was called.</param>
     /// <param name="sequence">The sequence of elements.</param>
     /// <param name="action">The action to perform.</param>
-    /// <returns>The result of the last call to <paramref name="action"/>.</returns>
+    /// <returns>A reference to <paramref name="this"/> after the last call to <paramref name="action"/> returns.</returns>
     /// <exception cref="ArgumentNullException">
     /// <para><paramref name="this"/> is <see langword="null"/>.</para>
     /// <para>- or -</para>
@@ -131,9 +131,9 @@ partial class FluentExtensions
     /// <param name="this">The object on which this method was called.</param>
     /// <param name="sequence">The sequence of elements.</param>
     /// <param name="action">The action to perform.</param>
-    /// <returns>The result of the last call to <paramref name="action"/>.</returns>
+    /// <returns>A reference to <paramref name="this"/> after the last call to <paramref name="action"/> returns.</returns>
     /// <remarks>
-    /// <para>This method is essentially the same as <see cref="ForEach{T,TElement}(T,IEnumerable{TElement},FluentAction{T,TElement})"/>,
+    /// <para>This method is essentially the same as <see cref="ForEach{T,TElement}(T,IEnumerable{TElement},Action{T,TElement})"/>,
     /// but it also passes an index to <paramref name="action"/>. The passed index is 0 for the first call and is incremented by 1
     /// for each subsequent call.</para>
     /// </remarks>
@@ -205,7 +205,7 @@ partial class FluentExtensions
     /// <param name="this">The object on which this method was called.</param>
     /// <param name="span">The span of elements.</param>
     /// <param name="action">The action to perform.</param>
-    /// <returns>The result of the last call to <paramref name="action"/>.</returns>
+    /// <returns>A reference to <paramref name="this"/> after the last call to <paramref name="action"/> returns.</returns>
     /// <exception cref="ArgumentNullException">
     /// <para><paramref name="this"/> is <see langword="null"/>.</para>
     /// <para>- or -</para>
@@ -267,17 +267,16 @@ partial class FluentExtensions
 
     /// <summary>
     /// Performs a specified action on an object and each element of a span,
-    /// each time taking the result of the action as the object to pass together with the next element,
-    /// then returns the result of the last action.
+    /// then returns the object.
     /// </summary>
     /// <typeparam name="T">The type of the object.</typeparam>
     /// <typeparam name="TElement">The type of each element of the span.</typeparam>
     /// <param name="this">The object on which this method was called.</param>
     /// <param name="span">The span of elements.</param>
     /// <param name="action">The action to perform.</param>
-    /// <returns>The result of the last call to <paramref name="action"/>.</returns>
+    /// <returns>A reference to <paramref name="this"/> after the last call to <paramref name="action"/> returns.</returns>
     /// <remarks>
-    /// <para>This method is essentially the same as <see cref="ForEach{T,TElement}(T,ReadOnlySpan{TElement},FluentAction{T,TElement})"/>,
+    /// <para>This method is essentially the same as <see cref="ForEach{T,TElement}(T,ReadOnlySpan{TElement},Action{T,TElement})"/>,
     /// but it also passes the index of each element to <paramref name="action"/>.</para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">
