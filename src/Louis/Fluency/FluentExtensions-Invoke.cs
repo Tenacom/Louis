@@ -63,7 +63,7 @@ partial class FluentExtensions
     /// <typeparam name="TArg1">The type of the first additional parameter to <paramref name="action"/>.</typeparam>
     /// <typeparam name="TArg2">The type of the second additional parameter to <paramref name="action"/>.</typeparam>
     /// <param name="this">The object on which this method was called.</param>
-    /// <param name="arg1">The First additional argument to pass to <paramref name="action"/>.</param>
+    /// <param name="arg1">The first additional argument to pass to <paramref name="action"/>.</param>
     /// <param name="arg2">The second additional argument to pass to <paramref name="action"/>.</param>
     /// <param name="action">The action to perform on <paramref name="this"/> and the additional arguments.</param>
     /// <returns>A reference to <paramref name="this"/> after <paramref name="action"/> returns.</returns>
@@ -91,7 +91,7 @@ partial class FluentExtensions
     /// <typeparam name="TArg2">The type of the second additional parameter to <paramref name="action"/>.</typeparam>
     /// <typeparam name="TArg3">The type of the third additional parameter to <paramref name="action"/>.</typeparam>
     /// <param name="this">The object on which this method was called.</param>
-    /// <param name="arg1">The First additional argument to pass to <paramref name="action"/>.</param>
+    /// <param name="arg1">The first additional argument to pass to <paramref name="action"/>.</param>
     /// <param name="arg2">The second additional argument to pass to <paramref name="action"/>.</param>
     /// <param name="arg3">The third additional argument to pass to <paramref name="action"/>.</param>
     /// <param name="action">The action to perform on <paramref name="this"/> and the additional arguments.</param>
@@ -121,7 +121,7 @@ partial class FluentExtensions
     /// <typeparam name="TArg3">The type of the third additional parameter to <paramref name="action"/>.</typeparam>
     /// <typeparam name="TArg4">The type of the fourth additional parameter to <paramref name="action"/>.</typeparam>
     /// <param name="this">The object on which this method was called.</param>
-    /// <param name="arg1">The First additional argument to pass to <paramref name="action"/>.</param>
+    /// <param name="arg1">The first additional argument to pass to <paramref name="action"/>.</param>
     /// <param name="arg2">The second additional argument to pass to <paramref name="action"/>.</param>
     /// <param name="arg3">The third additional argument to pass to <paramref name="action"/>.</param>
     /// <param name="arg4">The fourth additional argument to pass to <paramref name="action"/>.</param>

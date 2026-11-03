@@ -22,7 +22,8 @@ partial class FluentExtensions
     /// <para>If the action is <see langword="null"/>, no action is performed if the value is equal to <paramref name="value"/>;
     /// instead, the method returns immediately.</para>
     /// </param>
-    /// <returns>A reference to <paramref name="this"/> after one of the actions in <paramref name="cases"/>, if any, returns.</returns>
+    /// <returns>The result of the action of the first case whose comparand is equal to <paramref name="value"/>,
+    /// or a reference to <paramref name="this"/> if there is no such case or its action is <see langword="null"/>.</returns>
     /// <exception cref="ArgumentNullException">
     /// <para><paramref name="this"/> is <see langword="null"/>.</para>
     /// <para>- or -</para>
@@ -48,9 +49,12 @@ partial class FluentExtensions
     /// <para>If the action is <see langword="null"/>, no action is performed if the value is equal to <paramref name="value"/>;
     /// instead, the method returns immediately.</para>
     /// </param>
-    /// <returns>A reference to <paramref name="this"/> after one of the actions in <paramref name="cases"/>, if any, returns.</returns>
+    /// <returns>The result of the action of the first case whose comparand is equal to <paramref name="value"/>,
+    /// or a reference to <paramref name="this"/> if there is no such case or its action is <see langword="null"/>.</returns>
     /// <exception cref="ArgumentNullException">
     /// <para><paramref name="this"/> is <see langword="null"/>.</para>
+    /// <para>- or -</para>
+    /// <para><paramref name="comparer"/> is <see langword="null"/>.</para>
     /// <para>- or -</para>
     /// <para><paramref name="cases"/> is <see langword="null"/>.</para>
     /// </exception>
@@ -103,6 +107,8 @@ partial class FluentExtensions
     /// <exception cref="ArgumentNullException">
     /// <para><paramref name="this"/> is <see langword="null"/>.</para>
     /// <para>- or -</para>
+    /// <para><paramref name="comparer"/> is <see langword="null"/>.</para>
+    /// <para>- or -</para>
     /// <para><paramref name="cases"/> is <see langword="null"/>.</para>
     /// </exception>
     /// <remarks>
@@ -130,7 +136,9 @@ partial class FluentExtensions
     /// <para>If the action is <see langword="null"/>, no action is performed if the value is equal to <paramref name="value"/>;
     /// instead, the method returns immediately.</para>
     /// </param>
-    /// <returns>A reference to <paramref name="this"/> after one of the actions in <paramref name="cases"/>, if any, returns.</returns>
+    /// <returns>The result of the action of the first case whose comparand is equal to <paramref name="value"/>,
+    /// or of <paramref name="default"/> if there is no such case,
+    /// or a reference to <paramref name="this"/> if the action to invoke is <see langword="null"/>.</returns>
     /// <exception cref="ArgumentNullException">
     /// <para><paramref name="this"/> is <see langword="null"/>.</para>
     /// <para>- or -</para>
@@ -159,9 +167,13 @@ partial class FluentExtensions
     /// <para>If the action is <see langword="null"/>, no action is performed if the value is equal to <paramref name="value"/>;
     /// instead, the method returns immediately.</para>
     /// </param>
-    /// <returns>A reference to <paramref name="this"/> after one of the actions in <paramref name="cases"/>, if any, returns.</returns>
+    /// <returns>The result of the action of the first case whose comparand is equal to <paramref name="value"/>,
+    /// or of <paramref name="default"/> if there is no such case,
+    /// or a reference to <paramref name="this"/> if the action to invoke is <see langword="null"/>.</returns>
     /// <exception cref="ArgumentNullException">
     /// <para><paramref name="this"/> is <see langword="null"/>.</para>
+    /// <para>- or -</para>
+    /// <para><paramref name="comparer"/> is <see langword="null"/>.</para>
     /// <para>- or -</para>
     /// <para><paramref name="cases"/> is <see langword="null"/>.</para>
     /// </exception>
@@ -235,6 +247,8 @@ partial class FluentExtensions
     /// <returns>A reference to <paramref name="this"/> after one of the actions in <paramref name="cases"/>, if any, returns.</returns>
     /// <exception cref="ArgumentNullException">
     /// <para><paramref name="this"/> is <see langword="null"/>.</para>
+    /// <para>- or -</para>
+    /// <para><paramref name="comparer"/> is <see langword="null"/>.</para>
     /// <para>- or -</para>
     /// <para><paramref name="cases"/> is <see langword="null"/>.</para>
     /// </exception>
