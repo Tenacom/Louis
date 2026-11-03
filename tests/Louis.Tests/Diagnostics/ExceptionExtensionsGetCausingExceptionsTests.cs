@@ -1,6 +1,7 @@
 // Copyright (c) Tenacom and contributors. Licensed under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
+using System.Collections;
 using Louis.Diagnostics;
 using TUnit.Assertions.Enums;
 
@@ -97,5 +98,24 @@ internal sealed class ExceptionExtensionsGetCausingExceptionsTests
 #pragma warning restore CA1851 // Possible multiple enumerations of IEnumerable collection
 
         await Assert.That(secondPass).IsEquivalentTo(firstPass, CollectionOrdering.Matching);
+    }
+
+    [Test]
+    public async Task GetCausingExceptions_EnumeratedThroughIEnumerable_YieldsSameSequence()
+    {
+        var inner = new InvalidOperationException("inner");
+        var outer = new InvalidOperationException("outer", inner);
+        object[] expected = [inner, outer];
+        IEnumerable nonGeneric = outer.GetCausingExceptions();
+
+        // foreach over an IEnumerable calls the non-generic GetEnumerator.
+        // Cast<object> would use the generic one, because IEnumerable<Exception> is an IEnumerable<object> by covariance.
+        var actual = new List<object>();
+        foreach (var item in nonGeneric)
+        {
+            actual.Add(item);
+        }
+
+        await Assert.That(actual).IsEquivalentTo(expected, CollectionOrdering.Matching);
     }
 }
