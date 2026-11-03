@@ -16,6 +16,7 @@ internal sealed class MinimalAsyncService : AsyncService
 
     protected override async Task ExecuteAsync(CancellationToken cancellationToken)
     {
+        // ReSharper disable once UseAwaitUsing // CancellationTokenRegistration has no DisposeAsync before .NET Standard 2.1
         using var registration = cancellationToken.Register(() => _ = ExecuteGate.TrySetCanceled(cancellationToken));
         _executeEntered.SetResult(true);
         _ = await ExecuteGate.Task;
