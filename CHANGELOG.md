@@ -42,6 +42,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `ReadOnlyMemoryStream.Read(byte[], int, int)` threw `ArgumentOutOfRangeException` when `count` exceeded the bytes left in the stream, instead of reading them.
 - `ReadOnlyMemoryStream.CopyTo` and `CopyToAsync` threw `ArgumentException` when the position of the stream was beyond its end, instead of copying nothing.
 - On the `netstandard2.0` and .NET Framework builds, `ReadOnlyMemoryStream.CopyToAsync` returned the buffer it rents for memory without a backing array before the destination consumed it.
+- [`SelfCheck.FailCritically<T>`](docs/api/Louis/Louis.Diagnostics.SelfCheck.md) threw `InternalErrorException` instead of `CriticalInternalErrorException`.
+- [`SelfCheck`](docs/api/Louis/Louis.Diagnostics.SelfCheck.md) messages named `System.Private.CoreLib` or `mscorlib` as the assembly of the failed check, instead of the assembly of the calling method.
 
 ### Known problems introduced by this release
 

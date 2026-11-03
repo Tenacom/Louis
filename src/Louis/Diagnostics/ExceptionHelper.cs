@@ -62,7 +62,7 @@ public static class ExceptionHelper
     /// <item><description>call <paramref name="obj"/>.<see cref="object.ToString">ToString()</see>;</description></item>
     /// <item><description>if <c>ToString</c> throws an exception, return a string of the form <c>&lt;{objType}:{exceptionType}&gt;</c>;</description></item>
     /// <item><description>if <c>ToString</c> returns <see langword="null"/>, return <see cref="ToStringNullText"/>;</description></item>
-    /// <item><description>if <c>ToString</c> returns the empty string, return <see cref="ToStringNullText"/>;</description></item>
+    /// <item><description>if <c>ToString</c> returns the empty string, return <see cref="ToStringEmptyText"/>;</description></item>
     /// <item><description>otherwise, return the result of <c>ToString</c>.</description></item>
     /// </list>
     /// <para>Keep in mind that instances of <see href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types">nullable value types</see>

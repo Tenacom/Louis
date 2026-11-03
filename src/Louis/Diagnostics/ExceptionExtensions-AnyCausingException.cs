@@ -31,7 +31,7 @@ partial class ExceptionExtensions
     /// </remarks>
     public static bool AnyCausingException(this Exception @this, Func<Exception, bool> predicate)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(predicate);
 
 #pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843

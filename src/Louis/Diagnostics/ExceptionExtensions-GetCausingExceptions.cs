@@ -33,7 +33,7 @@ partial class ExceptionExtensions
     /// </remarks>
     public static IEnumerable<Exception> GetCausingExceptions(this Exception @this)
     {
-        Guard.IsNotNull(@this);
+        Guard.IsNotNull(@this, nameof(@this));
 
         return new CausingExceptions(@this);
     }
