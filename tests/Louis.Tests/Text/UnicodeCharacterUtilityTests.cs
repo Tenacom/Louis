@@ -24,7 +24,7 @@ internal sealed class UnicodeCharacterUtilityTests
     [Arguments('ʰ', true)] // A modifier letter
     [Arguments('一', true)] // An other letter
     [Arguments('\x0661', false)] // Arabic-Indic digit one, a decimal digit
-    [Arguments('\x2160', false)] // Roman numeral one, a letter number
+    [Arguments('\x2160', true)] // Roman numeral one, a letter number
     [Arguments('\x0301', false)] // Combining acute accent, a non-spacing mark
     [Arguments('\x0903', false)] // Devanagari sign visarga, a spacing combining mark
     [Arguments('\x203F', false)] // Undertie, a connector punctuation
