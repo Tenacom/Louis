@@ -35,6 +35,8 @@ public enum AsyncServiceSetupResult
     /// <summary>
     /// <para>Setup failed with an exception (the task returned by <see cref="AsyncService.SetupAsync"/> has faulted).</para>
     /// <para>Service execution is stopped.</para>
+    /// <para>Only <see cref="AsyncService.WaitUntilStartedAsync"/> returns this value.
+    /// <see cref="AsyncService.StartAndWaitAsync"/> throws the exception instead.</para>
     /// </summary>
     Faulted,
 }

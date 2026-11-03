@@ -45,6 +45,7 @@ public abstract class AsyncService : IAsyncDisposable, IDisposable
     private InterlockedFlag _disposed;
     private AsyncServiceState _state = AsyncServiceState.Created;
     private bool _stoppedBeforeStart;
+    private Exception? _setupException;
 
     static AsyncService()
     {
@@ -144,7 +145,9 @@ public abstract class AsyncService : IAsyncDisposable, IDisposable
     /// <remarks>
     /// <para>Only one of <see cref="RunAsync"/>, <see cref="Start"/>, and <see cref="StartAndWaitAsync"/>
     /// may be called, at most once.</para>
-    /// <para>If your program needs to know the exact reason why a service stops or fails to start,
+    /// <para>If <see cref="SetupAsync"/> throws an exception, the returned task throws the same exception,
+    /// so its result is never <see cref="AsyncServiceSetupResult.Faulted"/>.</para>
+    /// <para>If your program needs to know the exact reason why a service stops,
     /// do not use this method; call <see cref="RunAsync"/> from a separate task instead.</para>
     /// <para>If the service was stopped before starting, the returned task is already completed
     /// with <see cref="AsyncServiceSetupResult.NotStarted"/>.</para>
@@ -157,7 +160,7 @@ public abstract class AsyncService : IAsyncDisposable, IDisposable
             _ = RunAsyncCore(true, cancellationToken);
         }
 
-        return WaitUntilStartedAsync();
+        return WaitUntilStartedOrThrowAsync();
     }
 
     /// <summary>
@@ -194,14 +197,16 @@ public abstract class AsyncService : IAsyncDisposable, IDisposable
     /// Asynchronously wait until an asynchronous service has started.
     /// </summary>
     /// <returns>
-    /// A <see cref="Task{T}">Task&lt;bool&gt;</see> that will complete as soon as the service has started
-    /// (in which case the result will be <see langword="true"/>), or it could not start
-    /// (in which case the result will be <see langword="false"/>).
+    /// A <see cref="Task{T}">Task</see>&lt;<see cref="AsyncServiceSetupResult"/>&gt; that will complete as soon as the service
+    /// either has started or could not start.
     /// </returns>
     /// <remarks>
     /// <para>If none of <see cref="RunAsync"/>, <see cref="Start"/>, <see cref="StartAndWaitAsync"/>, and <see cref="Stop()"/>
     /// have been called, the returned task will not complete until one of them is called.</para>
     /// <para>If the service has already finished starting, or was stopped before starting, the returned task is already completed.</para>
+    /// <para>The returned task never throws. If <see cref="SetupAsync"/> throws an exception, the result is
+    /// <see cref="AsyncServiceSetupResult.Faulted"/>, and the exception is thrown by <see cref="RunAsync"/>
+    /// or <see cref="StartAndWaitAsync"/> instead.</para>
     /// </remarks>
     public Task<AsyncServiceSetupResult> WaitUntilStartedAsync() => _startedCompletionSource.Task;
 
@@ -477,6 +482,8 @@ public abstract class AsyncService : IAsyncDisposable, IDisposable
         var (setupResult, exception) = await RunSetupAsync(cts.Token).ConfigureAwait(false);
         if (setupResult != AsyncServiceSetupResult.Successful)
         {
+            // Store the exception before completing the started task, so that StartAndWaitAsync finds it.
+            _setupException = exception;
             State = AsyncServiceState.Stopped;
             _startedCompletionSource.SetResult(setupResult);
             _stoppedCompletionSource.SetResult(true);
@@ -585,6 +592,18 @@ public abstract class AsyncService : IAsyncDisposable, IDisposable
             LogTeardownFailed(e);
             return e;
         }
+    }
+
+    // Completes with the setup result, or throws the exception thrown by SetupAsync.
+    private async Task<AsyncServiceSetupResult> WaitUntilStartedOrThrowAsync()
+    {
+        var setupResult = await WaitUntilStartedAsync().ConfigureAwait(false);
+        if (_setupException is { } setupException)
+        {
+            ExceptionDispatchInfo.Capture(setupException).Throw();
+        }
+
+        return setupResult;
     }
 
     private bool Stop(bool checkDisposed)

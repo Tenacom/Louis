@@ -31,17 +31,30 @@ public abstract partial class AsyncHostedService : AsyncService, IHostedService
 
     /// <summary>
     /// Gets a value indicating whether <see cref="StartAsync"/> will fail if
-    /// the result of <see cref="AsyncService.SetupAsync"/> is <see cref="AsyncServiceSetupResult.NotStarted"/>.
+    /// the result of <see cref="AsyncService.StartAndWaitAsync"/> is <see cref="AsyncServiceSetupResult.NotStarted"/>.
     /// </summary>
     protected virtual bool FailOnSetupNotStarted => true;
 
     /// <summary>
     /// Gets a value indicating whether <see cref="StartAsync"/> will fail if
-    /// the result of <see cref="AsyncService.SetupAsync"/> is <see cref="AsyncServiceSetupResult.Unsuccessful"/>.
+    /// the result of <see cref="AsyncService.StartAndWaitAsync"/> is <see cref="AsyncServiceSetupResult.Unsuccessful"/>.
     /// </summary>
     protected virtual bool FailOnSetupUnsuccessful => true;
 
     /// <inheritdoc/>
+    /// <exception cref="InvalidOperationException">
+    /// <para>The service has already been started.</para>
+    /// <para>The result of <see cref="AsyncService.StartAndWaitAsync"/> is <see cref="AsyncServiceSetupResult.NotStarted"/>
+    /// and <see cref="FailOnSetupNotStarted"/> is <see langword="true"/>.</para>
+    /// <para>The result of <see cref="AsyncService.StartAndWaitAsync"/> is <see cref="AsyncServiceSetupResult.Unsuccessful"/>
+    /// and <see cref="FailOnSetupUnsuccessful"/> is <see langword="true"/>.</para>
+    /// </exception>
+    /// <exception cref="OperationCanceledException">
+    /// The setup phase was canceled, either through <paramref name="cancellationToken"/> or by a stop request.
+    /// </exception>
+    /// <remarks>
+    /// <para>If <see cref="AsyncService.SetupAsync"/> throws an exception, this method throws the same exception.</para>
+    /// </remarks>
     public async Task StartAsync(CancellationToken cancellationToken)
     {
         LogHostedServiceStarting();
@@ -52,6 +65,9 @@ public abstract partial class AsyncHostedService : AsyncService, IHostedService
             case AsyncServiceSetupResult.NotStarted when !FailOnSetupNotStarted:
             case AsyncServiceSetupResult.Unsuccessful when !FailOnSetupUnsuccessful:
                 break;
+            case AsyncServiceSetupResult.Canceled:
+                ThrowHelper.ThrowOperationCanceledException("Service start was canceled.", cancellationToken);
+                break;
             default:
                 ThrowHelper.ThrowInvalidOperationException($"Service start failed ({setupResult}).");
                 break;
@@ -59,6 +75,10 @@ public abstract partial class AsyncHostedService : AsyncService, IHostedService
     }
 
     /// <inheritdoc/>
+    /// <remarks>
+    /// <para>This method requests the service to stop, then waits until either the service has stopped
+    /// or <paramref name="cancellationToken"/> is canceled, whichever comes first.</para>
+    /// </remarks>
     public async Task StopAsync(CancellationToken cancellationToken)
     {
         LogHostedServiceStopping();

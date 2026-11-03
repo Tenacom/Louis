@@ -22,6 +22,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **BREAKING CHANGE**: `Louis` no longer depends on [PolyKit](https://github.com/Tenacom/PolyKit), so a project that used its polyfills through `Louis` must add its own polyfill package.
 - **BREAKING CHANGE**: [`DateOnlyExtensions`](docs/api/Louis/Louis.DateOnlyExtensions.md) and [`DateOnlyUtility`](docs/api/Louis/Louis.DateOnlyUtility.md) are no longer available in the `netstandard` and .NET Framework builds of `Louis`, which have no `DateOnly`.
 - **BREAKING CHANGE**: The `default` parameter of the [`FluentExtensions.Switch`](docs/api/Louis/Louis.Fluency.FluentExtensions.md) overloads with `Action<T>` cases is an `Action<T>`, no longer a `FluentAction<T>` whose result the method discarded.
+- **BREAKING CHANGE**: [`AsyncService.StartAndWaitAsync`](docs/api/Louis/Louis.Threading.AsyncService.md) no longer returns `AsyncServiceSetupResult.Faulted`, and throws the exception of `SetupAsync` instead.
+- **BREAKING CHANGE**: [`AsyncHostedService.StartAsync`](docs/api/Louis.Hosting/Louis.Hosting.AsyncHostedService.md) no longer throws `InvalidOperationException` when the setup phase is canceled, and throws `OperationCanceledException` instead.
+- **BREAKING CHANGE**: [`AsyncHostedService.StartAsync`](docs/api/Louis.Hosting/Louis.Hosting.AsyncHostedService.md) no longer throws `InvalidOperationException` when `SetupAsync` throws, and throws the exception of `SetupAsync` instead.
 
 ### Bugs fixed in this release
 
