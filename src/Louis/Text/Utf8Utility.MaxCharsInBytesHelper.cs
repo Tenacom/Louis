@@ -33,10 +33,11 @@ partial class Utf8Utility
             {
                 if (!TryAddChar(c))
                 {
-                    break;
+                    return _totalCharsTaken;
                 }
             }
 
+            _ = TryAddPrecedingHighSurrogate();
             return _totalCharsTaken;
         }
 
@@ -46,7 +47,7 @@ partial class Utf8Utility
                 < 0x80 => TryAddSingleByte(),
                 < 0x800 => TryAddTwoByteSequence(),
                 >= 0xD800 and < 0xDC00 => TryAddHighSurrogate(),
-                >= 0xDC00 and < 0xDFFF => TryAddLowSurrogate(),
+                >= 0xDC00 and < 0xE000 => TryAddLowSurrogate(),
                 _ => TryAddThreeByteSequence(),
             };
 
