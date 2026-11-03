@@ -176,7 +176,10 @@ public abstract partial class AsyncHostedService : AsyncService, IHostedService
     protected sealed override partial void LogTeardownFailed(Exception exception);
 
     /// <inheritdoc/>
-    protected sealed override void LogStopRequested(AsyncServiceState previousState, AsyncServiceState currentState, bool result)
+    protected sealed override void LogStopRequested(
+        AsyncServiceState previousState,
+        AsyncServiceState currentState,
+        bool result)
         => LogStopRequestedCore(previousState, result ? "running" : "not running");
 
     [LoggerMessage(
