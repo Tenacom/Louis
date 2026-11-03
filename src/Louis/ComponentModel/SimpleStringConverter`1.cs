@@ -84,7 +84,11 @@ public abstract class SimpleStringConverter<T> : TypeConverter
     /// <param name="destinationType">A <see cref="Type"/> that represents the type to convert to.</param>
     /// <returns>An <see cref="object"/> that represents the converted value.</returns>
     /// <exception cref="NotSupportedException">The conversion cannot be performed.</exception>
-    public sealed override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+    public sealed override object? ConvertTo(
+        ITypeDescriptorContext? context,
+        CultureInfo? culture,
+        object? value,
+        Type destinationType)
         => _convertToString is not null && value is T typedValue && destinationType == typeof(string)
             ? _convertToString(context, culture, typedValue)
             : base.ConvertTo(context, culture, value, destinationType);
