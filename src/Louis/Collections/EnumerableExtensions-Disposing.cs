@@ -40,9 +40,7 @@ partial class EnumerableExtensions
                     var valueTask = asyncDisposable.DisposeAsync();
                     if (!valueTask.IsCompletedSuccessfully)
                     {
-#pragma warning disable SA1010 // Opening square brackets should be spaced correctly - False positive, see https://github.com/DotNetAnalyzers/StyleCopAnalyzers/issues/3687
                         pendingTasks ??= [];
-#pragma warning restore SA1010 // Opening square brackets should be spaced correctly
                         pendingTasks.Add(valueTask.AsTask());
                     }
 
@@ -54,9 +52,7 @@ partial class EnumerableExtensions
                     }
                     catch (Exception e) when (!e.IsCriticalError())
                     {
-#pragma warning disable SA1010 // Opening square brackets should be spaced correctly - False positive, see https://github.com/DotNetAnalyzers/StyleCopAnalyzers/issues/3687
                         exceptions ??= [];
-#pragma warning restore SA1010 // Opening square brackets should be spaced correctly
                         exceptions.Add(e);
                     }
 
@@ -64,28 +60,24 @@ partial class EnumerableExtensions
             }
         }
 
-        if (pendingTasks is null)
+        if (pendingTasks is not null)
         {
-            if (exceptions is not null)
+            foreach (var pendingTask in pendingTasks)
             {
-                throw new AggregateException(exceptions);
+                try
+                {
+                    await pendingTask.ConfigureAwait(false);
+                }
+                catch (Exception e) when (!e.IsCriticalError())
+                {
+                    exceptions ??= [];
+                    exceptions.Add(e);
+                }
             }
-
-            return;
         }
 
-        try
+        if (exceptions is not null)
         {
-            await Task.WhenAll(pendingTasks).ConfigureAwait(false);
-        }
-        catch (AggregateException e)
-        {
-            if (exceptions is null)
-            {
-                throw;
-            }
-
-            exceptions.AddRange(e.InnerExceptions);
             throw new AggregateException(exceptions);
         }
     }
@@ -120,9 +112,7 @@ partial class EnumerableExtensions
                     }
                     catch (Exception e) when (!e.IsCriticalError())
                     {
-#pragma warning disable SA1010 // Opening square brackets should be spaced correctly - False positive, see https://github.com/DotNetAnalyzers/StyleCopAnalyzers/issues/3687
                         exceptions ??= [];
-#pragma warning restore SA1010 // Opening square brackets should be spaced correctly
                         exceptions.Add(e);
                     }
 
@@ -131,9 +121,7 @@ partial class EnumerableExtensions
                     var valueTask = asyncDisposable.DisposeAsync();
                     if (!valueTask.IsCompletedSuccessfully)
                     {
-#pragma warning disable SA1010 // Opening square brackets should be spaced correctly - False positive, see https://github.com/DotNetAnalyzers/StyleCopAnalyzers/issues/3687
                         pendingTasks ??= [];
-#pragma warning restore SA1010 // Opening square brackets should be spaced correctly
                         pendingTasks.Add(valueTask.AsTask());
                     }
 
@@ -141,28 +129,24 @@ partial class EnumerableExtensions
             }
         }
 
-        if (pendingTasks is null)
+        if (pendingTasks is not null)
         {
-            if (exceptions is not null)
+            foreach (var pendingTask in pendingTasks)
             {
-                throw new AggregateException(exceptions);
+                try
+                {
+                    pendingTask.GetAwaiter().GetResult();
+                }
+                catch (Exception e) when (!e.IsCriticalError())
+                {
+                    exceptions ??= [];
+                    exceptions.Add(e);
+                }
             }
-
-            return;
         }
 
-        try
+        if (exceptions is not null)
         {
-            Task.WhenAll(pendingTasks).GetAwaiter().GetResult();
-        }
-        catch (AggregateException e)
-        {
-            if (exceptions is null)
-            {
-                throw;
-            }
-
-            exceptions.AddRange(e.InnerExceptions);
             throw new AggregateException(exceptions);
         }
     }
