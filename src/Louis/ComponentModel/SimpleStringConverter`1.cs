@@ -39,7 +39,8 @@ public abstract class SimpleStringConverter<T> : TypeConverter
     /// <param name="sourceType">A <see cref="Type"/> that represents the type to convert from.</param>
     /// <returns><see langword="true"/> if this converter can perform the conversion; otherwise, <see langword="false"/>.</returns>
     /// <remarks>
-    /// <para>This method always returns <see langword="true"/> if <paramref name="sourceType"/> is <see cref="string"/>;
+    /// <para>This method returns <see langword="true"/> if <paramref name="sourceType"/> is <see cref="string"/>
+    /// and the constructor received a non-null <c>convertFromString</c> delegate;
     /// otherwise, it calls <see cref="TypeConverter.CanConvertFrom(ITypeDescriptorContext,Type)"/> and returns the result.</para>
     /// </remarks>
     public sealed override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
@@ -85,7 +86,7 @@ public abstract class SimpleStringConverter<T> : TypeConverter
     /// <exception cref="NotSupportedException">The conversion cannot be performed.</exception>
     public sealed override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
         => _convertToString is not null && value is T typedValue && destinationType == typeof(string)
-            ? ConvertToString(context, culture, typedValue)
+            ? _convertToString(context, culture, typedValue)
             : base.ConvertTo(context, culture, value, destinationType);
 
     // ReSharper restore AssignNullToNotNullAttribute
