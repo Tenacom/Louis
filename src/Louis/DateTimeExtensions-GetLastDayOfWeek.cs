@@ -66,5 +66,5 @@ partial class DateTimeExtensions
     /// if weeks are considered starting with <paramref name="firstDayOfWeek"/>.</returns>
     /// <seealso cref="DayOfWeek"/>
     public static DateTime GetLastDayOfWeek(this DateTime @this, DayOfWeek firstDayOfWeek)
-        => @this.AddDays(6 - DateUtility.GetDaysFromStartOfWeek(@this.DayOfWeek, firstDayOfWeek));
+        => @this.Date.AddDays(6 - DateUtility.GetDaysFromStartOfWeek(@this.DayOfWeek, firstDayOfWeek));
 }

@@ -26,6 +26,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - The `RangeCheck.InRangeOrDefault` overloads for nullable value types with `acceptNull` returned `defaultValue` for a value in range, and the value otherwise.
 - The `ArgumentNullException` that an extension method throws for a null `this` argument had `@this`, not `this`, as its `ParamName`.
+- [`DateUtility.GetDaysFromStartOfWeek`](docs/api/Louis/Louis.DateUtility.md), and the `GetStartOfWeek`, `GetLastDayOfWeek`, and `GetEndOfWeek` extension methods, returned wrong results for a day on or after the first day of the week.
+- [`DateTimeExtensions.GetStartOfWeek`](docs/api/Louis/Louis.DateTimeExtensions.md), `GetLastDayOfWeek`, and `GetEndOfWeek` kept the time of day of their argument, instead of returning midnight or the last tick of the day.
 
 ### Known problems introduced by this release
 
