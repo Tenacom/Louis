@@ -36,7 +36,8 @@ public static class UnicodeCharacterUtility
                 or UnicodeCategory.LowercaseLetter
                 or UnicodeCategory.TitlecaseLetter
                 or UnicodeCategory.ModifierLetter
-                or UnicodeCategory.OtherLetter,
+                or UnicodeCategory.OtherLetter
+                or UnicodeCategory.LetterNumber,
         };
 
     /// <summary>

@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [`DateTimeExtensions.GetStartOfWeek`](docs/api/Louis/Louis.DateTimeExtensions.md), `GetLastDayOfWeek`, and `GetEndOfWeek` kept the time of day of their argument, instead of returning midnight or the last tick of the day.
 - When an asynchronous disposal was pending, [`EnumerableExtensions.DisposeAll`](docs/api/Louis/Louis.Collections.EnumerableExtensions.md) and `DisposeAllAsync` lost the exceptions of `Dispose` calls, and threw a `DisposeAsync` exception without the `AggregateException` wrapper.
 - The [`Louis.Text`](docs/api/Louis/Louis.Text.md) methods that build a string literal escaped a control character as `\xHH`, which C# reads together with the hex digits that follow.
+- [`UnicodeCharacterUtility.IsIdentifierStartCharacter`](docs/api/Louis/Louis.Text.UnicodeCharacterUtility.md) returned `false` for a letter number, such as `Ⅰ` (U+2160), so `IsValidIdentifier` rejected an identifier that starts with one.
 - [`Utf8Utility.GetMaxCharsInBytes`](docs/api/Louis/Louis.Text.Utf8Utility.md) counted a surrogate pair whose low surrogate is `U+DFFF`, such as the one of `U+10FFFF`, as six bytes instead of four.
 - `Utf8Utility.GetMaxCharsInBytes` did not count a high surrogate at the end of the input, even when its three-byte replacement character fit.
 - [`ReadOnlyMemoryStream.Position`](docs/api/Louis/Louis.IO.ReadOnlyMemoryStream.md) threw `ArgumentOutOfRangeException` when set to 0.
