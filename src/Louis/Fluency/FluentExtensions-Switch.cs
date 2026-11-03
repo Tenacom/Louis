@@ -10,7 +10,8 @@ namespace Louis.Fluency;
 partial class FluentExtensions
 {
     /// <summary>
-    /// Selects an action to invoke on an object by comparing a given value against a list of comparands, then returns the object.
+    /// Selects an action to invoke on an object by comparing a given value against a list of comparands,
+    /// then returns the result of the action.
     /// </summary>
     /// <typeparam name="T">The type of the object.</typeparam>
     /// <typeparam name="TValue">The type of the value being compared.</typeparam>
@@ -40,7 +41,8 @@ partial class FluentExtensions
         => Switch(@this, EqualityComparer<TValue>.Default, value, null, cases);
 
     /// <summary>
-    /// Selects an action to invoke on an object by comparing a given value against a list of comparands, then returns the object.
+    /// Selects an action to invoke on an object by comparing a given value against a list of comparands,
+    /// then returns the result of the action.
     /// </summary>
     /// <typeparam name="T">The type of the object.</typeparam>
     /// <typeparam name="TValue">The type of the value being compared.</typeparam>
@@ -133,7 +135,8 @@ partial class FluentExtensions
         => Switch(@this, comparer, value, null, cases);
 
     /// <summary>
-    /// Selects an action to invoke on an object by comparing a given value against a list of comparands, then returns the object.
+    /// Selects an action to invoke on an object by comparing a given value against a list of comparands,
+    /// then returns the result of the action.
     /// </summary>
     /// <typeparam name="T">The type of the object.</typeparam>
     /// <typeparam name="TValue">The type of the value being compared.</typeparam>
@@ -167,7 +170,8 @@ partial class FluentExtensions
         => Switch(@this, EqualityComparer<TValue>.Default, value, @default, cases);
 
     /// <summary>
-    /// Selects an action to invoke on an object by comparing a given value against a list of comparands, then returns the object.
+    /// Selects an action to invoke on an object by comparing a given value against a list of comparands,
+    /// then returns the result of the action.
     /// </summary>
     /// <typeparam name="T">The type of the object.</typeparam>
     /// <typeparam name="TValue">The type of the value being compared.</typeparam>

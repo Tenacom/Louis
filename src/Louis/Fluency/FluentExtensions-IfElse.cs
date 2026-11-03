@@ -9,7 +9,7 @@ namespace Louis.Fluency;
 partial class FluentExtensions
 {
     /// <summary>
-    /// Invokes one of two actions on an object according to a boolean condition, then returns the same object.
+    /// Invokes one of two actions on an object according to a boolean condition, then returns the result of that action.
     /// </summary>
     /// <typeparam name="T">The type of the object.</typeparam>
     /// <param name="this">The object on which this method was called.</param>
