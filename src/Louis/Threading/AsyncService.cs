@@ -482,16 +482,20 @@ public abstract class AsyncService : IAsyncDisposable, IDisposable
         var (setupResult, exception) = await RunSetupAsync(cts.Token).ConfigureAwait(false);
         if (setupResult != AsyncServiceSetupResult.Successful)
         {
-            // Store the exception before completing the started task, so that StartAndWaitAsync finds it.
-            _setupException = exception;
-            State = AsyncServiceState.Stopped;
-            _startedCompletionSource.SetResult(setupResult);
-            _stoppedCompletionSource.SetResult(true);
+            // Cancel DoneToken before setting the state to Stopped.
+            // DisposeAsync disposes the token source as soon as it finds the service stopped,
+            // and the cancellation would then throw.
 #if NET8_0_OR_GREATER
             await _doneTokenSource.CancelAsync().ConfigureAwait(false);
 #else
             _doneTokenSource.Cancel();
 #endif
+
+            // Store the exception before completing the started task, so that StartAndWaitAsync finds it.
+            _setupException = exception;
+            State = AsyncServiceState.Stopped;
+            _startedCompletionSource.SetResult(setupResult);
+            _stoppedCompletionSource.SetResult(true);
 
             // Only propagate exceptions if there is a caller to propagate to.
             if (exception is not null && !runInBackground)
