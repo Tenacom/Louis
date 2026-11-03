@@ -99,7 +99,8 @@ public abstract class AsyncService : IAsyncDisposable, IDisposable
     /// or <see cref="StartAndWaitAsync"/>.
     /// </exception>
     /// <remarks>
-    /// <para>Only one of <see cref="RunAsync"/>, <see cref="Start"/>, and <see cref="StartAndWaitAsync"/> may be called, at most once.</para>
+    /// <para>Only one of <see cref="RunAsync"/>, <see cref="Start"/>, and <see cref="StartAndWaitAsync"/>
+    /// may be called, at most once.</para>
     /// <para>If the service was stopped before starting, the returned task is already completed.</para>
     /// </remarks>
     public Task RunAsync(CancellationToken cancellationToken)
@@ -110,10 +111,12 @@ public abstract class AsyncService : IAsyncDisposable, IDisposable
     /// </summary>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to stop the service.</param>
     /// <exception cref="InvalidOperationException">
-    /// The service has already been started, either by calling <see cref="RunAsync"/>, <see cref="Start"/>, or <see cref="StartAndWaitAsync"/>.
+    /// The service has already been started, either by calling <see cref="RunAsync"/>, <see cref="Start"/>,
+    /// or <see cref="StartAndWaitAsync"/>.
     /// </exception>
     /// <remarks>
-    /// <para>Only one of <see cref="RunAsync"/>, <see cref="Start"/>, and <see cref="StartAndWaitAsync"/> may be called, at most once.</para>
+    /// <para>Only one of <see cref="RunAsync"/>, <see cref="Start"/>, and <see cref="StartAndWaitAsync"/>
+    /// may be called, at most once.</para>
     /// <para>If your program needs to know the exact reason why a service stops or fails to start,
     /// do not use this method; call <see cref="RunAsync"/> from a separate task instead.</para>
     /// <para>If the service was stopped before starting, this method does nothing.</para>
@@ -135,7 +138,8 @@ public abstract class AsyncService : IAsyncDisposable, IDisposable
     /// either has started or could not start.
     /// </returns>
     /// <exception cref="InvalidOperationException">
-    /// The service has already been started, either by calling <see cref="RunAsync"/>, <see cref="Start"/>,  or <see cref="StartAndWaitAsync"/>.
+    /// The service has already been started, either by calling <see cref="RunAsync"/>, <see cref="Start"/>,
+    /// or <see cref="StartAndWaitAsync"/>.
     /// </exception>
     /// <remarks>
     /// <para>Only one of <see cref="RunAsync"/>, <see cref="Start"/>, and <see cref="StartAndWaitAsync"/>
@@ -411,7 +415,10 @@ public abstract class AsyncService : IAsyncDisposable, IDisposable
     /// <param name="currentState">The value of the <see cref="State"/> property after the stop request.</param>
     /// <param name="result"><see langword="true"/> if the service was running when requested to stop;
     /// <see langword="false"/> otherwise.</param>
-    protected virtual void LogStopRequested(AsyncServiceState previousState, AsyncServiceState currentState, bool result)
+    protected virtual void LogStopRequested(
+        AsyncServiceState previousState,
+        AsyncServiceState currentState,
+        bool result)
     {
     }
 
@@ -509,7 +516,8 @@ public abstract class AsyncService : IAsyncDisposable, IDisposable
         }
     }
 
-    private async Task<(AsyncServiceSetupResult Result, Exception? Exception)> RunSetupAsync(CancellationToken cancellationToken)
+    private async Task<(AsyncServiceSetupResult Result, Exception? Exception)> RunSetupAsync(
+        CancellationToken cancellationToken)
     {
         try
         {

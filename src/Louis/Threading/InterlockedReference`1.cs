@@ -50,7 +50,8 @@ public struct InterlockedReference<T> : IEquatable<InterlockedReference<T>>, IEq
     /// <param name="b">The second instance to compare.</param>
     /// <returns><see langword="true"/> if the value of <paramref name="a"/> is the same as the value of <paramref name="b"/>;
     /// otherwise, <see langword="false"/>.</returns>
-    public static bool operator ==(InterlockedReference<T> a, InterlockedReference<T> b) => ReferenceEquals(a.Value, b.Value);
+    public static bool operator ==(InterlockedReference<T> a, InterlockedReference<T> b)
+        => ReferenceEquals(a.Value, b.Value);
 
     /// <summary>
     /// Determines whether two specified interlocked references have different values.
@@ -59,7 +60,8 @@ public struct InterlockedReference<T> : IEquatable<InterlockedReference<T>>, IEq
     /// <param name="b">The second instance to compare.</param>
     /// <returns><see langword="true"/> if the value of <paramref name="a"/> is different from the value of <paramref name="b"/>;
     /// otherwise, <see langword="false"/>.</returns>
-    public static bool operator !=(InterlockedReference<T> a, InterlockedReference<T> b) => !ReferenceEquals(a.Value, b.Value);
+    public static bool operator !=(InterlockedReference<T> a, InterlockedReference<T> b)
+        => !ReferenceEquals(a.Value, b.Value);
 
     /// <summary>
     /// Determines whether the value of a specified interlocked reference is the same as a specified value.
