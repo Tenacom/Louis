@@ -27,7 +27,10 @@ partial class RangeCheck
     /// </exception>
     public static T InRangeOrDefault<T>(T value, T min, T max, T defaultValue)
         where T : IComparable<T>
-        => Verify(value, min, max) ? value : defaultValue;
+    {
+        EnsureValidRange(min, max);
+        return UnsafeVerify(value, min, max) ? value : defaultValue;
+    }
 
     /// <summary>
     /// Returns a value if it is within an inclusive range, or a default value otherwise,
@@ -52,7 +55,12 @@ partial class RangeCheck
     /// </exception>
     public static T InRangeOrDefault<T>(T value, T min, T max, T defaultValue, IComparer<T> comparer)
         where T : notnull
-        => Verify(value, min, max, comparer) ? value : defaultValue;
+    {
+#pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
+        EnsureValidComparerAndRange(min, max, comparer);
+#pragma warning restore CA1062 // Validate arguments of public methods
+        return UnsafeVerify(value, min, max, comparer) ? value : defaultValue;
+    }
 
     /// <summary>
     /// Returns a value if it is within an inclusive range, or a default value otherwise.
@@ -77,9 +85,14 @@ partial class RangeCheck
     [return:NotNullIfNotNull("value")]
     public static T? InRangeOrDefault<T>(T? value, T min, T max, T? defaultValue, bool acceptNull)
         where T : class, IComparable<T>
-        => value == null
+    {
+#pragma warning disable CA1062 // Validate arguments of public methods - min and max are non-nullable, and no overload null-checks them
+        EnsureValidRange(min, max);
+#pragma warning restore CA1062 // Validate arguments of public methods
+        return value is null
             ? acceptNull ? null : defaultValue
-            : Verify(value, min, max) ? value : defaultValue;
+            : UnsafeVerify(value, min, max) ? value : defaultValue;
+    }
 
     /// <summary>
     /// Returns a value if it is within an inclusive range, or a default value otherwise,
@@ -109,9 +122,14 @@ partial class RangeCheck
     [return:NotNullIfNotNull("value")]
     public static T? InRangeOrDefault<T>(T? value, T min, T max, T? defaultValue, bool acceptNull, IComparer<T> comparer)
         where T : class
-        => value == null
+    {
+#pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
+        EnsureValidComparerAndRange(min, max, comparer);
+#pragma warning restore CA1062 // Validate arguments of public methods
+        return value is null
             ? acceptNull ? null : defaultValue
-            : Verify(value, min, max, comparer) ? value : defaultValue;
+            : UnsafeVerify(value, min, max, comparer) ? value : defaultValue;
+    }
 
     /// <summary>
     /// Returns a value if it is within an inclusive range, or a default value otherwise.
@@ -136,9 +154,12 @@ partial class RangeCheck
     [return:NotNullIfNotNull("value")]
     public static T? InRangeOrDefault<T>(T? value, T min, T max, T? defaultValue, bool acceptNull)
         where T : struct, IComparable<T>
-        => value.HasValue
-            ? Verify(value.Value, min, max) ? value.Value : defaultValue
+    {
+        EnsureValidRange(min, max);
+        return value.HasValue
+            ? UnsafeVerify(value.Value, min, max) ? value.Value : defaultValue
             : acceptNull ? null : defaultValue;
+    }
 
     /// <summary>
     /// Returns a value if it is within an inclusive range, or a default value otherwise,
@@ -168,7 +189,12 @@ partial class RangeCheck
     [return:NotNullIfNotNull("value")]
     public static T? InRangeOrDefault<T>(T? value, T min, T max, T? defaultValue, bool acceptNull, IComparer<T> comparer)
         where T : struct
-        => value.HasValue
-            ? Verify(value.Value, min, max, comparer) ? value.Value : defaultValue
+    {
+#pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
+        EnsureValidComparerAndRange(min, max, comparer);
+#pragma warning restore CA1062 // Validate arguments of public methods
+        return value.HasValue
+            ? UnsafeVerify(value.Value, min, max, comparer) ? value.Value : defaultValue
             : acceptNull ? null : defaultValue;
+    }
 }

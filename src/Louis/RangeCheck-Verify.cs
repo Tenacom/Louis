@@ -26,7 +26,7 @@ partial class RangeCheck
         where T : IComparable<T>
     {
         EnsureValidRange(min, max);
-        return value.CompareTo(min) >= 0 && value.CompareTo(max) <= 0;
+        return UnsafeVerify(value, min, max);
     }
 
     /// <summary>
@@ -54,7 +54,7 @@ partial class RangeCheck
 #pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
         EnsureValidComparerAndRange(min, max, comparer);
 #pragma warning restore CA1062 // Validate arguments of public methods
-        return comparer.Compare(value, min) >= 0 && comparer.Compare(value, max) <= 0;
+        return UnsafeVerify(value, min, max, comparer);
     }
 
     /// <summary>
@@ -79,7 +79,12 @@ partial class RangeCheck
     /// </exception>
     public static bool Verify<T>(T? value, T min, T max, bool acceptNull)
         where T : class, IComparable<T>
-        => value is null ? acceptNull : Verify(value, min, max);
+    {
+#pragma warning disable CA1062 // Validate arguments of public methods - min and max are non-nullable, and no overload null-checks them
+        EnsureValidRange(min, max);
+#pragma warning restore CA1062 // Validate arguments of public methods
+        return value is null ? acceptNull : UnsafeVerify(value, min, max);
+    }
 
     /// <summary>
     /// Checks whether a nullable value is within an inclusive range,
@@ -108,7 +113,12 @@ partial class RangeCheck
     /// </exception>
     public static bool Verify<T>(T? value, T min, T max, bool acceptNull, IComparer<T> comparer)
         where T : class
-        => value is null ? acceptNull : Verify(value, min, max, comparer);
+    {
+#pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
+        EnsureValidComparerAndRange(min, max, comparer);
+#pragma warning restore CA1062 // Validate arguments of public methods
+        return value is null ? acceptNull : UnsafeVerify(value, min, max, comparer);
+    }
 
     /// <summary>
     /// Checks whether a nullable value is within an inclusive range,
@@ -132,7 +142,10 @@ partial class RangeCheck
     /// </exception>
     public static bool Verify<T>(T? value, T min, T max, bool acceptNull)
         where T : struct, IComparable<T>
-        => value.HasValue ? Verify(value.Value, min, max) : acceptNull;
+    {
+        EnsureValidRange(min, max);
+        return value.HasValue ? UnsafeVerify(value.Value, min, max) : acceptNull;
+    }
 
     /// <summary>
     /// Checks whether a nullable value is within an inclusive range,
@@ -161,5 +174,17 @@ partial class RangeCheck
     /// </exception>
     public static bool Verify<T>(T? value, T min, T max, bool acceptNull, IComparer<T> comparer)
         where T : struct
-        => value.HasValue ? Verify(value.Value, min, max, comparer) : acceptNull;
+    {
+#pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
+        EnsureValidComparerAndRange(min, max, comparer);
+#pragma warning restore CA1062 // Validate arguments of public methods
+        return value.HasValue ? UnsafeVerify(value.Value, min, max, comparer) : acceptNull;
+    }
+
+    private static bool UnsafeVerify<T>(T value, T min, T max)
+        where T : IComparable<T>
+        => value.CompareTo(min) >= 0 && value.CompareTo(max) <= 0;
+
+    private static bool UnsafeVerify<T>(T value, T min, T max, IComparer<T> comparer)
+        => comparer.Compare(value, min) >= 0 && comparer.Compare(value, max) <= 0;
 }
