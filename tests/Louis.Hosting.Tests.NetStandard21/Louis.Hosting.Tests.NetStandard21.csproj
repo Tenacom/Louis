@@ -7,7 +7,12 @@
     <TargetFramework>net10.0</TargetFramework>
     <CLSCompliant>false</CLSCompliant>
     <ImplicitUsings>true</ImplicitUsings>
-    <DefineConstants>$(DefineConstants);LOUIS_NETSTANDARD2_1</DefineConstants>
+    <!--
+        A test copies the #if of the member it tests, so this project defines the symbols of the build it tests
+        instead of the symbols of its own target framework.
+    -->
+    <DisableImplicitFrameworkDefines>true</DisableImplicitFrameworkDefines>
+    <DefineConstants>$(DefineConstants);NETSTANDARD;NETSTANDARD2_1;NETSTANDARD2_0_OR_GREATER;NETSTANDARD2_1_OR_GREATER</DefineConstants>
     <!--
         The SDK adds the project references of Louis.Hosting to this project without SetTargetFramework,
         which would bring in the net10.0 build of Louis. Every project reference is explicit below instead.

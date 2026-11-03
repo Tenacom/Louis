@@ -16,7 +16,7 @@ Louis is a library of general-purpose types for .NET libraries and applications.
 Each package `<Package>`, built from `src/<Package>`, has three test projects under `tests/`. "Every build of a package gets tested" in `testing.md` says what each kind does.
 
 - `<Package>.Tests` is the main test project. It targets `net10.0`, and `net48` on Windows.
-- `<Package>.Tests.NetStandard20` and `<Package>.Tests.NetStandard21` are the `netstandard` test projects. They define `LOUIS_NETSTANDARD2_0` or `LOUIS_NETSTANDARD2_1`. The symbol names the build and not the package, so every package uses the same two. A `NetStandard20` project references `Microsoft.Bcl.AsyncInterfaces`, because the `netstandard2.0` build of `Louis` does.
+- `<Package>.Tests.NetStandard20` and `<Package>.Tests.NetStandard21` are the `netstandard` test projects. They turn `DisableImplicitFrameworkDefines` on and define the symbols of the build they test: `NETSTANDARD`, `NETSTANDARD2_0`, and `NETSTANDARD2_0_OR_GREATER` for a `NetStandard20` project, and `NETSTANDARD`, `NETSTANDARD2_1`, `NETSTANDARD2_0_OR_GREATER`, and `NETSTANDARD2_1_OR_GREATER` for a `NetStandard21` project. A test of framework-specific code then copies the `#if` of the member it tests, in every test project. A `NetStandard20` project references `Microsoft.Bcl.AsyncInterfaces`, because the `netstandard2.0` build of `Louis` does.
 
 `tests/Common.targets` holds the settings every test project gets.
 
