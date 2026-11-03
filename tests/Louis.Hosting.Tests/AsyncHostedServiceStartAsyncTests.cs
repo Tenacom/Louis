@@ -136,6 +136,29 @@ internal sealed class AsyncHostedServiceStartAsyncTests : AsyncHostedServiceTest
 
         _ = await Assert.That(() => Service.StartAsync(cancellationToken)).Throws<ObjectDisposedException>();
     }
+
+    [Test]
+    public async Task StartAsync_WithMinimalAsyncHostedServiceWhenStoppedBeforeStart_ThrowsInvalidOperationException(
+        CancellationToken cancellationToken)
+    {
+        await using var service = new MinimalAsyncHostedService(Logger, setupResult: true);
+        _ = service.Stop();
+
+        await Assert.That(() => service.StartAsync(cancellationToken))
+            .Throws<InvalidOperationException>()
+            .WithMessage("Service start failed (NotStarted).", StringComparison.Ordinal);
+    }
+
+    [Test]
+    public async Task StartAsync_WithMinimalAsyncHostedServiceWhenSetupReturnsFalse_ThrowsInvalidOperationException(
+        CancellationToken cancellationToken)
+    {
+        await using var service = new MinimalAsyncHostedService(Logger, setupResult: false);
+
+        await Assert.That(() => service.StartAsync(cancellationToken))
+            .Throws<InvalidOperationException>()
+            .WithMessage("Service start failed (Unsuccessful).", StringComparison.Ordinal);
+    }
 }
 
 #pragma warning restore CA1849 // Call async methods when in an async method

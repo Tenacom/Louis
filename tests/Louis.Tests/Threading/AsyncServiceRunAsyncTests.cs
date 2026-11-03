@@ -343,6 +343,53 @@ internal sealed class AsyncServiceRunAsyncTests : AsyncServiceTestsBase
 
         _ = Assert.Throws<ObjectDisposedException>(Act);
     }
+
+    [Test]
+    public async Task RunAsync_WithMinimalAsyncService_RunsToCompletion(CancellationToken cancellationToken)
+    {
+        await using var service = new MinimalAsyncService();
+        var runTask = service.RunAsync(cancellationToken);
+        await service.ExecuteEntered;
+
+        await Assert.That(service.State).IsEqualTo(AsyncServiceState.Running);
+        var setupResult = await service.WaitUntilStartedAsync();
+        await Assert.That(setupResult).IsEqualTo(AsyncServiceSetupResult.Successful);
+
+        service.ExecuteGate.SetResult(true);
+        await runTask;
+
+        await Assert.That(service.State).IsEqualTo(AsyncServiceState.Stopped);
+        await Assert.That(service.DoneToken.IsCancellationRequested).IsTrue();
+    }
+
+    [Test]
+    public async Task RunAsync_WithMinimalAsyncServiceAndCanceledToken_SkipsSetup(CancellationToken cancellationToken)
+    {
+        await using var service = new MinimalAsyncService();
+
+        await service.RunAsync(new CancellationToken(canceled: true));
+
+        await Assert.That(service.State).IsEqualTo(AsyncServiceState.Stopped);
+        var setupResult = await service.WaitUntilStartedAsync();
+        await Assert.That(setupResult).IsEqualTo(AsyncServiceSetupResult.Canceled);
+        await Assert.That(service.ExecuteEntered.IsCompleted).IsFalse();
+    }
+
+    [Test]
+    public async Task RunAsync_WithMinimalAsyncServiceWhenExecutionThrows_ThrowsExecutionException(
+        CancellationToken cancellationToken)
+    {
+        await using var service = new MinimalAsyncService();
+        var exception = new InvalidOperationException("Execution failed.");
+        var runTask = service.RunAsync(cancellationToken);
+        await service.ExecuteEntered;
+
+        service.ExecuteGate.SetException(exception);
+
+        var thrown = await Assert.That(() => runTask).Throws<InvalidOperationException>();
+        await Assert.That(thrown).IsSameReferenceAs(exception);
+        await Assert.That(service.State).IsEqualTo(AsyncServiceState.Stopped);
+    }
 }
 
 #pragma warning restore CA1849 // Call async methods when in an async method

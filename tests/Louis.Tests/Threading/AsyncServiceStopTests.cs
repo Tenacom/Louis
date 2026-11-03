@@ -105,4 +105,20 @@ internal sealed class AsyncServiceStopTests : AsyncServiceTestsBase
         await Assert.That(result).IsFalse();
         await Assert.That(Service.Calls).Contains("LogStopRequested(Disposed, Disposed, False)");
     }
+
+    [Test]
+    public async Task Stop_WithMinimalAsyncServiceDuringExecution_CancelsExecutionAndReturnsTrue(
+        CancellationToken cancellationToken)
+    {
+        await using var service = new MinimalAsyncService();
+        var runTask = service.RunAsync(cancellationToken);
+        await service.ExecuteEntered;
+
+        var result = service.Stop();
+        await runTask;
+
+        await Assert.That(result).IsTrue();
+        await Assert.That(service.ExecuteGate.Task.IsCanceled).IsTrue();
+        await Assert.That(service.State).IsEqualTo(AsyncServiceState.Stopped);
+    }
 }
