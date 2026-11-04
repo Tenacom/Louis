@@ -54,12 +54,23 @@ public abstract class SimpleStringConverter<T> : TypeConverter
     /// <param name="value">The <see cref="object"/> to convert.</param>
     /// <returns>An <see cref="object"/> that represents the converted value.</returns>
     /// <exception cref="NotSupportedException">The conversion cannot be performed.</exception>
-    // ReSharper disable AssignNullToNotNullAttribute // the overrides follow the BCL contract; JetBrains annotations differ
-    // ReSharper disable once NullnessAnnotationConflictWithJetBrainsAnnotations // value is CanBeNull in JetBrains annotations only
+#if !NET6_0_OR_GREATER
+    // JetBrains annotations mark value CanBeNull.
+    // The override follows the BCL, which marks value non-null from .NET 6 on.
+    // ReSharper disable once NullnessAnnotationConflictWithJetBrainsAnnotations
+#endif
     public sealed override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
         => _convertFromString is not null && value is string str
             ? _convertFromString(context, culture, str)
+#if !NET6_0_OR_GREATER
+            // JetBrains annotations mark context and culture NotNull.
+            // The BCL accepts null for both, as its own annotations say from .NET 6 on.
+            // ReSharper disable AssignNullToNotNullAttribute
+#endif
             : base.ConvertFrom(context, culture, value);
+#if !NET6_0_OR_GREATER
+    // ReSharper restore AssignNullToNotNullAttribute
+#endif
 
     /// <summary>
     /// Returns whether this converter can convert an object an instance of <typeparamref name="T"/> to <paramref name="destinationType"/>,
@@ -73,6 +84,11 @@ public abstract class SimpleStringConverter<T> : TypeConverter
     /// otherwise, it calls <see cref="TypeConverter.CanConvertTo(ITypeDescriptorContext,Type)"/> and returns the result.</para>
     /// </remarks>
     public sealed override bool CanConvertTo(ITypeDescriptorContext? context, Type? destinationType)
+#if !NET6_0_OR_GREATER
+        // JetBrains annotations mark destinationType NotNull.
+        // The BCL accepts null, as its own annotations say from .NET 6 on.
+        // ReSharper disable once AssignNullToNotNullAttribute
+#endif
         => (_convertToString is not null && destinationType == typeof(string)) || base.CanConvertTo(context, destinationType);
 
     /// <summary>
@@ -92,6 +108,4 @@ public abstract class SimpleStringConverter<T> : TypeConverter
         => _convertToString is not null && value is T typedValue && destinationType == typeof(string)
             ? _convertToString(context, culture, typedValue)
             : base.ConvertTo(context, culture, value, destinationType);
-
-    // ReSharper restore AssignNullToNotNullAttribute
 }

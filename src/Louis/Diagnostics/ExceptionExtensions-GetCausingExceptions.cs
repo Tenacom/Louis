@@ -50,7 +50,12 @@ partial class ExceptionExtensions
                 var current = enumerator.Current;
 
                 // Early bailout for common cases - don't allocate an extra enumerator unless necessary.
-                // ReSharper disable once PossibleNullReferenceException // Current is CanBeNull in JetBrains annotations only
+#if !NETCOREAPP3_0_OR_GREATER
+                // JetBrains annotations mark IEnumerator<T>.Current CanBeNull, whatever T is.
+                // From .NET Core 3.0 on, the BCL gives Current the nullability of T, and ReSharper follows it.
+                // AggregateException rejects null inner exceptions, so current is never null here.
+                // ReSharper disable once PossibleNullReferenceException
+#endif
                 if (current is not AggregateException && current.InnerException is null)
                 {
                     yield return current;
@@ -60,7 +65,12 @@ partial class ExceptionExtensions
                     using var innerEnumerator = GetCausingExceptionsCore(current);
                     while (innerEnumerator.MoveNext())
                     {
-                        // ReSharper disable once AssignNullToNotNullAttribute // Current is CanBeNull in JetBrains annotations only
+#if !NETCOREAPP3_0_OR_GREATER
+                        // JetBrains annotations mark IEnumerator<T>.Current CanBeNull, whatever T is.
+                        // From .NET Core 3.0 on, the BCL gives Current the nullability of T, and ReSharper follows it.
+                        // GetCausingExceptionsCore yields no nulls, so innerEnumerator.Current is never null here.
+                        // ReSharper disable once AssignNullToNotNullAttribute
+#endif
                         yield return innerEnumerator.Current;
                     }
                 }
@@ -80,7 +90,12 @@ partial class ExceptionExtensions
                     using var enumerator = GetCausingExceptionsCore(innerException);
                     while (enumerator.MoveNext())
                     {
-                        // ReSharper disable once AssignNullToNotNullAttribute // Current is CanBeNull in JetBrains annotations only
+#if !NETCOREAPPP3_0_OR_GREATER
+                        // JetBrains annotations mark IEnumerator<T>.Current CanBeNull, whatever T is.
+                        // From .NET Core 3.0 on, the BCL gives Current the nullability of T, and ReSharper follows it.
+                        // GetCausingExceptionsCore yields no nulls, so enumerator.Current is never null here.
+                        // ReSharper disable once AssignNullToNotNullAttribute
+#endif
                         yield return enumerator.Current;
                     }
                 }

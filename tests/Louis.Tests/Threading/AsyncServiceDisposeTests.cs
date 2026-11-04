@@ -3,14 +3,15 @@
 
 using Louis.Threading;
 
-#pragma warning disable CA1849 // Call async methods when in an async method - Dispose is the method under test
 [Timeout(10_000)]
 internal sealed class AsyncServiceDisposeTests : AsyncServiceTestsBase
 {
     [Test]
     public async Task Dispose_BeforeStart_DisposesResources(CancellationToken cancellationToken)
     {
+#pragma warning disable CA1849 // Call async methods when in an async method - Dispose is the method under test
         Service.Dispose();
+#pragma warning restore CA1849 // Call async methods when in an async method
 
         await Assert.That(Service.State).IsEqualTo(AsyncServiceState.Disposed);
         await Assert.That(Service.DisposeResourcesCalls).IsEqualTo(1);
@@ -30,10 +31,15 @@ internal sealed class AsyncServiceDisposeTests : AsyncServiceTestsBase
         var executeToken = Service.ExecuteToken;
         void CancelExecution() => _ = executeGate.TrySetException(new OperationCanceledException(executeToken));
 
-        // ReSharper disable once UseAwaitUsing // CancellationTokenRegistration has no DisposeAsync on .NET Framework
+#if NETSTANDARD2_1 || NETCOREAPP
+        // CancellationTokenRegistration has no DisposeAsync before .NET Standard 2.1
+        await
+#endif
         using var registration = executeToken.Register(CancelExecution);
 
+#pragma warning disable CA1849 // Call async methods when in an async method - Dispose is the method under test
         Service.Dispose();
+#pragma warning restore CA1849 // Call async methods when in an async method
 
         await Assert.That(Service.State).IsEqualTo(AsyncServiceState.Disposed);
         await Assert.That(Service.DisposeResourcesCalls).IsEqualTo(1);
@@ -45,11 +51,12 @@ internal sealed class AsyncServiceDisposeTests : AsyncServiceTestsBase
     [Test]
     public async Task Dispose_ThenDisposeAsync_DisposesResourcesOnce(CancellationToken cancellationToken)
     {
+#pragma warning disable CA1849 // Call async methods when in an async method - Dispose is the method under test
         Service.Dispose();
+#pragma warning restore CA1849 // Call async methods when in an async method
+
         await Service.DisposeAsync();
 
         await Assert.That(Service.DisposeResourcesCalls).IsEqualTo(1);
     }
 }
-
-#pragma warning restore CA1849 // Call async methods when in an async method

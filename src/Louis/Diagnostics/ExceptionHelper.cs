@@ -116,7 +116,10 @@ public static class ExceptionHelper
             return $"<{obj.GetType().Name}:{e.GetType().Name}>";
         }
 
-        // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract // object.ToString() returns string? in the BCL
+#if NETFRAMEWORK
+        // object.ToString() is NotNull in JetBrains annotations, but an override of toString() may return null
+        // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+#endif
         return result is null ? ToStringNullText
             : result.Length == 0 ? ToStringEmptyText
             : result;

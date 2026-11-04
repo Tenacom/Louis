@@ -3,7 +3,6 @@
 
 using Louis.Threading;
 
-// ReSharper disable SuspiciousTypeConversion.Global // Equals(object) with a value of another type is the case under test
 internal sealed partial class InterlockedReferenceTests
 {
     [Test]
@@ -64,6 +63,7 @@ internal sealed partial class InterlockedReferenceTests
         var a = new InterlockedReference<TestItem>(item);
         var b = new InterlockedReference<TestItem>(item);
 
+        // ReSharper disable SuspiciousTypeConversion.Global // Equals(object) with a value of another type is the case under test
         await Assert.That(a == b).IsTrue();
         await Assert.That(a != b).IsFalse();
         await Assert.That(a.Equals(b)).IsTrue();
@@ -72,6 +72,7 @@ internal sealed partial class InterlockedReferenceTests
         await Assert.That(a != item).IsFalse();
         await Assert.That(a.Equals(item)).IsTrue();
         await Assert.That(a.Equals((object)item)).IsTrue();
+        // ReSharper restore SuspiciousTypeConversion.Global
     }
 
     [Test]
@@ -84,6 +85,7 @@ internal sealed partial class InterlockedReferenceTests
         var a = new InterlockedReference<TestItem>(item);
         var b = new InterlockedReference<TestItem>(otherItem);
 
+        // ReSharper disable SuspiciousTypeConversion.Global // Equals(object) with a value of another type is the case under test
         await Assert.That(a == b).IsFalse();
         await Assert.That(a != b).IsTrue();
         await Assert.That(a.Equals(b)).IsFalse();
@@ -92,6 +94,7 @@ internal sealed partial class InterlockedReferenceTests
         await Assert.That(a != otherItem).IsTrue();
         await Assert.That(a.Equals(otherItem)).IsFalse();
         await Assert.That(a.Equals((object)otherItem)).IsFalse();
+        // ReSharper restore SuspiciousTypeConversion.Global
     }
 
     [Test]
@@ -101,6 +104,7 @@ internal sealed partial class InterlockedReferenceTests
         var a = new InterlockedReference<TestItem>(null);
         var b = default(InterlockedReference<TestItem>);
 
+        // ReSharper disable SuspiciousTypeConversion.Global // Equals(object) with a value of another type is the case under test
         await Assert.That(a == b).IsTrue();
         await Assert.That(a != b).IsFalse();
         await Assert.That(a.Equals(b)).IsTrue();
@@ -109,6 +113,7 @@ internal sealed partial class InterlockedReferenceTests
         await Assert.That(a != nullItem).IsFalse();
         await Assert.That(a.Equals(nullItem)).IsTrue();
         await Assert.That(a.Equals((object?)null)).IsTrue();
+        // ReSharper restore SuspiciousTypeConversion.Global
     }
 
     [Test]
@@ -119,6 +124,7 @@ internal sealed partial class InterlockedReferenceTests
         var a = new InterlockedReference<TestItem>(item);
         var b = new InterlockedReference<TestItem>(null);
 
+        // ReSharper disable SuspiciousTypeConversion.Global // Equals(object) with a value of another type is the case under test
         await Assert.That(a == b).IsFalse();
         await Assert.That(a != b).IsTrue();
         await Assert.That(a.Equals(b)).IsFalse();
@@ -131,6 +137,7 @@ internal sealed partial class InterlockedReferenceTests
         await Assert.That(b != item).IsTrue();
         await Assert.That(b.Equals(item)).IsFalse();
         await Assert.That(b.Equals((object)item)).IsFalse();
+        // ReSharper restore SuspiciousTypeConversion.Global
     }
 
     [Test]
@@ -138,8 +145,10 @@ internal sealed partial class InterlockedReferenceTests
     {
         var reference = new InterlockedReference<TestItem>(new TestItem(1));
 
+        // ReSharper disable SuspiciousTypeConversion.Global // Equals(object) with a value of another type is the case under test
         await Assert.That(reference.Equals("1")).IsFalse();
         await Assert.That(reference.Equals(1)).IsFalse();
+        // ReSharper restore SuspiciousTypeConversion.Global
     }
 
     [Test]
@@ -228,5 +237,3 @@ internal sealed partial class InterlockedReferenceTests
         await Assert.That(reference.Value).IsSameReferenceAs(item);
     }
 }
-
-// ReSharper restore SuspiciousTypeConversion.Global

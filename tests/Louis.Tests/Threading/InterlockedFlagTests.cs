@@ -3,7 +3,6 @@
 
 using Louis.Threading;
 
-// ReSharper disable SuspiciousTypeConversion.Global // Equals(object) with a value of another type is the case under test
 internal sealed partial class InterlockedFlagTests
 {
     [Test]
@@ -140,7 +139,10 @@ internal sealed partial class InterlockedFlagTests
         await Assert.That(flag == b).IsEqualTo(expected);
         await Assert.That(flag != b).IsEqualTo(!expected);
         await Assert.That(flag.Equals(b)).IsEqualTo(expected);
+
+        // ReSharper disable SuspiciousTypeConversion.Global // Equals(object) with a value of another type is the case under test
         await Assert.That(flag.Equals((object)b)).IsEqualTo(expected);
+        // ReSharper restore SuspiciousTypeConversion.Global
     }
 
     [Test]
@@ -148,7 +150,9 @@ internal sealed partial class InterlockedFlagTests
     {
         var flag = new InterlockedFlag(true);
 
+        // ReSharper disable SuspiciousTypeConversion.Global // Equals(object) with a value of another type is the case under test
         await Assert.That(flag.Equals("True")).IsFalse();
+        // ReSharper restore SuspiciousTypeConversion.Global
         await Assert.That(flag.Equals(null)).IsFalse();
     }
 
@@ -172,5 +176,3 @@ internal sealed partial class InterlockedFlagTests
         await Assert.That(flag.ToString()).IsEqualTo(expected);
     }
 }
-
-// ReSharper restore SuspiciousTypeConversion.Global
