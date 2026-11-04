@@ -4,11 +4,6 @@ This is L.o.U.I.S. (Lots of Useful and Interesting Stuff), a collection of usefu
 We refer to L.o.U.I.S. as Louis in conversations and where an identifier is needed.
 See `.claude/rules/` for project instructions.
 
-## Repository
-
-- Upstream: `Tenacom/Louis`. Issues, PRs, and releases live there. It is the default target of `gh` calls.
-- PR branches go to the contributor's own fork, the `origin` remote. Run `git remote -v` once per session when you need its name. Do not assume it.
-
 ## Rules index
 
 The `.claude` directory is meant to be copied whole into other projects. This index says what survives the copy unchanged and what has to be rewritten on arrival. Each Markdown file under `.claude` says the same of itself in its first paragraph, so that the information survives a copy without this index.
@@ -25,23 +20,27 @@ The `.claude` directory is meant to be copied whole into other projects. This in
 - `rules/common/testing.md`: test framework, MTP-only orchestration, coverage exclusion policy, cross-platform test rules.
 - `rules/common/buildvana.md`: build commands, dependency commands, and the Buildvana documentation. Assumes the project is built with Buildvana.
 - `rules/common/dotnet.md`: efficiency rules for .NET tooling, and how to inspect a third-party package.
-- `rules/common/documentation.md`: what counts as user documentation, the register, the structure of `docs/`, the changelog bullet format, and the checks. The names it relies on are in `rules/project/terminology.md`, and the inventory it applies to is in `rules/project/architecture.md`.
+- `rules/common/git-host.md`: what the Git host is, the three platforms, and how to identify the platform and the version of a host. The hosts of the repository are in `rules/project/repository.md`.
+- `rules/common/documentation.md`: what counts as user documentation, the register, the structure of `docs/`, the changelog bullet format, the rendering differences between the platforms, and the checks. The names it relies on are in `rules/project/terminology.md`, and the inventory it applies to is in `rules/project/documentation.md`.
 - `skills/review-pr/SKILL.md`: how a PR is reviewed and how the review is posted. Run it with `/review-pr <N>`. Its "What the gate and CI already cover" section names `inspect.cs` and the workflows under `.github/workflows/`, and a copy names its own checks there.
 - `agents/pr-reviewer.md`: the subagent that runs the skill for the self-review cycle. Nothing repo-specific in it.
 - `output-styles/simple-tech.md`: the register for every kind of prose, from chat to commit messages. Select it with `/output-style`.
-- `tools/Common.props`: build options for the tools. It turns off the StyleCop rules that a single-file app cannot follow, SA1636 included, so that a tool keeps its header whatever copyright text the repository sets.
+- `tools/Common.props`: build options for the tools, and the `Compile` item that puts `tools/ProjectFacts.cs` into every tool. The `.editorconfig` next to it turns off the StyleCop rules that a single-file app cannot follow, SA1636 included, so that a tool keeps its header whatever copyright text the repository sets.
 - `tools/inspect.cs`: the sanity-check gate. It finds the solution file in the home directory by itself.
-- `tools/lint-commit.cs`: commit-message check, run on the draft before every commit. Its `bannedWords` and `announcingVerbs` arrays come from past commits of the repository the tool was written in. They apply anywhere, and a copy may extend them.
-- `tools/lint-docs.cs`: documentation check, the first phase of `inspect.cs`. Its `fenceTags` array is the list in `rules/common/documentation.md`. Its `todoExemptFiles` and `sentenceExemptFiles` arrays hold globs. The first is empty here, and the second holds the non-technical documentation that `rules/common/documentation.md` lists. A copy may add globs to either. Its `generatedFolders` array names `docs/api`, the generated folder of `rules/project/architecture.md`, and a copy names its own.
+- `tools/lint-commit.cs`: commit-message check, run on the draft before every commit. Its `bannedWords` and `announcingVerbs` arrays come from past commits of the repository the tool was written in. They apply anywhere, and `tools/ProjectFacts.cs` extends them.
+- `tools/lint-docs.cs`: documentation check, the first phase of `inspect.cs`. Its `fenceTags` array is the list in `rules/common/documentation.md`, and its `sentenceExemptFiles` array holds the non-technical documentation that file lists. The globs it adds to either check, the generated folders, and the platform of the Git host come from `tools/ProjectFacts.cs`.
 - `scratchpad/`: scratch directory for temporary files, commit messages included. Its `Common.props` turns StyleCop and code style enforcement off for scratch code, and states every property it relies on. Everything else in the directory is gitignored.
 - `settings.json`: the output style and the tool permissions that apply before the classifier. Nothing repo-specific in it.
 - `.gitignore`: keeps `settings.local.json`, `worktrees/`, `agent-memory-local/`, `handoff/`, and the contents of `scratchpad/` out of git. Nothing repo-specific in it.
 
 ### Project-specific: rewrite when copied
 
-- `rules/project/architecture.md`: the packages, the namespaces of `Louis`, the target frameworks and the `#if` policy, the public API file layout, and the documentation inventory: files, subfolders of `docs/`, generated regions. Entirely about this repo.
+- `rules/project/repository.md`: the upstream repository, the fork remote, the hosts and their platforms, and CI. Entirely about this repo.
+- `rules/project/architecture.md`: the packages, the namespaces of `Louis`, the target frameworks and the `#if` policy, and the public API file layout. Entirely about this repo.
+- `rules/project/documentation.md`: the documentation inventory: files, page kinds beyond guide and reference, subfolders of `docs/`, generated regions, generated folders, pinned reference pages. Entirely about this repo.
 - `rules/project/dependency-management.md`: the run-time dependencies of each package and the reason each is allowed, the polyfill packages, and the test and development dependency groups. The common part is in `rules/common/buildvana.md`.
 - `rules/project/terminology.md`: the one name for each thing the repository documents. Entirely about this repo.
 - `rules/project/pr-checks.md`: the checks of a pull request whose failure does not stop a review. The Codecov section applies to any repository whose CI uploads to Codecov, and a copy adds its own checks.
 - `rules/project/people.md`: who holds each role the rule files name. Entirely about this repo.
-- this file: repository coordinates, and the index itself.
+- `tools/ProjectFacts.cs`: the facts the tools read. The platform of the Git host sits at the top. `Documentation` holds the facts of `lint-docs.cs`: the generated folders, and the globs the TODO and sentence checks leave alone. `CommitMessages` holds the words `lint-commit.cs` rejects on top of its own lists. Entirely about this repo.
+- this file: the index itself.
