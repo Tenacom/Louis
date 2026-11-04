@@ -108,7 +108,8 @@ The current position within the stream\.
 #### Exceptions
 
 [System\.ArgumentOutOfRangeException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentoutofrangeexception 'System\.ArgumentOutOfRangeException')  
-The position is set to a negative value or a value greater than [System\.Int32\.MaxValue](https://learn.microsoft.com/en-us/dotnet/api/system.int32.maxvalue 'System\.Int32\.MaxValue')\.
+The position is set to a negative value
+            or a value greater than [System\.Int32\.MaxValue](https://learn.microsoft.com/en-us/dotnet/api/system.int32.maxvalue 'System\.Int32\.MaxValue')\.
 
 [System\.ObjectDisposedException](https://learn.microsoft.com/en-us/dotnet/api/system.objectdisposedexception 'System\.ObjectDisposedException')  
 The stream is closed\.
@@ -150,9 +151,11 @@ Either this stream or [destination](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.Re
 
 ### Remarks
 
-This method overrides the corresponding method of [System\.IO\.Stream](https://learn.microsoft.com/en-us/dotnet/api/system.io.stream 'System\.IO\.Stream') on runtimes where it is `virtual` (.NET Core 2.0 and newer,
-            .NET 5 and newer, .NET Standard 2.1 and newer). On older runtimes, this method can be accessed as a method of [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream'),
-            while a [System\.IO\.Stream](https://learn.microsoft.com/en-us/dotnet/api/system.io.stream 'System\.IO\.Stream') reference will use the standard implementation, which works but is slower and may allocate more memory.
+This method overrides the corresponding method of [System\.IO\.Stream](https://learn.microsoft.com/en-us/dotnet/api/system.io.stream 'System\.IO\.Stream') on runtimes where it is `virtual`
+            (.NET Core 2.0 and newer, .NET 5 and newer, .NET Standard 2.1 and newer).
+            On older runtimes, this method can be accessed as a method of [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream'),
+            while a [System\.IO\.Stream](https://learn.microsoft.com/en-us/dotnet/api/system.io.stream 'System\.IO\.Stream') reference will use the standard implementation,
+            which works but is slower and may allocate more memory.
 
 Since this method copies all the contents of the stream (starting from the current [Position](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.Position 'Louis\.IO\.ReadOnlyMemoryStream\.Position')) in one go,
             the [bufferSize](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.CopyTo(System.IO.Stream,int).bufferSize 'Louis\.IO\.ReadOnlyMemoryStream\.CopyTo\(System\.IO\.Stream, int\)\.bufferSize') parameter is not used; it is still validated for backward compatibility.
@@ -203,7 +206,8 @@ A task that represents the asynchronous copy operation\.
 Either this stream or [destination](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.CopyToAsync(System.IO.Stream,int,System.Threading.CancellationToken).destination 'Louis\.IO\.ReadOnlyMemoryStream\.CopyToAsync\(System\.IO\.Stream, int, System\.Threading\.CancellationToken\)\.destination') is closed\.
 
 [System\.OperationCanceledException](https://learn.microsoft.com/en-us/dotnet/api/system.operationcanceledexception 'System\.OperationCanceledException')  
-The cancellation token was canceled\. This exception is stored into the returned task\.
+The cancellation token was canceled\.
+            This exception is stored into the returned task\.
 
 <a name='Louis.IO.ReadOnlyMemoryStream.Dispose(bool)'></a>
 
@@ -263,7 +267,8 @@ A task that represents the asynchronous flush operation\.
 #### Exceptions
 
 [System\.OperationCanceledException](https://learn.microsoft.com/en-us/dotnet/api/system.operationcanceledexception 'System\.OperationCanceledException')  
-The cancellation token was canceled\. This exception is stored into the returned task\.
+The cancellation token was canceled\.
+            This exception is stored into the returned task\.
 
 ### Remarks
 
@@ -288,13 +293,15 @@ public override int Read(byte[] buffer, int offset, int count);
 `buffer` [System\.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte 'System\.Byte')[\[\]](https://learn.microsoft.com/en-us/dotnet/api/system.array 'System\.Array')
 
 When this method returns, contains the specified byte array
-            with the values between `offset` and `(offset + count - 1)` replaced by the characters read from the current stream\.
+            with the values between `offset` and `(offset + count - 1)`
+            replaced by the characters read from the current stream\.
 
 <a name='Louis.IO.ReadOnlyMemoryStream.Read(byte[],int,int).offset'></a>
 
 `offset` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
 
-The zero\-based byte offset in [buffer](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.Read(byte[],int,int).buffer 'Louis\.IO\.ReadOnlyMemoryStream\.Read\(byte\[\], int, int\)\.buffer') at which to begin storing data from the current stream\.
+The zero\-based byte offset in [buffer](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.Read(byte[],int,int).buffer 'Louis\.IO\.ReadOnlyMemoryStream\.Read\(byte\[\], int, int\)\.buffer')
+            at which to begin storing data from the current stream\.
 
 <a name='Louis.IO.ReadOnlyMemoryStream.Read(byte[],int,int).count'></a>
 
@@ -317,7 +324,8 @@ The total number of bytes written into the buffer\.
 [offset](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.Read(byte[],int,int).offset 'Louis\.IO\.ReadOnlyMemoryStream\.Read\(byte\[\], int, int\)\.offset') or [count](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.Read(byte[],int,int).count 'Louis\.IO\.ReadOnlyMemoryStream\.Read\(byte\[\], int, int\)\.count') is negative\.
 
 [System\.ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception 'System\.ArgumentException')  
-[offset](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.Read(byte[],int,int).offset 'Louis\.IO\.ReadOnlyMemoryStream\.Read\(byte\[\], int, int\)\.offset') subtracted from the length of [buffer](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.Read(byte[],int,int).buffer 'Louis\.IO\.ReadOnlyMemoryStream\.Read\(byte\[\], int, int\)\.buffer') is less than [count](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.Read(byte[],int,int).count 'Louis\.IO\.ReadOnlyMemoryStream\.Read\(byte\[\], int, int\)\.count')\.
+[offset](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.Read(byte[],int,int).offset 'Louis\.IO\.ReadOnlyMemoryStream\.Read\(byte\[\], int, int\)\.offset') subtracted from the length of [buffer](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.Read(byte[],int,int).buffer 'Louis\.IO\.ReadOnlyMemoryStream\.Read\(byte\[\], int, int\)\.buffer')
+            is less than [count](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.Read(byte[],int,int).count 'Louis\.IO\.ReadOnlyMemoryStream\.Read\(byte\[\], int, int\)\.count')\.
 
 [System\.ObjectDisposedException](https://learn.microsoft.com/en-us/dotnet/api/system.objectdisposedexception 'System\.ObjectDisposedException')  
 The stream is closed\.
@@ -337,11 +345,14 @@ public override int Read(System.Span<byte> buffer);
 
 `buffer` [System\.Span&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.span-1 'System\.Span\`1')[System\.Byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte 'System\.Byte')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.span-1 'System\.Span\`1')
 
-A region of memory\. When this method returns, the contents of this span are replaced by the bytes read from the current stream\.
+A region of memory\. When this method returns,
+            the contents of this span are replaced by the bytes read from the current stream\.
 
 #### Returns
 [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')  
-The total number of bytes read into the buffer\. This can be less than the number of bytes allocated in the buffer if that many bytes are not currently available, or zero \(0\) if the end of the stream has been reached\.
+The total number of bytes read into the buffer\.
+            This can be less than the number of bytes allocated in the buffer if that many bytes are not currently available,
+            or zero \(0\) if the end of the stream has been reached\.
 
 #### Exceptions
 
@@ -350,15 +361,17 @@ The stream is closed\.
 
 ### Remarks
 
-This method overrides the corresponding method of [System\.IO\.Stream](https://learn.microsoft.com/en-us/dotnet/api/system.io.stream 'System\.IO\.Stream') on runtimes where it is available (.NET Core 2.1 and newer,
-            .NET 5 and newer, .NET Standard 2.1 and newer). On older runtimes, this method is present as a method of [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream')
+This method overrides the corresponding method of [System\.IO\.Stream](https://learn.microsoft.com/en-us/dotnet/api/system.io.stream 'System\.IO\.Stream') on runtimes where it is available
+            (.NET Core 2.1 and newer, .NET 5 and newer, .NET Standard 2.1 and newer).
+            On older runtimes, this method is present as a method of [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream')
             and depends on the `System.Memory` NuGet package.
 
 <a name='Louis.IO.ReadOnlyMemoryStream.ReadAsync(byte[],int,int,System.Threading.CancellationToken)'></a>
 
 ## ReadOnlyMemoryStream\.ReadAsync\(byte\[\], int, int, CancellationToken\) Method
 
-Asynchronously reads a sequence of bytes from the current stream, advances the position within the stream by the number of bytes read, and monitors cancellation requests\.
+Asynchronously reads a sequence of bytes from the current stream,
+advances the position within the stream by the number of bytes read, and monitors cancellation requests\.
 
 ```csharp
 public override System.Threading.Tasks.Task<int> ReadAsync(byte[] buffer, int offset, int count, System.Threading.CancellationToken cancellationToken);
@@ -394,7 +407,8 @@ The token to monitor for cancellation requests\.
 
 A task that represents the asynchronous read operation.
 
-The [Result](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1.result 'System\.Threading\.Tasks\.Task\`1\.Result') of the returned task will be the total number of bytes read into the buffer.
+The [Result](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1.result 'System\.Threading\.Tasks\.Task\`1\.Result') of the returned task
+            will be the total number of bytes read into the buffer.
 
 The result value can be less than the number of bytes requested if the number of bytes currently available
             is less than the requested number, or it can be 0 (zero) if the end of the stream has been reached.
@@ -408,13 +422,15 @@ The result value can be less than the number of bytes requested if the number of
 [offset](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.ReadAsync(byte[],int,int,System.Threading.CancellationToken).offset 'Louis\.IO\.ReadOnlyMemoryStream\.ReadAsync\(byte\[\], int, int, System\.Threading\.CancellationToken\)\.offset') or [count](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.ReadAsync(byte[],int,int,System.Threading.CancellationToken).count 'Louis\.IO\.ReadOnlyMemoryStream\.ReadAsync\(byte\[\], int, int, System\.Threading\.CancellationToken\)\.count') is negative\.
 
 [System\.ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception 'System\.ArgumentException')  
-[offset](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.ReadAsync(byte[],int,int,System.Threading.CancellationToken).offset 'Louis\.IO\.ReadOnlyMemoryStream\.ReadAsync\(byte\[\], int, int, System\.Threading\.CancellationToken\)\.offset') subtracted from the length of [buffer](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.ReadAsync(byte[],int,int,System.Threading.CancellationToken).buffer 'Louis\.IO\.ReadOnlyMemoryStream\.ReadAsync\(byte\[\], int, int, System\.Threading\.CancellationToken\)\.buffer') is less than [count](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.ReadAsync(byte[],int,int,System.Threading.CancellationToken).count 'Louis\.IO\.ReadOnlyMemoryStream\.ReadAsync\(byte\[\], int, int, System\.Threading\.CancellationToken\)\.count')\.
+[offset](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.ReadAsync(byte[],int,int,System.Threading.CancellationToken).offset 'Louis\.IO\.ReadOnlyMemoryStream\.ReadAsync\(byte\[\], int, int, System\.Threading\.CancellationToken\)\.offset') subtracted from the length of [buffer](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.ReadAsync(byte[],int,int,System.Threading.CancellationToken).buffer 'Louis\.IO\.ReadOnlyMemoryStream\.ReadAsync\(byte\[\], int, int, System\.Threading\.CancellationToken\)\.buffer')
+            is less than [count](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.ReadAsync(byte[],int,int,System.Threading.CancellationToken).count 'Louis\.IO\.ReadOnlyMemoryStream\.ReadAsync\(byte\[\], int, int, System\.Threading\.CancellationToken\)\.count')\.
 
 [System\.ObjectDisposedException](https://learn.microsoft.com/en-us/dotnet/api/system.objectdisposedexception 'System\.ObjectDisposedException')  
 The stream is closed\.
 
 [System\.OperationCanceledException](https://learn.microsoft.com/en-us/dotnet/api/system.operationcanceledexception 'System\.OperationCanceledException')  
-The cancellation token was canceled\. This exception is stored into the returned task\.
+The cancellation token was canceled\.
+            This exception is stored into the returned task\.
 
 <a name='Louis.IO.ReadOnlyMemoryStream.ReadAsync(System.Memory_byte_,System.Threading.CancellationToken)'></a>
 
@@ -445,7 +461,8 @@ The token to monitor for cancellation requests\.
 
 A task that represents the asynchronous read operation.
 
-The [Result](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1.result 'System\.Threading\.Tasks\.Task\`1\.Result') of the returned task will be the total number of bytes read into [buffer](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.ReadAsync(System.Memory_byte_,System.Threading.CancellationToken).buffer 'Louis\.IO\.ReadOnlyMemoryStream\.ReadAsync\(System\.Memory\<byte\>, System\.Threading\.CancellationToken\)\.buffer').
+The [Result](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1.result 'System\.Threading\.Tasks\.Task\`1\.Result') of the returned task
+            will be the total number of bytes read into [buffer](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.ReadAsync(System.Memory_byte_,System.Threading.CancellationToken).buffer 'Louis\.IO\.ReadOnlyMemoryStream\.ReadAsync\(System\.Memory\<byte\>, System\.Threading\.CancellationToken\)\.buffer').
 
 The result value can be less than the number of bytes requested if the number of bytes currently available
             is less than the requested number, or it can be 0 (zero) if the end of the stream has been reached.
@@ -456,12 +473,14 @@ The result value can be less than the number of bytes requested if the number of
 The stream is closed\.
 
 [System\.OperationCanceledException](https://learn.microsoft.com/en-us/dotnet/api/system.operationcanceledexception 'System\.OperationCanceledException')  
-The cancellation token was canceled\. This exception is stored into the returned task\.
+The cancellation token was canceled\.
+            This exception is stored into the returned task\.
 
 ### Remarks
 
-This method overrides the corresponding method of [System\.IO\.Stream](https://learn.microsoft.com/en-us/dotnet/api/system.io.stream 'System\.IO\.Stream') on runtimes where it is available (.NET Core 2.1 and newer,
-            .NET 5 and newer, .NET Standard 2.1 and newer). On older runtimes, this method is present as a method of [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream')
+This method overrides the corresponding method of [System\.IO\.Stream](https://learn.microsoft.com/en-us/dotnet/api/system.io.stream 'System\.IO\.Stream') on runtimes where it is available
+            (.NET Core 2.1 and newer, .NET 5 and newer, .NET Standard 2.1 and newer).
+            On older runtimes, this method is present as a method of [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream')
             and depends on the `System.Memory` NuGet package.
 
 <a name='Louis.IO.ReadOnlyMemoryStream.ReadByte()'></a>
@@ -498,7 +517,8 @@ public override long Seek(long offset, System.IO.SeekOrigin origin);
 
 `offset` [System\.Int64](https://learn.microsoft.com/en-us/dotnet/api/system.int64 'System\.Int64')
 
-The new position within the stream\. This is relative to the [origin](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.Seek(long,System.IO.SeekOrigin).origin 'Louis\.IO\.ReadOnlyMemoryStream\.Seek\(long, System\.IO\.SeekOrigin\)\.origin') parameter, and can be positive or negative\.
+The new position within the stream\.
+            This is relative to the [origin](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.Seek(long,System.IO.SeekOrigin).origin 'Louis\.IO\.ReadOnlyMemoryStream\.Seek\(long, System\.IO\.SeekOrigin\)\.origin') parameter, and can be positive or negative\.
 
 <a name='Louis.IO.ReadOnlyMemoryStream.Seek(long,System.IO.SeekOrigin).origin'></a>
 
@@ -528,7 +548,8 @@ The stream is closed\.
 
 Sets the length of the current stream to the specified value.
 
-Since a [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream') cannot be written to, this method will always throw a [System\.NotSupportedException](https://learn.microsoft.com/en-us/dotnet/api/system.notsupportedexception 'System\.NotSupportedException').
+Since a [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream') cannot be written to,
+            this method will always throw a [System\.NotSupportedException](https://learn.microsoft.com/en-us/dotnet/api/system.notsupportedexception 'System\.NotSupportedException').
 
 ```csharp
 public override void SetLength(long value);
@@ -544,7 +565,8 @@ The value at which to set the length\.
 #### Exceptions
 
 [System\.NotSupportedException](https://learn.microsoft.com/en-us/dotnet/api/system.notsupportedexception 'System\.NotSupportedException')  
-Always thrown, because instances of [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream') are read\-only\.
+Always thrown,
+            because instances of [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream') are read\-only\.
 
 <a name='Louis.IO.ReadOnlyMemoryStream.Write(byte[],int,int)'></a>
 
@@ -553,7 +575,8 @@ Always thrown, because instances of [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemo
 
 Writes a block of bytes to the current stream using data read from a buffer.
 
-Since a [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream') cannot be written to, this method will always throw a [System\.NotSupportedException](https://learn.microsoft.com/en-us/dotnet/api/system.notsupportedexception 'System\.NotSupportedException').
+Since a [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream') cannot be written to,
+            this method will always throw a [System\.NotSupportedException](https://learn.microsoft.com/en-us/dotnet/api/system.notsupportedexception 'System\.NotSupportedException').
 
 ```csharp
 public override void Write(byte[] buffer, int offset, int count);
@@ -570,7 +593,8 @@ The buffer to write data from\.
 
 `offset` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
 
-The zero\-based byte offset in [buffer](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.Write(byte[],int,int).buffer 'Louis\.IO\.ReadOnlyMemoryStream\.Write\(byte\[\], int, int\)\.buffer') at which to begin copying bytes to the current stream\.
+The zero\-based byte offset in [buffer](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.Write(byte[],int,int).buffer 'Louis\.IO\.ReadOnlyMemoryStream\.Write\(byte\[\], int, int\)\.buffer')
+            at which to begin copying bytes to the current stream\.
 
 <a name='Louis.IO.ReadOnlyMemoryStream.Write(byte[],int,int).count'></a>
 
@@ -581,16 +605,19 @@ The maximum number of bytes to write\.
 #### Exceptions
 
 [System\.NotSupportedException](https://learn.microsoft.com/en-us/dotnet/api/system.notsupportedexception 'System\.NotSupportedException')  
-Always thrown, because instances of [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream') are read\-only\.
+Always thrown,
+            because instances of [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream') are read\-only\.
 
 <a name='Louis.IO.ReadOnlyMemoryStream.Write(System.ReadOnlySpan_byte_)'></a>
 
 ## ReadOnlyMemoryStream\.Write\(ReadOnlySpan\<byte\>\) Method
 
 
-Writes a sequence of bytes into the current stream and advances the current position within this stream by the number of bytes written.
+Writes a sequence of bytes into the current stream
+            and advances the current position within this stream by the number of bytes written.
 
-Since a [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream') cannot be written to, this method will always throw a [System\.NotSupportedException](https://learn.microsoft.com/en-us/dotnet/api/system.notsupportedexception 'System\.NotSupportedException').
+Since a [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream') cannot be written to,
+            this method will always throw a [System\.NotSupportedException](https://learn.microsoft.com/en-us/dotnet/api/system.notsupportedexception 'System\.NotSupportedException').
 
 ```csharp
 public override void Write(System.ReadOnlySpan<byte> buffer);
@@ -606,12 +633,14 @@ A region of memory\.
 #### Exceptions
 
 [System\.NotSupportedException](https://learn.microsoft.com/en-us/dotnet/api/system.notsupportedexception 'System\.NotSupportedException')  
-Always thrown, because instances of [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream') are read\-only\.
+Always thrown,
+            because instances of [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream') are read\-only\.
 
 ### Remarks
 
-This method overrides the corresponding method of [System\.IO\.Stream](https://learn.microsoft.com/en-us/dotnet/api/system.io.stream 'System\.IO\.Stream') on runtimes where it is available (.NET Core 2.0 and newer,
-            .NET 5 and newer, .NET Standard 2.1 and newer). On older runtimes, this method is present as a method of [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream')
+This method overrides the corresponding method of [System\.IO\.Stream](https://learn.microsoft.com/en-us/dotnet/api/system.io.stream 'System\.IO\.Stream') on runtimes where it is available
+            (.NET Core 2.1 and newer, .NET 5 and newer, .NET Standard 2.1 and newer).
+            On older runtimes, this method is present as a method of [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream')
             and depends on the `System.Memory` NuGet package.
 
 <a name='Louis.IO.ReadOnlyMemoryStream.WriteAsync(byte[],int,int,System.Threading.CancellationToken)'></a>
@@ -619,9 +648,11 @@ This method overrides the corresponding method of [System\.IO\.Stream](https://l
 ## ReadOnlyMemoryStream\.WriteAsync\(byte\[\], int, int, CancellationToken\) Method
 
 
-Asynchronously writes a sequence of bytes to the current stream, advances the current position within this stream by the number of bytes written, and monitors cancellation requests.
+Asynchronously writes a sequence of bytes to the current stream,
+            advances the current position within this stream by the number of bytes written, and monitors cancellation requests.
 
-Since a [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream') cannot be written to, this method will always throw a [System\.NotSupportedException](https://learn.microsoft.com/en-us/dotnet/api/system.notsupportedexception 'System\.NotSupportedException').
+Since a [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream') cannot be written to,
+            this method will always throw a [System\.NotSupportedException](https://learn.microsoft.com/en-us/dotnet/api/system.notsupportedexception 'System\.NotSupportedException').
 
 ```csharp
 public override System.Threading.Tasks.Task WriteAsync(byte[] buffer, int offset, int count, System.Threading.CancellationToken cancellationToken);
@@ -638,7 +669,8 @@ The buffer to write data from\.
 
 `offset` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
 
-The zero\-based byte offset in [buffer](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.WriteAsync(byte[],int,int,System.Threading.CancellationToken).buffer 'Louis\.IO\.ReadOnlyMemoryStream\.WriteAsync\(byte\[\], int, int, System\.Threading\.CancellationToken\)\.buffer') from which to begin copying bytes to the stream\.
+The zero\-based byte offset in [buffer](Louis.IO.ReadOnlyMemoryStream.md#Louis.IO.ReadOnlyMemoryStream.WriteAsync(byte[],int,int,System.Threading.CancellationToken).buffer 'Louis\.IO\.ReadOnlyMemoryStream\.WriteAsync\(byte\[\], int, int, System\.Threading\.CancellationToken\)\.buffer')
+            from which to begin copying bytes to the stream\.
 
 <a name='Louis.IO.ReadOnlyMemoryStream.WriteAsync(byte[],int,int,System.Threading.CancellationToken).count'></a>
 
@@ -659,16 +691,19 @@ A task that represents the asynchronous write operation\.
 #### Exceptions
 
 [System\.NotSupportedException](https://learn.microsoft.com/en-us/dotnet/api/system.notsupportedexception 'System\.NotSupportedException')  
-Always thrown, because instances of [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream') are read\-only\.
+Always thrown,
+            because instances of [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream') are read\-only\.
 
 <a name='Louis.IO.ReadOnlyMemoryStream.WriteAsync(System.ReadOnlyMemory_byte_,System.Threading.CancellationToken)'></a>
 
 ## ReadOnlyMemoryStream\.WriteAsync\(ReadOnlyMemory\<byte\>, CancellationToken\) Method
 
 
-Asynchronously writes a sequence of bytes into the current stream, advances the current position within this stream by the number of bytes written, and monitors cancellation requests.
+Asynchronously writes a sequence of bytes into the current stream,
+            advances the current position within this stream by the number of bytes written, and monitors cancellation requests.
 
-Since a [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream') cannot be written to, this method will always throw a [System\.NotSupportedException](https://learn.microsoft.com/en-us/dotnet/api/system.notsupportedexception 'System\.NotSupportedException').
+Since a [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream') cannot be written to,
+            this method will always throw a [System\.NotSupportedException](https://learn.microsoft.com/en-us/dotnet/api/system.notsupportedexception 'System\.NotSupportedException').
 
 ```csharp
 public override System.Threading.Tasks.ValueTask WriteAsync(System.ReadOnlyMemory<byte> buffer, System.Threading.CancellationToken cancellationToken=default(System.Threading.CancellationToken));
@@ -694,12 +729,14 @@ A task that represents the asynchronous write operation\.
 #### Exceptions
 
 [System\.NotSupportedException](https://learn.microsoft.com/en-us/dotnet/api/system.notsupportedexception 'System\.NotSupportedException')  
-Always thrown, because instances of [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream') are read\-only\.
+Always thrown,
+            because instances of [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream') are read\-only\.
 
 ### Remarks
 
-This method overrides the corresponding method of [System\.IO\.Stream](https://learn.microsoft.com/en-us/dotnet/api/system.io.stream 'System\.IO\.Stream') on runtimes where it is available (.NET Core 2.0 and newer,
-            .NET 5 and newer, .NET Standard 2.1 and newer). On older runtimes, this method is present as a method of [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream')
+This method overrides the corresponding method of [System\.IO\.Stream](https://learn.microsoft.com/en-us/dotnet/api/system.io.stream 'System\.IO\.Stream') on runtimes where it is available
+            (.NET Core 2.1 and newer, .NET 5 and newer, .NET Standard 2.1 and newer).
+            On older runtimes, this method is present as a method of [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream')
             and depends on the `System.Memory` NuGet package.
 
 <a name='Louis.IO.ReadOnlyMemoryStream.WriteByte(byte)'></a>
@@ -709,7 +746,8 @@ This method overrides the corresponding method of [System\.IO\.Stream](https://l
 
 Writes a byte to the current stream at the current position.
 
-Since a [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream') cannot be written to, this method will always throw a [System\.NotSupportedException](https://learn.microsoft.com/en-us/dotnet/api/system.notsupportedexception 'System\.NotSupportedException').
+Since a [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream') cannot be written to,
+            this method will always throw a [System\.NotSupportedException](https://learn.microsoft.com/en-us/dotnet/api/system.notsupportedexception 'System\.NotSupportedException').
 
 ```csharp
 public override void WriteByte(byte value);
@@ -725,4 +763,5 @@ The byte to write\.
 #### Exceptions
 
 [System\.NotSupportedException](https://learn.microsoft.com/en-us/dotnet/api/system.notsupportedexception 'System\.NotSupportedException')  
-Always thrown, because instances of [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream') are read\-only\.
+Always thrown,
+            because instances of [ReadOnlyMemoryStream](Louis.IO.ReadOnlyMemoryStream.md 'Louis\.IO\.ReadOnlyMemoryStream') are read\-only\.

@@ -40,7 +40,7 @@ A [StringLiteralKind](Louis.Text.StringLiteralKind.md 'Louis\.Text\.StringLitera
 #### Returns
 [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')  
 The length of the string that would result from calling
-            [ToLiteral\(this ReadOnlySpan&lt;char&gt;, StringLiteralKind\)](Louis.Text.CharReadOnlySpanExtensions.md#Louis.Text.CharReadOnlySpanExtensions.ToLiteral(thisSystem.ReadOnlySpan_char_,Louis.Text.StringLiteralKind) 'Louis\.Text\.CharReadOnlySpanExtensions\.ToLiteral\(this System\.ReadOnlySpan\<char\>, Louis\.Text\.StringLiteralKind\)')on [this](Louis.Text.CharReadOnlySpanExtensions.md#Louis.Text.CharReadOnlySpanExtensions.GetLiteralLength(thisSystem.ReadOnlySpan_char_,Louis.Text.StringLiteralKind).this 'Louis\.Text\.CharReadOnlySpanExtensions\.GetLiteralLength\(this System\.ReadOnlySpan\<char\>, Louis\.Text\.StringLiteralKind\)\.this')
+            [ToLiteral\(this ReadOnlySpan&lt;char&gt;, StringLiteralKind\)](Louis.Text.CharReadOnlySpanExtensions.md#Louis.Text.CharReadOnlySpanExtensions.ToLiteral(thisSystem.ReadOnlySpan_char_,Louis.Text.StringLiteralKind) 'Louis\.Text\.CharReadOnlySpanExtensions\.ToLiteral\(this System\.ReadOnlySpan\<char\>, Louis\.Text\.StringLiteralKind\)') on [this](Louis.Text.CharReadOnlySpanExtensions.md#Louis.Text.CharReadOnlySpanExtensions.GetLiteralLength(thisSystem.ReadOnlySpan_char_,Louis.Text.StringLiteralKind).this 'Louis\.Text\.CharReadOnlySpanExtensions\.GetLiteralLength\(this System\.ReadOnlySpan\<char\>, Louis\.Text\.StringLiteralKind\)\.this')
             with [literalKind](Louis.Text.CharReadOnlySpanExtensions.md#Louis.Text.CharReadOnlySpanExtensions.GetLiteralLength(thisSystem.ReadOnlySpan_char_,Louis.Text.StringLiteralKind).literalKind 'Louis\.Text\.CharReadOnlySpanExtensions\.GetLiteralLength\(this System\.ReadOnlySpan\<char\>, Louis\.Text\.StringLiteralKind\)\.literalKind') as last parameter\.
 
 #### Exceptions
@@ -71,7 +71,7 @@ The [ReadOnlySpan&lt;char&gt;](https://learn.microsoft.com/en-us/dotnet/api/syst
 #### Returns
 [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')  
 The length of the string that would result from calling
-            [ToQuotedLiteral\(this ReadOnlySpan&lt;char&gt;\)](Louis.Text.CharReadOnlySpanExtensions.md#Louis.Text.CharReadOnlySpanExtensions.ToQuotedLiteral(thisSystem.ReadOnlySpan_char_) 'Louis\.Text\.CharReadOnlySpanExtensions\.ToQuotedLiteral\(this System\.ReadOnlySpan\<char\>\)')on [this](Louis.Text.CharReadOnlySpanExtensions.md#Louis.Text.CharReadOnlySpanExtensions.GetQuotedLiteralLength(thisSystem.ReadOnlySpan_char_).this 'Louis\.Text\.CharReadOnlySpanExtensions\.GetQuotedLiteralLength\(this System\.ReadOnlySpan\<char\>\)\.this')\.
+            [ToQuotedLiteral\(this ReadOnlySpan&lt;char&gt;\)](Louis.Text.CharReadOnlySpanExtensions.md#Louis.Text.CharReadOnlySpanExtensions.ToQuotedLiteral(thisSystem.ReadOnlySpan_char_) 'Louis\.Text\.CharReadOnlySpanExtensions\.ToQuotedLiteral\(this System\.ReadOnlySpan\<char\>\)') on [this](Louis.Text.CharReadOnlySpanExtensions.md#Louis.Text.CharReadOnlySpanExtensions.GetQuotedLiteralLength(thisSystem.ReadOnlySpan_char_).this 'Louis\.Text\.CharReadOnlySpanExtensions\.GetQuotedLiteralLength\(this System\.ReadOnlySpan\<char\>\)\.this')\.
 
 <a name='Louis.Text.CharReadOnlySpanExtensions.GetVerbatimLiteralLength(thisSystem.ReadOnlySpan_char_)'></a>
 
@@ -95,7 +95,7 @@ The [ReadOnlySpan&lt;char&gt;](https://learn.microsoft.com/en-us/dotnet/api/syst
 #### Returns
 [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')  
 The length of the string that would result from calling
-            [ToVerbatimLiteral\(this ReadOnlySpan&lt;char&gt;\)](Louis.Text.CharReadOnlySpanExtensions.md#Louis.Text.CharReadOnlySpanExtensions.ToVerbatimLiteral(thisSystem.ReadOnlySpan_char_) 'Louis\.Text\.CharReadOnlySpanExtensions\.ToVerbatimLiteral\(this System\.ReadOnlySpan\<char\>\)')on [this](Louis.Text.CharReadOnlySpanExtensions.md#Louis.Text.CharReadOnlySpanExtensions.GetVerbatimLiteralLength(thisSystem.ReadOnlySpan_char_).this 'Louis\.Text\.CharReadOnlySpanExtensions\.GetVerbatimLiteralLength\(this System\.ReadOnlySpan\<char\>\)\.this')\.
+            [ToVerbatimLiteral\(this ReadOnlySpan&lt;char&gt;\)](Louis.Text.CharReadOnlySpanExtensions.md#Louis.Text.CharReadOnlySpanExtensions.ToVerbatimLiteral(thisSystem.ReadOnlySpan_char_) 'Louis\.Text\.CharReadOnlySpanExtensions\.ToVerbatimLiteral\(this System\.ReadOnlySpan\<char\>\)') on [this](Louis.Text.CharReadOnlySpanExtensions.md#Louis.Text.CharReadOnlySpanExtensions.GetVerbatimLiteralLength(thisSystem.ReadOnlySpan_char_).this 'Louis\.Text\.CharReadOnlySpanExtensions\.GetVerbatimLiteralLength\(this System\.ReadOnlySpan\<char\>\)\.this')\.
 
 <a name='Louis.Text.CharReadOnlySpanExtensions.ToClippedLiteral(thisSystem.ReadOnlySpan_char_,Louis.Text.StringLiteralKind,int,int,bool)'></a>
 
@@ -143,7 +143,7 @@ The number of characters to leave after clipping\.
 `useUnicodeEllipsis` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
 
 [true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use a single Unicode character Ellipsis \(`'\x2026'`, `…`\) to replace the clipped part;
-            [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use three dots \(`.`\) instead\. Default is [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
+            [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use three dots \(`...`\) instead\. Default is [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
@@ -207,7 +207,7 @@ The number of characters to leave after clipping\.
 `useUnicodeEllipsis` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
 
 [true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use a single Unicode character Ellipsis \(`'\x2026'`, `…`\) to replace the clipped part;
-            [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use three dots \(`.`\) instead\. Default is [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
+            [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use three dots \(`...`\) instead\. Default is [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
@@ -267,7 +267,7 @@ The number of characters to leave after clipping\.
 `useUnicodeEllipsis` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
 
 [true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use a single Unicode character Ellipsis \(`'\x2026'`, `…`\) to replace the clipped part;
-            [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use three dots \(`.`\) instead\. Default is [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
+            [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use three dots \(`...`\) instead\. Default is [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
@@ -315,6 +315,12 @@ A [StringLiteralKind](Louis.Text.StringLiteralKind.md 'Louis\.Text\.StringLitera
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
 A newly\-constructed [string](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/string 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/keywords/string')\.
+
+#### Exceptions
+
+[System\.ArgumentException](https://learn.microsoft.com/en-us/dotnet/api/system.argumentexception 'System\.ArgumentException')  
+[literalKind](Louis.Text.CharReadOnlySpanExtensions.md#Louis.Text.CharReadOnlySpanExtensions.ToLiteral(thisSystem.ReadOnlySpan_char_,Louis.Text.StringLiteralKind).literalKind 'Louis\.Text\.CharReadOnlySpanExtensions\.ToLiteral\(this System\.ReadOnlySpan\<char\>, Louis\.Text\.StringLiteralKind\)\.literalKind') is neither [Quoted](Louis.Text.StringLiteralKind.md#Louis.Text.StringLiteralKind.Quoted 'Louis\.Text\.StringLiteralKind\.Quoted')
+            nor [Verbatim](Louis.Text.StringLiteralKind.md#Louis.Text.StringLiteralKind.Verbatim 'Louis\.Text\.StringLiteralKind\.Verbatim')\.
 
 ### See Also
 - [ToQuotedLiteral\(this ReadOnlySpan&lt;char&gt;\)](Louis.Text.CharReadOnlySpanExtensions.md#Louis.Text.CharReadOnlySpanExtensions.ToQuotedLiteral(thisSystem.ReadOnlySpan_char_) 'Louis\.Text\.CharReadOnlySpanExtensions\.ToQuotedLiteral\(this System\.ReadOnlySpan\<char\>\)')

@@ -54,3 +54,6 @@ Service execution is stopped.
 Setup failed with an exception (the task returned by [SetupAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.SetupAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.SetupAsync\(System\.Threading\.CancellationToken\)') has faulted).
 
 Service execution is stopped.
+
+Only [WaitUntilStartedAsync\(\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.WaitUntilStartedAsync() 'Louis\.Threading\.AsyncService\.WaitUntilStartedAsync\(\)') returns this value.
+            [StartAndWaitAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.StartAndWaitAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.StartAndWaitAsync\(System\.Threading\.CancellationToken\)') throws the exception instead.

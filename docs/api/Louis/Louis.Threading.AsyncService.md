@@ -406,7 +406,10 @@ or [StartAndWaitAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Loui
 
 ### Remarks
 
-Only one of [RunAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.RunAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.RunAsync\(System\.Threading\.CancellationToken\)'), [Start\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.Start(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.Start\(System\.Threading\.CancellationToken\)'), and [StartAndWaitAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.StartAndWaitAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.StartAndWaitAsync\(System\.Threading\.CancellationToken\)') may be called, at most once.
+Only one of [RunAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.RunAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.RunAsync\(System\.Threading\.CancellationToken\)'), [Start\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.Start(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.Start\(System\.Threading\.CancellationToken\)'), and [StartAndWaitAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.StartAndWaitAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.StartAndWaitAsync\(System\.Threading\.CancellationToken\)')
+            may be called, at most once.
+
+If the service was stopped before starting, the returned task is already completed.
 
 <a name='Louis.Threading.AsyncService.SetupAsync(System.Threading.CancellationToken)'></a>
 
@@ -440,7 +443,7 @@ If the returned task completes with [false](https://docs.microsoft.com/en-us/dot
 
 ## AsyncService\.Start\(CancellationToken\) Method
 
-Starts an asynchronous service, then return while it continues to run in the background\.
+Starts an asynchronous service, then returns while it continues to run in the background\.
 
 ```csharp
 public void Start(System.Threading.CancellationToken cancellationToken);
@@ -456,14 +459,18 @@ A [System\.Threading\.CancellationToken](https://learn.microsoft.com/en-us/dotne
 #### Exceptions
 
 [System\.InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception 'System\.InvalidOperationException')  
-The service has already been started, either by calling [RunAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.RunAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.RunAsync\(System\.Threading\.CancellationToken\)'), [Start\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.Start(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.Start\(System\.Threading\.CancellationToken\)'), or [StartAndWaitAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.StartAndWaitAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.StartAndWaitAsync\(System\.Threading\.CancellationToken\)')\.
+The service has already been started, either by calling [RunAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.RunAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.RunAsync\(System\.Threading\.CancellationToken\)'), [Start\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.Start(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.Start\(System\.Threading\.CancellationToken\)'),
+or [StartAndWaitAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.StartAndWaitAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.StartAndWaitAsync\(System\.Threading\.CancellationToken\)')\.
 
 ### Remarks
 
-Only one of [RunAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.RunAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.RunAsync\(System\.Threading\.CancellationToken\)'), [Start\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.Start(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.Start\(System\.Threading\.CancellationToken\)'), and [StartAndWaitAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.StartAndWaitAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.StartAndWaitAsync\(System\.Threading\.CancellationToken\)') may be called, at most once.
+Only one of [RunAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.RunAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.RunAsync\(System\.Threading\.CancellationToken\)'), [Start\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.Start(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.Start\(System\.Threading\.CancellationToken\)'), and [StartAndWaitAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.StartAndWaitAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.StartAndWaitAsync\(System\.Threading\.CancellationToken\)')
+            may be called, at most once.
 
 If your program needs to know the exact reason why a service stops or fails to start,
             do not use this method; call [RunAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.RunAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.RunAsync\(System\.Threading\.CancellationToken\)') from a separate task instead.
+
+If the service was stopped before starting, this method does nothing.
 
 <a name='Louis.Threading.AsyncService.StartAndWaitAsync(System.Threading.CancellationToken)'></a>
 
@@ -490,14 +497,22 @@ either has started or could not start\.
 #### Exceptions
 
 [System\.InvalidOperationException](https://learn.microsoft.com/en-us/dotnet/api/system.invalidoperationexception 'System\.InvalidOperationException')  
-The service has already been started, either by calling [RunAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.RunAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.RunAsync\(System\.Threading\.CancellationToken\)'), [Start\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.Start(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.Start\(System\.Threading\.CancellationToken\)'),  or [StartAndWaitAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.StartAndWaitAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.StartAndWaitAsync\(System\.Threading\.CancellationToken\)')\.
+The service has already been started, either by calling [RunAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.RunAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.RunAsync\(System\.Threading\.CancellationToken\)'), [Start\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.Start(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.Start\(System\.Threading\.CancellationToken\)'),
+or [StartAndWaitAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.StartAndWaitAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.StartAndWaitAsync\(System\.Threading\.CancellationToken\)')\.
 
 ### Remarks
 
-You may call one of [RunAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.RunAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.RunAsync\(System\.Threading\.CancellationToken\)') and [StartAndWaitAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.StartAndWaitAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.StartAndWaitAsync\(System\.Threading\.CancellationToken\)') at most once.
+Only one of [RunAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.RunAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.RunAsync\(System\.Threading\.CancellationToken\)'), [Start\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.Start(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.Start\(System\.Threading\.CancellationToken\)'), and [StartAndWaitAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.StartAndWaitAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.StartAndWaitAsync\(System\.Threading\.CancellationToken\)')
+            may be called, at most once.
 
-If your program needs to know the exact reason why a service stops or fails to start,
+If [SetupAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.SetupAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.SetupAsync\(System\.Threading\.CancellationToken\)') throws an exception, the returned task throws the same exception,
+            so its result is never [Faulted](Louis.Threading.AsyncServiceSetupResult.md#Louis.Threading.AsyncServiceSetupResult.Faulted 'Louis\.Threading\.AsyncServiceSetupResult\.Faulted').
+
+If your program needs to know the exact reason why a service stops,
             do not use this method; call [RunAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.RunAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.RunAsync\(System\.Threading\.CancellationToken\)') from a separate task instead.
+
+If the service was stopped before starting, the returned task is already completed
+            with [NotStarted](Louis.Threading.AsyncServiceSetupResult.md#Louis.Threading.AsyncServiceSetupResult.NotStarted 'Louis\.Threading\.AsyncServiceSetupResult\.NotStarted').
 
 ### See Also
 - [AsyncServiceSetupResult](Louis.Threading.AsyncServiceSetupResult.md 'Louis\.Threading\.AsyncServiceSetupResult')
@@ -569,16 +584,19 @@ public System.Threading.Tasks.Task<Louis.Threading.AsyncServiceSetupResult> Wait
 
 #### Returns
 [System\.Threading\.Tasks\.Task&lt;](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1 'System\.Threading\.Tasks\.Task\`1')[AsyncServiceSetupResult](Louis.Threading.AsyncServiceSetupResult.md 'Louis\.Threading\.AsyncServiceSetupResult')[&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1 'System\.Threading\.Tasks\.Task\`1')  
-A [Task&lt;bool&gt;](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1 'System\.Threading\.Tasks\.Task\`1') that will complete as soon as the service has started
-\(in which case the result will be [true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\), or it could not start
-\(in which case the result will be [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\)\.
+A [Task](https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1 'System\.Threading\.Tasks\.Task\`1')\<[AsyncServiceSetupResult](Louis.Threading.AsyncServiceSetupResult.md 'Louis\.Threading\.AsyncServiceSetupResult')\> that will complete as soon as the service
+either has started or could not start\.
 
 ### Remarks
 
-If neither [RunAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.RunAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.RunAsync\(System\.Threading\.CancellationToken\)') nor [StartAndWaitAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.StartAndWaitAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.StartAndWaitAsync\(System\.Threading\.CancellationToken\)') have been called,
-            the returned task will not complete until one of them is called.
+If none of [RunAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.RunAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.RunAsync\(System\.Threading\.CancellationToken\)'), [Start\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.Start(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.Start\(System\.Threading\.CancellationToken\)'), [StartAndWaitAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.StartAndWaitAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.StartAndWaitAsync\(System\.Threading\.CancellationToken\)'), and [Stop\(\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.Stop() 'Louis\.Threading\.AsyncService\.Stop\(\)')
+            have been called, the returned task will not complete until one of them is called.
 
-If the service has already finished starting, the returned task is already completed.
+If the service has already finished starting, or was stopped before starting, the returned task is already completed.
+
+The returned task never throws. If [SetupAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.SetupAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.SetupAsync\(System\.Threading\.CancellationToken\)') throws an exception, the result is
+            [Faulted](Louis.Threading.AsyncServiceSetupResult.md#Louis.Threading.AsyncServiceSetupResult.Faulted 'Louis\.Threading\.AsyncServiceSetupResult\.Faulted'), and the exception is thrown by [RunAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.RunAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.RunAsync\(System\.Threading\.CancellationToken\)')
+            or [StartAndWaitAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.StartAndWaitAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.StartAndWaitAsync\(System\.Threading\.CancellationToken\)') instead.
 
 <a name='Louis.Threading.AsyncService.WaitUntilStoppedAsync()'></a>
 
@@ -597,7 +615,7 @@ or until it has failed to start\.
 
 ### Remarks
 
-If neither [RunAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.RunAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.RunAsync\(System\.Threading\.CancellationToken\)') nor [StartAndWaitAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.StartAndWaitAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.StartAndWaitAsync\(System\.Threading\.CancellationToken\)') have been called,
-            the returned task will not complete until one of them is called.
+If none of [RunAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.RunAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.RunAsync\(System\.Threading\.CancellationToken\)'), [Start\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.Start(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.Start\(System\.Threading\.CancellationToken\)'), [StartAndWaitAsync\(CancellationToken\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.StartAndWaitAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.StartAndWaitAsync\(System\.Threading\.CancellationToken\)'), and [Stop\(\)](Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.Stop() 'Louis\.Threading\.AsyncService\.Stop\(\)')
+            have been called, the returned task will not complete until one of them is called.
 
 If the service has already stopped, the returned task is already completed.

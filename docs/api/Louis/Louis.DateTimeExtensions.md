@@ -85,7 +85,8 @@ An instance of [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/s
 
 ## DateTimeExtensions\.GetEndOfWeek\(this DateTime, DayOfWeek\) Method
 
-Returns the last tick of the earliest date, greater or equal to a given date, whose day of the week is the one preceding a specified day of the week\.
+Returns the last tick of the earliest date, greater or equal to a given date,
+whose day of the week is the one preceding a specified day of the week\.
 
 ```csharp
 public static System.DateTime GetEndOfWeek(this System.DateTime @this, System.DayOfWeek firstDayOfWeek);
@@ -238,7 +239,8 @@ An instance of [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/s
 
 ## DateTimeExtensions\.GetLastDayOfWeek\(this DateTime, DayOfWeek\) Method
 
-Returns midnight on the earliest date, greater or equal to a given date and time, whose day of the week is the one preceding a specified day of the week\.
+Returns midnight on the earliest date, greater or equal to a given date and time,
+whose day of the week is the one preceding a specified day of the week\.
 
 ```csharp
 public static System.DateTime GetLastDayOfWeek(this System.DateTime @this, System.DayOfWeek firstDayOfWeek);
@@ -391,7 +393,8 @@ An instance of [System\.DateTime](https://learn.microsoft.com/en-us/dotnet/api/s
 
 ## DateTimeExtensions\.GetStartOfWeek\(this DateTime, DayOfWeek\) Method
 
-Returns midnight on the most recent date, earlier or equal to a given date, whose day of the week is equal to a specified day of the week\.
+Returns midnight on the most recent date, earlier or equal to a given date,
+whose day of the week is equal to a specified day of the week\.
 
 ```csharp
 public static System.DateTime GetStartOfWeek(this System.DateTime @this, System.DayOfWeek firstDayOfWeek);

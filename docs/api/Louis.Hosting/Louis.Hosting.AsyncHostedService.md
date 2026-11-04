@@ -37,7 +37,7 @@ An [Microsoft\.Extensions\.Logging\.ILogger](https://learn.microsoft.com/en-us/d
 ## AsyncHostedService\.FailOnSetupNotStarted Property
 
 Gets a value indicating whether [StartAsync\(CancellationToken\)](Louis.Hosting.AsyncHostedService.md#Louis.Hosting.AsyncHostedService.StartAsync(System.Threading.CancellationToken) 'Louis\.Hosting\.AsyncHostedService\.StartAsync\(System\.Threading\.CancellationToken\)') will fail if
-the result of [SetupAsync\(CancellationToken\)](../Louis/Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.SetupAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.SetupAsync\(System\.Threading\.CancellationToken\)') is [NotStarted](../Louis/Louis.Threading.AsyncServiceSetupResult.md#Louis.Threading.AsyncServiceSetupResult.NotStarted 'Louis\.Threading\.AsyncServiceSetupResult\.NotStarted')\.
+the result of [StartAndWaitAsync\(CancellationToken\)](../Louis/Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.StartAndWaitAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.StartAndWaitAsync\(System\.Threading\.CancellationToken\)') is [NotStarted](../Louis/Louis.Threading.AsyncServiceSetupResult.md#Louis.Threading.AsyncServiceSetupResult.NotStarted 'Louis\.Threading\.AsyncServiceSetupResult\.NotStarted')\.
 
 ```csharp
 protected virtual bool FailOnSetupNotStarted { protected get; }
@@ -51,7 +51,7 @@ protected virtual bool FailOnSetupNotStarted { protected get; }
 ## AsyncHostedService\.FailOnSetupUnsuccessful Property
 
 Gets a value indicating whether [StartAsync\(CancellationToken\)](Louis.Hosting.AsyncHostedService.md#Louis.Hosting.AsyncHostedService.StartAsync(System.Threading.CancellationToken) 'Louis\.Hosting\.AsyncHostedService\.StartAsync\(System\.Threading\.CancellationToken\)') will fail if
-the result of [SetupAsync\(CancellationToken\)](../Louis/Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.SetupAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.SetupAsync\(System\.Threading\.CancellationToken\)') is [Unsuccessful](../Louis/Louis.Threading.AsyncServiceSetupResult.md#Louis.Threading.AsyncServiceSetupResult.Unsuccessful 'Louis\.Threading\.AsyncServiceSetupResult\.Unsuccessful')\.
+the result of [StartAndWaitAsync\(CancellationToken\)](../Louis/Louis.Threading.AsyncService.md#Louis.Threading.AsyncService.StartAndWaitAsync(System.Threading.CancellationToken) 'Louis\.Threading\.AsyncService\.StartAndWaitAsync\(System\.Threading\.CancellationToken\)') is [Unsuccessful](../Louis/Louis.Threading.AsyncServiceSetupResult.md#Louis.Threading.AsyncServiceSetupResult.Unsuccessful 'Louis\.Threading\.AsyncServiceSetupResult\.Unsuccessful')\.
 
 ```csharp
 protected virtual bool FailOnSetupUnsuccessful { protected get; }

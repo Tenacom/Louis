@@ -136,7 +136,7 @@ The number of characters to leave after clipping\.
 `useUnicodeEllipsis` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
 
 [true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use a single Unicode character Ellipsis \(`'\x2026'`, `…`\) to replace the clipped part;
-            [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use three dots \(`.`\) instead\. Default is [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
+            [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use three dots \(`...`\) instead\.
 
 #### Returns
 [System\.Text\.StringBuilder](https://learn.microsoft.com/en-us/dotnet/api/system.text.stringbuilder 'System\.Text\.StringBuilder')  
@@ -283,7 +283,7 @@ The number of characters to leave after clipping\.
 `useUnicodeEllipsis` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
 
 [true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use a single Unicode character Ellipsis \(`'\x2026'`, `…`\) to replace the clipped part;
-            [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use three dots \(`.`\) instead\. Default is [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
+            [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use three dots \(`...`\) instead\.
 
 #### Returns
 [System\.Text\.StringBuilder](https://learn.microsoft.com/en-us/dotnet/api/system.text.stringbuilder 'System\.Text\.StringBuilder')  
@@ -412,7 +412,7 @@ The number of characters to leave after clipping\.
 `useUnicodeEllipsis` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
 
 [true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use a single Unicode character Ellipsis \(`'\x2026'`, `…`\) to replace the clipped part;
-            [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use three dots \(`.`\) instead\. Default is [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
+            [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use three dots \(`...`\) instead\.
 
 #### Returns
 [System\.Text\.StringBuilder](https://learn.microsoft.com/en-us/dotnet/api/system.text.stringbuilder 'System\.Text\.StringBuilder')  
@@ -442,7 +442,7 @@ If [str](Louis.Text.StringBuilderExtensions.md#Louis.Text.StringBuilderExtension
 
 Appends the specified span of characters, expressed as a C\# quoted string literal, to the end
 of this instance\. If the span is longer than the sum of [headLength](Louis.Text.StringBuilderExtensions.md#Louis.Text.StringBuilderExtensions.AppendClippedQuotedLiteral(thisSystem.Text.StringBuilder,System.ReadOnlySpan_char_,int,int).headLength 'Louis\.Text\.StringBuilderExtensions\.AppendClippedQuotedLiteral\(this System\.Text\.StringBuilder, System\.ReadOnlySpan\<char\>, int, int\)\.headLength'),
-[tailLength](Louis.Text.StringBuilderExtensions.md#Louis.Text.StringBuilderExtensions.AppendClippedQuotedLiteral(thisSystem.Text.StringBuilder,System.ReadOnlySpan_char_,int,int).tailLength 'Louis\.Text\.StringBuilderExtensions\.AppendClippedQuotedLiteral\(this System\.Text\.StringBuilder, System\.ReadOnlySpan\<char\>, int, int\)\.tailLength'), and the length of an ellipsis \(three dots `...`1\), then it is clipped,
+[tailLength](Louis.Text.StringBuilderExtensions.md#Louis.Text.StringBuilderExtensions.AppendClippedQuotedLiteral(thisSystem.Text.StringBuilder,System.ReadOnlySpan_char_,int,int).tailLength 'Louis\.Text\.StringBuilderExtensions\.AppendClippedQuotedLiteral\(this System\.Text\.StringBuilder, System\.ReadOnlySpan\<char\>, int, int\)\.tailLength'), and the length of an ellipsis \(three dots `...`\), then it is clipped,
 taking only the first [headLength](Louis.Text.StringBuilderExtensions.md#Louis.Text.StringBuilderExtensions.AppendClippedQuotedLiteral(thisSystem.Text.StringBuilder,System.ReadOnlySpan_char_,int,int).headLength 'Louis\.Text\.StringBuilderExtensions\.AppendClippedQuotedLiteral\(this System\.Text\.StringBuilder, System\.ReadOnlySpan\<char\>, int, int\)\.headLength') characters, followed by the ellipsis
 and the last [tailLength](Louis.Text.StringBuilderExtensions.md#Louis.Text.StringBuilderExtensions.AppendClippedQuotedLiteral(thisSystem.Text.StringBuilder,System.ReadOnlySpan_char_,int,int).tailLength 'Louis\.Text\.StringBuilderExtensions\.AppendClippedQuotedLiteral\(this System\.Text\.StringBuilder, System\.ReadOnlySpan\<char\>, int, int\)\.tailLength') characters\.
 
@@ -537,7 +537,7 @@ The number of characters to leave after clipping\.
 `useUnicodeEllipsis` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
 
 [true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use a single Unicode character Ellipsis \(`'\x2026'`, `…`\) to replace the clipped part;
-            [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use three dots \(`...`\) instead\. Default is [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
+            [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use three dots \(`...`\) instead\.
 
 #### Returns
 [System\.Text\.StringBuilder](https://learn.microsoft.com/en-us/dotnet/api/system.text.stringbuilder 'System\.Text\.StringBuilder')  
@@ -662,7 +662,7 @@ The number of characters to leave after clipping\.
 `useUnicodeEllipsis` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
 
 [true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use a single Unicode character Ellipsis \(`'\x2026'`, `…`\) to replace the clipped part;
-            [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use three dots \(`.`\) instead\. Default is [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
+            [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use three dots \(`...`\) instead\.
 
 #### Returns
 [System\.Text\.StringBuilder](https://learn.microsoft.com/en-us/dotnet/api/system.text.stringbuilder 'System\.Text\.StringBuilder')  
@@ -787,7 +787,7 @@ The number of characters to leave after clipping\.
 `useUnicodeEllipsis` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
 
 [true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use a single Unicode character Ellipsis \(`'\x2026'`, `…`\) to replace the clipped part;
-            [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use three dots \(`.`\) instead\. Default is [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
+            [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use three dots \(`...`\) instead\.
 
 #### Returns
 [System\.Text\.StringBuilder](https://learn.microsoft.com/en-us/dotnet/api/system.text.stringbuilder 'System\.Text\.StringBuilder')  
@@ -933,7 +933,7 @@ The string to append\.
 
 #### Returns
 [System\.Text\.StringBuilder](https://learn.microsoft.com/en-us/dotnet/api/system.text.stringbuilder 'System\.Text\.StringBuilder')  
-A reference to this instance after the append operation has completed\.\.
+A reference to this instance after the append operation has completed\.
 
 #### Exceptions
 
@@ -975,7 +975,7 @@ The characters to append\.
 
 #### Returns
 [System\.Text\.StringBuilder](https://learn.microsoft.com/en-us/dotnet/api/system.text.stringbuilder 'System\.Text\.StringBuilder')  
-A reference to this instance after the append operation has completed\.\.
+A reference to this instance after the append operation has completed\.
 
 #### Exceptions
 

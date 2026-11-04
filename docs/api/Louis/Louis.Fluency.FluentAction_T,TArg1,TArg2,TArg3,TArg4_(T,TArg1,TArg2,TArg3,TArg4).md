@@ -3,7 +3,7 @@
 
 ## FluentAction\<T,TArg1,TArg2,TArg3,TArg4\>\(T, TArg1, TArg2, TArg3, TArg4\) Delegate
 
-Encapsulates a method that has four parameter and returns a value of the same type as the first parameter\.
+Encapsulates a method that has five parameters and returns a value of the same type as the first parameter\.
 
 ```csharp
 public delegate T FluentAction<T,TArg1,TArg2,TArg3,TArg4>(T obj, TArg1 arg1, TArg2 arg2, TArg3 arg3, TArg4 arg4);
@@ -74,5 +74,5 @@ The fifth parameter of the method that this delegate encapsulates\.
 #### Returns
 [T](Louis.Fluency.FluentAction_T,TArg1,TArg2,TArg3,TArg4_(T,TArg1,TArg2,TArg3,TArg4).md#Louis.Fluency.FluentAction_T,TArg1,TArg2,TArg3,TArg4_(T,TArg1,TArg2,TArg3,TArg4).T 'Louis\.Fluency\.FluentAction\<T,TArg1,TArg2,TArg3,TArg4\>\(T, TArg1, TArg2, TArg3, TArg4\)\.T')  
 The return value of the method that this delegate encapsulates\.
-            This is usually \(but not obligatorily\), at least is [T](Louis.Fluency.FluentAction_T,TArg1,TArg2,TArg3,TArg4_(T,TArg1,TArg2,TArg3,TArg4).md#Louis.Fluency.FluentAction_T,TArg1,TArg2,TArg3,TArg4_(T,TArg1,TArg2,TArg3,TArg4).T 'Louis\.Fluency\.FluentAction\<T,TArg1,TArg2,TArg3,TArg4\>\(T, TArg1, TArg2, TArg3, TArg4\)\.T') is a reference type,
+            This is usually \(but not obligatorily\), at least if [T](Louis.Fluency.FluentAction_T,TArg1,TArg2,TArg3,TArg4_(T,TArg1,TArg2,TArg3,TArg4).md#Louis.Fluency.FluentAction_T,TArg1,TArg2,TArg3,TArg4_(T,TArg1,TArg2,TArg3,TArg4).T 'Louis\.Fluency\.FluentAction\<T,TArg1,TArg2,TArg3,TArg4\>\(T, TArg1, TArg2, TArg3, TArg4\)\.T') is a reference type,
             the same reference that was passed as the first parameter to the method\.

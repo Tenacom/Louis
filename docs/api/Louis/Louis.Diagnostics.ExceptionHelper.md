@@ -99,13 +99,15 @@ If [obj](Louis.Diagnostics.ExceptionHelper.md#Louis.Diagnostics.ExceptionHelper.
 - try to format [obj](Louis.Diagnostics.ExceptionHelper.md#Louis.Diagnostics.ExceptionHelper.FormatObject(object,string).obj 'Louis\.Diagnostics\.ExceptionHelper\.FormatObject\(object, string\)\.obj') using the specified [format](Louis.Diagnostics.ExceptionHelper.md#Louis.Diagnostics.ExceptionHelper.FormatObject(object,string).format 'Louis\.Diagnostics\.ExceptionHelper\.FormatObject\(object, string\)\.format')
               and the [invariant culture](https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo.invariantculture 'System\.Globalization\.CultureInfo\.InvariantCulture');
 - if an exception is thrown, try again using an empty format string;
-- if another exception is thrown, treat [obj](Louis.Diagnostics.ExceptionHelper.md#Louis.Diagnostics.ExceptionHelper.FormatObject(object,string).obj 'Louis\.Diagnostics\.ExceptionHelper\.FormatObject\(object, string\)\.obj') as if it didn't implement [System\.IFormattable](https://learn.microsoft.com/en-us/dotnet/api/system.iformattable 'System\.IFormattable').
+- if another exception is thrown, treat [obj](Louis.Diagnostics.ExceptionHelper.md#Louis.Diagnostics.ExceptionHelper.FormatObject(object,string).obj 'Louis\.Diagnostics\.ExceptionHelper\.FormatObject\(object, string\)\.obj')
+              as if it didn't implement [System\.IFormattable](https://learn.microsoft.com/en-us/dotnet/api/system.iformattable 'System\.IFormattable').
 
 If [obj](Louis.Diagnostics.ExceptionHelper.md#Louis.Diagnostics.ExceptionHelper.FormatObject(object,string).obj 'Louis\.Diagnostics\.ExceptionHelper\.FormatObject\(object, string\)\.obj') does not implement [System\.IFormattable](https://learn.microsoft.com/en-us/dotnet/api/system.iformattable 'System\.IFormattable'):
 - call [obj](Louis.Diagnostics.ExceptionHelper.md#Louis.Diagnostics.ExceptionHelper.FormatObject(object,string).obj 'Louis\.Diagnostics\.ExceptionHelper\.FormatObject\(object, string\)\.obj').[ToString\(\)](https://learn.microsoft.com/en-us/dotnet/api/system.object.tostring 'System\.Object\.ToString');
-- if `ToString` throws an exception, return a string of the form `<{objType}:{exceptionType}>`;
+- if `ToString` throws an exception,
+              return a string of the form `<{objType}:{exceptionType}>`;
 - if `ToString` returns [null](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/null 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/keywords/null'), return [ToStringNullText](Louis.Diagnostics.ExceptionHelper.md#Louis.Diagnostics.ExceptionHelper.ToStringNullText 'Louis\.Diagnostics\.ExceptionHelper\.ToStringNullText');
-- if `ToString` returns the empty string, return [ToStringNullText](Louis.Diagnostics.ExceptionHelper.md#Louis.Diagnostics.ExceptionHelper.ToStringNullText 'Louis\.Diagnostics\.ExceptionHelper\.ToStringNullText');
+- if `ToString` returns the empty string, return [ToStringEmptyText](Louis.Diagnostics.ExceptionHelper.md#Louis.Diagnostics.ExceptionHelper.ToStringEmptyText 'Louis\.Diagnostics\.ExceptionHelper\.ToStringEmptyText');
 - otherwise, return the result of `ToString`.
 
 Keep in mind that instances of [nullable value types](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/nullable\-value\-types')

@@ -60,7 +60,7 @@ public bool IsNull { get; }
 
 Gets or sets the reference stored in an [InterlockedReference&lt;T&gt;](Louis.Threading.InterlockedReference_T_.md 'Louis\.Threading\.InterlockedReference\<T\>').
 
-This property if thread-safe.
+This property is thread-safe.
 
 ```csharp
 public T? Value { get; set; }
@@ -223,7 +223,7 @@ The second instance to compare\.
 
 ## InterlockedReference\<T\>\.operator ==\(InterlockedReference\<T\>, T\) Operator
 
-Determines whether the value of a specified interlocked references is the same as a specified value\.
+Determines whether the value of a specified interlocked reference is the same as a specified value\.
 
 ```csharp
 public static bool operator ==(Louis.Threading.InterlockedReference<T> a, T? b);

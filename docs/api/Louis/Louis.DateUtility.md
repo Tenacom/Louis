@@ -16,7 +16,8 @@ Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system
 
 ## DateUtility\.GetDaysFromStartOfWeek\(DayOfWeek\) Method
 
-Returns the amount of full days separating a given day of the week from the first day of the same week, according to the current culture\.
+Returns the amount of full days separating a given day of the week from the first day of the same week,
+according to the current culture\.
 
 ```csharp
 public static int GetDaysFromStartOfWeek(System.DayOfWeek today);
@@ -43,7 +44,8 @@ An integer number between 0 and 6 representing the days between the start of the
 
 ## DateUtility\.GetDaysFromStartOfWeek\(DayOfWeek, DayOfWeek\) Method
 
-Returns the amount of full days separating a given day of the week from the first day of the same week, if a given day is considered the first of the week\.
+Returns the amount of full days separating a given day of the week from the first day of the same week,
+if a given day is considered the first of the week\.
 
 ```csharp
 public static int GetDaysFromStartOfWeek(System.DayOfWeek today, System.DayOfWeek firstDayOfWeek);
@@ -74,7 +76,8 @@ An integer number between 0 and 6 representing the days between the start of the
 
 ## DateUtility\.GetDaysFromStartOfWeek\(DayOfWeek, CultureInfo\) Method
 
-Returns the amount of full days separating a given day of the week from the first day of the same week, according to the specified culture\.
+Returns the amount of full days separating a given day of the week from the first day of the same week,
+according to the specified culture\.
 
 ```csharp
 public static int GetDaysFromStartOfWeek(System.DayOfWeek today, System.Globalization.CultureInfo culture);
@@ -112,7 +115,8 @@ An integer number between 0 and 6 representing the days between the start of the
 
 ## DateUtility\.GetDaysFromStartOfWeek\(DayOfWeek, DateTimeFormatInfo\) Method
 
-Returns the amount of full days separating a given day of the week from the first day of the same week, according to the specified formatting information\.
+Returns the amount of full days separating a given day of the week from the first day of the same week,
+according to the specified formatting information\.
 
 ```csharp
 public static int GetDaysFromStartOfWeek(System.DayOfWeek today, System.Globalization.DateTimeFormatInfo dateTimeFormat);

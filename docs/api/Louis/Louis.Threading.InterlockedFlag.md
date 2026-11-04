@@ -37,7 +37,7 @@ The initial value of the flag\.
 
 Gets or sets a value indicating whether the flag is set.
 
-This property if thread-safe.
+This property is thread-safe.
 
 ```csharp
 public bool Value { get; set; }
@@ -243,7 +243,7 @@ The second flag to compare\.
 
 ## InterlockedFlag\.operator \!=\(InterlockedFlag, bool\) Operator
 
-Determines whether a specified interlocked flags has a value different from a specified value\.
+Determines whether a specified interlocked flag has a value different from a specified value\.
 
 ```csharp
 public static bool operator !=(Louis.Threading.InterlockedFlag a, bool b);

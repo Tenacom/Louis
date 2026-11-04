@@ -39,7 +39,7 @@ A [StringLiteralKind](Louis.Text.StringLiteralKind.md 'Louis\.Text\.StringLitera
 #### Returns
 [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')  
 The length of the string that would result from calling
-            [ToLiteral\(this string, StringLiteralKind\)](Louis.Text.StringExtensions.md#Louis.Text.StringExtensions.ToLiteral(thisstring,Louis.Text.StringLiteralKind) 'Louis\.Text\.StringExtensions\.ToLiteral\(this string, Louis\.Text\.StringLiteralKind\)')on [this](Louis.Text.StringExtensions.md#Louis.Text.StringExtensions.GetLiteralLength(thisstring,Louis.Text.StringLiteralKind).this 'Louis\.Text\.StringExtensions\.GetLiteralLength\(this string, Louis\.Text\.StringLiteralKind\)\.this')
+            [ToLiteral\(this string, StringLiteralKind\)](Louis.Text.StringExtensions.md#Louis.Text.StringExtensions.ToLiteral(thisstring,Louis.Text.StringLiteralKind) 'Louis\.Text\.StringExtensions\.ToLiteral\(this string, Louis\.Text\.StringLiteralKind\)') on [this](Louis.Text.StringExtensions.md#Louis.Text.StringExtensions.GetLiteralLength(thisstring,Louis.Text.StringLiteralKind).this 'Louis\.Text\.StringExtensions\.GetLiteralLength\(this string, Louis\.Text\.StringLiteralKind\)\.this')
             with [literalKind](Louis.Text.StringExtensions.md#Louis.Text.StringExtensions.GetLiteralLength(thisstring,Louis.Text.StringLiteralKind).literalKind 'Louis\.Text\.StringExtensions\.GetLiteralLength\(this string, Louis\.Text\.StringLiteralKind\)\.literalKind') as last parameter\.
 
 #### Exceptions
@@ -69,7 +69,7 @@ The [string](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/k
 #### Returns
 [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')  
 The length of the string that would result from calling
-            [ToQuotedLiteral\(this string\)](Louis.Text.StringExtensions.md#Louis.Text.StringExtensions.ToQuotedLiteral(thisstring) 'Louis\.Text\.StringExtensions\.ToQuotedLiteral\(this string\)')on [this](Louis.Text.StringExtensions.md#Louis.Text.StringExtensions.GetQuotedLiteralLength(thisstring).this 'Louis\.Text\.StringExtensions\.GetQuotedLiteralLength\(this string\)\.this')\.
+            [ToQuotedLiteral\(this string\)](Louis.Text.StringExtensions.md#Louis.Text.StringExtensions.ToQuotedLiteral(thisstring) 'Louis\.Text\.StringExtensions\.ToQuotedLiteral\(this string\)') on [this](Louis.Text.StringExtensions.md#Louis.Text.StringExtensions.GetQuotedLiteralLength(thisstring).this 'Louis\.Text\.StringExtensions\.GetQuotedLiteralLength\(this string\)\.this')\.
 
 <a name='Louis.Text.StringExtensions.GetVerbatimLiteralLength(thisstring)'></a>
 
@@ -92,7 +92,7 @@ The [string](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/k
 #### Returns
 [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')  
 The length of the string that would result from calling
-            [ToVerbatimLiteral\(this string\)](Louis.Text.StringExtensions.md#Louis.Text.StringExtensions.ToVerbatimLiteral(thisstring) 'Louis\.Text\.StringExtensions\.ToVerbatimLiteral\(this string\)')on [this](Louis.Text.StringExtensions.md#Louis.Text.StringExtensions.GetVerbatimLiteralLength(thisstring).this 'Louis\.Text\.StringExtensions\.GetVerbatimLiteralLength\(this string\)\.this')\.
+            [ToVerbatimLiteral\(this string\)](Louis.Text.StringExtensions.md#Louis.Text.StringExtensions.ToVerbatimLiteral(thisstring) 'Louis\.Text\.StringExtensions\.ToVerbatimLiteral\(this string\)') on [this](Louis.Text.StringExtensions.md#Louis.Text.StringExtensions.GetVerbatimLiteralLength(thisstring).this 'Louis\.Text\.StringExtensions\.GetVerbatimLiteralLength\(this string\)\.this')\.
 
 <a name='Louis.Text.StringExtensions.ToClippedLiteral(thisstring,Louis.Text.StringLiteralKind,int,int,bool)'></a>
 
@@ -139,7 +139,7 @@ The number of characters to leave after clipping\.
 `useUnicodeEllipsis` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
 
 [true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use a single Unicode character Ellipsis \(`'\x2026'`, `…`\) to replace the clipped part;
-            [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use three dots \(`.`\) instead\. Default is [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
+            [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use three dots \(`...`\) instead\. Default is [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
@@ -202,7 +202,7 @@ The number of characters to leave after clipping\.
 `useUnicodeEllipsis` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
 
 [true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use a single Unicode character Ellipsis \(`'\x2026'`, `…`\) to replace the clipped part;
-            [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use three dots \(`.`\) instead\. Default is [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
+            [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use three dots \(`...`\) instead\. Default is [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  
@@ -261,7 +261,7 @@ The number of characters to leave after clipping\.
 `useUnicodeEllipsis` [System\.Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean 'System\.Boolean')
 
 [true](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use a single Unicode character Ellipsis \(`'\x2026'`, `…`\) to replace the clipped part;
-            [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use three dots \(`.`\) instead\. Default is [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
+            [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool') to use three dots \(`...`\) instead\. Default is [false](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/bool 'https://docs\.microsoft\.com/en\-us/dotnet/csharp/language\-reference/builtin\-types/bool')\.
 
 #### Returns
 [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')  

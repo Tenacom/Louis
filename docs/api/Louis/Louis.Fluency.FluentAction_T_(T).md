@@ -26,5 +26,5 @@ The parameter of the method that this delegate encapsulates\.
 #### Returns
 [T](Louis.Fluency.FluentAction_T_(T).md#Louis.Fluency.FluentAction_T_(T).T 'Louis\.Fluency\.FluentAction\<T\>\(T\)\.T')  
 The return value of the method that this delegate encapsulates\.
-            This is usually \(but not obligatorily\), at least is [T](Louis.Fluency.FluentAction_T_(T).md#Louis.Fluency.FluentAction_T_(T).T 'Louis\.Fluency\.FluentAction\<T\>\(T\)\.T') is a reference type,
+            This is usually \(but not obligatorily\), at least if [T](Louis.Fluency.FluentAction_T_(T).md#Louis.Fluency.FluentAction_T_(T).T 'Louis\.Fluency\.FluentAction\<T\>\(T\)\.T') is a reference type,
             the same reference that was passed to the method\.

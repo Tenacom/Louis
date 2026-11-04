@@ -10,6 +10,12 @@ public static class SelfCheck
 ```
 
 Inheritance [System\.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object 'System\.Object') → SelfCheck
+
+### Remarks
+
+The message of every exception created by this class names the assembly of the calling method,
+            as the call stack reports it. When the JIT compiler removes the frame of the calling method,
+            by inlining it into its own caller or by a tail call, the message names the assembly of the next frame instead.
 ### Methods
 
 <a name='Louis.Diagnostics.SelfCheck.CriticalFailure(string,string,int)'></a>
@@ -35,14 +41,14 @@ The exception message\.
 `filePath` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The path of the source file where this method is called\.
-            This parameter is automatically added by the compiler amd should never be provided explicitly\.
+            This parameter is automatically added by the compiler and should never be provided explicitly\.
 
 <a name='Louis.Diagnostics.SelfCheck.CriticalFailure(string,string,int).lineNumber'></a>
 
 `lineNumber` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
 
 The line number in source where this method is called\.
-            This parameter is automatically added by the compiler amd should never be provided explicitly\.
+            This parameter is automatically added by the compiler and should never be provided explicitly\.
 
 #### Returns
 [CriticalInternalErrorException](Louis.Diagnostics.CriticalInternalErrorException.md 'Louis\.Diagnostics\.CriticalInternalErrorException')  
@@ -85,14 +91,14 @@ The exception message\.
 `filePath` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The path of the source file where this method is called\.
-            This parameter is automatically added by the compiler amd should never be provided explicitly\.
+            This parameter is automatically added by the compiler and should never be provided explicitly\.
 
 <a name='Louis.Diagnostics.SelfCheck.Fail(string,string,int).lineNumber'></a>
 
 `lineNumber` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
 
 The line number in source where this method is called\.
-            This parameter is automatically added by the compiler amd should never be provided explicitly\.
+            This parameter is automatically added by the compiler and should never be provided explicitly\.
 
 ### Remarks
 
@@ -130,14 +136,14 @@ The exception message\.
 `filePath` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The path of the source file where this method is called\.
-            This parameter is automatically added by the compiler amd should never be provided explicitly\.
+            This parameter is automatically added by the compiler and should never be provided explicitly\.
 
 <a name='Louis.Diagnostics.SelfCheck.Fail_T_(string,string,int).lineNumber'></a>
 
 `lineNumber` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
 
 The line number in source where this method is called\.
-            This parameter is automatically added by the compiler amd should never be provided explicitly\.
+            This parameter is automatically added by the compiler and should never be provided explicitly\.
 
 #### Returns
 [T](Louis.Diagnostics.SelfCheck.md#Louis.Diagnostics.SelfCheck.Fail_T_(string,string,int).T 'Louis\.Diagnostics\.SelfCheck\.Fail\<T\>\(string, string, int\)\.T')  
@@ -172,14 +178,14 @@ The exception message\.
 `filePath` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The path of the source file where this method is called\.
-            This parameter is automatically added by the compiler amd should never be provided explicitly\.
+            This parameter is automatically added by the compiler and should never be provided explicitly\.
 
 <a name='Louis.Diagnostics.SelfCheck.FailCritically(string,string,int).lineNumber'></a>
 
 `lineNumber` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
 
 The line number in source where this method is called\.
-            This parameter is automatically added by the compiler amd should never be provided explicitly\.
+            This parameter is automatically added by the compiler and should never be provided explicitly\.
 
 ### Remarks
 
@@ -221,14 +227,14 @@ The exception message\.
 `filePath` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The path of the source file where this method is called\.
-            This parameter is automatically added by the compiler amd should never be provided explicitly\.
+            This parameter is automatically added by the compiler and should never be provided explicitly\.
 
 <a name='Louis.Diagnostics.SelfCheck.FailCritically_T_(string,string,int).lineNumber'></a>
 
 `lineNumber` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
 
 The line number in source where this method is called\.
-            This parameter is automatically added by the compiler amd should never be provided explicitly\.
+            This parameter is automatically added by the compiler and should never be provided explicitly\.
 
 #### Returns
 [T](Louis.Diagnostics.SelfCheck.md#Louis.Diagnostics.SelfCheck.FailCritically_T_(string,string,int).T 'Louis\.Diagnostics\.SelfCheck\.FailCritically\<T\>\(string, string, int\)\.T')  
@@ -267,14 +273,14 @@ The exception message\.
 `filePath` [System\.String](https://learn.microsoft.com/en-us/dotnet/api/system.string 'System\.String')
 
 The path of the source file where this method is called\.
-            This parameter is automatically added by the compiler amd should never be provided explicitly\.
+            This parameter is automatically added by the compiler and should never be provided explicitly\.
 
 <a name='Louis.Diagnostics.SelfCheck.Failure(string,string,int).lineNumber'></a>
 
 `lineNumber` [System\.Int32](https://learn.microsoft.com/en-us/dotnet/api/system.int32 'System\.Int32')
 
 The line number in source where this method is called\.
-            This parameter is automatically added by the compiler amd should never be provided explicitly\.
+            This parameter is automatically added by the compiler and should never be provided explicitly\.
 
 #### Returns
 [InternalErrorException](Louis.Diagnostics.InternalErrorException.md 'Louis\.Diagnostics\.InternalErrorException')  
