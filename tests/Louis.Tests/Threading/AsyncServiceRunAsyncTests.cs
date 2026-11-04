@@ -4,7 +4,6 @@
 using Louis.Threading;
 using TUnit.Assertions.Enums;
 
-#pragma warning disable CA1849 // Call async methods when in an async method - CancelAsync does not exist on .NET Framework
 [Timeout(10_000)]
 internal sealed class AsyncServiceRunAsyncTests : AsyncServiceTestsBase
 {
@@ -129,7 +128,12 @@ internal sealed class AsyncServiceRunAsyncTests : AsyncServiceTestsBase
         var runTask = Service.RunAsync(tokenSource.Token);
         await Service.SetupEntered;
 
+#if NETFRAMEWORK
+        // On .NET Framework, CancelAsync does not exist, so we use Cancel() instead.
         tokenSource.Cancel();
+#else
+        await tokenSource.CancelAsync();
+#endif
 
         await Assert.That(Service.SetupToken.IsCancellationRequested).IsTrue();
 
@@ -175,7 +179,12 @@ internal sealed class AsyncServiceRunAsyncTests : AsyncServiceTestsBase
         var runTask = Service.RunAsync(tokenSource.Token);
         await Service.ExecuteEntered;
 
+#if NETFRAMEWORK
+        // On .NET Framework, CancelAsync does not exist, so we use Cancel() instead.
         tokenSource.Cancel();
+#else
+        await tokenSource.CancelAsync();
+#endif
 
         await Assert.That(Service.ExecuteToken.IsCancellationRequested).IsTrue();
 
@@ -211,7 +220,12 @@ internal sealed class AsyncServiceRunAsyncTests : AsyncServiceTestsBase
         var runTask = Service.RunAsync(tokenSource.Token);
         await Service.ExecuteEntered;
 
+#if NETFRAMEWORK
+        // On .NET Framework, CancelAsync does not exist, so we use Cancel() instead.
         tokenSource.Cancel();
+#else
+        await tokenSource.CancelAsync();
+#endif
         Service.ExecuteGate.SetResult(true);
         await runTask;
 

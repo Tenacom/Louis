@@ -6,7 +6,6 @@ using TUnit.Assertions.Enums;
 
 // The log hooks of AsyncService are sealed in AsyncHostedService, so these tests check what the logger receives.
 // The event ids are numbers on purpose: they are the contract a log reader sees.
-#pragma warning disable CA1849 // Call async methods when in an async method - CancelAsync does not exist on .NET Framework
 [Timeout(10_000)]
 internal sealed class AsyncHostedServiceLoggingTests : AsyncHostedServiceTestsBase
 {
@@ -96,7 +95,12 @@ internal sealed class AsyncHostedServiceLoggingTests : AsyncHostedServiceTestsBa
         var startTask = Service.StartAsync(tokenSource.Token);
         await Service.SetupEntered;
 
+#if NETFRAMEWORK
+        // On .NET Framework, CancelAsync does not exist, so we use Cancel() instead.
         tokenSource.Cancel();
+#else
+        await tokenSource.CancelAsync();
+#endif
         Service.SetupGate.SetException(new OperationCanceledException(Service.SetupToken));
 
         _ = await Assert.That(() => startTask).Throws<OperationCanceledException>();

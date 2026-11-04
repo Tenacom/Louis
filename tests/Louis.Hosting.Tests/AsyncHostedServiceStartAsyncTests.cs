@@ -3,7 +3,6 @@
 
 using Louis.Threading;
 
-#pragma warning disable CA1849 // Call async methods when in an async method - CancelAsync does not exist on .NET Framework
 [Timeout(10_000)]
 internal sealed class AsyncHostedServiceStartAsyncTests : AsyncHostedServiceTestsBase
 {
@@ -75,8 +74,12 @@ internal sealed class AsyncHostedServiceStartAsyncTests : AsyncHostedServiceTest
         var startTask = Service.StartAsync(tokenSource.Token);
         await Service.SetupEntered;
 
+#if NETFRAMEWORK
+        // On .NET Framework, CancelAsync does not exist, so we use Cancel() instead.
         tokenSource.Cancel();
-
+#else
+        await tokenSource.CancelAsync();
+#endif
         await Assert.That(Service.SetupToken.IsCancellationRequested).IsTrue();
 
         Service.SetupGate.SetException(new OperationCanceledException(Service.SetupToken));
