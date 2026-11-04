@@ -26,7 +26,7 @@ public static class AsyncDisposableExtensions
     {
         Guard.IsNotNull(@this, nameof(@this));
 
-#pragma warning disable CA2012 // Use ValueTasks correctly - ValueTask gets consumed only once, hence this is correct usage.
+#pragma warning disable CA2012 // Use ValueTasks correctly - This is correct usage because we consume the ValueTask only once.
         @this.DisposeAsync().GetAwaiter().GetResult();
 #pragma warning restore CA2012 // Use ValueTasks correctly
     }

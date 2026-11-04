@@ -10,7 +10,8 @@ using System.Text;
 namespace Louis.Text;
 
 #pragma warning disable CA1815 // Override equals and operator equals on value types - They would never be used anyway
-#pragma warning disable RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads - Just mimicking StringBuilder.AppendInterpolatedStringHandler's APIs here.
+// We don't decide the shape of the APIs here, the compiler does.
+#pragma warning disable RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads
 
 /// <summary>
 /// <para>Provides an interpolated string handler that only performs formatting if a given condition is <see langword="true"/>.</para>
