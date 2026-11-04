@@ -78,9 +78,7 @@ partial class RangeCheck
     public static bool Verify<T>(T? value, T min, T max, bool acceptNull)
         where T : class, IComparable<T>
     {
-#pragma warning disable CA1062 // Validate arguments of public methods - min and max are non-nullable, and no overload null-checks them
         EnsureValidRange(min, max);
-#pragma warning restore CA1062 // Validate arguments of public methods
         return value is null ? acceptNull : UnsafeVerify(value, min, max);
     }
 

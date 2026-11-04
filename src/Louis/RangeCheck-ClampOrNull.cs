@@ -30,9 +30,7 @@ partial class RangeCheck
     public static T? ClampOrNull<T>(T? value, T min, T max)
         where T : class, IComparable<T>
     {
-#pragma warning disable CA1062 // Validate arguments of public methods - min and max are non-nullable, and no overload null-checks them
         EnsureValidRange(min, max);
-#pragma warning restore CA1062 // Validate arguments of public methods
         return value is null ? null : UnsafeClamp(value, min, max);
     }
 

@@ -16,6 +16,9 @@ public static partial class RangeCheck
     private static void EnsureValidRange<T>(T min, T max)
         where T : IComparable<T>
     {
+        Guard.IsNotNull(min);
+        Guard.IsNotNull(max);
+
         if (min.CompareTo(max) > 0)
         {
             ThrowInvalidRange(min, max);
@@ -25,6 +28,8 @@ public static partial class RangeCheck
     private static void EnsureValidComparerAndRange<T>(T min, T max, IComparer<T> comparer)
         where T : notnull
     {
+        Guard.IsNotNull(min);
+        Guard.IsNotNull(max);
         Guard.IsNotNull(comparer);
 
         if (comparer.Compare(min, max) > 0)
