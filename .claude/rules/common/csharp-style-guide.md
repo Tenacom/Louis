@@ -122,8 +122,10 @@ Extension blocks need some warning suppression because of bugs in Roslyn analyze
 /// <summary>
 /// Provides extension methods for `MyClass` instances.
 /// </summary>
-#pragma warning disable CA1034 // Nested types should not be visible — false positive on C# 14 extension blocks; fixed in .NET 11, backport to .NET 10 requested in https://github.com/dotnet/sdk/issues/53984
-#pragma warning disable CA1708 // Identifiers should differ by more than case — false positive on classes with C# 14 extension blocks; fixed in .NET 11, https://github.com/dotnet/sdk/issues/51716
+// False positive on C# 14 extension blocks. Fixed in .NET 11, backport to .NET 10 requested in https://github.com/dotnet/sdk/issues/53984
+#pragma warning disable CA1034 // Nested types should not be visible
+// False positive on classes with C# 14 extension blocks. Fixed in .NET 11: https://github.com/dotnet/sdk/issues/51716
+#pragma warning disable CA1708 // Identifiers should differ by more than case
 public static class MyClassExtensions
 {
     extension(MyClass @this)
@@ -260,6 +262,8 @@ A line of C# is at most 140 characters, including indentation. The limit covers 
 
 A URL is never broken, and no line is wrapped to fit one. A line that holds a URL complies when its length without the URL is within the limit.
 
+When the justification for a diagnostic suppression causes a line to exceed the limit, instead of shortening the justification, move it to one or more comment lines immediately above the suppression.
+
 The limit is a review rule, not a formatter setting. `.editorconfig` has no `max_line_length` on purpose, so no tool reformats existing code on its own.
 
 New and modified lines always comply. When you work in a file, by adding to it, reworking it, or fixing something in it, bring the whole file within the limit. Commit those extra wraps separately, so that the change under review stays readable. A mechanical sweep that touches a line or two in many files does not count as working in them. There, comply on the lines you touch and leave the rest.
@@ -327,3 +331,4 @@ Invocation, correct:
 ## ReSharper suppressions
 
 Canonical form: `// ReSharper disable once <DiagnosticId> // <justification>`. The justification comment is mandatory.
+When the justification does not fit, it goes on the line above, as "Line length" says.
