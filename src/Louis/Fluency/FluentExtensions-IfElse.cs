@@ -33,9 +33,7 @@ partial class FluentExtensions
         Guard.IsNotNull(then);
         Guard.IsNotNull(@else, nameof(@else));
 
-#pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
         return condition ? then(@this) : @else(@this);
-#pragma warning restore CA1062 // Validate arguments of public methods
     }
 
     /// <summary>
@@ -62,7 +60,6 @@ partial class FluentExtensions
         Guard.IsNotNull(then);
         Guard.IsNotNull(@else, nameof(@else));
 
-#pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
         if (condition)
         {
             then(@this);
@@ -71,7 +68,6 @@ partial class FluentExtensions
         {
             @else(@this);
         }
-#pragma warning restore CA1062 // Validate arguments of public methods
 
         return @this;
     }

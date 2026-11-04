@@ -63,9 +63,7 @@ partial class RangeCheck
     public static T? ClampOrNull<T>(T? value, T min, T max, IComparer<T> comparer)
         where T : class
     {
-#pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
         EnsureValidComparerAndRange(min, max, comparer);
-#pragma warning restore CA1062 // Validate arguments of public methods
         return value is null ? null : UnsafeClamp(value, min, max, comparer);
     }
 
@@ -121,9 +119,7 @@ partial class RangeCheck
     public static T? ClampOrNull<T>(T? value, T min, T max, IComparer<T> comparer)
         where T : struct
     {
-#pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
         EnsureValidComparerAndRange(min, max, comparer);
-#pragma warning restore CA1062 // Validate arguments of public methods
         return value.HasValue ? UnsafeClamp(value.Value, min, max, comparer) : null;
     }
 }

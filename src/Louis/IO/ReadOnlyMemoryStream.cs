@@ -14,9 +14,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using CommunityToolkit.Diagnostics;
 using Louis.Diagnostics;
-#if !NET6_0_OR_GREATER
-using Louis.Diagnostics.Internal;
-#endif
 
 namespace Louis.IO;
 
@@ -155,9 +152,7 @@ public sealed class ReadOnlyMemoryStream : Stream
     /// <exception cref="ObjectDisposedException">The stream is closed.</exception>
     public override int Read(byte[] buffer, int offset, int count)
     {
-#pragma warning disable CA1062 // Validate arguments of public methods - False positive
         ValidateBufferArguments(buffer, offset, count);
-#pragma warning restore CA1062 // Validate arguments of public methods
         EnsureNotClosed();
 
         var n = _data.Length - _position;
@@ -236,9 +231,7 @@ public sealed class ReadOnlyMemoryStream : Stream
     public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
     {
         EnsureNotClosed();
-#pragma warning disable CA1062 // Validate arguments of public methods - False positive
         ValidateBufferArguments(buffer, offset, count);
-#pragma warning restore CA1062 // Validate arguments of public methods
 
         if (cancellationToken.IsCancellationRequested)
         {
@@ -354,9 +347,7 @@ public sealed class ReadOnlyMemoryStream : Stream
     {
         // Validate arguments for compatibility,
         // although bufferSize is only for show, as we're going to copy all data in one go.
-#pragma warning disable CA1062 // Validate arguments of public methods - False positive
         ValidateCopyToArguments(destination, bufferSize);
-#pragma warning restore CA1062 // Validate arguments of public methods
         EnsureNotClosed();
 
         // EmulateRead will increment _position, so save its value
@@ -367,9 +358,7 @@ public sealed class ReadOnlyMemoryStream : Stream
             return;
         }
 
-#pragma warning disable CA1062 // Validate arguments of public methods - False positive
         CopyToInternal(destination, originalPosition);
-#pragma warning restore CA1062 // Validate arguments of public methods
     }
 
     /// <summary>
@@ -387,9 +376,7 @@ public sealed class ReadOnlyMemoryStream : Stream
     /// This exception is stored into the returned task.</exception>
     public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
     {
-#pragma warning disable CA1062 // Validate arguments of public methods - False positive
         ValidateCopyToArguments(destination, bufferSize);
-#pragma warning restore CA1062 // Validate arguments of public methods
         EnsureNotClosed();
 
         if (cancellationToken.IsCancellationRequested)
@@ -410,9 +397,7 @@ public sealed class ReadOnlyMemoryStream : Stream
         {
 #if NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
             // On runtimes that have Stream.WriteAsync(ReadOnlyMemory<byte>, CancellationToken), just use that.
-#pragma warning disable CA1062 // Validate arguments of public methods - False positive
             return destination.WriteAsync(_data.Slice(originalPosition, remaining), cancellationToken).AsTask();
-#pragma warning restore CA1062 // Validate arguments of public methods
 #else
             // If we cannot use WriteAsync(ReadOnlyMemory<byte>, CancellationToken), we need an array.
             // Our data, being a ReadOnlyMemory<byte>, could (and most times will) be backed by an array or a portion thereof.
@@ -632,7 +617,7 @@ public sealed class ReadOnlyMemoryStream : Stream
 
 #if !NET6_0_OR_GREATER
 
-    private static void ValidateBufferArguments([ValidatedNotNull] byte[]? buffer, int offset, int count)
+    private static void ValidateBufferArguments(byte[]? buffer, int offset, int count)
     {
         Guard.IsNotNull(buffer);
         Guard.IsGreaterThanOrEqualTo(offset, 0);
@@ -642,7 +627,7 @@ public sealed class ReadOnlyMemoryStream : Stream
         }
     }
 
-    private static void ValidateCopyToArguments([ValidatedNotNull] Stream? destination, int bufferSize)
+    private static void ValidateCopyToArguments(Stream? destination, int bufferSize)
     {
         Guard.IsNotNull(destination);
         Guard.IsGreaterThan(bufferSize, 0);

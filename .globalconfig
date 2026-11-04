@@ -593,7 +593,7 @@ dotnet_diagnostic.CA1021.severity = none # CA1021: Avoid out parameters
 # Miscellaneous configuration
 dotnet_code_quality.CA1303.use_naming_heuristic = false                   # Don't raise CA1303 just because a parameter name contains Text, Message, or Caption.
 dotnet_code_quality.CA1062.exclude_extension_method_this_parameter = true # Extension methods: null check may be skipped on "this" parameter.
-dotnet_code_quality.CA1062.null_check_validation_methods = System.String.IsNullOrEmpty|System.String.IsNullOrWhiteSpace
+dotnet_code_quality.CA1062.null_check_validation_methods = System.String.IsNullOrEmpty(System.String)|System.String.IsNullOrWhiteSpace(System.String)|System.IO.Stream.ValidateCopyToArguments(System.IO.Stream,System.Int32)|CommunityToolkit.Diagnostics.Guard.IsNotNull``1(``0,System.String)
 dotnet_code_quality.dispose_ownership_transfer_at_constructor = true      # Disposables passed to a constructor must be disposed by the constructed object.
 
 # Suppress some annoying IDE messages

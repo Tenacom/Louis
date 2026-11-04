@@ -51,9 +51,7 @@ partial class RangeCheck
     public static bool Verify<T>(T value, T min, T max, IComparer<T> comparer)
         where T : notnull
     {
-#pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
         EnsureValidComparerAndRange(min, max, comparer);
-#pragma warning restore CA1062 // Validate arguments of public methods
         return UnsafeVerify(value, min, max, comparer);
     }
 
@@ -114,9 +112,7 @@ partial class RangeCheck
     public static bool Verify<T>(T? value, T min, T max, bool acceptNull, IComparer<T> comparer)
         where T : class
     {
-#pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
         EnsureValidComparerAndRange(min, max, comparer);
-#pragma warning restore CA1062 // Validate arguments of public methods
         return value is null ? acceptNull : UnsafeVerify(value, min, max, comparer);
     }
 
@@ -175,9 +171,7 @@ partial class RangeCheck
     public static bool Verify<T>(T? value, T min, T max, bool acceptNull, IComparer<T> comparer)
         where T : struct
     {
-#pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
         EnsureValidComparerAndRange(min, max, comparer);
-#pragma warning restore CA1062 // Validate arguments of public methods
         return value.HasValue ? UnsafeVerify(value.Value, min, max, comparer) : acceptNull;
     }
 

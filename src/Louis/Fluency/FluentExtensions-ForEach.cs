@@ -35,12 +35,10 @@ partial class FluentExtensions
         Guard.IsNotNull(action);
         Guard.IsNotNull(sequence);
 
-#pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
         foreach (var item in sequence)
         {
             @this = action(@this, item);
         }
-#pragma warning restore CA1062 // Validate arguments of public methods
 
         return @this;
     }
@@ -70,12 +68,10 @@ partial class FluentExtensions
         Guard.IsNotNull(action);
         Guard.IsNotNull(sequence);
 
-#pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
         foreach (var item in sequence)
         {
             action(@this, item);
         }
-#pragma warning restore CA1062 // Validate arguments of public methods
 
         return @this;
     }
@@ -115,12 +111,10 @@ partial class FluentExtensions
         Guard.IsNotNull(sequence);
 
         var index = 0;
-#pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
         foreach (var item in sequence)
         {
             @this = action(@this, item, index++);
         }
-#pragma warning restore CA1062 // Validate arguments of public methods
 
         return @this;
     }
@@ -156,12 +150,10 @@ partial class FluentExtensions
         Guard.IsNotNull(sequence);
 
         var index = 0;
-#pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
         foreach (var item in sequence)
         {
             action(@this, item, index++);
         }
-#pragma warning restore CA1062 // Validate arguments of public methods
 
         return @this;
     }
@@ -191,9 +183,7 @@ partial class FluentExtensions
 
         foreach (var item in span)
         {
-#pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
             @this = action(@this, item);
-#pragma warning restore CA1062 // Validate arguments of public methods
         }
 
         return @this;
@@ -223,9 +213,7 @@ partial class FluentExtensions
 
         foreach (var item in span)
         {
-#pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
             action(@this, item);
-#pragma warning restore CA1062 // Validate arguments of public methods
         }
 
         return @this;
@@ -263,9 +251,7 @@ partial class FluentExtensions
 
         for (var i = 0; i < span.Length; i++)
         {
-#pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
             @this = action(@this, span[i], i);
-#pragma warning restore CA1062 // Validate arguments of public methods
         }
 
         return @this;
@@ -299,9 +285,7 @@ partial class FluentExtensions
 
         for (var i = 0; i < span.Length; i++)
         {
-#pragma warning disable CA1062 // Validate arguments of public methods - False positive, see https://github.com/CommunityToolkit/dotnet/issues/843
             action(@this, span[i], i);
-#pragma warning restore CA1062 // Validate arguments of public methods
         }
 
         return @this;
