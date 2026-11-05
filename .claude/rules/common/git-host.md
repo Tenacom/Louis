@@ -1,4 +1,4 @@
-﻿# Git host
+# Git host
 
 This file is the same in every repository that copies `.claude`. A fact specific to one repository lives in another rule file.
 
