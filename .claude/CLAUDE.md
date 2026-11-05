@@ -6,7 +6,7 @@ See `.claude/rules/` for project instructions.
 
 ## Rules index
 
-The `.claude` directory is meant to be copied whole into other projects. This index says what survives the copy unchanged and what has to be rewritten on arrival. Each Markdown file under `.claude` says the same of itself in its first paragraph, so that the information survives a copy without this index.
+The `.claude` directory is meant to be copied whole into other projects. This index says what survives the copy unchanged and what has to be rewritten on arrival. Each Markdown file under `.claude` says the same of itself in its first paragraph, so that the information survives a copy without this index. The rule files are split by the same criterion: `rules/common/` holds the portable ones, and `rules/project/` the project-specific ones. A file name is unique across both directories, so the rule files refer to each other by bare name.
 
 ### Portable: copy verbatim
 
