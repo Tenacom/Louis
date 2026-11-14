@@ -9,27 +9,27 @@ namespace Louis.Text;
 partial class StringExtensions
 {
     /// <summary>
-    /// Gets the length of the <see href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/strings/#quoted-string-literals">quoted literal</see>
+    /// Computes the length of the <see href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/strings/#quoted-string-literals">quoted literal</see>
     /// representation of a string.
     /// </summary>
     /// <param name="this">The <see langword="string"/> on which this method is called.</param>
     /// <returns>The length of the string that would result from calling
     /// <see cref="ToQuotedLiteral"/> on <paramref name="this"/>.</returns>
-    public static int GetQuotedLiteralLength(this string? @this)
-        => @this is null ? InternalConstants.QuotedNullLength : @this.AsSpan().GetQuotedLiteralLength();
+    public static int ComputeQuotedLiteralLength(this string? @this)
+        => @this is null ? InternalConstants.QuotedNullLength : @this.AsSpan().ComputeQuotedLiteralLength();
 
     /// <summary>
-    /// Gets the length of the <see href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/strings/#verbatim-string-literals">verbatim literal</see>
+    /// Computes the length of the <see href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/strings/#verbatim-string-literals">verbatim literal</see>
     /// representation of a string.
     /// </summary>
     /// <param name="this">The <see langword="string"/> on which this method is called.</param>
     /// <returns>The length of the string that would result from calling
     /// <see cref="ToVerbatimLiteral"/> on <paramref name="this"/>.</returns>
-    public static int GetVerbatimLiteralLength(this string? @this)
-        => @this is null ? InternalConstants.QuotedNullLength : @this.AsSpan().GetVerbatimLiteralLength();
+    public static int ComputeVerbatimLiteralLength(this string? @this)
+        => @this is null ? InternalConstants.QuotedNullLength : @this.AsSpan().ComputeVerbatimLiteralLength();
 
     /// <summary>
-    /// Gets the length of the representation of a string as a string literal.
+    /// Computes the length of the representation of a string as a string literal.
     /// </summary>
     /// <param name="this">The <see langword="string"/> on which this method is called.</param>
     /// <param name="literalKind">A <see cref="StringLiteralKind"/> constant specifying
@@ -39,10 +39,10 @@ partial class StringExtensions
     /// with <paramref name="literalKind"/> as last parameter.</returns>
     /// <exception cref="ArgumentException"><paramref name="literalKind"/> is neither <see cref="StringLiteralKind.Quoted"/>
     /// nor <see cref="StringLiteralKind.Verbatim"/>.</exception>
-    public static int GetLiteralLength(this string? @this, StringLiteralKind literalKind)
+    public static int ComputeLiteralLength(this string? @this, StringLiteralKind literalKind)
     {
         InternalGuard.IsDefinedStringLiteralKind(literalKind);
 
-        return @this is null ? InternalConstants.QuotedNullLength : @this.AsSpan().GetLiteralLength(literalKind);
+        return @this is null ? InternalConstants.QuotedNullLength : @this.AsSpan().ComputeLiteralLength(literalKind);
     }
 }

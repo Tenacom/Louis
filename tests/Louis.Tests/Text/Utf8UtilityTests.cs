@@ -72,39 +72,39 @@ internal sealed class Utf8UtilityTests
 
     [Test]
     [MethodDataSource(nameof(MaxCharsRows))]
-    public async Task GetMaxCharsInBytes_WithString_ReturnsCharsThatFit(string input, int maxBytes, int expected)
+    public async Task ComputeMaxCharsInBytes_WithString_ReturnsCharsThatFit(string input, int maxBytes, int expected)
     {
-        await Assert.That(Utf8Utility.GetMaxCharsInBytes(input, maxBytes)).IsEqualTo(expected);
+        await Assert.That(Utf8Utility.ComputeMaxCharsInBytes(input, maxBytes)).IsEqualTo(expected);
     }
 
     [Test]
     [MethodDataSource(nameof(MaxCharsRows))]
-    public async Task GetMaxCharsInBytes_WithSpan_ReturnsCharsThatFit(string input, int maxBytes, int expected)
+    public async Task ComputeMaxCharsInBytes_WithSpan_ReturnsCharsThatFit(string input, int maxBytes, int expected)
     {
-        await Assert.That(Utf8Utility.GetMaxCharsInBytes(input.AsSpan(), maxBytes)).IsEqualTo(expected);
+        await Assert.That(Utf8Utility.ComputeMaxCharsInBytes(input.AsSpan(), maxBytes)).IsEqualTo(expected);
     }
 
     [Test]
-    public async Task GetMaxCharsInBytes_WithNullString_ThrowsArgumentNullException()
+    public async Task ComputeMaxCharsInBytes_WithNullString_ThrowsArgumentNullException()
     {
         // ! Null on purpose: testing null detection
-        static void Act() => Utf8Utility.GetMaxCharsInBytes(null!, 10);
+        static void Act() => Utf8Utility.ComputeMaxCharsInBytes(null!, 10);
 
         await Assert.That(Act).Throws<ArgumentNullException>().WithParameterName("str");
     }
 
     [Test]
-    public async Task GetMaxCharsInBytes_WithStringAndNegativeMaxBytes_ThrowsArgumentOutOfRangeException()
+    public async Task ComputeMaxCharsInBytes_WithStringAndNegativeMaxBytes_ThrowsArgumentOutOfRangeException()
     {
-        static void Act() => Utf8Utility.GetMaxCharsInBytes("abc", -1);
+        static void Act() => Utf8Utility.ComputeMaxCharsInBytes("abc", -1);
 
         await Assert.That(Act).Throws<ArgumentOutOfRangeException>().WithParameterName("maxBytes");
     }
 
     [Test]
-    public async Task GetMaxCharsInBytes_WithSpanAndNegativeMaxBytes_ThrowsArgumentOutOfRangeException()
+    public async Task ComputeMaxCharsInBytes_WithSpanAndNegativeMaxBytes_ThrowsArgumentOutOfRangeException()
     {
-        static void Act() => Utf8Utility.GetMaxCharsInBytes("abc".AsSpan(), -1);
+        static void Act() => Utf8Utility.ComputeMaxCharsInBytes("abc".AsSpan(), -1);
 
         await Assert.That(Act).Throws<ArgumentOutOfRangeException>().WithParameterName("maxBytes");
     }
