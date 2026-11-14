@@ -38,6 +38,7 @@ The `.claude` directory is meant to be copied whole into other projects. This in
 
 - `rules/project/repository.md`: the upstream repository, the fork remote, the hosts and their platforms, the host file, CI, and the issue and PR templates. Entirely about this repo.
 - `rules/project/architecture.md`: the packages, the namespaces of `Louis`, the target frameworks and the `#if` policy, and the public API file layout. Entirely about this repo.
+- `rules/project/csharp.md`: the C# rules that differ here from `rules/common/csharp-style-guide.md`: classic extension methods and no extension blocks under `src/`, with the reason. Entirely about this repo.
 - `rules/project/documentation.md`: the documentation inventory: files, page kinds beyond guide and reference, subfolders of `docs/`, generated regions, generated folders, pinned reference pages. Entirely about this repo.
 - `rules/project/dependency-management.md`: the run-time dependencies of each package and the reason each is allowed, the polyfill packages, and the test and development dependency groups. The common part is in `rules/common/buildvana.md`.
 - `rules/project/terminology.md`: the one name for each thing the repository documents. Entirely about this repo.
