@@ -15,6 +15,41 @@ override Louis.IO.ReadOnlyMemoryStream.ReadAsync(System.Memory<byte> buffer, Sys
 override Louis.IO.ReadOnlyMemoryStream.WriteAsync(System.ReadOnlyMemory<byte> buffer, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
 override Louis.Text.ClippedLines.Equals(object? obj) -> bool
 override Louis.Text.ClippedLines.GetHashCode() -> int
+Louis.Processes.CommandLineFormatter
+Louis.Processes.ConsoleUtility
+Louis.Processes.IProcessRunner
+Louis.Processes.IProcessRunner.RunAsync(string! executable, System.Collections.Generic.IEnumerable<string!>! arguments, Louis.Processes.ProcessRunOptions? options = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Louis.Processes.ProcessResult!>!
+Louis.Processes.ProcessFailedException
+Louis.Processes.ProcessFailedException.ProcessFailedException(Louis.Processes.ProcessResult! result) -> void
+Louis.Processes.ProcessFailedException.Result.get -> Louis.Processes.ProcessResult!
+Louis.Processes.ProcessResult
+Louis.Processes.ProcessResult.CommandLine.get -> string!
+Louis.Processes.ProcessResult.Elapsed.get -> System.TimeSpan
+Louis.Processes.ProcessResult.ExitCode.get -> int
+Louis.Processes.ProcessResult.ProcessResult(string! commandLine, int exitCode, string! standardOutput, string! standardError, System.TimeSpan elapsed) -> void
+Louis.Processes.ProcessResult.StandardError.get -> string!
+Louis.Processes.ProcessResult.StandardOutput.get -> string!
+Louis.Processes.ProcessRunner
+Louis.Processes.ProcessRunner.ProcessRunner() -> void
+Louis.Processes.ProcessRunner.RunAsync(string! executable, System.Collections.Generic.IEnumerable<string!>! arguments, Louis.Processes.ProcessRunOptions? options = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Louis.Processes.ProcessResult!>!
+Louis.Processes.ProcessRunOptions
+Louis.Processes.ProcessRunOptions.Environment.get -> System.Collections.Generic.IReadOnlyDictionary<string!, string?>?
+Louis.Processes.ProcessRunOptions.Environment.init -> void
+Louis.Processes.ProcessRunOptions.InheritStandardStreams.get -> bool
+Louis.Processes.ProcessRunOptions.InheritStandardStreams.init -> void
+Louis.Processes.ProcessRunOptions.OnStandardErrorLine.get -> System.Action<string!>?
+Louis.Processes.ProcessRunOptions.OnStandardErrorLine.init -> void
+Louis.Processes.ProcessRunOptions.OnStandardOutputLine.get -> System.Action<string!>?
+Louis.Processes.ProcessRunOptions.OnStandardOutputLine.init -> void
+Louis.Processes.ProcessRunOptions.OutputEncoding.get -> System.Text.Encoding?
+Louis.Processes.ProcessRunOptions.OutputEncoding.init -> void
+Louis.Processes.ProcessRunOptions.ProcessRunOptions() -> void
+Louis.Processes.ProcessRunOptions.StandardInput.get -> System.IO.Stream?
+Louis.Processes.ProcessRunOptions.StandardInput.init -> void
+Louis.Processes.ProcessRunOptions.ThrowOnNonZeroExitCode.get -> bool
+Louis.Processes.ProcessRunOptions.ThrowOnNonZeroExitCode.init -> void
+Louis.Processes.ProcessRunOptions.WorkingDirectory.get -> string?
+Louis.Processes.ProcessRunOptions.WorkingDirectory.init -> void
 Louis.Text.ClippedLines
 Louis.Text.ClippedLines.ClippedLines() -> void
 Louis.Text.ClippedLines.Equals(Louis.Text.ClippedLines other) -> bool
@@ -53,6 +88,8 @@ Louis.Text.TrueConditionInterpolatedStringHandler.TrueConditionInterpolatedStrin
 Louis.Text.TrueConditionInterpolatedStringHandler.TrueConditionInterpolatedStringHandler(int literalLength, int formattedCount, bool condition, out bool shouldAppend) -> void
 static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, System.Collections.Generic.IEqualityComparer<TValue>! comparer, TValue value, System.Action<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
 static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, TValue value, System.Action<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
+static Louis.Processes.CommandLineFormatter.Format(string! executable, System.Collections.Generic.IEnumerable<string!>! arguments) -> string!
+static Louis.Processes.ConsoleUtility.SystemDefaultEncoding.get -> System.Text.Encoding!
 static Louis.Text.CharReadOnlySpanExtensions.ClipLines(this System.ReadOnlySpan<char> this, int headLines, int tailLines) -> Louis.Text.ClippedLines
 static Louis.Text.CharReadOnlySpanExtensions.ComputeLiteralLength(this System.ReadOnlySpan<char> this, Louis.Text.StringLiteralKind literalKind) -> int
 static Louis.Text.CharReadOnlySpanExtensions.ComputeQuotedLiteralLength(this System.ReadOnlySpan<char> this) -> int
