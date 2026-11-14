@@ -10,14 +10,14 @@ namespace Louis.Text;
 partial class CharReadOnlySpanExtensions
 {
     /// <summary>
-    /// Gets the length of the <see href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/strings/#quoted-string-literals">quoted literal</see>
+    /// Computes the length of the <see href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/strings/#quoted-string-literals">quoted literal</see>
     /// representation of a span of characters.
     /// </summary>
     /// <param name="this">The <see cref="ReadOnlySpan{T}">ReadOnlySpan&lt;char&gt;</see>
     /// on which this method is called.</param>
     /// <returns>The length of the string that would result from calling
     /// <see cref="ToQuotedLiteral"/> on <paramref name="this"/>.</returns>
-    public static int GetQuotedLiteralLength(this ReadOnlySpan<char> @this)
+    public static int ComputeQuotedLiteralLength(this ReadOnlySpan<char> @this)
     {
         var result = 2;
         foreach (var c in @this)
@@ -53,14 +53,14 @@ partial class CharReadOnlySpanExtensions
     }
 
     /// <summary>
-    /// Gets the length of the <see href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/strings/#verbatim-string-literals">verbatim literal</see>
+    /// Computes the length of the <see href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/strings/#verbatim-string-literals">verbatim literal</see>
     /// representation of a span of characters.
     /// </summary>
     /// <param name="this">The <see cref="ReadOnlySpan{T}">ReadOnlySpan&lt;char&gt;</see>
     /// on which this method is called.</param>
     /// <returns>The length of the string that would result from calling
     /// <see cref="ToVerbatimLiteral"/> on <paramref name="this"/>.</returns>
-    public static int GetVerbatimLiteralLength(this ReadOnlySpan<char> @this)
+    public static int ComputeVerbatimLiteralLength(this ReadOnlySpan<char> @this)
     {
         var result = 3 + @this.Length;
         foreach (var c in @this)
@@ -75,7 +75,7 @@ partial class CharReadOnlySpanExtensions
     }
 
     /// <summary>
-    /// Gets the length of the representation of a span of characters as a string literal.
+    /// Computes the length of the representation of a span of characters as a string literal.
     /// </summary>
     /// <param name="this">The <see cref="ReadOnlySpan{T}">ReadOnlySpan&lt;char&gt;</see>
     /// on which this method is called.</param>
@@ -86,13 +86,13 @@ partial class CharReadOnlySpanExtensions
     /// with <paramref name="literalKind"/> as last parameter.</returns>
     /// <exception cref="ArgumentException"><paramref name="literalKind"/> is neither <see cref="StringLiteralKind.Quoted"/>
     /// nor <see cref="StringLiteralKind.Verbatim"/>.</exception>
-    public static int GetLiteralLength(this ReadOnlySpan<char> @this, StringLiteralKind literalKind)
+    public static int ComputeLiteralLength(this ReadOnlySpan<char> @this, StringLiteralKind literalKind)
     {
         InternalGuard.IsDefinedStringLiteralKind(literalKind);
 
         return literalKind switch {
-            StringLiteralKind.Quoted => GetQuotedLiteralLength(@this),
-            StringLiteralKind.Verbatim => GetVerbatimLiteralLength(@this),
+            StringLiteralKind.Quoted => ComputeQuotedLiteralLength(@this),
+            StringLiteralKind.Verbatim => ComputeVerbatimLiteralLength(@this),
             _ => 0,
         };
     }

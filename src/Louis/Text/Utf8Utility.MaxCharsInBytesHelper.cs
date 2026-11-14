@@ -24,10 +24,10 @@ partial class Utf8Utility
             }
 
             var instance = new MaxCharsInBytesHelper { MaxBytes = maxBytes };
-            return instance.GetMaxCharsInBytes(chars);
+            return instance.ComputeMaxCharsInBytes(chars);
         }
 
-        private int GetMaxCharsInBytes(ReadOnlySpan<char> chars)
+        private int ComputeMaxCharsInBytes(ReadOnlySpan<char> chars)
         {
             foreach (var c in chars)
             {

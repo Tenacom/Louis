@@ -25,6 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **BREAKING CHANGE**: [`AsyncService.StartAndWaitAsync`](docs/api/Louis/Louis.Threading.AsyncService.md) no longer returns `AsyncServiceSetupResult.Faulted`, and throws the exception of `SetupAsync` instead.
 - **BREAKING CHANGE**: [`AsyncHostedService.StartAsync`](docs/api/Louis.Hosting/Louis.Hosting.AsyncHostedService.md) no longer throws `InvalidOperationException` when the setup phase is canceled, and throws `OperationCanceledException` instead.
 - **BREAKING CHANGE**: [`AsyncHostedService.StartAsync`](docs/api/Louis.Hosting/Louis.Hosting.AsyncHostedService.md) no longer throws `InvalidOperationException` when `SetupAsync` throws, and throws the exception of `SetupAsync` instead.
+- **BREAKING CHANGE**: [`StringExtensions.GetLiteralLength`](docs/api/Louis/Louis.Text.StringExtensions.md) and [`CharReadOnlySpanExtensions.GetLiteralLength`](docs/api/Louis/Louis.Text.CharReadOnlySpanExtensions.md) are renamed to `ComputeLiteralLength`.
+- **BREAKING CHANGE**: `StringExtensions.GetQuotedLiteralLength` and `CharReadOnlySpanExtensions.GetQuotedLiteralLength` are renamed to `ComputeQuotedLiteralLength`.
+- **BREAKING CHANGE**: `StringExtensions.GetVerbatimLiteralLength` and `CharReadOnlySpanExtensions.GetVerbatimLiteralLength` are renamed to `ComputeVerbatimLiteralLength`.
+- **BREAKING CHANGE**: [`Utf8Utility.GetMaxCharsInBytes`](docs/api/Louis/Louis.Text.Utf8Utility.md) is renamed to `ComputeMaxCharsInBytes`.
 
 ### Bugs fixed in this release
 
@@ -37,8 +41,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - When an asynchronous disposal was pending, [`EnumerableExtensions.DisposeAll`](docs/api/Louis/Louis.Collections.EnumerableExtensions.md) and `DisposeAllAsync` lost the exceptions of `Dispose` calls, and threw a `DisposeAsync` exception without the `AggregateException` wrapper.
 - The [`Louis.Text`](docs/api/Louis/Louis.Text.md) methods that build a string literal escaped a control character as `\xHH`, which C# reads together with the hex digits that follow.
 - [`UnicodeCharacterUtility.IsIdentifierStartCharacter`](docs/api/Louis/Louis.Text.UnicodeCharacterUtility.md) returned `false` for a letter number, such as `Ⅰ` (U+2160), so `IsValidIdentifier` rejected an identifier that starts with one.
-- [`Utf8Utility.GetMaxCharsInBytes`](docs/api/Louis/Louis.Text.Utf8Utility.md) counted a surrogate pair whose low surrogate is `U+DFFF`, such as the one of `U+10FFFF`, as six bytes instead of four.
-- `Utf8Utility.GetMaxCharsInBytes` did not count a high surrogate at the end of the input, even when its three-byte replacement character fit.
+- [`Utf8Utility.ComputeMaxCharsInBytes`](docs/api/Louis/Louis.Text.Utf8Utility.md) counted a surrogate pair whose low surrogate is `U+DFFF`, such as the one of `U+10FFFF`, as six bytes instead of four.
+- `Utf8Utility.ComputeMaxCharsInBytes` did not count a high surrogate at the end of the input, even when its three-byte replacement character fit.
 - [`ReadOnlyMemoryStream.Position`](docs/api/Louis/Louis.IO.ReadOnlyMemoryStream.md) threw `ArgumentOutOfRangeException` when set to 0.
 - The `ArgumentOutOfRangeException` that `ReadOnlyMemoryStream.Position` throws for a value above `int.MaxValue` had its message, not `value`, as its `ParamName`.
 - The `ObjectDisposedException` that a closed `ReadOnlyMemoryStream` throws had `Cannot access a closed Stream.` as its `ObjectName` instead of its `Message`.

@@ -37,7 +37,7 @@ public static partial class Utf8Utility
     /// at the start of the encoded string. If you plan to use the preamble, you should subtract 3 from the number
     /// of available bytes when calling this method.</para>
     /// </remarks>
-    public static int GetMaxCharsInBytes(string str, int maxBytes)
+    public static int ComputeMaxCharsInBytes(string str, int maxBytes)
     {
         Guard.IsNotNull(str);
         Guard.IsGreaterThanOrEqualTo(maxBytes, 0);
@@ -64,7 +64,7 @@ public static partial class Utf8Utility
     /// at the start of the encoded string. If you plan to use the preamble, you should subtract 3 from the number
     /// of available bytes when calling this method.</para>
     /// </remarks>
-    public static int GetMaxCharsInBytes(ReadOnlySpan<char> chars, int maxBytes)
+    public static int ComputeMaxCharsInBytes(ReadOnlySpan<char> chars, int maxBytes)
     {
         Guard.IsGreaterThanOrEqualTo(maxBytes, 0);
 
