@@ -3,17 +3,17 @@
 
 using Louis.Text;
 
-internal sealed class CharReadOnlySpanExtensionsClipLinesTests
+internal sealed class CharReadOnlySpanExtensionsComputeLineClippingTests
 {
     [Test]
-    [MethodDataSource(typeof(ClipLinesRows), nameof(ClipLinesRows.All))]
-    public async Task ClipLines_ReturnsRangesAndLineCounts(
+    [MethodDataSource(typeof(LineClippingRows), nameof(LineClippingRows.All))]
+    public async Task ComputeLineClipping_ReturnsRangesAndLineCounts(
         string input,
         int headLines,
         int tailLines,
         (string Head, string Tail, int HeadLineCount, int TailLineCount, int OmittedLineCount) expected)
     {
-        var result = input.AsSpan().ClipLines(headLines, tailLines);
+        var result = input.AsSpan().ComputeLineClipping(headLines, tailLines);
 
         await Assert.That(result.Head).IsEqualTo(new Range(0, expected.Head.Length));
         await Assert.That(result.Tail).IsEqualTo(new Range(input.Length - expected.Tail.Length, input.Length));
@@ -25,7 +25,7 @@ internal sealed class CharReadOnlySpanExtensionsClipLinesTests
     }
 
     [Test]
-    public async Task ClipLines_OnEveryShortText_FindsTheLinesOfAForwardScan()
+    public async Task ComputeLineClipping_OnEveryShortText_FindsTheLinesOfAForwardScan()
     {
         const int MaxLines = 4;
         var failures = new List<string>();
@@ -52,7 +52,7 @@ internal sealed class CharReadOnlySpanExtensionsClipLinesTests
                         tailLineCount,
                         lineCount - headLineCount - tailLineCount);
 
-                    var result = text.AsSpan().ClipLines(headLines, tailLines);
+                    var result = text.AsSpan().ComputeLineClipping(headLines, tailLines);
                     var actual = (result.Head, result.Tail, result.HeadLineCount, result.TailLineCount, result.OmittedLineCount);
                     if (!actual.Equals(expected))
                     {
@@ -68,12 +68,12 @@ internal sealed class CharReadOnlySpanExtensionsClipLinesTests
     [Test]
     [Arguments(-1, 0, "headLines")]
     [Arguments(0, -1, "tailLines")]
-    public async Task ClipLines_WithNegativeLineCount_ThrowsArgumentOutOfRangeException(
+    public async Task ComputeLineClipping_WithNegativeLineCount_ThrowsArgumentOutOfRangeException(
         int headLines,
         int tailLines,
         string paramName)
     {
-        void Act() => "abc".AsSpan().ClipLines(headLines, tailLines);
+        void Act() => "abc".AsSpan().ComputeLineClipping(headLines, tailLines);
 
         await Assert.That(Act).Throws<ArgumentOutOfRangeException>().WithParameterName(paramName);
     }

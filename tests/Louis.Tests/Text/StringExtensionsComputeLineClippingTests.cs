@@ -3,17 +3,17 @@
 
 using Louis.Text;
 
-internal sealed class StringExtensionsClipLinesTests
+internal sealed class StringExtensionsComputeLineClippingTests
 {
     [Test]
-    [MethodDataSource(typeof(ClipLinesRows), nameof(ClipLinesRows.All))]
-    public async Task ClipLines_ReturnsRangesAndLineCounts(
+    [MethodDataSource(typeof(LineClippingRows), nameof(LineClippingRows.All))]
+    public async Task ComputeLineClipping_ReturnsRangesAndLineCounts(
         string input,
         int headLines,
         int tailLines,
         (string Head, string Tail, int HeadLineCount, int TailLineCount, int OmittedLineCount) expected)
     {
-        var result = input.ClipLines(headLines, tailLines);
+        var result = input.ComputeLineClipping(headLines, tailLines);
 
         await Assert.That(result.Head).IsEqualTo(new Range(0, expected.Head.Length));
         await Assert.That(result.Tail).IsEqualTo(new Range(input.Length - expected.Tail.Length, input.Length));
@@ -25,20 +25,20 @@ internal sealed class StringExtensionsClipLinesTests
     }
 
     [Test]
-    public async Task ClipLines_WithNullString_ReturnsDefault()
+    public async Task ComputeLineClipping_WithNullString_ReturnsDefault()
     {
-        await Assert.That(((string?)null).ClipLines(2, 2)).IsEqualTo(default(ClippedLines));
+        await Assert.That(((string?)null).ComputeLineClipping(2, 2)).IsEqualTo(default(LineClipping));
     }
 
     [Test]
     [Arguments(-1, 0, "headLines")]
     [Arguments(0, -1, "tailLines")]
-    public async Task ClipLines_WithNegativeLineCount_ThrowsArgumentOutOfRangeException(
+    public async Task ComputeLineClipping_WithNegativeLineCount_ThrowsArgumentOutOfRangeException(
         int headLines,
         int tailLines,
         string paramName)
     {
-        void Act() => "abc".ClipLines(headLines, tailLines);
+        void Act() => "abc".ComputeLineClipping(headLines, tailLines);
 
         await Assert.That(Act).Throws<ArgumentOutOfRangeException>().WithParameterName(paramName);
     }

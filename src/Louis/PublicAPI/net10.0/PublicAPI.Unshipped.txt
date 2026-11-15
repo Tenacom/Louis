@@ -13,8 +13,8 @@
 *REMOVED*static Louis.Text.Utf8Utility.GetMaxCharsInBytes(string! str, int maxBytes) -> int
 override Louis.IO.ReadOnlyMemoryStream.ReadAsync(System.Memory<byte> buffer, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<int>
 override Louis.IO.ReadOnlyMemoryStream.WriteAsync(System.ReadOnlyMemory<byte> buffer, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
-override Louis.Text.ClippedLines.Equals(object? obj) -> bool
-override Louis.Text.ClippedLines.GetHashCode() -> int
+override Louis.Text.LineClipping.Equals(object? obj) -> bool
+override Louis.Text.LineClipping.GetHashCode() -> int
 Louis.Processes.CommandLineFormatter
 Louis.Processes.ConsoleUtility
 Louis.Processes.IProcessRunner
@@ -50,14 +50,6 @@ Louis.Processes.ProcessRunOptions.ThrowOnNonZeroExitCode.get -> bool
 Louis.Processes.ProcessRunOptions.ThrowOnNonZeroExitCode.init -> void
 Louis.Processes.ProcessRunOptions.WorkingDirectory.get -> string?
 Louis.Processes.ProcessRunOptions.WorkingDirectory.init -> void
-Louis.Text.ClippedLines
-Louis.Text.ClippedLines.ClippedLines() -> void
-Louis.Text.ClippedLines.Equals(Louis.Text.ClippedLines other) -> bool
-Louis.Text.ClippedLines.Head.get -> System.Range
-Louis.Text.ClippedLines.HeadLineCount.get -> int
-Louis.Text.ClippedLines.OmittedLineCount.get -> int
-Louis.Text.ClippedLines.Tail.get -> System.Range
-Louis.Text.ClippedLines.TailLineCount.get -> int
 Louis.Text.FalseConditionInterpolatedStringHandler
 Louis.Text.FalseConditionInterpolatedStringHandler.AppendFormatted(object? value, int alignment = 0, string? format = null) -> void
 Louis.Text.FalseConditionInterpolatedStringHandler.AppendFormatted(string? value) -> void
@@ -72,6 +64,14 @@ Louis.Text.FalseConditionInterpolatedStringHandler.AppendLiteral(string! value) 
 Louis.Text.FalseConditionInterpolatedStringHandler.FalseConditionInterpolatedStringHandler() -> void
 Louis.Text.FalseConditionInterpolatedStringHandler.FalseConditionInterpolatedStringHandler(int literalLength, int formattedCount, bool condition, out bool shouldAppend) -> void
 Louis.Text.FalseConditionInterpolatedStringHandler.ToStringAndClear() -> string!
+Louis.Text.LineClipping
+Louis.Text.LineClipping.Equals(Louis.Text.LineClipping other) -> bool
+Louis.Text.LineClipping.Head.get -> System.Range
+Louis.Text.LineClipping.HeadLineCount.get -> int
+Louis.Text.LineClipping.LineClipping() -> void
+Louis.Text.LineClipping.OmittedLineCount.get -> int
+Louis.Text.LineClipping.Tail.get -> System.Range
+Louis.Text.LineClipping.TailLineCount.get -> int
 Louis.Text.TrueConditionInterpolatedStringHandler
 Louis.Text.TrueConditionInterpolatedStringHandler.AppendFormatted(object? value, int alignment = 0, string? format = null) -> void
 Louis.Text.TrueConditionInterpolatedStringHandler.AppendFormatted(string? value) -> void
@@ -90,13 +90,13 @@ static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, System.Coll
 static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, TValue value, System.Action<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
 static Louis.Processes.CommandLineFormatter.Format(string! executable, System.Collections.Generic.IEnumerable<string!>! arguments) -> string!
 static Louis.Processes.ConsoleUtility.SystemDefaultEncoding.get -> System.Text.Encoding!
-static Louis.Text.CharReadOnlySpanExtensions.ClipLines(this System.ReadOnlySpan<char> this, int headLines, int tailLines) -> Louis.Text.ClippedLines
+static Louis.Text.CharReadOnlySpanExtensions.ComputeLineClipping(this System.ReadOnlySpan<char> this, int headLines, int tailLines) -> Louis.Text.LineClipping
 static Louis.Text.CharReadOnlySpanExtensions.ComputeLiteralLength(this System.ReadOnlySpan<char> this, Louis.Text.StringLiteralKind literalKind) -> int
 static Louis.Text.CharReadOnlySpanExtensions.ComputeQuotedLiteralLength(this System.ReadOnlySpan<char> this) -> int
 static Louis.Text.CharReadOnlySpanExtensions.ComputeVerbatimLiteralLength(this System.ReadOnlySpan<char> this) -> int
-static Louis.Text.ClippedLines.operator !=(Louis.Text.ClippedLines a, Louis.Text.ClippedLines b) -> bool
-static Louis.Text.ClippedLines.operator ==(Louis.Text.ClippedLines a, Louis.Text.ClippedLines b) -> bool
-static Louis.Text.StringExtensions.ClipLines(this string? this, int headLines, int tailLines) -> Louis.Text.ClippedLines
+static Louis.Text.LineClipping.operator !=(Louis.Text.LineClipping a, Louis.Text.LineClipping b) -> bool
+static Louis.Text.LineClipping.operator ==(Louis.Text.LineClipping a, Louis.Text.LineClipping b) -> bool
+static Louis.Text.StringExtensions.ComputeLineClipping(this string? this, int headLines, int tailLines) -> Louis.Text.LineClipping
 static Louis.Text.StringExtensions.ComputeLiteralLength(this string? this, Louis.Text.StringLiteralKind literalKind) -> int
 static Louis.Text.StringExtensions.ComputeQuotedLiteralLength(this string? this) -> int
 static Louis.Text.StringExtensions.ComputeVerbatimLiteralLength(this string? this) -> int
