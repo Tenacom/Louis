@@ -3,9 +3,11 @@
 
 #if NET8_0_OR_GREATER
 
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using Louis.Processes;
+using TUnit.Core.Enums;
 
 [Timeout(60_000)]
 internal sealed class ProcessRunnerCancellationTests
@@ -193,6 +195,39 @@ internal sealed class ProcessRunnerCancellationTests
     }
 
     [Test]
+    [RunOn(OS.Linux)]
+    public async Task RunAsync_WhenTokenIsSignaledAndProcessOutlivesKill_ThrowsAfterCallbackReturns(
+        CancellationToken cancellationToken)
+    {
+        Skip.Unless(await CanRunSudoWithoutPasswordAsync(cancellationToken), "sudo is missing, or needs a password.");
+
+        using var cancellationSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        var callbackHasReturned = false;
+        void CancelAndKeepRunning(string line)
+        {
+            cancellationSource.Cancel();
+            Thread.Sleep(TimeForAbortedRunToThrow);
+            callbackHasReturned = true;
+        }
+
+        // With no terminal, as on a CI runner, the shell that sudo starts runs as root, and the current user cannot kill it.
+        // Process.Kill then throws AggregateException, which must not replace the exception of the run.
+        // With a terminal, the kill ends the shell too, and the test passes without that exception.
+        // The shell that outlives the kill ends by itself after its sleep.
+        Task Act() => _runner.RunAsync(
+            "sudo",
+            ["-n", "sh", "-c", "echo ready; sleep 5"],
+            new ProcessRunOptions { OnStandardOutputLine = CancelAndKeepRunning },
+            cancellationSource.Token);
+
+        var exception = await Assert.That(Act).Throws<OperationCanceledException>();
+
+        Debug.Assert(exception is not null, "Throws returns null only inside Assert.Multiple.");
+        await Assert.That(exception.CancellationToken).IsEqualTo(cancellationSource.Token);
+        await Assert.That(callbackHasReturned).IsTrue();
+    }
+
+    [Test]
     public async Task RunAsync_WhenCallbackThrowsWhileOtherCallbackRuns_ThrowsAfterOtherCallbackReturns(
         CancellationToken cancellationToken)
     {
@@ -324,6 +359,22 @@ internal sealed class ProcessRunnerCancellationTests
         catch (ArgumentException)
         {
             // The process has exited: the runner killed it with the child, because the child had not exited yet.
+        }
+    }
+
+    // A test of a kill that leaves a process running gets a process of another user from sudo.
+    private async Task<bool> CanRunSudoWithoutPasswordAsync(CancellationToken cancellationToken)
+    {
+        try
+        {
+            var options = new ProcessRunOptions { ThrowOnNonZeroExitCode = false };
+            var result = await _runner.RunAsync("sudo", ["-n", "true"], options, cancellationToken);
+            return result.ExitCode == 0;
+        }
+        catch (Win32Exception)
+        {
+            // The system has no sudo.
+            return false;
         }
     }
 }
