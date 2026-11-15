@@ -36,7 +36,7 @@ public interface IProcessRunner
     /// <exception cref="ProcessFailedException">The process exited with a code other than 0,
     /// and <see cref="ProcessRunOptions.ThrowOnNonZeroExitCode"/> is <see langword="true"/>.</exception>
     /// <exception cref="OperationCanceledException"><paramref name="cancellationToken"/> was signaled
-    /// before the process exited.</exception>
+    /// before the run ended.</exception>
     Task<ProcessResult> RunAsync(
         string executable,
         IEnumerable<string> arguments,

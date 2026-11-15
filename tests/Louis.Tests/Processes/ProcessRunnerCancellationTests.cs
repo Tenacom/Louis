@@ -4,11 +4,16 @@
 #if NET5_0_OR_GREATER
 
 using System.Diagnostics;
+using System.Globalization;
 using Louis.Processes;
 
 [Timeout(60_000)]
 internal sealed class ProcessRunnerCancellationTests
 {
+    // Long enough for a child that has nothing more to do to exit. A test that waits this long still passes
+    // when the child takes longer, because the runner then kills the child and the process it started.
+    private static readonly TimeSpan TimeForChildToExit = TimeSpan.FromMilliseconds(500);
+
     private readonly ProcessRunner _runner = new();
 
     [Test]
@@ -110,6 +115,154 @@ internal sealed class ProcessRunnerCancellationTests
         var thrown = await Assert.That(Act).Throws<InvalidOperationException>();
 
         await Assert.That(thrown).IsSameReferenceAs(failure);
+    }
+
+    [Test]
+    public async Task RunAsync_WhenTokenIsSignaled_CallsNoCallbackAfterwards(CancellationToken cancellationToken)
+    {
+        using var cancellationSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        var lineCount = 0;
+        void CountAndCancel(string line)
+        {
+            lineCount++;
+            cancellationSource.Cancel();
+        }
+
+        // The child writes both lines at once, so the runner holds the second line when the callback signals the token.
+        Task Act() => _runner.RunAsync(
+            ChildProcess.Executable,
+            ChildProcess.Arguments("out:first\nsecond", "sleep"),
+            new ProcessRunOptions { OnStandardOutputLine = CountAndCancel },
+            cancellationSource.Token);
+
+        await Assert.That(Act).Throws<OperationCanceledException>();
+        await Assert.That(lineCount).IsEqualTo(1);
+    }
+
+    [Test]
+    public async Task RunAsync_WhenCallbackThrowsAfterTokenIsSignaled_ThrowsOperationCanceledException(
+        CancellationToken cancellationToken)
+    {
+        using var cancellationSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        void CancelAndThrow(string line)
+        {
+            cancellationSource.Cancel();
+            throw new InvalidOperationException("The callback failed.");
+        }
+
+        // The token was signaled first, so the run reports the cancellation, and not the failure of the callback.
+        Task Act() => _runner.RunAsync(
+            ChildProcess.Executable,
+            ChildProcess.Arguments("out:ready", "sleep"),
+            new ProcessRunOptions { OnStandardOutputLine = CancelAndThrow },
+            cancellationSource.Token);
+
+        var exception = await Assert.That(Act).Throws<OperationCanceledException>();
+
+        Debug.Assert(exception is not null, "Throws returns null only inside Assert.Multiple.");
+        await Assert.That(exception.CancellationToken).IsEqualTo(cancellationSource.Token);
+    }
+
+    [Test]
+    public async Task RunAsync_WhenTokenIsSignaledAfterChildHasExited_ThrowsWithoutWaitingForStreams(
+        CancellationToken cancellationToken)
+    {
+        using var cancellationSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        var spawnedProcessId = 0;
+        void CancelAfterChildHasExited(string line)
+        {
+            if (TryGetSpawnedProcessId(line, out var processId))
+            {
+                spawnedProcessId = processId;
+                cancellationSource.CancelAfter(TimeForChildToExit);
+            }
+        }
+
+        // The process that the child starts inherits both pipes of the child, and sleeps forever.
+        // The child exits at once, so the token is signaled while the runner waits for both pipes to be closed.
+        Task Act() => _runner.RunAsync(
+            ChildProcess.Executable,
+            ChildProcess.Arguments("spawn"),
+            new ProcessRunOptions { OnStandardOutputLine = CancelAfterChildHasExited },
+            cancellationSource.Token);
+
+        try
+        {
+            var exception = await Assert.That(Act).Throws<OperationCanceledException>();
+
+            Debug.Assert(exception is not null, "Throws returns null only inside Assert.Multiple.");
+            await Assert.That(exception.CancellationToken).IsEqualTo(cancellationSource.Token);
+        }
+        finally
+        {
+            KillSpawnedProcess(spawnedProcessId);
+        }
+    }
+
+    [Test]
+    public async Task RunAsync_WhenCallbackThrowsAfterChildHasExited_ThrowsWithoutWaitingForStreams(
+        CancellationToken cancellationToken)
+    {
+        var failure = new InvalidOperationException("The callback failed.");
+        var spawnedProcessId = 0;
+        void ThrowAfterChildHasExited(string line)
+        {
+            if (TryGetSpawnedProcessId(line, out var processId))
+            {
+                spawnedProcessId = processId;
+                Thread.Sleep(TimeForChildToExit);
+                throw failure;
+            }
+        }
+
+        // The process that the child starts inherits both pipes of the child, and sleeps forever.
+        // The child exits while the callback sleeps, so the callback throws while the standard error of the child is still open.
+        Task Act() => _runner.RunAsync(
+            ChildProcess.Executable,
+            ChildProcess.Arguments("spawn"),
+            new ProcessRunOptions { OnStandardOutputLine = ThrowAfterChildHasExited },
+            cancellationToken);
+
+        try
+        {
+            var thrown = await Assert.That(Act).Throws<InvalidOperationException>();
+
+            await Assert.That(thrown).IsSameReferenceAs(failure);
+        }
+        finally
+        {
+            KillSpawnedProcess(spawnedProcessId);
+        }
+    }
+
+    // Reads the line that the "spawn" instruction of the child writes: "pid:" and the id of the process it started.
+    private static bool TryGetSpawnedProcessId(string line, out int processId)
+    {
+        const string Prefix = "pid:";
+        processId = 0;
+        return line.StartsWith(Prefix, StringComparison.Ordinal)
+            && int.TryParse(line.AsSpan(Prefix.Length), NumberStyles.None, CultureInfo.InvariantCulture, out processId);
+    }
+
+    // The runner kills the process that the child started only together with the child.
+    // A test in which the child exits by itself kills that process, so that it does not outlive the test run.
+    private static void KillSpawnedProcess(int processId)
+    {
+        // The id is 0 when the child wrote no line, and the test has failed already.
+        if (processId == 0)
+        {
+            return;
+        }
+
+        try
+        {
+            using var process = Process.GetProcessById(processId);
+            process.Kill();
+        }
+        catch (ArgumentException)
+        {
+            // The process has exited: the runner killed it with the child, because the child had not exited yet.
+        }
     }
 }
 

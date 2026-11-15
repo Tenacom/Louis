@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -34,8 +35,10 @@ namespace Louis.Processes;
 /// While the child runs, the runner keeps Ctrl-C from ending the current process: the child receives the same Ctrl-C
 /// and decides how to shut down, and the runner returns its exit code.
 /// Inherited mode is of no use in a program without a console.</para>
-/// <para>When the <see cref="CancellationToken"/> of a run is signaled, the runner kills the child
-/// and every process the child started, then throws an <see cref="OperationCanceledException"/>.</para>
+/// <para>When the <see cref="CancellationToken"/> of a run is signaled before the run ends,
+/// the runner throws an <see cref="OperationCanceledException"/>.
+/// When the child is still running, the runner first kills it, and every process it started.
+/// When the child has exited, the runner kills nothing, and stops waiting for the streams to end.</para>
 /// <para>A child that cannot start throws what <see cref="Process.Start()"/> throws,
 /// usually a <see cref="System.ComponentModel.Win32Exception"/>.</para>
 /// </remarks>
@@ -161,35 +164,60 @@ public sealed class ProcessRunner : IProcessRunner
     {
         _ = process.Start();
 
-        // A stream task that fails cancels this source. The child is then killed, instead of blocking on a pipe nobody reads.
+        // Canceling this source aborts the run. The token of the run cancels it, and so does a stream task that fails.
+        // The child is then killed, instead of blocking on a pipe nobody reads, and the run stops waiting for the stream tasks.
         using var abortSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
         var abortToken = abortSource.Token;
-        Action abort = abortSource.Cancel;
+        Action cancelAbortSource = abortSource.Cancel;
+        ExceptionDispatchInfo? failure = null;
 
         // The read of options.StandardInput is canceled when the run is aborted, and when the child exits.
         using var inputSource = CancellationTokenSource.CreateLinkedTokenSource(abortToken);
-        var inputTask = WriteStandardInputAsync(process.StandardInput, options.StandardInput, abort, inputSource.Token);
-        var outputTask = ReadLinesAsync(process.StandardOutput, options.OnStandardOutputLine, abort);
-        var errorTask = ReadLinesAsync(process.StandardError, options.OnStandardErrorLine, abort);
-        var exited = await WaitForExitOrKillAsync(process, abortToken).ConfigureAwait(false);
+        var inputTask = WriteStandardInputAsync(process.StandardInput, options.StandardInput, Abort, inputSource.Token);
+        var outputTask = ReadLinesAsync(process.StandardOutput, options.OnStandardOutputLine, Abort, abortToken);
+        var errorTask = ReadLinesAsync(process.StandardError, options.OnStandardErrorLine, Abort, abortToken);
+        _ = await WaitForExitOrKillAsync(process, abortToken).ConfigureAwait(false);
 
         // A child that has exited reads no more input. A read of options.StandardInput that is still pending would never end.
         await inputSource.CancelAsync().ConfigureAwait(false);
 
-        // The streams end once the child has exited or has been killed. A stream task that failed throws here.
-        await Task.WhenAll(inputTask, outputTask, errorTask).ConfigureAwait(false);
-        if (!exited)
+        // The streams end once the child has exited or has been killed, unless a process that the child started holds one.
+        // An aborted run does not wait for that process: it leaves the stream tasks to end by themselves.
+        var streamsTask = Task.WhenAll(inputTask, outputTask, errorTask);
+        _ = await Task.WhenAny(streamsTask, Task.Delay(Timeout.Infinite, abortToken)).ConfigureAwait(false);
+        if (abortToken.IsCancellationRequested)
         {
+            // Nothing awaits the stream tasks of an aborted run, so an exception of theirs would count as unobserved.
+            _ = streamsTask.ContinueWith(
+                static task => _ = task.Exception,
+                CancellationToken.None,
+                TaskContinuationOptions.OnlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously,
+                TaskScheduler.Default);
+            failure?.Throw();
             throw new OperationCanceledException(cancellationToken);
         }
 
+        // A run that was not aborted gets here when every stream task has ended, and none has failed.
         return (await outputTask.ConfigureAwait(false), await errorTask.ConfigureAwait(false));
+
+        // Aborts the run because of a failure of a stream task. The first failure is the exception that the run throws.
+        void Abort(Exception exception)
+        {
+            // An aborted run has stopped waiting for the stream tasks, and may have disposed abortSource.
+            if (abortToken.IsCancellationRequested)
+            {
+                return;
+            }
+
+            _ = Interlocked.CompareExchange(ref failure, ExceptionDispatchInfo.Capture(exception), null);
+            cancelAbortSource();
+        }
     }
 
     private static async Task WriteStandardInputAsync(
         StreamWriter standardInput,
         Stream? input,
-        Action abort,
+        Action<Exception> abort,
         CancellationToken cancellationToken)
     {
         // An IOException of the input stream is a failure. An IOException of the pipe means that the child stopped reading.
@@ -225,29 +253,40 @@ public sealed class ProcessRunner : IProcessRunner
         {
             // Either the child has exited, or RunCapturedAsync kills it and reports the cancellation or the failure that caused it.
         }
-        catch
+        catch (Exception exception)
         {
-            abort();
+            abort(exception);
             throw;
         }
     }
 
-    private static async Task<string> ReadLinesAsync(StreamReader reader, Action<string>? onLine, Action abort)
+    private static async Task<string> ReadLinesAsync(
+        StreamReader reader,
+        Action<string>? onLine,
+        Action<Exception> abort,
+        CancellationToken abortToken)
     {
         try
         {
             var text = new StringBuilder();
-            while (await reader.ReadLineAsync().ConfigureAwait(false) is { } line)
+            while (await reader.ReadLineAsync(abortToken).ConfigureAwait(false) is { } line)
             {
+                // The reader returns a line that it holds already, even when the token is signaled.
+                // An aborted run does not wait for this task, so that line must not reach the callback.
+                if (abortToken.IsCancellationRequested)
+                {
+                    break;
+                }
+
                 _ = text.AppendLine(line);
                 onLine?.Invoke(line);
             }
 
             return text.ToString();
         }
-        catch
+        catch (Exception exception)
         {
-            abort();
+            abort(exception);
             throw;
         }
     }
