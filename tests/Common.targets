@@ -1,5 +1,13 @@
 <Project>
 
+  <!-- Common build options for projects under tests/ -->
+  <PropertyGroup>
+
+    <!-- Nothing under tests/ is packed, test project or not. -->
+    <IsPackable>false</IsPackable>
+
+  </PropertyGroup>
+
   <!-- Common build options for test projects -->
   <PropertyGroup Condition="'$(IsTestingPlatformApplication)' == 'true'">
 
@@ -12,9 +20,6 @@
 
     <!-- No need for public API analyzers -->
     <UsePublicApiAnalyzers>false</UsePublicApiAnalyzers>
-
-    <!-- No sense in packing test projects -->
-    <IsPackable>false</IsPackable>
 
     <!-- Common.props turns trimming on for the packaged libraries. A test project is an application that runs as built. -->
     <IsTrimmable>false</IsTrimmable>
