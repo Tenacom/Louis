@@ -2,9 +2,12 @@
 // See the LICENSE file in the project root for full license information.
 
 #if NET5_0_OR_GREATER
-
 using System;
+#endif
 using System.Diagnostics.CodeAnalysis;
+#if !NET5_0_OR_GREATER
+using System.Runtime.InteropServices;
+#endif
 using System.Text;
 using Louis.Text;
 
@@ -12,8 +15,6 @@ namespace Louis.Processes;
 
 /// <summary>
 /// <para>Provides utility members to work with the console.</para>
-/// <para>This type is not available in the <c>netstandard</c> and .NET Framework builds of Louis,
-/// which have no <c>Louis.Processes</c> namespace.</para>
 /// </summary>
 public static partial class ConsoleUtility
 {
@@ -37,10 +38,19 @@ public static partial class ConsoleUtility
     /// </remarks>
     public static Encoding SystemDefaultEncoding { get; } = GetSystemDefaultEncoding();
 
+    // ExcludeFromCodeCoverageAttribute has no Justification before .NET 5. The justification below holds for every build.
+#if NET5_0_OR_GREATER
     [ExcludeFromCodeCoverage(Justification = "The path taken depends on the operating system and on its OEM code page.")]
+#else
+    [ExcludeFromCodeCoverage]
+#endif
     private static Encoding GetSystemDefaultEncoding()
     {
+#if NET5_0_OR_GREATER
         if (!OperatingSystem.IsWindows())
+#else
+        if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+#endif
         {
             return Utf8Utility.Utf8NoBomEncoding;
         }
@@ -52,5 +62,3 @@ public static partial class ConsoleUtility
         return CodePagesEncodingProvider.Instance.GetEncoding(codePage) ?? Utf8Utility.Utf8NoBomEncoding;
     }
 }
-
-#endif

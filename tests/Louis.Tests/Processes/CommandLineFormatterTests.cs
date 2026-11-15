@@ -1,8 +1,6 @@
 // Copyright (c) Tenacom and contributors. Licensed under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
-#if NET5_0_OR_GREATER
-
 using Louis.Processes;
 
 internal sealed class CommandLineFormatterTests
@@ -71,5 +69,3 @@ internal sealed class CommandLineFormatterTests
         await Assert.That(Act).Throws<ArgumentException>().WithParameterName("arguments");
     }
 }
-
-#endif
