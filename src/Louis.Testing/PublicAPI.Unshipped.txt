@@ -1,0 +1,11 @@
+#nullable enable
+Louis.Processes.FakeProcessRun
+Louis.Processes.FakeProcessRun.Arguments.get -> System.Collections.Generic.IReadOnlyList<string!>!
+Louis.Processes.FakeProcessRun.Executable.get -> string!
+Louis.Processes.FakeProcessRun.Options.get -> Louis.Processes.ProcessRunOptions!
+Louis.Processes.FakeProcessRunner
+Louis.Processes.FakeProcessRunner.FakeProcessRunner() -> void
+Louis.Processes.FakeProcessRunner.OnRun.get -> System.Func<string!, System.Collections.Generic.IReadOnlyList<string!>!, Louis.Processes.ProcessRunOptions!, Louis.Processes.ProcessResult!>?
+Louis.Processes.FakeProcessRunner.OnRun.init -> void
+Louis.Processes.FakeProcessRunner.RunAsync(string! executable, System.Collections.Generic.IEnumerable<string!>! arguments, Louis.Processes.ProcessRunOptions? options = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Louis.Processes.ProcessResult!>!
+Louis.Processes.FakeProcessRunner.Runs.get -> System.Collections.Generic.IReadOnlyList<Louis.Processes.FakeProcessRun!>!

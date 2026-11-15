@@ -1,0 +1,10 @@
+# ![L.o.U.I.S.](https://raw.githubusercontent.com/Tenacom/Louis/main/graphics/Readme.png)
+
+---
+
+L.o.U.I.S. is a collection of useful types commonly needed in the development of .NET libraries and applications.
+It is pronounced _LOO-iss_, just like the name Louis.
+
+This package contains `Louis.Testing.dll`, that provides test doubles of the contracts of L.o.U.I.S., for testing code that depends on them.
+
+See [the complete README](https://github.com/Tenacom/Louis#readme) for more information.
