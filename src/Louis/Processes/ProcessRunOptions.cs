@@ -100,6 +100,9 @@ public sealed class ProcessRunOptions
     /// with the text of the line without its terminator.</para>
     /// <para>The runner calls the callback from a thread of the thread pool. It never calls the same callback
     /// twice at the same time, but it may call this callback and <see cref="OnStandardErrorLine"/> at the same time.</para>
+    /// <para>The runner never calls the callback after <see cref="IProcessRunner.RunAsync"/> has returned its result or thrown.
+    /// When the run is canceled, or fails, while the callback is running,
+    /// <see cref="IProcessRunner.RunAsync"/> throws after the callback returns.</para>
     /// <para>When the callback throws an exception, the runner kills the child,
     /// and <see cref="IProcessRunner.RunAsync"/> throws the same exception.</para>
     /// <para>The runner ignores this property when <see cref="InheritStandardStreams"/> is <see langword="true"/>.</para>
@@ -117,6 +120,9 @@ public sealed class ProcessRunOptions
     /// with the text of the line without its terminator.</para>
     /// <para>The runner calls the callback from a thread of the thread pool. It never calls the same callback
     /// twice at the same time, but it may call this callback and <see cref="OnStandardOutputLine"/> at the same time.</para>
+    /// <para>The runner never calls the callback after <see cref="IProcessRunner.RunAsync"/> has returned its result or thrown.
+    /// When the run is canceled, or fails, while the callback is running,
+    /// <see cref="IProcessRunner.RunAsync"/> throws after the callback returns.</para>
     /// <para>When the callback throws an exception, the runner kills the child,
     /// and <see cref="IProcessRunner.RunAsync"/> throws the same exception.</para>
     /// <para>The runner ignores this property when <see cref="InheritStandardStreams"/> is <see langword="true"/>.</para>
