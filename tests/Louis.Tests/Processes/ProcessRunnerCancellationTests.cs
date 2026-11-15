@@ -14,6 +14,11 @@ internal sealed class ProcessRunnerCancellationTests
     // when the child takes longer, because the runner then kills the child and the process it started.
     private static readonly TimeSpan TimeForChildToExit = TimeSpan.FromMilliseconds(500);
 
+    // Long enough for an aborted run to kill the child and throw. A callback that keeps running this long is still running
+    // when a run that does not wait for it throws. A test that relies on this time still passes when the kill takes longer,
+    // because the run waits for the callback.
+    private static readonly TimeSpan TimeForAbortedRunToThrow = TimeSpan.FromMilliseconds(500);
+
     private readonly ProcessRunner _runner = new();
 
     [Test]
@@ -74,7 +79,8 @@ internal sealed class ProcessRunnerCancellationTests
     }
 
     [Test]
-    public async Task RunAsync_WhenTokenIsSignaledWhileReadingStandardInput_KillsChildAndThrows(CancellationToken cancellationToken)
+    public async Task RunAsync_WhenTokenIsSignaledWhileReadingStandardInput_KillsChildAndThrows(
+        CancellationToken cancellationToken)
     {
         using var cancellationSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
         using var input = new CallbackReadStream(ReadForever);
@@ -161,6 +167,62 @@ internal sealed class ProcessRunnerCancellationTests
 
         Debug.Assert(exception is not null, "Throws returns null only inside Assert.Multiple.");
         await Assert.That(exception.CancellationToken).IsEqualTo(cancellationSource.Token);
+    }
+
+    [Test]
+    public async Task RunAsync_WhenTokenIsSignaledWhileCallbackRuns_ThrowsAfterCallbackReturns(
+        CancellationToken cancellationToken)
+    {
+        using var cancellationSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        var callbackHasReturned = false;
+        void CancelAndKeepRunning(string line)
+        {
+            cancellationSource.Cancel();
+            Thread.Sleep(TimeForAbortedRunToThrow);
+            callbackHasReturned = true;
+        }
+
+        Task Act() => _runner.RunAsync(
+            ChildProcess.Executable,
+            ChildProcess.Arguments("out:ready", "sleep"),
+            new ProcessRunOptions { OnStandardOutputLine = CancelAndKeepRunning },
+            cancellationSource.Token);
+
+        await Assert.That(Act).Throws<OperationCanceledException>();
+        await Assert.That(callbackHasReturned).IsTrue();
+    }
+
+    [Test]
+    public async Task RunAsync_WhenCallbackThrowsWhileOtherCallbackRuns_ThrowsAfterOtherCallbackReturns(
+        CancellationToken cancellationToken)
+    {
+        var failure = new InvalidOperationException("The callback failed.");
+        using var outputCallbackIsRunning = new ManualResetEventSlim();
+        var outputCallbackHasReturned = false;
+        void KeepRunning(string line)
+        {
+            outputCallbackIsRunning.Set();
+            Thread.Sleep(TimeForAbortedRunToThrow);
+            outputCallbackHasReturned = true;
+        }
+
+        void ThrowWhileOutputCallbackRuns(string line)
+        {
+            outputCallbackIsRunning.Wait(cancellationToken);
+            throw failure;
+        }
+
+        var options = new ProcessRunOptions { OnStandardOutputLine = KeepRunning, OnStandardErrorLine = ThrowWhileOutputCallbackRuns };
+        Task Act() => _runner.RunAsync(
+            ChildProcess.Executable,
+            ChildProcess.Arguments("out:ready", "err:ready", "sleep"),
+            options,
+            cancellationToken);
+
+        var thrown = await Assert.That(Act).Throws<InvalidOperationException>();
+
+        await Assert.That(thrown).IsSameReferenceAs(failure);
+        await Assert.That(outputCallbackHasReturned).IsTrue();
     }
 
     [Test]
