@@ -31,6 +31,7 @@
   <Folder Name="/src/">
     <Project Path="src/Louis/Louis.csproj" />
     <Project Path="src/Louis.Hosting/Louis.Hosting.csproj" />
+    <Project Path="src/Louis.Testing/Louis.Testing.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <File Path="tests/.editorconfig" />
@@ -42,5 +43,6 @@
     <Project Path="tests/Louis.Hosting.Tests/Louis.Hosting.Tests.csproj" />
     <Project Path="tests/Louis.Hosting.Tests.NetStandard20/Louis.Hosting.Tests.NetStandard20.csproj" />
     <Project Path="tests/Louis.Hosting.Tests.NetStandard21/Louis.Hosting.Tests.NetStandard21.csproj" />
+    <Project Path="tests/Louis.Testing.Tests/Louis.Testing.Tests.csproj" />
   </Folder>
 </Solution>

@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Test doubles of the contracts of L.o.U.I.S.</Description>
+    <TargetFrameworks>net10.0</TargetFrameworks>
+    <!-- A test double lives in the namespace of the contract it stands for. -->
+    <RootNamespace>Louis</RootNamespace>
+    <UseTfmSpecificPublicApiFiles>false</UseTfmSpecificPublicApiFiles>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Louis\Louis.csproj" />
+  </ItemGroup>
+
+</Project>
