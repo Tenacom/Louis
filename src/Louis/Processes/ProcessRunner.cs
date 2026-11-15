@@ -39,6 +39,9 @@ namespace Louis.Processes;
 /// the runner throws an <see cref="OperationCanceledException"/>.
 /// When the child is still running, the runner first kills it, and every process it started.
 /// When the child has exited, the runner kills nothing, and stops waiting for the streams to end.</para>
+/// <para>The runner kills with <see cref="Process.Kill(bool)"/>, which leaves some processes running:
+/// on Linux, a process that runs as another user, and on Windows, an elevated process.
+/// The runner does not wait for such a process, and throws as if the kill were complete.</para>
 /// <para>A child that cannot start throws what <see cref="Process.Start()"/> throws,
 /// usually a <see cref="System.ComponentModel.Win32Exception"/>.</para>
 /// </remarks>
@@ -297,7 +300,8 @@ public sealed class ProcessRunner : IProcessRunner
         }
     }
 
-    // Returns false when the token was signaled before the child exited. The child and its process tree are then killed.
+    // Returns false when the token was signaled before the child exited.
+    // The runner then kills the child and its process tree, as far as Process.Kill can.
     private static async Task<bool> WaitForExitOrKillAsync(Process process, CancellationToken cancellationToken)
     {
         try
@@ -307,8 +311,29 @@ public sealed class ProcessRunner : IProcessRunner
         }
         catch (OperationCanceledException)
         {
+            // After an incomplete kill, the child itself may be a process that keeps running, and the wait would never end.
+            if (TryKillProcessTree(process))
+            {
+                await process.WaitForExitAsync(CancellationToken.None).ConfigureAwait(false);
+            }
+
+            return false;
+        }
+    }
+
+    // Returns false when a process of the tree outlives the kill. Process.Kill then throws AggregateException,
+    // after it has killed every process that the current user is allowed to kill.
+    // On Linux, a command that sudo runs with no terminal is not one of them (measured on Debian, with sudo 1.9.13).
+    // The run was aborted already, and the caller must get the exception that says why.
+    private static bool TryKillProcessTree(Process process)
+    {
+        try
+        {
             process.Kill(entireProcessTree: true);
-            await process.WaitForExitAsync(CancellationToken.None).ConfigureAwait(false);
+            return true;
+        }
+        catch (AggregateException)
+        {
             return false;
         }
     }
