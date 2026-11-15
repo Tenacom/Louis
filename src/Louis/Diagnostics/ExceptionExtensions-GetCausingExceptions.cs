@@ -90,7 +90,7 @@ partial class ExceptionExtensions
                     using var enumerator = GetCausingExceptionsCore(innerException);
                     while (enumerator.MoveNext())
                     {
-#if !NETCOREAPPP3_0_OR_GREATER
+#if !NETCOREAPP3_0_OR_GREATER
                         // JetBrains annotations mark IEnumerator<T>.Current CanBeNull, whatever T is.
                         // From .NET Core 3.0 on, the BCL gives Current the nullability of T, and ReSharper follows it.
                         // GetCausingExceptionsCore yields no nulls, so enumerator.Current is never null here.
