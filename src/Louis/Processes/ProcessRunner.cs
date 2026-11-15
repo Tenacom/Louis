@@ -165,10 +165,16 @@ public sealed class ProcessRunner : IProcessRunner
         using var abortSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
         var abortToken = abortSource.Token;
         Action abort = abortSource.Cancel;
-        var inputTask = WriteStandardInputAsync(process.StandardInput, options.StandardInput, abort, abortToken);
+
+        // The read of options.StandardInput is canceled when the run is aborted, and when the child exits.
+        using var inputSource = CancellationTokenSource.CreateLinkedTokenSource(abortToken);
+        var inputTask = WriteStandardInputAsync(process.StandardInput, options.StandardInput, abort, inputSource.Token);
         var outputTask = ReadLinesAsync(process.StandardOutput, options.OnStandardOutputLine, abort);
         var errorTask = ReadLinesAsync(process.StandardError, options.OnStandardErrorLine, abort);
         var exited = await WaitForExitOrKillAsync(process, abortToken).ConfigureAwait(false);
+
+        // A child that has exited reads no more input. A read of options.StandardInput that is still pending would never end.
+        await inputSource.CancelAsync().ConfigureAwait(false);
 
         // The streams end once the child has exited or has been killed. A stream task that failed throws here.
         await Task.WhenAll(inputTask, outputTask, errorTask).ConfigureAwait(false);
@@ -184,7 +190,7 @@ public sealed class ProcessRunner : IProcessRunner
         StreamWriter standardInput,
         Stream? input,
         Action abort,
-        CancellationToken abortToken)
+        CancellationToken cancellationToken)
     {
         // An IOException of the input stream is a failure. An IOException of the pipe means that the child stopped reading.
         var readingInput = false;
@@ -199,14 +205,14 @@ public sealed class ProcessRunner : IProcessRunner
                     while (true)
                     {
                         readingInput = true;
-                        var count = await input.ReadAsync(buffer, abortToken).ConfigureAwait(false);
+                        var count = await input.ReadAsync(buffer, cancellationToken).ConfigureAwait(false);
                         readingInput = false;
                         if (count == 0)
                         {
                             break;
                         }
 
-                        await standardInput.BaseStream.WriteAsync(buffer.AsMemory(0, count), abortToken).ConfigureAwait(false);
+                        await standardInput.BaseStream.WriteAsync(buffer.AsMemory(0, count), cancellationToken).ConfigureAwait(false);
                     }
                 }
             }
@@ -215,9 +221,9 @@ public sealed class ProcessRunner : IProcessRunner
         {
             // The child closed its standard input, or exited, before it read all the data.
         }
-        catch (OperationCanceledException) when (abortToken.IsCancellationRequested)
+        catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
         {
-            // RunCapturedAsync kills the child, and reports the cancellation or the failure that caused it.
+            // Either the child has exited, or RunCapturedAsync kills it and reports the cancellation or the failure that caused it.
         }
         catch
         {

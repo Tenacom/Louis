@@ -56,6 +56,29 @@ internal sealed class ProcessRunnerStandardInputTests
     }
 
     [Test]
+    public async Task RunAsync_WhenChildExitsWhileReadOfStandardInputIsPending_ReturnsResult(
+        CancellationToken cancellationToken)
+    {
+        using var input = new CallbackReadStream(ReadUntilCanceled);
+
+        // The read never ends by itself. It ends when the runner cancels it, which the exit of the child causes.
+        static async ValueTask<int> ReadUntilCanceled(Memory<byte> buffer, CancellationToken readToken)
+        {
+            await Task.Delay(Timeout.Infinite, readToken);
+            return 0;
+        }
+
+        var result = await _runner.RunAsync(
+            ChildProcess.Executable,
+            ChildProcess.Arguments("out:done"),
+            new ProcessRunOptions { StandardInput = input },
+            cancellationToken);
+
+        await Assert.That(result.ExitCode).IsEqualTo(0);
+        await Assert.That(result.StandardOutput).IsEqualTo($"done{NewLine}");
+    }
+
+    [Test]
     public async Task RunAsync_WhenStandardInputThrowsIOException_KillsChildAndThrowsIt(CancellationToken cancellationToken)
     {
         var failure = new IOException("The input cannot be read.");
