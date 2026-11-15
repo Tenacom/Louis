@@ -1,8 +1,6 @@
 // Copyright (c) Tenacom and contributors. Licensed under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
-#if NET5_0_OR_GREATER
-
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,8 +10,6 @@ namespace Louis.Processes;
 
 /// <summary>
 /// <para>Formats the executable and the arguments of a process as one command line, for display.</para>
-/// <para>This type is not available in the <c>netstandard</c> and .NET Framework builds of Louis,
-/// as <see cref="ProcessRunner"/> is not.</para>
 /// </summary>
 public static class CommandLineFormatter
 {
@@ -65,8 +61,10 @@ public static class CommandLineFormatter
             return;
         }
 
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_0_OR_GREATER
         _ = result.Append('"').Append(item.Replace("\"", "\\\"", StringComparison.Ordinal)).Append('"');
+#else
+        _ = result.Append('"').Append(item.Replace("\"", "\\\"")).Append('"');
+#endif
     }
 }
-
-#endif

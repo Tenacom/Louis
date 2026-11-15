@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Struct `Louis.Text.TrueConditionInterpolatedStringHandler` only performs formatting if a given condition is true.
 - Struct `Louis.Text.FalseConditionInterpolatedStringHandler` only performs formatting if a given condition is false.
 - A complete [API reference](docs/README.md) replaces the documentation articles under `docs/`.
-- Namespace [`Louis.Processes`](docs/api/Louis/Louis.Processes.md), in the `net10.0` build of `Louis` alone, has [`ProcessRunner`](docs/api/Louis/Louis.Processes.ProcessRunner.md), which runs a child process and returns its exit code and its output.
+- [`ProcessRunner`](docs/api/Louis/Louis.Processes.ProcessRunner.md), in namespace [`Louis.Processes`](docs/api/Louis/Louis.Processes.md) and in the `net10.0` build of `Louis` alone, runs a child process and returns its exit code and its output.
 - Property [`Louis.Processes.ConsoleUtility.SystemDefaultEncoding`](docs/api/Louis/Louis.Processes.ConsoleUtility.md) returns the encoding that a new console of the system starts with.
 - Package [`Louis.Testing`](docs/api/Louis.Testing/README.md), for `net10.0`, has [`FakeProcessRunner`](docs/api/Louis.Testing/Louis.Processes.FakeProcessRunner.md), a test double of `IProcessRunner` that records each run and starts no process.
 - [`StringExtensions.ComputeLineClipping`](docs/api/Louis/Louis.Text.StringExtensions.md) and [`CharReadOnlySpanExtensions.ComputeLineClipping`](docs/api/Louis/Louis.Text.CharReadOnlySpanExtensions.md) find the first and last lines of a text, and count the lines between them.
@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **BREAKING CHANGE**: `StringExtensions.GetVerbatimLiteralLength` and `CharReadOnlySpanExtensions.GetVerbatimLiteralLength` are renamed to `ComputeVerbatimLiteralLength`.
 - **BREAKING CHANGE**: [`Utf8Utility.GetMaxCharsInBytes`](docs/api/Louis/Louis.Text.Utf8Utility.md) is renamed to `ComputeMaxCharsInBytes`.
 - The `netstandard2.0` and .NET Framework builds of `Louis` depend on `Microsoft.Bcl.Memory`, which supplies the `Range` of [`LineClipping`](docs/api/Louis/Louis.Text.LineClipping.md).
+- The `netstandard` and .NET Framework builds of `Louis` depend on `System.Text.Encoding.CodePages`, which supplies the encoding of [`ConsoleUtility.SystemDefaultEncoding`](docs/api/Louis/Louis.Processes.ConsoleUtility.md).
 
 ### Bugs fixed in this release
 

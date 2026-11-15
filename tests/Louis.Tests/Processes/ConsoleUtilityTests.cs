@@ -1,16 +1,12 @@
 // Copyright (c) Tenacom and contributors. Licensed under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
-#if NET5_0_OR_GREATER
-
 using System.Diagnostics;
-using System.Globalization;
-using System.Text.RegularExpressions;
 using Louis.Processes;
 using Louis.Text;
 using TUnit.Core.Enums;
 
-internal sealed partial class ConsoleUtilityTests
+internal sealed class ConsoleUtilityTests
 {
     [Test]
     public async Task SystemDefaultEncoding_WritesNoByteOrderMark()
@@ -36,21 +32,54 @@ internal sealed partial class ConsoleUtilityTests
     [Timeout(60_000)]
     public async Task SystemDefaultEncoding_OnWindows_HasCodePageOfNewConsole(CancellationToken cancellationToken)
     {
-        // chcp names the code page of its console. With CreateNoWindow on, that console is a new one.
-        // The text around the number depends on the language of Windows, and the number is the last thing on the line.
-        var startInfo = new ProcessStartInfo("cmd.exe") { UseShellExecute = false, CreateNoWindow = true, RedirectStandardOutput = true };
-        startInfo.ArgumentList.Add("/c");
-        startInfo.ArgumentList.Add("chcp");
-        using var process = await Assert.That(Process.Start(startInfo)).IsNotNull();
-        var output = await process.StandardOutput.ReadToEndAsync(cancellationToken);
-        await process.WaitForExitAsync(cancellationToken);
-        var codePage = int.Parse(TrailingNumber().Match(output).Value, CultureInfo.InvariantCulture);
+        var codePage = ParseLastNumber(RunChcpInNewConsole(cancellationToken));
 
         await Assert.That(ConsoleUtility.SystemDefaultEncoding.CodePage).IsEqualTo(codePage);
     }
 
-    [GeneratedRegex(@"\d+(?=\s*$)")]
-    private static partial Regex TrailingNumber();
-}
+    // chcp names the code page of its console. With CreateNoWindow on, that console is a new one.
+    // The helper is synchronous, and uses no member that .NET Framework lacks, so that every test project compiles it.
+    private static string RunChcpInNewConsole(CancellationToken cancellationToken)
+    {
+        using var process = new Process();
+        process.StartInfo.FileName = "cmd.exe";
+        process.StartInfo.Arguments = "/c chcp";
+        process.StartInfo.UseShellExecute = false;
+        process.StartInfo.CreateNoWindow = true;
+        process.StartInfo.RedirectStandardOutput = true;
+        _ = process.Start();
 
-#endif
+        // Killing the child ends its standard output, and the read with it.
+        using var registration = cancellationToken.Register(process.Kill);
+        var output = process.StandardOutput.ReadToEnd();
+        process.WaitForExit();
+        return output;
+    }
+
+    // The text around the code page depends on the language of Windows. The code page is the last number in the text.
+    private static int ParseLastNumber(string text)
+    {
+        var end = text.Length;
+        while (end > 0 && !IsDigit(text[end - 1]))
+        {
+            end--;
+        }
+
+        var start = end;
+        while (start > 0 && IsDigit(text[start - 1]))
+        {
+            start--;
+        }
+
+        var number = 0;
+        for (var i = start; i < end; i++)
+        {
+            number *= 10;
+            number += text[i] - '0';
+        }
+
+        return number;
+
+        static bool IsDigit(char c) => c is >= '0' and <= '9';
+    }
+}

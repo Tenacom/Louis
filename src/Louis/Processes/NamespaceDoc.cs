@@ -1,8 +1,6 @@
 // Copyright (c) Tenacom and contributors. Licensed under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
-#if NET5_0_OR_GREATER
-
 namespace Louis.Processes;
 
 /// <summary>
@@ -11,5 +9,3 @@ namespace Louis.Processes;
 internal static class NamespaceDoc
 {
 }
-
-#endif
