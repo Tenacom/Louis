@@ -15,7 +15,7 @@ partial class CharReadOnlySpanExtensions
     /// on which this method is called.</param>
     /// <param name="headLines">The number of lines to keep at the start of the span, when the span is clipped.</param>
     /// <param name="tailLines">The number of lines to keep at the end of the span, when the span is clipped.</param>
-    /// <returns>A <see cref="ClippedLines"/> value, whose ranges refer to <paramref name="this"/>.</returns>
+    /// <returns>A <see cref="LineClipping"/> value, whose ranges refer to <paramref name="this"/>.</returns>
     /// <exception cref="ArgumentOutOfRangeException">
     /// <para><paramref name="headLines"/> is less than 0.</para>
     /// <para>- or -</para>
@@ -27,15 +27,15 @@ partial class CharReadOnlySpanExtensions
     /// as in <see cref="System.IO.TextReader.ReadLine"/>.
     /// A line terminator at the end of the span starts no line, and an empty span has no lines.</para>
     /// <para>A span of more than <paramref name="headLines"/> + <paramref name="tailLines"/> + 1 lines is clipped:
-    /// <see cref="ClippedLines.Head"/> holds its first <paramref name="headLines"/> lines,
-    /// and <see cref="ClippedLines.Tail"/> its last <paramref name="tailLines"/> lines.</para>
-    /// <para>A span of at most that many lines is not clipped: <see cref="ClippedLines.Head"/> holds all of its lines,
-    /// and <see cref="ClippedLines.Tail"/> is empty. No span is clipped by a single line,
+    /// <see cref="LineClipping.Head"/> holds its first <paramref name="headLines"/> lines,
+    /// and <see cref="LineClipping.Tail"/> its last <paramref name="tailLines"/> lines.</para>
+    /// <para>A span of at most that many lines is not clipped: <see cref="LineClipping.Head"/> holds all of its lines,
+    /// and <see cref="LineClipping.Tail"/> is empty. No span is clipped by a single line,
     /// because a caller usually shows one line in place of the omitted lines.</para>
     /// <para>This method copies no characters and allocates no memory.</para>
     /// </remarks>
-    /// <seealso cref="StringExtensions.ClipLines"/>
-    public static ClippedLines ClipLines(this ReadOnlySpan<char> @this, int headLines, int tailLines)
+    /// <seealso cref="StringExtensions.ComputeLineClipping"/>
+    public static LineClipping ComputeLineClipping(this ReadOnlySpan<char> @this, int headLines, int tailLines)
     {
         Guard.IsGreaterThanOrEqualTo(headLines, 0);
         Guard.IsGreaterThanOrEqualTo(tailLines, 0);

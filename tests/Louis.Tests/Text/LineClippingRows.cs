@@ -2,22 +2,22 @@
 // See the LICENSE file in the project root for full license information.
 
 using Louis.Text;
-using ClipLinesRow = (
+using LineClippingRow = (
     string Input,
     int HeadLines,
     int TailLines,
     (string Head, string Tail, int HeadLineCount, int TailLineCount, int OmittedLineCount) Expected);
 
 /// <summary>
-/// Holds the inputs that drive the tests of the <c>ClipLines</c> methods of <see cref="StringExtensions"/>
+/// Holds the inputs that drive the tests of the <c>ComputeLineClipping</c> methods of <see cref="StringExtensions"/>
 /// and <see cref="CharReadOnlySpanExtensions"/>. The expected values of each row are the text of the head,
 /// which is at the start of the input, the text of the tail, which is at the end of the input, and the three line counts.
 /// The expected values are a tuple of their own, because the test framework does not unpack a row of eight values
 /// on .NET Framework.
 /// </summary>
-internal static class ClipLinesRows
+internal static class LineClippingRows
 {
-    public static IEnumerable<ClipLinesRow> All() => [
+    public static IEnumerable<LineClippingRow> All() => [
         // An empty text has no lines.
         (string.Empty, 2, 2, (string.Empty, string.Empty, 0, 0, 0)),
 

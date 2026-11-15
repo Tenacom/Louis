@@ -42,7 +42,7 @@ Each namespace of `Louis` groups types by the BCL area they extend or complete.
 | `Louis.Fluency`       | `FluentExtensions` and the `FluentAction` delegates.                                                                                                                                |
 | `Louis.IO`            | `ReadOnlyMemoryStream`.                                                                                                                                                             |
 | `Louis.Processes`     | `ProcessRunner` with its contract `IProcessRunner`, `ProcessRunOptions`, `ProcessResult`, `ProcessFailedException`, `CommandLineFormatter`. Also `ConsoleUtility`. In the `net10.0` build alone. |
-| `Louis.Text`          | String literals: `StringExtensions`, `CharReadOnlySpanExtensions`, `StringBuilderExtensions`, `StringLiteralKind`. Lines: `ClipLines` in the first two, and `ClippedLines`. Also `UnicodeCharacterUtility`, `Utf8Utility`, and the conditional interpolated string handlers. |
+| `Louis.Text`          | String literals: `StringExtensions`, `CharReadOnlySpanExtensions`, `StringBuilderExtensions`, `StringLiteralKind`. Lines: `ComputeLineClipping` in the first two, and `LineClipping`. Also `UnicodeCharacterUtility`, `Utf8Utility`, and the conditional interpolated string handlers. |
 | `Louis.Threading`     | `AsyncService` with its enums, `InterlockedFlag`, `InterlockedReference<T>`, `ValueTaskUtility`.                                                                                    |
 
 `Louis.Testing` adds `FakeProcessRunner` and `FakeProcessRun` to `Louis.Processes`.
@@ -62,7 +62,7 @@ A namespace named `Internal` holds types that are not part of the public surface
 - Code that depends on a framework family, and not on a version, sits under a family symbol: `NETFRAMEWORK`, `NETSTANDARD`, or `NETCOREAPP`. For example, `#if !NETFRAMEWORK` excludes code from .NET Framework builds but keeps it for .NET and .NET Standard, regardless of version.
 - A type or member that only some frameworks get says so in its XML comment. The comment names the builds of the package that lack it, and the BCL type they lack, as the comment of `DateOnlyUtility` does.
 - `Common.props` turns `IsTrimmable` on for the frameworks compatible with `net8.0`.
-- The projects reference `System.Memory`, `System.Threading.Tasks.Extensions`, `Microsoft.Bcl.AsyncInterfaces`, and `Microsoft.Bcl.Memory` only on the frameworks that lack the types. `Louis.csproj` holds one `ItemGroup` per such framework. `Microsoft.Bcl.Memory` supplies the public `Range` that `ClippedLines` exposes.
+- The projects reference `System.Memory`, `System.Threading.Tasks.Extensions`, `Microsoft.Bcl.AsyncInterfaces`, and `Microsoft.Bcl.Memory` only on the frameworks that lack the types. `Louis.csproj` holds one `ItemGroup` per such framework. `Microsoft.Bcl.Memory` supplies the public `Range` that `LineClipping` exposes.
 - PolySharp generates every other polyfill, as internal types. A public BCL type that an older framework lacks and no Microsoft package supplies, such as `DateOnly`, gets no polyfill, because a consumer's own polyfill of the type would conflict with it. A member that uses such a type goes under `#if`, as `DateOnlyExtensions` does.
 
 ### Public API files

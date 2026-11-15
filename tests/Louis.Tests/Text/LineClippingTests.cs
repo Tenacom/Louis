@@ -3,21 +3,21 @@
 
 using Louis.Text;
 
-internal sealed class ClippedLinesTests
+internal sealed class LineClippingTests
 {
     private const string Text = "a\nb\nc\nd";
 
     [Test]
     public async Task Default_DescribesAnEmptyText()
     {
-        await Assert.That(default(ClippedLines)).IsEqualTo(string.Empty.ClipLines(1, 1));
+        await Assert.That(default(LineClipping)).IsEqualTo(string.Empty.ComputeLineClipping(1, 1));
     }
 
     [Test]
     public async Task Equals_WithSameRangesAndLineCounts_ReturnsTrue()
     {
-        var a = Text.ClipLines(1, 1);
-        var b = Text.ClipLines(1, 1);
+        var a = Text.ComputeLineClipping(1, 1);
+        var b = Text.ComputeLineClipping(1, 1);
 
         await Assert.That(a.Equals(b)).IsTrue();
         await Assert.That(a.Equals((object)b)).IsTrue();
@@ -34,8 +34,8 @@ internal sealed class ClippedLinesTests
     [Arguments("a\nb\nc\nd\ne", 1, 1)]
     public async Task Equals_WithDifferentRangeOrLineCount_ReturnsFalse(string otherText, int headLines, int tailLines)
     {
-        var a = Text.ClipLines(1, 1);
-        var b = otherText.ClipLines(headLines, tailLines);
+        var a = Text.ComputeLineClipping(1, 1);
+        var b = otherText.ComputeLineClipping(headLines, tailLines);
 
         await Assert.That(a.Equals(b)).IsFalse();
         await Assert.That(a.Equals((object)b)).IsFalse();
@@ -46,7 +46,7 @@ internal sealed class ClippedLinesTests
     [Test]
     public async Task Equals_WithObjectOfAnotherType_ReturnsFalse()
     {
-        var a = Text.ClipLines(1, 1);
+        var a = Text.ComputeLineClipping(1, 1);
         object other = Text;
 
         await Assert.That(a.Equals(other)).IsFalse();

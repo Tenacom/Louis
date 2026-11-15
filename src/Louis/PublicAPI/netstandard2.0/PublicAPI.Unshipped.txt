@@ -26,25 +26,25 @@
 *REMOVED*static Louis.Text.Utf8Utility.GetMaxCharsInBytes(string! str, int maxBytes) -> int
 Louis.IO.ReadOnlyMemoryStream.ReadAsync(System.Memory<byte> buffer, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<int>
 Louis.IO.ReadOnlyMemoryStream.WriteAsync(System.ReadOnlyMemory<byte> buffer, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
-Louis.Text.ClippedLines
-Louis.Text.ClippedLines.ClippedLines() -> void
-Louis.Text.ClippedLines.Equals(Louis.Text.ClippedLines other) -> bool
-Louis.Text.ClippedLines.Head.get -> System.Range
-Louis.Text.ClippedLines.HeadLineCount.get -> int
-Louis.Text.ClippedLines.OmittedLineCount.get -> int
-Louis.Text.ClippedLines.Tail.get -> System.Range
-Louis.Text.ClippedLines.TailLineCount.get -> int
-override Louis.Text.ClippedLines.Equals(object? obj) -> bool
-override Louis.Text.ClippedLines.GetHashCode() -> int
+Louis.Text.LineClipping
+Louis.Text.LineClipping.Equals(Louis.Text.LineClipping other) -> bool
+Louis.Text.LineClipping.Head.get -> System.Range
+Louis.Text.LineClipping.HeadLineCount.get -> int
+Louis.Text.LineClipping.LineClipping() -> void
+Louis.Text.LineClipping.OmittedLineCount.get -> int
+Louis.Text.LineClipping.Tail.get -> System.Range
+Louis.Text.LineClipping.TailLineCount.get -> int
+override Louis.Text.LineClipping.Equals(object? obj) -> bool
+override Louis.Text.LineClipping.GetHashCode() -> int
 static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, System.Collections.Generic.IEqualityComparer<TValue>! comparer, TValue value, System.Action<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
 static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, TValue value, System.Action<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
-static Louis.Text.CharReadOnlySpanExtensions.ClipLines(this System.ReadOnlySpan<char> this, int headLines, int tailLines) -> Louis.Text.ClippedLines
+static Louis.Text.CharReadOnlySpanExtensions.ComputeLineClipping(this System.ReadOnlySpan<char> this, int headLines, int tailLines) -> Louis.Text.LineClipping
 static Louis.Text.CharReadOnlySpanExtensions.ComputeLiteralLength(this System.ReadOnlySpan<char> this, Louis.Text.StringLiteralKind literalKind) -> int
 static Louis.Text.CharReadOnlySpanExtensions.ComputeQuotedLiteralLength(this System.ReadOnlySpan<char> this) -> int
 static Louis.Text.CharReadOnlySpanExtensions.ComputeVerbatimLiteralLength(this System.ReadOnlySpan<char> this) -> int
-static Louis.Text.ClippedLines.operator !=(Louis.Text.ClippedLines a, Louis.Text.ClippedLines b) -> bool
-static Louis.Text.ClippedLines.operator ==(Louis.Text.ClippedLines a, Louis.Text.ClippedLines b) -> bool
-static Louis.Text.StringExtensions.ClipLines(this string? this, int headLines, int tailLines) -> Louis.Text.ClippedLines
+static Louis.Text.LineClipping.operator !=(Louis.Text.LineClipping a, Louis.Text.LineClipping b) -> bool
+static Louis.Text.LineClipping.operator ==(Louis.Text.LineClipping a, Louis.Text.LineClipping b) -> bool
+static Louis.Text.StringExtensions.ComputeLineClipping(this string? this, int headLines, int tailLines) -> Louis.Text.LineClipping
 static Louis.Text.StringExtensions.ComputeLiteralLength(this string? this, Louis.Text.StringLiteralKind literalKind) -> int
 static Louis.Text.StringExtensions.ComputeQuotedLiteralLength(this string? this) -> int
 static Louis.Text.StringExtensions.ComputeVerbatimLiteralLength(this string? this) -> int

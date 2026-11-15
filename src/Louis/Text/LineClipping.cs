@@ -6,22 +6,22 @@ using System;
 namespace Louis.Text;
 
 /// <summary>
-/// Describes the first and the last lines of a text, as the <c>ClipLines</c> methods find them,
+/// Describes the first and the last lines of a text, as the <c>ComputeLineClipping</c> methods find them,
 /// with the number of lines between them.
 /// </summary>
 /// <remarks>
-/// <para><see cref="Head"/> and <see cref="Tail"/> are ranges of the text that <c>ClipLines</c> was called on.
+/// <para><see cref="Head"/> and <see cref="Tail"/> are ranges of the text that <c>ComputeLineClipping</c> was called on.
 /// Each range includes the line terminators of its lines, as they appear in the text.</para>
 /// <para>When <see cref="OmittedLineCount"/> is 0, the text is not clipped: <see cref="Head"/> covers the whole text,
 /// and <see cref="Tail"/> is an empty range at the end of the text.
-/// <see cref="OmittedLineCount"/> is never 1, because <c>ClipLines</c> does not clip a text by a single line.</para>
+/// <see cref="OmittedLineCount"/> is never 1, because no text is clipped by a single line.</para>
 /// <para>The default value describes an empty text.</para>
 /// </remarks>
-/// <seealso cref="StringExtensions.ClipLines"/>
-/// <seealso cref="CharReadOnlySpanExtensions.ClipLines"/>
-public readonly struct ClippedLines : IEquatable<ClippedLines>
+/// <seealso cref="StringExtensions.ComputeLineClipping"/>
+/// <seealso cref="CharReadOnlySpanExtensions.ComputeLineClipping"/>
+public readonly struct LineClipping : IEquatable<LineClipping>
 {
-    internal ClippedLines(Range head, Range tail, int headLineCount, int tailLineCount, int omittedLineCount)
+    internal LineClipping(Range head, Range tail, int headLineCount, int tailLineCount, int omittedLineCount)
     {
         Head = head;
         Tail = tail;
@@ -52,7 +52,7 @@ public readonly struct ClippedLines : IEquatable<ClippedLines>
     /// Gets the number of lines in <see cref="Head"/>.
     /// </summary>
     /// <value>
-    /// The <c>headLines</c> parameter of <c>ClipLines</c> when the text is clipped;
+    /// The <c>headLines</c> parameter of <c>ComputeLineClipping</c> when the text is clipped;
     /// otherwise, the number of lines of the text.
     /// </value>
     public int HeadLineCount { get; }
@@ -61,7 +61,7 @@ public readonly struct ClippedLines : IEquatable<ClippedLines>
     /// Gets the number of lines in <see cref="Tail"/>.
     /// </summary>
     /// <value>
-    /// The <c>tailLines</c> parameter of <c>ClipLines</c> when the text is clipped;
+    /// The <c>tailLines</c> parameter of <c>ComputeLineClipping</c> when the text is clipped;
     /// otherwise, 0.
     /// </value>
     public int TailLineCount { get; }
@@ -76,28 +76,28 @@ public readonly struct ClippedLines : IEquatable<ClippedLines>
     public int OmittedLineCount { get; }
 
     /// <summary>
-    /// Determines whether two specified <see cref="ClippedLines"/> values are equal.
+    /// Determines whether two specified <see cref="LineClipping"/> values are equal.
     /// </summary>
     /// <param name="a">The first value to compare.</param>
     /// <param name="b">The second value to compare.</param>
     /// <returns><see langword="true"/> if <paramref name="a"/> and <paramref name="b"/> have the same ranges and the same line counts;
     /// otherwise, <see langword="false"/>.</returns>
-    public static bool operator ==(ClippedLines a, ClippedLines b) => a.Equals(b);
+    public static bool operator ==(LineClipping a, LineClipping b) => a.Equals(b);
 
     /// <summary>
-    /// Determines whether two specified <see cref="ClippedLines"/> values are different.
+    /// Determines whether two specified <see cref="LineClipping"/> values are different.
     /// </summary>
     /// <param name="a">The first value to compare.</param>
     /// <param name="b">The second value to compare.</param>
     /// <returns><see langword="true"/> if <paramref name="a"/> and <paramref name="b"/> differ in a range or in a line count;
     /// otherwise, <see langword="false"/>.</returns>
-    public static bool operator !=(ClippedLines a, ClippedLines b) => !a.Equals(b);
+    public static bool operator !=(LineClipping a, LineClipping b) => !a.Equals(b);
 
     /// <inheritdoc/>
-    public override bool Equals(object? obj) => obj is ClippedLines other && Equals(other);
+    public override bool Equals(object? obj) => obj is LineClipping other && Equals(other);
 
     /// <inheritdoc/>
-    public bool Equals(ClippedLines other)
+    public bool Equals(LineClipping other)
         => (Head, Tail, HeadLineCount, TailLineCount, OmittedLineCount)
             .Equals((other.Head, other.Tail, other.HeadLineCount, other.TailLineCount, other.OmittedLineCount));
 
