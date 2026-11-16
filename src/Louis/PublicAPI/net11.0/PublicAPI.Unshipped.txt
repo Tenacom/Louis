@@ -1,0 +1,104 @@
+#nullable enable
+*REMOVED*override Louis.IO.ReadOnlyMemoryStream.ReadAsync(System.Memory<byte> buffer, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask<int>
+*REMOVED*override Louis.IO.ReadOnlyMemoryStream.WriteAsync(System.ReadOnlyMemory<byte> buffer, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask
+*REMOVED*static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, System.Collections.Generic.IEqualityComparer<TValue>! comparer, TValue value, Louis.Fluency.FluentAction<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
+*REMOVED*static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, TValue value, Louis.Fluency.FluentAction<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
+*REMOVED*static Louis.Text.CharReadOnlySpanExtensions.GetLiteralLength(this System.ReadOnlySpan<char> this, Louis.Text.StringLiteralKind literalKind) -> int
+*REMOVED*static Louis.Text.CharReadOnlySpanExtensions.GetQuotedLiteralLength(this System.ReadOnlySpan<char> this) -> int
+*REMOVED*static Louis.Text.CharReadOnlySpanExtensions.GetVerbatimLiteralLength(this System.ReadOnlySpan<char> this) -> int
+*REMOVED*static Louis.Text.StringExtensions.GetLiteralLength(this string? this, Louis.Text.StringLiteralKind literalKind) -> int
+*REMOVED*static Louis.Text.StringExtensions.GetQuotedLiteralLength(this string? this) -> int
+*REMOVED*static Louis.Text.StringExtensions.GetVerbatimLiteralLength(this string? this) -> int
+*REMOVED*static Louis.Text.Utf8Utility.GetMaxCharsInBytes(System.ReadOnlySpan<char> chars, int maxBytes) -> int
+*REMOVED*static Louis.Text.Utf8Utility.GetMaxCharsInBytes(string! str, int maxBytes) -> int
+override Louis.IO.ReadOnlyMemoryStream.ReadAsync(System.Memory<byte> buffer, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<int>
+override Louis.IO.ReadOnlyMemoryStream.WriteAsync(System.ReadOnlyMemory<byte> buffer, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
+override Louis.Text.LineClipping.Equals(object? obj) -> bool
+override Louis.Text.LineClipping.GetHashCode() -> int
+Louis.Processes.CommandLineFormatter
+Louis.Processes.ConsoleUtility
+Louis.Processes.IProcessRunner
+Louis.Processes.IProcessRunner.RunAsync(string! executable, System.Collections.Generic.IEnumerable<string!>! arguments, Louis.Processes.ProcessRunOptions? options = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Louis.Processes.ProcessResult!>!
+Louis.Processes.ProcessFailedException
+Louis.Processes.ProcessFailedException.ProcessFailedException(Louis.Processes.ProcessResult! result) -> void
+Louis.Processes.ProcessFailedException.Result.get -> Louis.Processes.ProcessResult!
+Louis.Processes.ProcessResult
+Louis.Processes.ProcessResult.CommandLine.get -> string!
+Louis.Processes.ProcessResult.Elapsed.get -> System.TimeSpan
+Louis.Processes.ProcessResult.ExitCode.get -> int
+Louis.Processes.ProcessResult.ProcessResult(string! commandLine, int exitCode, string! standardOutput, string! standardError, System.TimeSpan elapsed) -> void
+Louis.Processes.ProcessResult.StandardError.get -> string!
+Louis.Processes.ProcessResult.StandardOutput.get -> string!
+Louis.Processes.ProcessRunner
+Louis.Processes.ProcessRunner.ProcessRunner() -> void
+Louis.Processes.ProcessRunner.RunAsync(string! executable, System.Collections.Generic.IEnumerable<string!>! arguments, Louis.Processes.ProcessRunOptions? options = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Louis.Processes.ProcessResult!>!
+Louis.Processes.ProcessRunOptions
+Louis.Processes.ProcessRunOptions.Environment.get -> System.Collections.Generic.IReadOnlyDictionary<string!, string?>?
+Louis.Processes.ProcessRunOptions.Environment.init -> void
+Louis.Processes.ProcessRunOptions.InheritStandardStreams.get -> bool
+Louis.Processes.ProcessRunOptions.InheritStandardStreams.init -> void
+Louis.Processes.ProcessRunOptions.OnStandardErrorLine.get -> System.Action<string!>?
+Louis.Processes.ProcessRunOptions.OnStandardErrorLine.init -> void
+Louis.Processes.ProcessRunOptions.OnStandardOutputLine.get -> System.Action<string!>?
+Louis.Processes.ProcessRunOptions.OnStandardOutputLine.init -> void
+Louis.Processes.ProcessRunOptions.OutputEncoding.get -> System.Text.Encoding?
+Louis.Processes.ProcessRunOptions.OutputEncoding.init -> void
+Louis.Processes.ProcessRunOptions.ProcessRunOptions() -> void
+Louis.Processes.ProcessRunOptions.StandardInput.get -> System.IO.Stream?
+Louis.Processes.ProcessRunOptions.StandardInput.init -> void
+Louis.Processes.ProcessRunOptions.ThrowOnNonZeroExitCode.get -> bool
+Louis.Processes.ProcessRunOptions.ThrowOnNonZeroExitCode.init -> void
+Louis.Processes.ProcessRunOptions.WorkingDirectory.get -> string?
+Louis.Processes.ProcessRunOptions.WorkingDirectory.init -> void
+Louis.Text.FalseConditionInterpolatedStringHandler
+Louis.Text.FalseConditionInterpolatedStringHandler.AppendFormatted(object? value, int alignment = 0, string? format = null) -> void
+Louis.Text.FalseConditionInterpolatedStringHandler.AppendFormatted(string? value) -> void
+Louis.Text.FalseConditionInterpolatedStringHandler.AppendFormatted(string? value, int alignment = 0, string? format = null) -> void
+Louis.Text.FalseConditionInterpolatedStringHandler.AppendFormatted(System.ReadOnlySpan<char> value) -> void
+Louis.Text.FalseConditionInterpolatedStringHandler.AppendFormatted(System.ReadOnlySpan<char> value, int alignment = 0, string? format = null) -> void
+Louis.Text.FalseConditionInterpolatedStringHandler.AppendFormatted<T>(T value) -> void
+Louis.Text.FalseConditionInterpolatedStringHandler.AppendFormatted<T>(T value, int alignment) -> void
+Louis.Text.FalseConditionInterpolatedStringHandler.AppendFormatted<T>(T value, int alignment, string? format) -> void
+Louis.Text.FalseConditionInterpolatedStringHandler.AppendFormatted<T>(T value, string? format) -> void
+Louis.Text.FalseConditionInterpolatedStringHandler.AppendLiteral(string! value) -> void
+Louis.Text.FalseConditionInterpolatedStringHandler.FalseConditionInterpolatedStringHandler() -> void
+Louis.Text.FalseConditionInterpolatedStringHandler.FalseConditionInterpolatedStringHandler(int literalLength, int formattedCount, bool condition, out bool shouldAppend) -> void
+Louis.Text.FalseConditionInterpolatedStringHandler.ToStringAndClear() -> string!
+Louis.Text.LineClipping
+Louis.Text.LineClipping.Equals(Louis.Text.LineClipping other) -> bool
+Louis.Text.LineClipping.Head.get -> System.Range
+Louis.Text.LineClipping.HeadLineCount.get -> int
+Louis.Text.LineClipping.LineClipping() -> void
+Louis.Text.LineClipping.OmittedLineCount.get -> int
+Louis.Text.LineClipping.Tail.get -> System.Range
+Louis.Text.LineClipping.TailLineCount.get -> int
+Louis.Text.TrueConditionInterpolatedStringHandler
+Louis.Text.TrueConditionInterpolatedStringHandler.AppendFormatted(object? value, int alignment = 0, string? format = null) -> void
+Louis.Text.TrueConditionInterpolatedStringHandler.AppendFormatted(string? value) -> void
+Louis.Text.TrueConditionInterpolatedStringHandler.AppendFormatted(string? value, int alignment = 0, string? format = null) -> void
+Louis.Text.TrueConditionInterpolatedStringHandler.AppendFormatted(System.ReadOnlySpan<char> value) -> void
+Louis.Text.TrueConditionInterpolatedStringHandler.AppendFormatted(System.ReadOnlySpan<char> value, int alignment = 0, string? format = null) -> void
+Louis.Text.TrueConditionInterpolatedStringHandler.AppendFormatted<T>(T value) -> void
+Louis.Text.TrueConditionInterpolatedStringHandler.AppendFormatted<T>(T value, int alignment) -> void
+Louis.Text.TrueConditionInterpolatedStringHandler.AppendFormatted<T>(T value, int alignment, string? format) -> void
+Louis.Text.TrueConditionInterpolatedStringHandler.AppendFormatted<T>(T value, string? format) -> void
+Louis.Text.TrueConditionInterpolatedStringHandler.AppendLiteral(string! value) -> void
+Louis.Text.TrueConditionInterpolatedStringHandler.ToStringAndClear() -> string!
+Louis.Text.TrueConditionInterpolatedStringHandler.TrueConditionInterpolatedStringHandler() -> void
+Louis.Text.TrueConditionInterpolatedStringHandler.TrueConditionInterpolatedStringHandler(int literalLength, int formattedCount, bool condition, out bool shouldAppend) -> void
+static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, System.Collections.Generic.IEqualityComparer<TValue>! comparer, TValue value, System.Action<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
+static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, TValue value, System.Action<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
+static Louis.Processes.CommandLineFormatter.Format(string! executable, System.Collections.Generic.IEnumerable<string!>! arguments) -> string!
+static Louis.Processes.ConsoleUtility.SystemDefaultEncoding.get -> System.Text.Encoding!
+static Louis.Text.CharReadOnlySpanExtensions.ComputeLineClipping(this System.ReadOnlySpan<char> this, int headLines, int tailLines) -> Louis.Text.LineClipping
+static Louis.Text.CharReadOnlySpanExtensions.ComputeLiteralLength(this System.ReadOnlySpan<char> this, Louis.Text.StringLiteralKind literalKind) -> int
+static Louis.Text.CharReadOnlySpanExtensions.ComputeQuotedLiteralLength(this System.ReadOnlySpan<char> this) -> int
+static Louis.Text.CharReadOnlySpanExtensions.ComputeVerbatimLiteralLength(this System.ReadOnlySpan<char> this) -> int
+static Louis.Text.LineClipping.operator !=(Louis.Text.LineClipping a, Louis.Text.LineClipping b) -> bool
+static Louis.Text.LineClipping.operator ==(Louis.Text.LineClipping a, Louis.Text.LineClipping b) -> bool
+static Louis.Text.StringExtensions.ComputeLineClipping(this string? this, int headLines, int tailLines) -> Louis.Text.LineClipping
+static Louis.Text.StringExtensions.ComputeLiteralLength(this string? this, Louis.Text.StringLiteralKind literalKind) -> int
+static Louis.Text.StringExtensions.ComputeQuotedLiteralLength(this string? this) -> int
+static Louis.Text.StringExtensions.ComputeVerbatimLiteralLength(this string? this) -> int
+static Louis.Text.Utf8Utility.ComputeMaxCharsInBytes(System.ReadOnlySpan<char> chars, int maxBytes) -> int
+static Louis.Text.Utf8Utility.ComputeMaxCharsInBytes(string! str, int maxBytes) -> int
