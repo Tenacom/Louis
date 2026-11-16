@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **BREAKING CHANGE**: `StringExtensions.GetQuotedLiteralLength` and `CharReadOnlySpanExtensions.GetQuotedLiteralLength` are renamed to `ComputeQuotedLiteralLength`.
 - **BREAKING CHANGE**: `StringExtensions.GetVerbatimLiteralLength` and `CharReadOnlySpanExtensions.GetVerbatimLiteralLength` are renamed to `ComputeVerbatimLiteralLength`.
 - **BREAKING CHANGE**: [`Utf8Utility.GetMaxCharsInBytes`](docs/api/Louis/Louis.Text.Utf8Utility.md) is renamed to `ComputeMaxCharsInBytes`.
+- **BREAKING CHANGE**: `Louis.IO.ReadOnlyMemoryStream` is removed, and `System.IO.ReadOnlyMemoryStream` of .NET 11 replaces it.
 - The `netstandard2.0` and .NET Framework builds of `Louis` depend on `Microsoft.Bcl.Memory`, which supplies the `Range` of [`LineClipping`](docs/api/Louis/Louis.Text.LineClipping.md).
 - The `netstandard` and .NET Framework builds of `Louis` depend on `System.Text.Encoding.CodePages`, which supplies the encoding of [`ConsoleUtility.SystemDefaultEncoding`](docs/api/Louis/Louis.Processes.ConsoleUtility.md).
 
@@ -49,12 +50,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [`UnicodeCharacterUtility.IsIdentifierStartCharacter`](docs/api/Louis/Louis.Text.UnicodeCharacterUtility.md) returned `false` for a letter number, such as `Ⅰ` (U+2160), so `IsValidIdentifier` rejected an identifier that starts with one.
 - [`Utf8Utility.ComputeMaxCharsInBytes`](docs/api/Louis/Louis.Text.Utf8Utility.md) counted a surrogate pair whose low surrogate is `U+DFFF`, such as the one of `U+10FFFF`, as six bytes instead of four.
 - `Utf8Utility.ComputeMaxCharsInBytes` did not count a high surrogate at the end of the input, even when its three-byte replacement character fit.
-- [`ReadOnlyMemoryStream.Position`](docs/api/Louis/Louis.IO.ReadOnlyMemoryStream.md) threw `ArgumentOutOfRangeException` when set to 0.
-- The `ArgumentOutOfRangeException` that `ReadOnlyMemoryStream.Position` throws for a value above `int.MaxValue` had its message, not `value`, as its `ParamName`.
-- The `ObjectDisposedException` that a closed `ReadOnlyMemoryStream` throws had `Cannot access a closed Stream.` as its `ObjectName` instead of its `Message`.
-- `ReadOnlyMemoryStream.Read(byte[], int, int)` threw `ArgumentOutOfRangeException` when `count` exceeded the bytes left in the stream, instead of reading them.
-- `ReadOnlyMemoryStream.CopyTo` and `CopyToAsync` threw `ArgumentException` when the position of the stream was beyond its end, instead of copying nothing.
-- On the `netstandard2.0` and .NET Framework builds, `ReadOnlyMemoryStream.CopyToAsync` returned the buffer it rents for memory without a backing array before the destination consumed it.
 - [`SelfCheck.FailCritically<T>`](docs/api/Louis/Louis.Diagnostics.SelfCheck.md) threw `InternalErrorException` instead of `CriticalInternalErrorException`.
 - [`SelfCheck`](docs/api/Louis/Louis.Diagnostics.SelfCheck.md) messages named `System.Private.CoreLib` or `mscorlib` as the assembly of the failed check, instead of the assembly of the calling method.
 - [`SimpleStringConverter<T>.ConvertTo`](docs/api/Louis/Louis.ComponentModel.SimpleStringConverter_T_.md) overflowed the stack on a conversion to `string`.

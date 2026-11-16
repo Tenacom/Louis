@@ -1,6 +1,28 @@
 #nullable enable
+*REMOVED*Louis.IO.ReadOnlyMemoryStream
+*REMOVED*Louis.IO.ReadOnlyMemoryStream.ReadOnlyMemoryStream(System.ReadOnlyMemory<byte> data) -> void
+*REMOVED*override Louis.IO.ReadOnlyMemoryStream.CanRead.get -> bool
+*REMOVED*override Louis.IO.ReadOnlyMemoryStream.CanSeek.get -> bool
+*REMOVED*override Louis.IO.ReadOnlyMemoryStream.CanWrite.get -> bool
+*REMOVED*override Louis.IO.ReadOnlyMemoryStream.CopyTo(System.IO.Stream! destination, int bufferSize) -> void
+*REMOVED*override Louis.IO.ReadOnlyMemoryStream.CopyToAsync(System.IO.Stream! destination, int bufferSize, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.Task!
+*REMOVED*override Louis.IO.ReadOnlyMemoryStream.Flush() -> void
+*REMOVED*override Louis.IO.ReadOnlyMemoryStream.FlushAsync(System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.Task!
+*REMOVED*override Louis.IO.ReadOnlyMemoryStream.Length.get -> long
+*REMOVED*override Louis.IO.ReadOnlyMemoryStream.Position.get -> long
+*REMOVED*override Louis.IO.ReadOnlyMemoryStream.Position.set -> void
+*REMOVED*override Louis.IO.ReadOnlyMemoryStream.Read(System.Span<byte> buffer) -> int
+*REMOVED*override Louis.IO.ReadOnlyMemoryStream.Read(byte[]! buffer, int offset, int count) -> int
 *REMOVED*override Louis.IO.ReadOnlyMemoryStream.ReadAsync(System.Memory<byte> buffer, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask<int>
+*REMOVED*override Louis.IO.ReadOnlyMemoryStream.ReadAsync(byte[]! buffer, int offset, int count, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.Task<int>!
+*REMOVED*override Louis.IO.ReadOnlyMemoryStream.ReadByte() -> int
+*REMOVED*override Louis.IO.ReadOnlyMemoryStream.Seek(long offset, System.IO.SeekOrigin origin) -> long
+*REMOVED*override Louis.IO.ReadOnlyMemoryStream.SetLength(long value) -> void
+*REMOVED*override Louis.IO.ReadOnlyMemoryStream.Write(System.ReadOnlySpan<byte> buffer) -> void
+*REMOVED*override Louis.IO.ReadOnlyMemoryStream.Write(byte[]! buffer, int offset, int count) -> void
 *REMOVED*override Louis.IO.ReadOnlyMemoryStream.WriteAsync(System.ReadOnlyMemory<byte> buffer, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.ValueTask
+*REMOVED*override Louis.IO.ReadOnlyMemoryStream.WriteAsync(byte[]! buffer, int offset, int count, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.Task!
+*REMOVED*override Louis.IO.ReadOnlyMemoryStream.WriteByte(byte value) -> void
 *REMOVED*Louis.DateOnlyExtensions
 *REMOVED*Louis.DateOnlyUtility
 *REMOVED*static Louis.DateOnlyExtensions.GetEndOfMonth(this System.DateOnly this) -> System.DateOnly
@@ -24,8 +46,6 @@
 *REMOVED*static Louis.Text.StringExtensions.GetVerbatimLiteralLength(this string? this) -> int
 *REMOVED*static Louis.Text.Utf8Utility.GetMaxCharsInBytes(System.ReadOnlySpan<char> chars, int maxBytes) -> int
 *REMOVED*static Louis.Text.Utf8Utility.GetMaxCharsInBytes(string! str, int maxBytes) -> int
-override Louis.IO.ReadOnlyMemoryStream.ReadAsync(System.Memory<byte> buffer, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<int>
-override Louis.IO.ReadOnlyMemoryStream.WriteAsync(System.ReadOnlyMemory<byte> buffer, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask
 override Louis.Text.LineClipping.Equals(object? obj) -> bool
 override Louis.Text.LineClipping.GetHashCode() -> int
 Louis.Processes.CommandLineFormatter

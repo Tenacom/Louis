@@ -27,8 +27,6 @@ Louis is a library of general-purpose types for .NET libraries and applications.
 
 Louis supports Windows and Linux, and `ci.yml` runs the tests on `ubuntu-latest` and `windows-latest`. The `net48` tests run on the Windows runner alone. "Tests on more than one platform" in `testing.md` holds for every other test.
 
-`ReadOnlyMemoryStream` is the one type with members that bind differently per build, as "Every build of a package gets tested" in `testing.md` describes. `Read(Span<byte>)`, `ReadAsync(Memory<byte>, CancellationToken)`, `CopyTo(Stream, int)`, `Write(ReadOnlySpan<byte>)`, and `WriteAsync(ReadOnlyMemory<byte>, CancellationToken)` are overrides only on the frameworks where `Stream` has them as virtual members. A test calls them through a `ReadOnlyMemoryStream` variable, never through a `Stream` variable.
-
 ### Namespaces of `Louis`
 
 Each namespace of `Louis` groups types by the BCL area they extend or complete.
@@ -40,7 +38,6 @@ Each namespace of `Louis` groups types by the BCL area they extend or complete.
 | `Louis.ComponentModel` | Type converters: `SimpleStringConverter<T>`, `ParsableStringConverter<T>`, `MailAddressConverter`, `MailAddressCollectionConverter`, and `SimpleStringConverter` to register them. |
 | `Louis.Diagnostics`   | Exceptions: `ExceptionExtensions`, `ExceptionHelper`, `SelfCheck`, `InternalErrorException`, `CriticalInternalErrorException`, `ICriticalError`. Also `StringBuilderExtensions`, with `AppendFormattedObject`. |
 | `Louis.Fluency`       | `FluentExtensions` and the `FluentAction` delegates.                                                                                                                                |
-| `Louis.IO`            | `ReadOnlyMemoryStream`.                                                                                                                                                             |
 | `Louis.Processes`     | `ProcessRunner` with its contract `IProcessRunner`, `ProcessRunOptions`, `ProcessResult`, `ProcessFailedException`, in the `net10.0` build alone. Also `CommandLineFormatter` and `ConsoleUtility`, in every build. |
 | `Louis.Text`          | String literals: `StringExtensions`, `CharReadOnlySpanExtensions`, `StringBuilderExtensions`, `StringLiteralKind`. Lines: `ComputeLineClipping` in the first two, and `LineClipping`. Also `UnicodeCharacterUtility`, `Utf8Utility`, and the conditional interpolated string handlers. |
 | `Louis.Threading`     | `AsyncService` with its enums, `InterlockedFlag`, `InterlockedReference<T>`, `ValueTaskUtility`.                                                                                    |
