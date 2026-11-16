@@ -14,10 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Struct `Louis.Text.TrueConditionInterpolatedStringHandler` only performs formatting if a given condition is true.
 - Struct `Louis.Text.FalseConditionInterpolatedStringHandler` only performs formatting if a given condition is false.
 - A complete [API reference](docs/README.md) replaces the documentation articles under `docs/`.
-- [`ProcessRunner`](docs/api/Louis/Louis.Processes.ProcessRunner.md), in namespace [`Louis.Processes`](docs/api/Louis/Louis.Processes.md) and in the `net10.0` build of `Louis` alone, runs a child process and returns its exit code and its output.
+- [`ProcessRunner`](docs/api/Louis/Louis.Processes.ProcessRunner.md), in namespace [`Louis.Processes`](docs/api/Louis/Louis.Processes.md) and in the `net10.0` and `net11.0` builds of `Louis` alone, runs a child process and returns its exit code and output.
 - Property [`Louis.Processes.ConsoleUtility.SystemDefaultEncoding`](docs/api/Louis/Louis.Processes.ConsoleUtility.md) returns the encoding that a new console of the system starts with.
-- Package [`Louis.Testing`](docs/api/Louis.Testing/README.md), for `net10.0`, has [`FakeProcessRunner`](docs/api/Louis.Testing/Louis.Processes.FakeProcessRunner.md), a test double of `IProcessRunner` that records each run and starts no process.
+- Package [`Louis.Testing`](docs/api/Louis.Testing/README.md), for `net10.0` and `net11.0`, has [`FakeProcessRunner`](docs/api/Louis.Testing/Louis.Processes.FakeProcessRunner.md), a test double of `IProcessRunner` that records each run and starts no process.
 - [`StringExtensions.ComputeLineClipping`](docs/api/Louis/Louis.Text.StringExtensions.md) and [`CharReadOnlySpanExtensions.ComputeLineClipping`](docs/api/Louis/Louis.Text.CharReadOnlySpanExtensions.md) find the first and last lines of a text, and count the lines between them.
+- L.o.U.I.S. packages have a `net11.0` build, next to the `net10.0` build.
 
 ### Changes to existing features
 
@@ -36,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **BREAKING CHANGE**: `Louis.IO.ReadOnlyMemoryStream` is removed, and `System.IO.ReadOnlyMemoryStream` of .NET 11 replaces it.
 - The `netstandard2.0` and .NET Framework builds of `Louis` depend on `Microsoft.Bcl.Memory`, which supplies the `Range` of [`LineClipping`](docs/api/Louis/Louis.Text.LineClipping.md).
 - The `netstandard` and .NET Framework builds of `Louis` depend on `System.Text.Encoding.CodePages`, which supplies the encoding of [`ConsoleUtility.SystemDefaultEncoding`](docs/api/Louis/Louis.Processes.ConsoleUtility.md).
+- L.o.U.I.S. packages depend on version 11.0.0 of `Microsoft.Bcl.AsyncInterfaces`, `Microsoft.Bcl.Memory`, `Microsoft.Extensions.Hosting.Abstractions`, `Microsoft.Extensions.Logging.Abstractions`, and `System.Text.Encoding.CodePages`.
 
 ### Bugs fixed in this release
 
