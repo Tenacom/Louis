@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>net10.0</TargetFrameworks>
+    <TargetFrameworks>net10.0;net11.0</TargetFrameworks>
     <!-- The .NET Framework build is tested on Windows alone: the Linux runner has no .NET Framework runtime. -->
     <TargetFrameworks Condition="'$(OS)' == 'Windows_NT'">$(TargetFrameworks);net48</TargetFrameworks>
     <CLSCompliant>false</CLSCompliant>
@@ -20,9 +20,9 @@
 
   <!--
       The tests of ProcessRunner run Louis.Tests.ChildProcess as a child process, from the output directory.
-      ProcessRunner exists in the net10.0 build of Louis alone.
+      ProcessRunner is under NET8_0_OR_GREATER in Louis, and the condition below selects the same frameworks.
   -->
-  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
+  <ItemGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">
     <ProjectReference Include="..\Louis.Tests.ChildProcess\Louis.Tests.ChildProcess.csproj" />
   </ItemGroup>
 
