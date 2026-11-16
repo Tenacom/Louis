@@ -44,7 +44,7 @@ Each namespace of `Louis` groups types by the BCL area they extend or complete.
 
 `Louis.Testing` adds `FakeProcessRunner` and `FakeProcessRun` to `Louis.Processes`.
 
-A namespace named `Internal` holds types that are not part of the public surface. `Louis.Text.Internal`, `Louis.Diagnostics.Internal`, and `Louis.Hosting.Internal` are the three.
+A namespace named `Internal` holds types that are not part of the public surface. `Louis.Text.Internal` and `Louis.Hosting.Internal` are the two.
 
 `UnicodeCharacterUtility` is adapted from Roslyn, and `THIRD-PARTY-NOTICES.md` carries the attribution. "Conformance with the toolchain we belong to" in `design-principles.md` says what copying costs. Do not add a second copied file without adding its notice in the same commit.
 
