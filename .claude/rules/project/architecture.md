@@ -67,4 +67,4 @@ A namespace named `Internal` holds types that are not part of the public surface
 
 ### Public API files
 
-`Louis` has one pair of public API files per target framework, under `src/Louis/PublicAPI/<target framework>/`, because its surface differs per framework. `Louis.Hosting` and `Louis.Testing` have one pair each, in the project directory, because the surface of each is the same on every target framework. `UseTfmSpecificPublicApiFiles` in each project file selects the layout. A new target framework gets its directory as a copy of the closest existing one.
+`Louis` has one pair of public API files per target framework, under `src/Louis/PublicAPI/<target framework>/`, because its surface differs per framework. `Louis.Hosting` and `Louis.Testing` have one pair each, in the project directory, because the surface of each is the same on every target framework. `UseTfmSpecificPublicApiFiles` in each project file selects the layout. No release holds a build for a new target framework. Its directory has the `#nullable enable` header alone in `PublicAPI.Shipped.txt`, and its whole surface in `PublicAPI.Unshipped.txt`, with no `*REMOVED*` line.
