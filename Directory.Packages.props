@@ -14,7 +14,7 @@
 
   <!-- Test dependencies -->
   <ItemGroup>
-    <PackageVersion Include="TUnit" Version="1.84.0" />
+    <PackageVersion Include="TUnit" Version="1.85.0" />
   </ItemGroup>
 
   <!-- Development dependencies -->
