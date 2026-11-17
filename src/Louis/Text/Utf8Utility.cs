@@ -13,7 +13,7 @@ namespace Louis.Text;
 public static partial class Utf8Utility
 {
     /// <summary>
-    /// <para>An <see cref="Encoding"/> that can be used to encode UTF-8 text without a byte order mark (BOM).</para>
+    /// <para>An <see cref="Encoding"/> that can be used to encode UTF-8 text without a byte order mark.</para>
     /// </summary>
     public static readonly Encoding Utf8NoBomEncoding = new UTF8Encoding(false);
 
@@ -33,8 +33,8 @@ public static partial class Utf8Utility
     /// <para>This method assumes that any unrepresentable character will be encoded as the Unicode replacement character
     /// (code point <c>0xFFFD</c>). This is the default for both <see cref="Encoding.UTF8"/>
     /// and <see cref="Utf8NoBomEncoding"/>.</para>
-    /// <para>This method does not take into account the UTF-8 preamble (BOM), which would add 3 additional bytes
-    /// at the start of the encoded string. If you plan to use the preamble, you should subtract 3 from the number
+    /// <para>This method does not take into account the UTF-8 byte order mark, which would add 3 additional bytes
+    /// at the start of the encoded string. If you plan to write a byte order mark, you should subtract 3 from the number
     /// of available bytes when calling this method.</para>
     /// </remarks>
     public static int ComputeMaxCharsInBytes(string str, int maxBytes)
@@ -60,8 +60,8 @@ public static partial class Utf8Utility
     /// <para>This method assumes that any unrepresentable character will be encoded as the Unicode replacement character
     /// (code point <c>0xFFFD</c>). This is the default for both <see cref="Encoding.UTF8"/>
     /// and <see cref="Utf8NoBomEncoding"/>.</para>
-    /// <para>This method does not take into account the UTF-8 preamble (BOM), which would add 3 additional bytes
-    /// at the start of the encoded string. If you plan to use the preamble, you should subtract 3 from the number
+    /// <para>This method does not take into account the UTF-8 byte order mark, which would add 3 additional bytes
+    /// at the start of the encoded string. If you plan to write a byte order mark, you should subtract 3 from the number
     /// of available bytes when calling this method.</para>
     /// </remarks>
     public static int ComputeMaxCharsInBytes(ReadOnlySpan<char> chars, int maxBytes)

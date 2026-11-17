@@ -23,7 +23,7 @@ public static partial class ConsoleUtility
     /// </summary>
     /// <value>
     /// On Windows, the encoding of the OEM code page of the system.
-    /// On every other operating system, UTF-8 without a byte order mark (BOM).
+    /// On every other operating system, UTF-8 without a byte order mark.
     /// </value>
     /// <remarks>
     /// <para>A console program that sets no encoding writes its redirected output with the encoding of its console.
