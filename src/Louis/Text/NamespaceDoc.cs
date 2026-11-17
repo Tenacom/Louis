@@ -4,7 +4,7 @@
 namespace Louis.Text;
 
 /// <summary>
-/// Provides types to work with strings and characters: C# string literals,
+/// Provides types to work with strings and characters: C# string literals, line clipping, text edits,
 /// Unicode and UTF-8 utilities, and conditional interpolated string handlers.
 /// </summary>
 internal static class NamespaceDoc
