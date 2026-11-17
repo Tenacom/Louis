@@ -20,6 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [`StringExtensions.ComputeLineClipping`](docs/api/Louis/Louis.Text.StringExtensions.md) and [`CharReadOnlySpanExtensions.ComputeLineClipping`](docs/api/Louis/Louis.Text.CharReadOnlySpanExtensions.md) find the first and last lines of a text, and count the lines between them.
 - L.o.U.I.S. packages have a `net11.0` build, next to the `net10.0` build.
 - [`StringExtensions.ApplyEdits`](docs/api/Louis/Louis.Text.StringExtensions.md) and [`CharReadOnlySpanExtensions.ApplyEdits`](docs/api/Louis/Louis.Text.CharReadOnlySpanExtensions.md) apply a set of edits to a text, where each [`TextEdit`](docs/api/Louis/Louis.Text.TextEdit.md) replaces a range of characters of the original text.
+- [`TextFileUtility.ReadAllText`](docs/api/Louis/Louis.IO.TextFileUtility.md) and `ReadAllTextAsync`, in namespace [`Louis.IO`](docs/api/Louis/Louis.IO.md), return a [`TextFileContent`](docs/api/Louis/Louis.IO.TextFileContent.md) with the text of a file and the encoding to write the file back with.
+- [`TextFileUtility.WriteAllTextIfChanged`](docs/api/Louis/Louis.IO.TextFileUtility.md) and `WriteAllTextIfChangedAsync` write a text to a file, unless the file holds that text already.
 
 ### Changes to existing features
 
