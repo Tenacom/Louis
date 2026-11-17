@@ -10,6 +10,7 @@ Each line below links the page of a namespace, which lists its types and links t
 - [`Louis.ComponentModel`](api/Louis/Louis.ComponentModel.md): type converters between a type and strings, and base classes to write such converters.
 - [`Louis.Diagnostics`](api/Louis/Louis.Diagnostics.md): types to create, inspect, and rethrow exceptions, to identify critical errors, and to perform self-checks.
 - [`Louis.Fluency`](api/Louis/Louis.Fluency.md): extension methods that embed conditional logic and other operations in a fluent call chain.
+- [`Louis.IO`](api/Louis/Louis.IO.md): types to read and write text files.
 - [`Louis.Processes`](api/Louis/Louis.Processes.md): types that run a child process and read what it writes, and utility members for the console.
 - [`Louis.Text`](api/Louis/Louis.Text.md): C# string literals, Unicode and UTF-8 utilities, text editing utilities, and conditional interpolated string handlers.
 - [`Louis.Threading`](api/Louis/Louis.Threading.md): a base class for long-running services, thread-safe flags and references, and utility methods for `ValueTask`.
