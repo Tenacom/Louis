@@ -50,6 +50,12 @@ override Louis.Text.LineClipping.Equals(object? obj) -> bool
 override Louis.Text.LineClipping.GetHashCode() -> int
 override Louis.Text.TextEdit.Equals(object? obj) -> bool
 override Louis.Text.TextEdit.GetHashCode() -> int
+Louis.IO.TextFileContent
+Louis.IO.TextFileContent.Deconstruct(out string! text, out System.Text.Encoding! encoding) -> void
+Louis.IO.TextFileContent.Encoding.get -> System.Text.Encoding!
+Louis.IO.TextFileContent.Text.get -> string!
+Louis.IO.TextFileContent.TextFileContent(string! text, System.Text.Encoding! encoding) -> void
+Louis.IO.TextFileUtility
 Louis.Processes.CommandLineFormatter
 Louis.Processes.ConsoleUtility
 Louis.Text.LineClipping
@@ -72,6 +78,10 @@ Louis.Text.TextEdit.TextEdit() -> void
 Louis.Text.TextEdit.TextEdit(int start, int length, string! text) -> void
 static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, System.Collections.Generic.IEqualityComparer<TValue>! comparer, TValue value, System.Action<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
 static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, TValue value, System.Action<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
+static Louis.IO.TextFileUtility.ReadAllText(string! path, System.Text.Encoding? fallbackEncoding = null) -> Louis.IO.TextFileContent!
+static Louis.IO.TextFileUtility.ReadAllTextAsync(string! path, System.Text.Encoding? fallbackEncoding = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<Louis.IO.TextFileContent!>!
+static Louis.IO.TextFileUtility.WriteAllTextIfChanged(string! path, string! text, System.Text.Encoding? encoding = null) -> bool
+static Louis.IO.TextFileUtility.WriteAllTextIfChangedAsync(string! path, string! text, System.Text.Encoding? encoding = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<bool>!
 static Louis.Processes.CommandLineFormatter.Format(string! executable, System.Collections.Generic.IEnumerable<string!>! arguments) -> string!
 static Louis.Processes.ConsoleUtility.SystemDefaultEncoding.get -> System.Text.Encoding!
 static Louis.Text.CharReadOnlySpanExtensions.ApplyEdits(this System.ReadOnlySpan<char> this, System.Collections.Generic.IEnumerable<Louis.Text.TextEdit>! edits) -> string!
