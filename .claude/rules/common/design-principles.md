@@ -56,6 +56,19 @@ Copying MIT-licensed code is a last resort. Omitting the attribution the licence
 
 Facts, constants, names that must match in order to interoperate, and the shape of an interface are not the licensed expression. Use them freely, and cite the source as a reference. Everything else gets reimplemented. When copying is the only viable option, the same commit adds a `THIRD-PARTY-NOTICES.md` entry.
 
+A file copied or adapted from another project says so in a block comment, between the copyright preamble and the first `using` directive. For a partial type, the block goes in the main file. Use this template:
+
+```csharp
+/*
+ * This file is adapted from <project>, under the <license name> license.
+ * Original source: <URL of the file, at a tag or a commit>
+ * Original license: <URL of the license file, at the same tag or commit>
+ * THIRD-PARTY-NOTICES.md, in the project root, holds the copyright notice and the license text.
+ */
+```
+
+The block is a `/* ... */` comment because StyleCop SA1512 rejects a `//` comment followed by a blank line.
+
 This rule bears on how I work. I answer a conformance question by reading upstream source, so the source is in front of me while I write the equivalent code. When I have read upstream to settle something, I say so, and I state what I took: this fact, this name. I do not emit code that happens to match theirs without saying so.
 
 Deviate only where the convention's premise does not hold for us, and say so at the point of deviation. Example: `bv` does not copy the CLI's non-English-UI-culture gate on the console encoding switch. That gate exists to make localized CLI output render, and Buildvana is single-culture English. The reason for the switch itself is language-independent, so the switch stays.

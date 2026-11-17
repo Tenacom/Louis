@@ -155,11 +155,26 @@ An extension class that extends a single type is named after the extended type:
 - Use the .NET class name, not the C# keyword: "String", not "string".
 - Add an "Extensions" suffix.
 
+The name works in both directions. Where `<name>` is the name of a type, or `I<name>` the name of an interface, a class named `<name>Extensions` holds extension members for these types only:
+
+- the type `<name>`, the interface `I<name>`, or both;
+- a well-known type that derives from `<name>` or implements `I<name>`, such as `MemoryStream` for `Stream`.
+
+A class that extends any other type says so in a comment above its declaration, after the XML comment. Use this form, so that a search finds every deviation:
+
+```csharp
+// Extension class name: also extends <type>, because <reason>.
+```
+
+Do not report the name of a class that has this comment.
+
 **Examples:**
 
 - `MyClass` extensions go in `MyClassExtensions`.
 - `MyGenericClass<T>` extensions go in ``MyGenericClassExtensions``, because extension classes cannot be generic.
 - `IMyInterface` extensions go in `MyInterfaceExtensions`.
+- `MyClass` and `IMyClass` extensions go in `MyClassExtensions`.
+- `Stream` and `MemoryStream` extensions go in `StreamExtensions`.
 
 When such a class has private helper methods, do not mix them with the extension block. Make the class partial and put the private methods in a separate file, such as `MyClassExtensions-private.cs`. Do this even when the class is under the size threshold for partial classes.
 
