@@ -48,6 +48,8 @@
 *REMOVED*static Louis.Text.Utf8Utility.GetMaxCharsInBytes(string! str, int maxBytes) -> int
 override Louis.Text.LineClipping.Equals(object? obj) -> bool
 override Louis.Text.LineClipping.GetHashCode() -> int
+override Louis.Text.TextEdit.Equals(object? obj) -> bool
+override Louis.Text.TextEdit.GetHashCode() -> int
 Louis.Processes.CommandLineFormatter
 Louis.Processes.ConsoleUtility
 Louis.Text.LineClipping
@@ -58,19 +60,33 @@ Louis.Text.LineClipping.LineClipping() -> void
 Louis.Text.LineClipping.OmittedLineCount.get -> int
 Louis.Text.LineClipping.Tail.get -> System.Range
 Louis.Text.LineClipping.TailLineCount.get -> int
+Louis.Text.TextEdit
+Louis.Text.TextEdit.Equals(Louis.Text.TextEdit other) -> bool
+Louis.Text.TextEdit.Length.get -> int
+Louis.Text.TextEdit.Length.init -> void
+Louis.Text.TextEdit.Start.get -> int
+Louis.Text.TextEdit.Start.init -> void
+Louis.Text.TextEdit.Text.get -> string!
+Louis.Text.TextEdit.Text.init -> void
+Louis.Text.TextEdit.TextEdit() -> void
+Louis.Text.TextEdit.TextEdit(int start, int length, string! text) -> void
 static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, System.Collections.Generic.IEqualityComparer<TValue>! comparer, TValue value, System.Action<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
 static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, TValue value, System.Action<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
 static Louis.Processes.CommandLineFormatter.Format(string! executable, System.Collections.Generic.IEnumerable<string!>! arguments) -> string!
 static Louis.Processes.ConsoleUtility.SystemDefaultEncoding.get -> System.Text.Encoding!
+static Louis.Text.CharReadOnlySpanExtensions.ApplyEdits(this System.ReadOnlySpan<char> this, System.Collections.Generic.IEnumerable<Louis.Text.TextEdit>! edits) -> string!
 static Louis.Text.CharReadOnlySpanExtensions.ComputeLineClipping(this System.ReadOnlySpan<char> this, int headLines, int tailLines) -> Louis.Text.LineClipping
 static Louis.Text.CharReadOnlySpanExtensions.ComputeLiteralLength(this System.ReadOnlySpan<char> this, Louis.Text.StringLiteralKind literalKind) -> int
 static Louis.Text.CharReadOnlySpanExtensions.ComputeQuotedLiteralLength(this System.ReadOnlySpan<char> this) -> int
 static Louis.Text.CharReadOnlySpanExtensions.ComputeVerbatimLiteralLength(this System.ReadOnlySpan<char> this) -> int
 static Louis.Text.LineClipping.operator !=(Louis.Text.LineClipping a, Louis.Text.LineClipping b) -> bool
 static Louis.Text.LineClipping.operator ==(Louis.Text.LineClipping a, Louis.Text.LineClipping b) -> bool
+static Louis.Text.StringExtensions.ApplyEdits(this string! this, System.Collections.Generic.IEnumerable<Louis.Text.TextEdit>! edits) -> string!
 static Louis.Text.StringExtensions.ComputeLineClipping(this string? this, int headLines, int tailLines) -> Louis.Text.LineClipping
 static Louis.Text.StringExtensions.ComputeLiteralLength(this string? this, Louis.Text.StringLiteralKind literalKind) -> int
 static Louis.Text.StringExtensions.ComputeQuotedLiteralLength(this string? this) -> int
 static Louis.Text.StringExtensions.ComputeVerbatimLiteralLength(this string? this) -> int
+static Louis.Text.TextEdit.operator !=(Louis.Text.TextEdit a, Louis.Text.TextEdit b) -> bool
+static Louis.Text.TextEdit.operator ==(Louis.Text.TextEdit a, Louis.Text.TextEdit b) -> bool
 static Louis.Text.Utf8Utility.ComputeMaxCharsInBytes(System.ReadOnlySpan<char> chars, int maxBytes) -> int
 static Louis.Text.Utf8Utility.ComputeMaxCharsInBytes(string! str, int maxBytes) -> int
