@@ -20,6 +20,7 @@ partial class CharReadOnlySpanExtensions
     /// <returns>A newly-constructed string, in which <see cref="TextEdit.Text"/> has replaced the characters of each edit.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="edits"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentOutOfRangeException">An edit has a negative <see cref="TextEdit.Start"/>,
+    /// a <see cref="TextEdit.Start"/> greater than the length of <paramref name="this"/>,
     /// a negative <see cref="TextEdit.Length"/>, or characters to replace after the end of <paramref name="this"/>.</exception>
     /// <exception cref="ArgumentException">Two edits overlap.</exception>
     /// <remarks>
