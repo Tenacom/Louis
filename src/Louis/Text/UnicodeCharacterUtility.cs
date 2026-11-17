@@ -1,12 +1,17 @@
 // Copyright (c) Tenacom and contributors. Licensed under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
+/*
+ * This file is adapted from Roslyn, under the MIT license.
+ * Original source: https://github.com/dotnet/roslyn/blob/v4.2.0/src/Compilers/Core/Portable/InternalUtilities/UnicodeCharacterUtilities.cs
+ * Original license: https://github.com/dotnet/roslyn/blob/v4.2.0/License.txt
+ * THIRD-PARTY-NOTICES.md, in the project root, holds the copyright notice and the license text.
+ */
+
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
-// The following code has been adapted from the Roslyn project.
-// https://github.com/dotnet/roslyn/blob/v4.2.0/src/Compilers/Core/Portable/InternalUtilities/UnicodeCharacterUtilities.cs
 namespace Louis.Text;
 
 /// <summary>
