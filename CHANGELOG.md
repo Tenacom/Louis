@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Package [`Louis.Testing`](docs/api/Louis.Testing/README.md), for `net10.0` and `net11.0`, has [`FakeProcessRunner`](docs/api/Louis.Testing/Louis.Processes.FakeProcessRunner.md), a test double of `IProcessRunner` that records each run and starts no process.
 - [`StringExtensions.ComputeLineClipping`](docs/api/Louis/Louis.Text.StringExtensions.md) and [`CharReadOnlySpanExtensions.ComputeLineClipping`](docs/api/Louis/Louis.Text.CharReadOnlySpanExtensions.md) find the first and last lines of a text, and count the lines between them.
 - L.o.U.I.S. packages have a `net11.0` build, next to the `net10.0` build.
+- [`StringExtensions.ApplyEdits`](docs/api/Louis/Louis.Text.StringExtensions.md) and [`CharReadOnlySpanExtensions.ApplyEdits`](docs/api/Louis/Louis.Text.CharReadOnlySpanExtensions.md) apply a set of edits to a text, where each [`TextEdit`](docs/api/Louis/Louis.Text.TextEdit.md) replaces a range of characters of the original text.
 
 ### Changes to existing features
 
