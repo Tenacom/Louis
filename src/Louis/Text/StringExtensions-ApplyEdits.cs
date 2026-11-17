@@ -24,6 +24,7 @@ partial class StringExtensions
     /// <para><paramref name="edits"/> is <see langword="null"/>.</para>
     /// </exception>
     /// <exception cref="ArgumentOutOfRangeException">An edit has a negative <see cref="TextEdit.Start"/>,
+    /// a <see cref="TextEdit.Start"/> greater than the length of <paramref name="this"/>,
     /// a negative <see cref="TextEdit.Length"/>, or characters to replace after the end of <paramref name="this"/>.</exception>
     /// <exception cref="ArgumentException">Two edits overlap.</exception>
     /// <remarks>
