@@ -11,7 +11,7 @@ Each line below links the page of a namespace, which lists its types and links t
 - [`Louis.Diagnostics`](api/Louis/Louis.Diagnostics.md): types to create, inspect, and rethrow exceptions, to identify critical errors, and to perform self-checks.
 - [`Louis.Fluency`](api/Louis/Louis.Fluency.md): extension methods that embed conditional logic and other operations in a fluent call chain.
 - [`Louis.Processes`](api/Louis/Louis.Processes.md): types that run a child process and read what it writes, and utility members for the console.
-- [`Louis.Text`](api/Louis/Louis.Text.md): C# string literals, Unicode and UTF-8 utilities, and conditional interpolated string handlers.
+- [`Louis.Text`](api/Louis/Louis.Text.md): C# string literals, Unicode and UTF-8 utilities, text editing utilities, and conditional interpolated string handlers.
 - [`Louis.Threading`](api/Louis/Louis.Threading.md): a base class for long-running services, thread-safe flags and references, and utility methods for `ValueTask`.
 
 ## `Louis.Hosting`
