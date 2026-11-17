@@ -41,8 +41,9 @@ public static class TextFileUtility
     /// When the file starts with none, the returned encoding is the fallback encoding.
     /// A file written back with the returned encoding keeps the byte order mark it had,
     /// and a file that had none gets none, unless the fallback encoding emits one.</para>
-    /// <para>The fallback encoding governs a file without a byte order mark alone.
-    /// The encoding of a byte order mark replaces every invalid byte sequence with the replacement character, U+FFFD.
+    /// <para>A file that starts with the byte order mark of the fallback encoding is read with the fallback encoding,
+    /// which is also the returned encoding.
+    /// The encoding of any other byte order mark replaces every invalid byte sequence with the replacement character, U+FFFD.
     /// The default fallback encoding does the same, as <see cref="File.ReadAllText(string)"/> does.
     /// To get a <see cref="DecoderFallbackException"/> for an invalid byte sequence in a file without a byte order mark,
     /// pass <c>new UTF8Encoding(false, true)</c> as <paramref name="fallbackEncoding"/>.</para>
@@ -78,8 +79,9 @@ public static class TextFileUtility
     /// When the file starts with none, the returned encoding is the fallback encoding.
     /// A file written back with the returned encoding keeps the byte order mark it had,
     /// and a file that had none gets none, unless the fallback encoding emits one.</para>
-    /// <para>The fallback encoding governs a file without a byte order mark alone.
-    /// The encoding of a byte order mark replaces every invalid byte sequence with the replacement character, U+FFFD.
+    /// <para>A file that starts with the byte order mark of the fallback encoding is read with the fallback encoding,
+    /// which is also the returned encoding.
+    /// The encoding of any other byte order mark replaces every invalid byte sequence with the replacement character, U+FFFD.
     /// The default fallback encoding does the same, as <see cref="File.ReadAllText(string)"/> does.
     /// To get a <see cref="DecoderFallbackException"/> for an invalid byte sequence in a file without a byte order mark,
     /// pass <c>new UTF8Encoding(false, true)</c> as <paramref name="fallbackEncoding"/>.</para>

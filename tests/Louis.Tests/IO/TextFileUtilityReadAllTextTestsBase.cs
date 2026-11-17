@@ -105,6 +105,30 @@ internal abstract class TextFileUtilityReadAllTextTestsBase
     }
 
     [Test]
+    public async Task WithByteOrderMarkOfFallbackEncoding_ReturnsFallbackEncoding(CancellationToken cancellationToken)
+    {
+        var fallbackEncoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: true);
+        using var file = new TemporaryFile(TextFileSamples.GetBytes(TextFileSamples.Text, fallbackEncoding));
+
+        var content = await ReadAsync(file.FilePath, fallbackEncoding, cancellationToken);
+
+        await Assert.That(content.Text).IsEqualTo(TextFileSamples.Text);
+        await Assert.That(content.Encoding).IsSameReferenceAs(fallbackEncoding);
+    }
+
+    [Test]
+    public async Task WithByteOrderMarkOfThrowingFallbackEncoding_ThrowsDecoderFallbackException(
+        CancellationToken cancellationToken)
+    {
+        var fallbackEncoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: true, throwOnInvalidBytes: true);
+        using var file = new TemporaryFile([.. fallbackEncoding.GetPreamble(), .. TextFileSamples.InvalidUtf8]);
+
+        Task Act() => ReadAsync(file.FilePath, fallbackEncoding, cancellationToken);
+
+        await Assert.That(Act).Throws<DecoderFallbackException>();
+    }
+
+    [Test]
     public async Task WithMissingFile_ThrowsFileNotFoundException(CancellationToken cancellationToken)
     {
         using var file = new TemporaryFile();
