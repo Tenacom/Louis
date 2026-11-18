@@ -1,5 +1,22 @@
 <Project>
 
+  <!-- Package information -->
+  <PropertyGroup>
+    <PackageProjectUrl>https://github.com/Tenacom/Louis</PackageProjectUrl>
+    <PackageReleaseNotes>See $(PackageProjectUrl)/blob/main/CHANGELOG.md</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <!--
+    SourceLink. The .NET SDK bundles the Microsoft.SourceLink.GitHub package since .NET 8, so no package reference is needed.
+    IncludeSymbols and SymbolPackageFormat act at pack time alone.
+  -->
+  <PropertyGroup>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
   <!-- Build options for the packaged libraries -->
   <PropertyGroup>
 

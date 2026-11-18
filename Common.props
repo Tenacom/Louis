@@ -1,6 +1,6 @@
 <Project>
 
-  <!-- Branding, ownership, licensing, project information -->
+  <!-- Branding, ownership, project information -->
   <PropertyGroup>
     <Product>L.o.U.I.S.</Product>
     <Authors>Tenacom and contributors</Authors>
@@ -8,14 +8,7 @@
     <Company>Tenacom</Company>
     <Copyright>Copyright (c) $(Authors)</Copyright>
     <Trademark />
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageProjectUrl>https://github.com/Tenacom/Louis</PackageProjectUrl>
-    <PackageReleaseNotes>See $(PackageProjectUrl)/blob/main/CHANGELOG.md</PackageReleaseNotes>
     <RepositoryUrl>https://github.com/Tenacom/Louis.git</RepositoryUrl>
-    <IconInPackage>true</IconInPackage>
-    <ReadmeFileInPackage>true</ReadmeFileInPackage>
-    <LicenseFileInPackage>true</LicenseFileInPackage>
-    <ThirdPartyNoticeInPackage>true</ThirdPartyNoticeInPackage>
     <UseVersionFile>false</UseVersionFile>
   </PropertyGroup>
 
@@ -28,10 +21,7 @@
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
-    <CLSCompliant>true</CLSCompliant>
-    <ComVisible>false</ComVisible>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <!-- Solution-wide build options -->

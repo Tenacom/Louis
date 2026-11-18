@@ -5,7 +5,6 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net11.0</TargetFramework>
-    <CLSCompliant>false</CLSCompliant>
     <ImplicitUsings>true</ImplicitUsings>
     <!--
         A test copies the #if of the member it tests, so this project defines the symbols of the build it tests

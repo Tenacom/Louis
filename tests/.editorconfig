@@ -23,7 +23,7 @@ resharper_use_await_using_highlighting = none
 # Captured variable is disposed in the outer scope - a test invokes its Act local function before the using scope ends.
 resharper_access_to_disposed_closure_highlighting = none
 
-# Declare types in namespaces - test projects have no root namespace on purpose (see Common.targets)
+# Declare types in namespaces - test projects have no root namespace on purpose (see tests/Common.targets)
 dotnet_diagnostic.CA1050.severity = none
 
 # Identifiers should not contain underscores - underscores are the test naming convention

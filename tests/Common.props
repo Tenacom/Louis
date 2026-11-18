@@ -1,0 +1,11 @@
+<Project>
+
+  <!-- Build options for every project under tests/ -->
+  <PropertyGroup>
+
+    <!-- Buildvana SDK marks an assembly as CLS-compliant by default. Nothing under tests/ has a public API to hold to the CLS. -->
+    <CLSCompliant>false</CLSCompliant>
+
+  </PropertyGroup>
+
+</Project>

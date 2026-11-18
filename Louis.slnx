@@ -7,7 +7,6 @@
     <File Path=".markdownlint-cli2.jsonc" />
     <File Path="buildvana.jsonc" />
     <File Path="Common.props" />
-    <File Path="Common.targets" />
     <File Path="nuget.config" />
     <File Path="VERSION" />
   </Folder>
@@ -29,12 +28,14 @@
     <File Path="graphics/README.md" />
   </Folder>
   <Folder Name="/src/">
+    <File Path="src/Common.props" />
     <Project Path="src/Louis/Louis.csproj" />
     <Project Path="src/Louis.Hosting/Louis.Hosting.csproj" />
     <Project Path="src/Louis.Testing/Louis.Testing.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <File Path="tests/.editorconfig" />
+    <File Path="tests/Common.props" />
     <File Path="tests/Common.targets" />
     <Project Path="tests/Louis.Tests/Louis.Tests.csproj" />
     <Project Path="tests/Louis.Tests.ChildProcess/Louis.Tests.ChildProcess.csproj" />
