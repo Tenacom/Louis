@@ -38,6 +38,13 @@ Without a file argument, `dotnet build` builds the one solution file in the curr
 
 This command shows the per-project outputs plus the summary. Use `dotnet bv build`, `pack`, or `test` when you need the full clean, restore, and build chain, or the artifacts. Use the direct `dotnet build` above for a quick compile-and-warning check.
 
+## Where a property goes
+
+Buildvana SDK imports every `Common.props` file from the home directory down to the directory of a project, in that order. A file in a subdirectory therefore overrides a file in a parent directory. [Directory structure](https://github.com/Tenacom/Buildvana/blob/main/docs/directory-structure.md) documents the import.
+
+- A property that applies to one group of projects goes in the `Common.props` file of the directory that holds the group, such as `src/Common.props` for the packaged libraries.
+- Do not set such a property in the home directory and then override it in every other project. Each new project would need the override.
+
 ## Dependencies
 
 [Dependency management](https://github.com/Tenacom/Buildvana/blob/main/docs/tool-commands/dependencies.md) documents `bv dependencies`, its scopes, its update policies, and what `bv` counts as a pin. `bv deps` is an alias.
