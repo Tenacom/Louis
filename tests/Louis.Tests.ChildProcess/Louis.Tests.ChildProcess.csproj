@@ -7,9 +7,8 @@
     <TargetFrameworks>net10.0;net11.0</TargetFrameworks>
     <CLSCompliant>false</CLSCompliant>
     <ImplicitUsings>true</ImplicitUsings>
-    <!-- As in a test project: no root namespace, and no trimming of a program that runs as built. -->
+    <!-- As in a test project: no root namespace. -->
     <RootNamespace />
-    <IsTrimmable>false</IsTrimmable>
   </PropertyGroup>
 
 </Project>

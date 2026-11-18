@@ -1,0 +1,11 @@
+<Project>
+
+  <!-- Build options for the packaged libraries -->
+  <PropertyGroup>
+
+    <!-- The .NET SDK supports the property on net8.0 and later, and gives NETSDK1210 on any other target framework. -->
+    <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">true</IsAotCompatible>
+
+  </PropertyGroup>
+
+</Project>
