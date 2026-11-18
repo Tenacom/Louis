@@ -44,7 +44,7 @@ partial class StringBuilderExtensions
         Guard.IsNotNull(@this, nameof(@this));
         Guard.IsNotNull(func);
 
-#if NETSTANDARD2_1 || NETCOREAPP2_1_OR_GREATER
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_1_OR_GREATER
         return @this.Append(func());
 #else
         return @this.Append(func().ToString());

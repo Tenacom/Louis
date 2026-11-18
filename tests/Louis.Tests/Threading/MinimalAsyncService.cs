@@ -16,7 +16,7 @@ internal sealed class MinimalAsyncService : AsyncService
 
     protected override async Task ExecuteAsync(CancellationToken cancellationToken)
     {
-#if NETSTANDARD2_1 || NETCOREAPP
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
         // CancellationTokenRegistration has no DisposeAsync before .NET Standard 2.1
         await
 #endif
