@@ -63,7 +63,7 @@ The policy does not cover these packages:
 
 ## Development dependencies
 
-Buildvana SDK adds the analyzers to every project, so `Directory.Packages.props` pins no analyzer package. The .NET SDK bundles SourceLink, so `Common.targets` references no SourceLink package. `buildvana.jsonc` sets the `minor-` policy on `StyleCop.Analyzers`, the one SDK-injected package pinned to a prerelease line.
+Buildvana SDK adds the analyzers to every project, so `Directory.Packages.props` pins no analyzer package. The .NET SDK bundles SourceLink, so `src/Common.props` references no SourceLink package. `buildvana.jsonc` sets the `minor-` policy on `StyleCop.Analyzers`, the one SDK-injected package pinned to a prerelease line.
 
 `PolySharp` is a development dependency of `Louis`. Its generated code is compiled into `Louis.dll`, so `THIRD-PARTY-NOTICES.md` carries its MIT notice.
 

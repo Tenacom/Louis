@@ -23,7 +23,7 @@ Louis is a library of general-purpose types for .NET libraries and applications.
 
 `tests/Louis.Tests.ChildProcess` is not a test project. It is the program that the tests of `Louis.Processes` run as a child process, from the output directory. `Louis.Tests` references it on its `net<major>.<minor>` target frameworks, because the types that run a child process are in those builds of `Louis` alone. The coverage collector follows a test into its child processes, so `Program` has `[ExcludeFromCodeCoverage]`.
 
-`tests/Common.targets` holds the settings every test project gets. It also turns `IsPackable` off for every project under `tests/`, test project or not.
+`tests/Common.props` and `tests/Common.targets` hold the settings of every project under `tests/`, test project or not. The settings of the test projects alone are in `tests/Common.targets`, under a condition on `IsTestingPlatformApplication`.
 
 Louis supports Windows and Linux, and `ci.yml` runs the tests on `ubuntu-latest` and `windows-latest`. The .NET Framework tests run on the Windows runner alone. "Tests on more than one platform" in `testing.md` holds for every other test.
 
