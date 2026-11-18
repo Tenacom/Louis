@@ -44,6 +44,8 @@ None.
 
 The summary of a namespace page comes from the `NamespaceDoc` class of the namespace, and the summary of `README.md` from the `AssemblyDoc` class of the package. Both are `internal static`, and a new namespace gets its `NamespaceDoc` class in the same change. The entry pages are the namespace pages, and `docs/README.md` links each one.
 
+A change that adds a namespace, or changes what a namespace holds, adds or changes the line of the namespace in `docs/README.md`. The line does not wait for the release that writes the page, and no check reports a missing line.
+
 `Louis.Testing` declares its types in `Louis.Processes`, a namespace `Louis` has too. For that namespace, DefaultDocumentation prints the warning `duplicate DocItem ... "N:Louis.Processes" ignored` at every release, and writes the right pages.
 
 ## Pinned reference pages
