@@ -1,6 +1,6 @@
 # Documentation inventory
 
-This file is specific to this repository. Rewrite it when `.claude` is copied to another repository. `rules/common/documentation.md` holds the rules. This file lists what they apply to here: the files, the page kinds, the subfolders of `docs/`, the generated regions, the generated folders, and the pinned reference pages.
+This file is specific to this repository. Rewrite it when `.claude` is copied to another repository. `rules/common/documentation.md` holds the rules. This file lists what they apply to here: the files, the page kinds, the subfolders of `docs/`, the generated regions, the API reference, and the pinned reference pages.
 
 ## Files
 
@@ -22,32 +22,37 @@ The following are not documentation:
 
 ## Page kinds
 
-Besides the guide and the reference of `rules/common/documentation.md`, the repository has two page kinds.
+Besides the guide and the reference of `rules/common/documentation.md`, the repository has the article.
 
-- An **API reference page** documents one assembly, one namespace, or one type with its members. DefaultDocumentation writes it, under the generated folder below, and no rule of the page template applies to it. A fix goes in the XML comment the page comes from.
 - An **article** is non-technical documentation, under `docs/articles/`. No article exists yet, and the first one creates the folder.
 
 ## Subfolders of `docs/`
 
-- `api/`, the generated folder below.
 - `articles/`, for articles, once the first one exists.
 
-Every hand-written page sits in `docs/` itself.
+Every other page sits in `docs/` itself.
 
 ## Generated regions
 
 None.
 
-## Generated folders
+## API reference
 
-`docs/api/<AssemblyName>/` holds the API reference of each package, flat: `README.md` for the assembly, which GitHub renders in the directory view, a page per namespace, and a page per type with its members. The hook `.buildvana/hooks/release/post-pack.cs` writes it with DefaultDocumentation at every release, prereleases included, so the pages on `main` describe the latest release. The hook reads the assembly and the XML documentation file of one target framework, the newest `net<major>.<minor>` one. A `netstandard` build may lack a member the pages hold, and the XML comment of the member says so, as "Target frameworks" in `architecture.md` requires.
+The API reference is a site on GitHub Pages, as "Open source repositories" in `rules/common/documentation.md` says.
 
-The summary of a namespace page comes from the `NamespaceDoc` class of the namespace, and the summary of `README.md` from the `AssemblyDoc` class of the package. Both are `internal static`, and a new namespace gets its `NamespaceDoc` class in the same change. The entry pages are the namespace pages, and `docs/README.md` links each one.
+- The stable part is at `https://tenacom.github.io/Louis/`, and the preview part at `https://tenacom.github.io/Louis/preview/`. `Documentation.ApiReferencePreviewUrl` in `tools/ProjectFacts.cs` holds the second URL.
+- Under the URL of a part, the page of a type is `api/<namespace>.<type>.html`, such as `api/Louis.Text.StringExtensions.html`. A generic type has its arity after a hyphen, as in `api/Louis.Fluency.FluentAction-1.html`.
+- The page of a namespace is `api/namespaces/<namespace>.html`. The page of a package is `api/packages/<package id>.html`, with the package id in lowercase.
+- A type has one page for every build of its package. A member that only some builds have shows its target frameworks, and its XML comment still names the builds that lack it, as "Target frameworks" in `architecture.md` requires.
+- A namespace has one page for every package. `Louis` and `Louis.Testing` both declare types in `Louis.Processes`, and the page of that namespace lists the types of both, with the package of each.
+- The workflow `docs.yml` builds both parts and deploys the site. `release.yml` calls it after `bv release`.
+- The `pack` job of `ci.yml` runs the generator on the packages it built, with every warning as an error. A defect of an XML comment therefore fails the checks of a pull request.
+- The hook `.buildvana/hooks/release/post-pack.cs` rewrites the links to the preview part, in the new section of `CHANGELOG.md`, at a stable release.
 
-A change that adds a namespace, or changes what a namespace holds, adds or changes the line of the namespace in `docs/README.md`. The line does not wait for the release that writes the page, and no check reports a missing line.
+The entry pages are the namespace pages, and `docs/README.md` links each one in the preview part. A namespace page has no summary, so the line of `docs/README.md` is the one description of a namespace.
 
-`Louis.Testing` declares its types in `Louis.Processes`, a namespace `Louis` has too. For that namespace, DefaultDocumentation prints the warning `duplicate DocItem ... "N:Louis.Processes" ignored` at every release, and writes the right pages.
+A change that adds a namespace, or changes what a namespace holds, adds or changes the line of the namespace in `docs/README.md`. The line does not wait for the release that publishes the page, and no check reports a missing line.
 
 ## Pinned reference pages
 
-None. No hand-written page lists a code surface, and an API reference page comes from the code itself.
+None. No page under `docs/` lists a code surface, and the API reference comes from the code itself.

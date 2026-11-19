@@ -26,3 +26,6 @@ One name per thing, in every kind of prose: documentation, chat, commit messages
 | A package that supplies a BCL type to a target framework that lacks it                        | polyfill                   | shim, compatibility package              |
 | A test project that targets the frameworks its package runs on, such as `tests/Louis.Tests`   | main test project          | test project proper, full test project   |
 | A test project that compiles the files of a main test project against a `netstandard` build   | `netstandard` test project | flavor project, mirror project           |
+| The documentation of the public API, generated from the XML comments of the code              | API reference              | API documentation, API docs              |
+| The part of the API reference that describes the stable release with the highest version      | stable part                | stable site, release documentation       |
+| The part of the API reference that describes the highest release, stable or prerelease        | preview part               | preview site, prerelease documentation   |

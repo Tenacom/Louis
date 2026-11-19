@@ -34,11 +34,11 @@ internal static class ProjectFacts
     internal static class Documentation
     {
         /// <summary>
-        /// The generated folders, as paths relative to the root with forward slashes.
-        /// <c>.claude/rules/project/documentation.md</c> lists them, with the tool that owns each. The tool skips
-        /// them.
+        /// The URL of the preview part of the API reference, with its trailing slash, or an empty string when the
+        /// repository publishes no API reference site. <c>.claude/rules/project/documentation.md</c> names both
+        /// parts of the site. The tool rejects a link to this part in a released section of the changelog.
         /// </summary>
-        public static IReadOnlyList<string> GeneratedFolders { get; } = ["docs/api"];
+        public const string ApiReferencePreviewUrl = "https://tenacom.github.io/Louis/preview/";
 
         /// <summary>
         /// Globs of the files the TODO check leaves alone. None here.
