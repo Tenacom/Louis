@@ -118,16 +118,12 @@ The reader then meets the high-level method first and reads down into its callee
 
 ## Extension blocks
 
-Extension blocks need some warning suppression because of bugs in Roslyn analyzers. Always use this template, adjusting names and access modifier as needed:
+Always use this template, adjusting names and access modifier as needed:
 
 ```csharp
 /// <summary>
 /// Provides extension methods for `MyClass` instances.
 /// </summary>
-// False positive on C# 14 extension blocks. Fixed in .NET 11, backport to .NET 10 requested in https://github.com/dotnet/sdk/issues/53984
-#pragma warning disable CA1034 // Nested types should not be visible
-// False positive on classes with C# 14 extension blocks. Fixed in .NET 11: https://github.com/dotnet/sdk/issues/51716
-#pragma warning disable CA1708 // Identifiers should differ by more than case
 public static class MyClassExtensions
 {
     extension(MyClass @this)
