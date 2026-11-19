@@ -7,6 +7,12 @@
  * needs no build, so it runs whatever the build does. Inspection only runs if the build reported nothing,
  * because it analyzes the build output.
  *
+ * With --gate, and when the home directory holds `docgen.json`, the generator of the API reference runs between
+ * the build and the inspection, on the packages the build left in the artifacts directory. It writes the site to
+ * `.buildvana-temp`, and every warning it reports is an error, such as a `cref` that names no member. The
+ * generator is the local tool Meziantou.DocumentationGenerator, pinned in `dotnet-tools.json`. "API reference" in
+ * `.claude/rules/common/documentation.md` describes the site.
+ *
  * Run from the repo root:
  *   `dotnet run .claude/tools/inspect.cs --gate`  pre-push gate: builds with `bv pack`, so that tests run and
  *                                                 artifacts are produced, inspects at WARNING severity and
@@ -25,8 +31,9 @@
  *
  * Both modes write one `path(line,col): severity ID: message` per diagnostic to standard output and nothing
  * else, which is what the `$msCompile` problem matcher consumes; progress and failure context go to standard
- * error. The raw output of the three child processes, the SARIF report, and the inspectcode caches are left in
- * `.buildvana-temp`. The caches start empty on every run.
+ * error. A diagnostic of the generator has no file position, so its origin is the bare name `docgen`. The raw
+ * output of the child processes, the SARIF report, and the inspectcode caches are left in `.buildvana-temp`. The
+ * caches start empty on every run.
  */
 
 using System;
@@ -38,6 +45,12 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 
 const int TailLineCount = 40;
+
+// The configuration `bv` builds in. It names the directory of the packages, and the build inspectcode reads.
+const string BuildConfiguration = "Release";
+
+// The configuration file of the generator of the API reference. A repository without the file has no site.
+const string DocgenConfigFileName = "docgen.json";
 
 const string Usage = "Usage: dotnet run .claude/tools/inspect.cs [--gate | --all]";
 
@@ -205,6 +218,65 @@ if (!buildIsClean)
         : 2;
 }
 
+// The generator reads the packages, which only `bv pack` produces, so it runs in the gate alone. Its findings do
+// not stop the inspection: the gate reports everything it can in one run.
+var docgenDiagnostics = new List<string>();
+var runDocgen = gate && File.Exists(Path.Combine(repoRoot, DocgenConfigFileName));
+if (runDocgen)
+{
+    Console.Error.WriteLine("info: running the generator of the API reference...");
+
+    // The generator takes its collections as JSON. A relative path with forward slashes needs no escaping.
+    string[] docgenArguments = [
+        "Meziantou.DocumentationGenerator",
+        "build",
+        "--packages",
+        $$"""[{"path":"artifacts/{{BuildConfiguration}}"}]""",
+        "--output",
+        Path.Combine(scratchPath, "docgen-site"),
+        "--warnaserror",
+    ];
+
+    var docgen = Run("dotnet", docgenArguments, repoRoot, _ => false);
+    File.WriteAllLines(Path.Combine(scratchPath, "docgen.log"), docgen.Lines);
+
+    // A diagnostic of the generator is `<origin>: error DG1234: <message>`, where the origin names a package, a
+    // target framework, and a symbol, or a file of the site. It becomes the message of a diagnostic of `docgen`.
+    var docgenRegex = new Regex(
+        @"^(?<origin>.+?): (?<severity>error|warning) (?<code>DG\d+): (?<message>.*)$",
+        RegexOptions.CultureInvariant);
+    foreach (var line in docgen.Lines)
+    {
+        var match = docgenRegex.Match(line);
+        if (match.Success)
+        {
+            var groups = match.Groups;
+            var message = $"{groups["origin"].Value}: {groups["message"].Value}";
+            docgenDiagnostics.Add($"docgen: {groups["severity"].Value} {groups["code"].Value}: {message}");
+        }
+    }
+
+    // The generator exits 1 on a failed build, with or without diagnostics. `dotnet` exits non-zero as well when
+    // the tool is not in the manifest. Without a diagnostic, nothing was checked.
+    if (docgen.ExitCode != 0 && docgenDiagnostics.Count == 0)
+    {
+        Console.Error.WriteLine($"The generator of the API reference failed with exit code {docgen.ExitCode}.");
+        Console.Error.WriteLine($"Last {TailLineCount} lines of {Path.Combine(scratchPath, "docgen.log")}:");
+        foreach (var line in docgen.Lines.TakeLast(TailLineCount))
+        {
+            Console.Error.WriteLine(line);
+        }
+
+        return 2;
+    }
+
+    Console.Error.WriteLine($"=== docgen: {docgenDiagnostics.Count} diagnostic(s) ===");
+    foreach (var diagnostic in docgenDiagnostics)
+    {
+        Console.WriteLine(diagnostic);
+    }
+}
+
 // --all has to name the lowest severity rather than leave the option out: inspectcode's own default is
 // WARNING, so omitting it would silently produce exactly what the gate produces.
 var severity = all ? "HINT" : gate ? "WARNING" : "SUGGESTION";
@@ -226,7 +298,7 @@ string[] inspectArguments = [
     $"--severity={severity}",
     $"--output={sarifPath}",
     "--format=Sarif",
-    "--properties:Configuration=Release",
+    $"--properties:Configuration={BuildConfiguration}",
     "--no-build",
     solutionFileName,
     "--yes",
@@ -326,10 +398,13 @@ foreach (var diagnostic in inspectDiagnostics)
     Console.WriteLine(diagnostic);
 }
 
-var gatePassed = gate && docsDiagnostics.Count == 0 && inspectDiagnostics.Count == 0;
+var gatePassed = gate && docsDiagnostics.Count == 0 && docgenDiagnostics.Count == 0 && inspectDiagnostics.Count == 0;
 if (gatePassed)
 {
-    Console.Error.WriteLine($"=== gate passed: neither lint-docs, bv {buildCommand}, nor inspectcode reported anything ===");
+    var phases = runDocgen
+        ? $"lint-docs, bv {buildCommand}, the generator of the API reference, nor inspectcode"
+        : $"lint-docs, bv {buildCommand}, nor inspectcode";
+    Console.Error.WriteLine($"=== gate passed: neither {phases} reported anything ===");
 }
 
 return gate && !gatePassed ? 1 : 0;

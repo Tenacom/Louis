@@ -2,14 +2,15 @@
 
 This file is the same in every repository that copies `.claude`. A fact specific to one repository lives in another rule file.
 
-User documentation is Markdown, rendered by the Git host. There is no separate site. The rules below say what counts as documentation, how it is written, and how it is checked. `file-formats.md` holds the Markdown format rules, such as emphasis markers and indentation. `output-styles/simple-tech.md` holds the register. `terminology.md` holds the name of each thing the repository documents. `rules/project/documentation.md` lists the repository's documentation files, its page kinds beyond the two of "Page kinds" below, the subfolders of `docs/`, the generated regions, the generated folders, and the pinned reference pages. `git-host.md` says how to identify the platform of a Git host, and "Git hosts" below says where the platforms render a page differently.
+User documentation is Markdown, rendered by the Git host. The API reference is the one exception, as "API reference" below says. The rules below say what counts as documentation, how it is written, and how it is checked. `file-formats.md` holds the Markdown format rules, such as emphasis markers and indentation. `output-styles/simple-tech.md` holds the register. `terminology.md` holds the name of each thing the repository documents. `rules/project/documentation.md` lists the repository's documentation files, its page kinds beyond the two of "Page kinds" below, the subfolders of `docs/`, the generated regions, the API reference, and the pinned reference pages. `git-host.md` says how to identify the platform of a Git host, and "Git hosts" below says where the platforms render a page differently.
 
 ## What is documentation
 
 The following files are technical documentation:
 
 - `CHANGELOG.md`.
-- Every file under `docs/`, except its `README.md` and the articles below. A file under a generated folder is documentation that a tool writes, and "Generated folders" below says which rules it follows.
+- Every file under `docs/`, except its `README.md` and the articles below.
+- The API reference, which a tool generates from the XML comments of the code. It is no file of the repository, and "API reference" below says which rules it follows.
 
 The following are non-technical documentation:
 
@@ -42,7 +43,7 @@ Every other Markdown file is not documentation: third-party notices, analyzer re
 - Link a file in the repository with a relative path. A tag then links to the files of the tag. The `NuGet-README.md` files are the exception, because nuget.org renders them outside the repository.
 - Link an external site with its full URL.
 - Link a section with the anchor of its heading: the heading text in lowercase, with spaces as hyphens and punctuation removed. "Git hosts" below says where the platforms differ on punctuation. markdownlint MD051 checks an anchor within the same file, in GitHub's form. `lint-docs.cs` checks an anchor in another file, and the table of contents, in the form of the platform that `GitHost` in `tools/ProjectFacts.cs` names.
-- Never link a page or a section that does not exist. The one exception is a page of a generated folder that the next release adds, as "Generated folders" says.
+- Never link a page or a section that does not exist. The one exception is a page of the API reference that the next release adds, as "API reference" says.
 - Do not write `#1` for "number 1", and do not write `!1`. Both read as a reference to an issue, a pull request, or a merge request. Every platform links them in an issue, a pull request, a comment, or a release body, and "Git hosts" below says which platform links them in a file too. A reader takes them for a reference even where the platform does not link them.
 
 ## Pages describe the present
@@ -51,19 +52,15 @@ A page under `docs/` describes the code next to it. It does not say when a featu
 
 A migration section is the exception. It describes the old behavior, because the reader is coming from it.
 
-A page of a generated folder describes the latest release, as "Generated folders" says.
-
 ## The root README
 
 The root README is the entry point. It holds what a visitor needs in order to decide whether to read on: what the product is, in two sentences, the packages with their badges, and links to the introduction, the getting-started page, and the index of `docs/`. It documents nothing itself.
 
 ## Structure of `docs/`
 
-The rules of this section apply to the hand-written pages. A generated folder follows "Generated folders" below, and the index links it as that section says.
-
 ### The index
 
-`docs/README.md` is the index. It links every hand-written page under `docs/`, with one line saying what the page covers. It has no table of contents, because it is one. Its shape:
+`docs/README.md` is the index. It links every page under `docs/`, with one line saying what the page covers. It links the API reference as "API reference" below says. It has no table of contents, because it is one. Its shape:
 
 - a title
 - one paragraph
@@ -154,16 +151,29 @@ A region a tool maintains sits between two HTML comment markers:
 - Nothing edits the region by hand. The prose around it is hand-written.
 - `rules/project/documentation.md` names each region and the tool that owns it.
 
-## Generated folders
+## API reference
 
-A generated folder is a subfolder of `docs/` that a tool writes in full at release. An API reference built from the XML comments of the code is one.
+A tool generates the API reference from the XML comments of the code, at every release. The repository holds none of its pages.
 
-- `rules/project/documentation.md` names each generated folder, the tool that owns it, and which of its pages are the entry pages.
-- Nothing edits a generated page by hand. A fix goes in the source the tool reads, such as an XML comment.
-- The tool decides the names, the depth, and the shape of its pages. The file-name rules, the page template, the page kinds, and the sentence rules do not apply. `lint-docs.cs` skips the folder, and `.markdownlint-cli2.jsonc` lists it under `ignores`.
-- The index links the entry pages of the folder, one line each. It does not link the other pages.
-- The pages describe the latest release. On `main`, the page of a type that no release holds yet does not exist, and it arrives with the release that adds the type.
-- A link into a generated folder is checked for its shape, and not for the existence of its target. A bullet under "Unreleased changes" links the page of a type whose release comes later, and `bv release` pins the link to the release tag, where the page exists.
+- Nothing edits a page of the API reference by hand. A fix goes in the XML comment the page comes from.
+- "XML comments" in `csharp-style-guide.md` governs the text of a page. The page template, the page kinds, and the sentence rules do not apply.
+- `rules/project/documentation.md` says where the repository publishes its API reference.
+
+### Open source repositories
+
+An open source repository is on GitHub, and publishes its API reference as a site on GitHub Pages.
+
+- Meziantou.DocumentationGenerator builds the site from the NuGet packages of a release. `docgen.json`, in the home directory, holds what every build of the site shares, such as the site title.
+- The site has two parts. The stable part describes the stable release with the highest version. The preview part describes the release with the highest version, stable or prerelease.
+- A workflow builds both parts from the assets of those two releases, and deploys the site. The release workflow calls it after `bv release`, and a maintainer runs it by hand to rebuild the site. No branch holds a generated page.
+- A part describes one release. The page of a type that no release holds yet does not exist, and it arrives with the release that adds the type.
+- A link to a page of the site is a full URL, and no tool checks that the page exists.
+- The index links the entry pages of the preview part, one line each. `rules/project/documentation.md` names the URL of each part, and says which pages are the entry pages.
+- A warning of the generator is a defect of an XML comment, such as a `cref` that names no member. "Checks" below says where the generator runs.
+
+### Private repositories
+
+A private repository is on a private Forgejo server. An external workflow generates its API reference, the release workflow starts that workflow at its end, and the repository holds nothing for it.
 
 ## Changelog
 
@@ -178,12 +188,13 @@ A generated folder is a subfolder of `docs/` that a tool writes in full at relea
 - A bullet about a member says what the member does, and leaves out the condition under which the member acts. The condition and the edge cases belong in the documentation of the member. Write "`Trim` removes white space from both ends of a string", not "of a string that is not empty".
 - It does not say "now". Every bullet describes a change.
 - The docs page that describes the feature is linked inline, on the phrase that names the feature. Do not add a trailing "See X.", which would be a second sentence.
-- A bullet that names a type links the page of the type in the generated folder that holds the API reference, when the repository has one. The page may not exist until the release, as "Generated folders" says.
+- A bullet that names a type links the page of the type in the preview part of the API reference, when the repository publishes one. The page may not exist until the next release, as "API reference" says.
 - A breaking change starts with `**BREAKING CHANGE**:` and names the behavior that is gone.
 - Breaking changes come first in their subsection.
 - Migration steps go in a section of the feature's page, and the bullet links there.
 - A release section may open with one paragraph, when a note applies to the whole release. The sentence rules apply to it.
 - A bullet under "Unreleased changes" links a repository file by relative path. When `bv release` moves the section into a release, it pins each such link to the release tag, so a released section keeps its links whatever happens to the files later. Do not edit links in a released section by hand.
+- At a stable release, the `release/post-pack` hook of the repository rewrites each link to the preview part, in the new section, into a link to the stable part. A released section therefore links the stable part alone, which describes a stable release.
 
 Example:
 
@@ -225,14 +236,15 @@ A reference is a token such as `#1` that the platform turns into a link to an is
 ## Checks
 
 - markdownlint runs with the configuration in `.markdownlint-cli2.jsonc`. `file-formats.md` says which rules it enforces.
-- `.claude/tools/lint-docs.cs` runs as a phase of `inspect.cs --gate`. `Documentation.GeneratedFolders` in `tools/ProjectFacts.cs` names the generated folders, which it skips, and `GitHost` there names the platform whose anchors it computes. A member of the documentation set that does not exist, such as `docs/` or `CHANGELOG.md`, is skipped and named on standard error, so that a repository without documentation passes. It checks:
+- `.claude/tools/lint-docs.cs` runs as a phase of `inspect.cs --gate`. `GitHost` in `tools/ProjectFacts.cs` names the platform whose anchors it computes, and `Documentation.ApiReferencePreviewUrl` there holds the URL of the preview part of the API reference. A member of the documentation set that does not exist, such as `docs/` or `CHANGELOG.md`, is skipped and named on standard error, so that a repository without documentation passes. It checks:
   - file names under `docs/` are kebab-case, and subfolders are one level deep;
   - every page follows the template: summary paragraph, rulers, and a table of contents that matches the headings;
-  - the index links every hand-written page, and no link points at a missing file or anchor, except a link into a generated folder;
+  - the index links every page, and no link points at a missing file or anchor;
   - every fenced block has a tag from the list above;
   - a prose line, outside a fenced block, a table, a released changelog section, and a file matching a glob of its `sentenceExemptFiles` array, holds one sentence of at most 25 words, counting a code span as one word and a link as the words of its text;
   - no documentation file contains "TODO";
   - generated-region markers exist and pair;
   - a bullet under "Unreleased changes" holds no nested list, and the breaking changes of a subsection come before its other bullets;
-  - a released changelog section holds no relative file link.
+  - a released changelog section holds no relative file link, and no link to the preview part of the API reference.
+- The generator of the API reference runs as a phase of `inspect.cs --gate`, when the home directory holds `docgen.json`. It reads the packages the gate built, and the gate reports each of its warnings as an error. `rules/project/documentation.md` says where CI runs the generator.
 - A reference page that lists a code surface is pinned by a test in the test project of that code. The test fails when an item exists in the code and not on the page, or on the page and not in the code. `rules/project/documentation.md` names the pinned pages, and the code each is pinned against.

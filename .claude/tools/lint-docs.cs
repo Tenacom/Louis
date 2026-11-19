@@ -26,23 +26,24 @@
  *   DocsFence      a fenced block with no language tag, or with a tag outside the list of the rules;
  *   DocsTodo       the word TODO;
  *   DocsRegion     a generated-region marker without its pair;
- *   DocsChangelog  a relative file link in a released section of CHANGELOG.md, a nested list under "Unreleased
- *                  changes", or a breaking change after a plain bullet in a subsection of "Unreleased changes";
+ *   DocsChangelog  a relative file link in a released section of CHANGELOG.md, a link to the preview part of the
+ *                  API reference in a released section, a nested list under "Unreleased changes", or a breaking
+ *                  change after a plain bullet in a subsection of "Unreleased changes";
  *   DocsSentence   a prose line, outside a fenced block and a table, holding more than 25 words, or more than
  *                  one sentence; a code span counts as one word, and a link as the words of its text. The
  *                  released sections of CHANGELOG.md are not checked.
  *
  * The facts about the repository come from `ProjectFacts.cs`, which `Common.props` compiles in. They are the
- * globs of the files the TODO check and the sentence check leave alone, the generated folders, and the platform
- * of the Git host. `ProjectFacts.cs` states the glob syntax.
+ * globs of the files the TODO check and the sentence check leave alone, the URL of the preview part of the API
+ * reference, and the platform of the Git host. `ProjectFacts.cs` states the glob syntax.
  *
  * Only inline links, `[text](target)`, are checked. A reference-style link is not. A link inside a code span or
  * a fenced block is not a link. A relative target must match the case of the file name, so that a link that
  * resolves on Windows and not on Linux is a finding on both.
  *
- * A generated folder is a subfolder of docs/ that a tool writes in full. Its files are not checked, and the index
- * need not link them. A link into it is checked for its shape alone, not for the existence of its target, because
- * a page the tool writes at release does not exist before the release.
+ * The API reference is a site outside the repository, as "API reference" in
+ * `.claude/rules/common/documentation.md` says. A link to it has a scheme, so its target is not checked. A released
+ * section of CHANGELOG.md links the stable part of the site, and a link to the preview part there is a finding.
  *
  * The anchor a heading gets depends on the platform of the Git host, as "Git hosts" in
  * `.claude/rules/common/documentation.md` says, and so does the check of every anchor and of every table of
@@ -127,14 +128,13 @@ var nestedListRegex = new Regex(@"^\s+(?:[-*+]|\d+\.)\s", RegexOptions.CultureIn
 
 var findings = new List<(string File, int Line, int Column, string Code, string Message)>();
 
-// The documentation set, as relative paths with forward slashes. The files of a generated folder are not in it,
-// and neither is a page when there is no docs/ directory.
+// The documentation set, as relative paths with forward slashes. It holds no page when there is no docs/
+// directory.
 var pages = new List<string>();
 if (hasDocs)
 {
     pages.AddRange(Directory.EnumerateFiles(docsDirectory, "*.md", SearchOption.AllDirectories)
         .Select(path => ToRelative(root, path))
-        .Where(page => !IsGenerated(page))
         .Order(StringComparer.Ordinal));
 }
 
@@ -165,19 +165,13 @@ if (Directory.Exists(srcDirectory))
         .Order(StringComparer.Ordinal));
 }
 
-// File and folder names under docs/. A generated folder, and everything under it, is named by its tool. The
-// sequence is empty when there is no docs/ directory.
+// File and folder names under docs/. The sequence is empty when there is no docs/ directory.
 IEnumerable<string> docsEntries = hasDocs
     ? Directory.EnumerateFileSystemEntries(docsDirectory, "*", SearchOption.AllDirectories)
     : [];
 foreach (var entry in docsEntries)
 {
     var relative = ToRelative(root, entry);
-    if (IsGenerated(relative))
-    {
-        continue;
-    }
-
     var segments = relative.Split('/');
     var name = segments[^1];
     if (Directory.Exists(entry))
@@ -314,6 +308,12 @@ foreach (var file in files)
             if (releasedSection.Length > 0 && target is not ['#', ..] && !schemeRegex.IsMatch(target))
             {
                 var message = $"released section \"{releasedSection}\" links \"{target}\" by relative path";
+                Report(file, lineNumber, column, "DocsChangelog", message);
+            }
+
+            if (releasedSection.Length > 0 && IsPreviewLink(target))
+            {
+                var message = $"released section \"{releasedSection}\" links \"{target}\", in the preview part of the API reference";
                 Report(file, lineNumber, column, "DocsChangelog", message);
             }
 
@@ -500,14 +500,6 @@ void CheckLink(string file, int lineNumber, int column, string target, HashSet<s
     if (relativeTarget.StartsWith("..", StringComparison.Ordinal) || Path.IsPathRooted(relativeTarget))
     {
         Report(file, lineNumber, column, "DocsLink", $"the link target \"{target}\" points outside the repository");
-        return;
-    }
-
-    // A page of a generated folder may not exist before the release that writes it, and its anchors are the
-    // tool's, not the heading anchors of the Git host.
-    if (IsGenerated(relativeTarget))
-    {
-        _ = targets.Add(relativeTarget);
         return;
     }
 
@@ -728,11 +720,12 @@ void CheckToc(
     }
 }
 
-// Whether a relative path, with forward slashes, is a generated folder or lies under one.
-bool IsGenerated(string relativePath)
+// Whether a link target is a page of the preview part of the API reference. A repository without such a site
+// states an empty URL, and no target is one. The host name of a URL has no case, so the comparison has none.
+static bool IsPreviewLink(string target)
 {
-    var withSlash = relativePath + "/";
-    return ProjectFacts.Documentation.GeneratedFolders.Any(folder => withSlash.StartsWith(folder + "/", StringComparison.Ordinal));
+    var previewUrl = ProjectFacts.Documentation.ApiReferencePreviewUrl;
+    return previewUrl.Length > 0 && target.StartsWith(previewUrl, StringComparison.OrdinalIgnoreCase);
 }
 
 // Whether a relative path, with forward slashes, matches one of the globs. `ProjectFacts.cs` states the glob syntax.
