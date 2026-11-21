@@ -1,4 +1,4 @@
-name: Publish the API reference
+name: Publish the documentation site
 
 permissions:
   contents: read
