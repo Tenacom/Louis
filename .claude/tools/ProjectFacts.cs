@@ -34,11 +34,11 @@ internal static class ProjectFacts
     internal static class Documentation
     {
         /// <summary>
-        /// The URL of the preview part of the API reference, with its trailing slash, or an empty string when the
-        /// repository publishes no API reference site. <c>.claude/rules/project/documentation.md</c> names both
-        /// parts of the site. The tool rejects a link to this part in a released section of the changelog.
+        /// The URL of the documentation site, with its trailing slash, or an empty string when the repository has
+        /// no documentation site. <c>.claude/rules/project/documentation.md</c> names the site. The tool rejects a
+        /// link to the site under "Unreleased changes" in the changelog.
         /// </summary>
-        public const string ApiReferencePreviewUrl = "https://tenacom.github.io/Louis/preview/";
+        public const string SiteUrl = "https://tenacom.github.io/Louis/";
 
         /// <summary>
         /// Globs of the files the TODO check leaves alone. None here.
@@ -46,10 +46,11 @@ internal static class ProjectFacts
         public static IReadOnlyList<string> TodoExemptFiles { get; } = [];
 
         /// <summary>
-        /// Globs of the files the sentence check leaves alone, beyond the non-technical documentation that "What is
-        /// documentation" in <c>.claude/rules/common/documentation.md</c> lists, which the tool knows. None here.
+        /// Globs of the informal documents that <c>.claude/rules/project/documentation.md</c> lists. The tool knows
+        /// the other informal documents of "Register" in <c>.claude/rules/common/documentation.md</c> by their
+        /// name and by their front matter. The sentence check leaves an informal document alone. None here.
         /// </summary>
-        public static IReadOnlyList<string> SentenceExemptFiles { get; } = [];
+        public static IReadOnlyList<string> InformalDocuments { get; } = [];
     }
 
     /// <summary>
