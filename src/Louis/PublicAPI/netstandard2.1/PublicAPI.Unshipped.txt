@@ -100,8 +100,24 @@ Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<float>).NotC
 Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<int>)
 Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<int>).CloseTo(int target, uint delta, string? message = null) -> Louis.Diagnostics.Param<int>
 Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<int>).InRangeFor(string! text, string? message = null) -> Louis.Diagnostics.Param<int>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<int>).InRangeFor<T>(System.Collections.Generic.ICollection<T>! collection, string? message = null) -> Louis.Diagnostics.Param<int>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<int>).InRangeFor<T>(System.Collections.Generic.IReadOnlyCollection<T>! collection, string? message = null) -> Louis.Diagnostics.Param<int>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<int>).InRangeFor<T>(System.Collections.Generic.List<T>! list, string? message = null) -> Louis.Diagnostics.Param<int>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<int>).InRangeFor<T>(System.Memory<T> memory, string? message = null) -> Louis.Diagnostics.Param<int>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<int>).InRangeFor<T>(System.ReadOnlyMemory<T> memory, string? message = null) -> Louis.Diagnostics.Param<int>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<int>).InRangeFor<T>(System.ReadOnlySpan<T> span, string? message = null) -> Louis.Diagnostics.Param<int>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<int>).InRangeFor<T>(System.Span<T> span, string? message = null) -> Louis.Diagnostics.Param<int>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<int>).InRangeFor<T>(T[]! array, string? message = null) -> Louis.Diagnostics.Param<int>
 Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<int>).NotCloseTo(int target, uint delta, string? message = null) -> Louis.Diagnostics.Param<int>
 Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<int>).NotInRangeFor(string! text, string? message = null) -> Louis.Diagnostics.Param<int>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<int>).NotInRangeFor<T>(System.Collections.Generic.ICollection<T>! collection, string? message = null) -> Louis.Diagnostics.Param<int>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<int>).NotInRangeFor<T>(System.Collections.Generic.IReadOnlyCollection<T>! collection, string? message = null) -> Louis.Diagnostics.Param<int>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<int>).NotInRangeFor<T>(System.Collections.Generic.List<T>! list, string? message = null) -> Louis.Diagnostics.Param<int>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<int>).NotInRangeFor<T>(System.Memory<T> memory, string? message = null) -> Louis.Diagnostics.Param<int>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<int>).NotInRangeFor<T>(System.ReadOnlyMemory<T> memory, string? message = null) -> Louis.Diagnostics.Param<int>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<int>).NotInRangeFor<T>(System.ReadOnlySpan<T> span, string? message = null) -> Louis.Diagnostics.Param<int>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<int>).NotInRangeFor<T>(System.Span<T> span, string? message = null) -> Louis.Diagnostics.Param<int>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<int>).NotInRangeFor<T>(T[]! array, string? message = null) -> Louis.Diagnostics.Param<int>
 Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<long>)
 Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<long>).CloseTo(long target, ulong delta, string? message = null) -> Louis.Diagnostics.Param<long>
 Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<long>).NotCloseTo(long target, ulong delta, string? message = null) -> Louis.Diagnostics.Param<long>
@@ -129,6 +145,83 @@ Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<string!>).Wh
 Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<string?>)
 Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<string?>).NullOrEmpty(string? message = null) -> Louis.Diagnostics.Param<string?>
 Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<string?>).NullOrWhiteSpace(string? message = null) -> Louis.Diagnostics.Param<string?>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>)
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>).Empty(string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>).HasSizeEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>).HasSizeEqualTo(System.Collections.Generic.ICollection<T>! other, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>).HasSizeGreaterThan(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>).HasSizeGreaterThanOrEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>).HasSizeLessThan(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>).HasSizeLessThanOrEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>).HasSizeLessThanOrEqualTo(System.Collections.Generic.ICollection<T>! other, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>).HasSizeNotEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>).NotEmpty(string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>)
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>).Empty(string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>).HasSizeEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>).HasSizeEqualTo(System.Collections.Generic.ICollection<T>! other, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>).HasSizeGreaterThan(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>).HasSizeGreaterThanOrEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>).HasSizeLessThan(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>).HasSizeLessThanOrEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>).HasSizeLessThanOrEqualTo(System.Collections.Generic.ICollection<T>! other, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>).HasSizeNotEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>).NotEmpty(string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>)
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>).Empty(string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>).HasSizeEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>).HasSizeEqualTo(System.Collections.Generic.ICollection<T>! other, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>).HasSizeGreaterThan(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>).HasSizeGreaterThanOrEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>).HasSizeLessThan(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>).HasSizeLessThanOrEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>).HasSizeLessThanOrEqualTo(System.Collections.Generic.ICollection<T>! other, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>).HasSizeNotEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>).NotEmpty(string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>)
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>).Empty(string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>).HasSizeEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>).HasSizeEqualTo(System.Collections.Generic.ICollection<T>! other, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>).HasSizeGreaterThan(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>).HasSizeGreaterThanOrEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>).HasSizeLessThan(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>).HasSizeLessThanOrEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>).HasSizeLessThanOrEqualTo(System.Collections.Generic.ICollection<T>! other, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>).HasSizeNotEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>).NotEmpty(string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>)
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>).Empty(string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>).HasSizeEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>).HasSizeEqualTo(System.Collections.Generic.ICollection<T>! other, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>).HasSizeGreaterThan(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>).HasSizeGreaterThanOrEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>).HasSizeLessThan(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>).HasSizeLessThanOrEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>).HasSizeLessThanOrEqualTo(System.Collections.Generic.ICollection<T>! other, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>).HasSizeNotEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>).NotEmpty(string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Memory<T>>)
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Memory<T>>).Empty(string? message = null) -> Louis.Diagnostics.Param<System.Memory<T>>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Memory<T>>).HasSizeEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.Memory<T>>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Memory<T>>).HasSizeEqualTo(System.ReadOnlyMemory<T> other, string? message = null) -> Louis.Diagnostics.Param<System.Memory<T>>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Memory<T>>).HasSizeGreaterThan(int size, string? message = null) -> Louis.Diagnostics.Param<System.Memory<T>>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Memory<T>>).HasSizeGreaterThanOrEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.Memory<T>>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Memory<T>>).HasSizeLessThan(int size, string? message = null) -> Louis.Diagnostics.Param<System.Memory<T>>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Memory<T>>).HasSizeLessThanOrEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.Memory<T>>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Memory<T>>).HasSizeLessThanOrEqualTo(System.ReadOnlyMemory<T> other, string? message = null) -> Louis.Diagnostics.Param<System.Memory<T>>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Memory<T>>).HasSizeNotEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.Memory<T>>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.Memory<T>>).NotEmpty(string? message = null) -> Louis.Diagnostics.Param<System.Memory<T>>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>)
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>).Empty(string? message = null) -> Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>).HasSizeEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>).HasSizeEqualTo(System.ReadOnlyMemory<T> other, string? message = null) -> Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>).HasSizeGreaterThan(int size, string? message = null) -> Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>).HasSizeGreaterThanOrEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>).HasSizeLessThan(int size, string? message = null) -> Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>).HasSizeLessThanOrEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>).HasSizeLessThanOrEqualTo(System.ReadOnlyMemory<T> other, string? message = null) -> Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>).HasSizeNotEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>).NotEmpty(string? message = null) -> Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>
 Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T!>)
 Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T!>).AtEndPosition(string? message = null) -> Louis.Diagnostics.Param<T!>
 Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T!>).AtStartPosition(string? message = null) -> Louis.Diagnostics.Param<T!>
@@ -169,6 +262,57 @@ Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T>).NotIn
 Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T>).NotOfType(System.Type! type, string? message = null) -> Louis.Diagnostics.Param<T>
 Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T>).Null(string? message = null) -> Louis.Diagnostics.Param<T>
 Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T>).OfType(System.Type! type, string? message = null) -> Louis.Diagnostics.Param<T>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T[]!>)
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T[]!>).Empty(string? message = null) -> Louis.Diagnostics.Param<T[]!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T[]!>).HasSizeEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<T[]!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T[]!>).HasSizeEqualTo(T[]! other, string? message = null) -> Louis.Diagnostics.Param<T[]!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T[]!>).HasSizeGreaterThan(int size, string? message = null) -> Louis.Diagnostics.Param<T[]!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T[]!>).HasSizeGreaterThanOrEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<T[]!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T[]!>).HasSizeLessThan(int size, string? message = null) -> Louis.Diagnostics.Param<T[]!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T[]!>).HasSizeLessThanOrEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<T[]!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T[]!>).HasSizeLessThanOrEqualTo(T[]! other, string? message = null) -> Louis.Diagnostics.Param<T[]!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T[]!>).HasSizeNotEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<T[]!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T[]!>).NotEmpty(string? message = null) -> Louis.Diagnostics.Param<T[]!>
+Louis.Diagnostics.ReadOnlySpanParam<T>
+Louis.Diagnostics.ReadOnlySpanParam<T>.Name.get -> string!
+Louis.Diagnostics.ReadOnlySpanParam<T>.ReadOnlySpanParam() -> void
+Louis.Diagnostics.ReadOnlySpanParam<T>.Value.get -> System.ReadOnlySpan<T>
+Louis.Diagnostics.ReadOnlySpanParamExtensions
+Louis.Diagnostics.ReadOnlySpanParamExtensions.extension(Louis.Diagnostics.ReadOnlySpanParam<char>)
+Louis.Diagnostics.ReadOnlySpanParamExtensions.extension(Louis.Diagnostics.ReadOnlySpanParam<char>).NotWhiteSpace(string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<char>
+Louis.Diagnostics.ReadOnlySpanParamExtensions.extension(Louis.Diagnostics.ReadOnlySpanParam<char>).WhiteSpace(string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<char>
+Louis.Diagnostics.ReadOnlySpanParamExtensions.extension<T>(Louis.Diagnostics.ReadOnlySpanParam<T>)
+Louis.Diagnostics.ReadOnlySpanParamExtensions.extension<T>(Louis.Diagnostics.ReadOnlySpanParam<T>).Checked(Louis.ReadOnlySpanPredicate<T>! predicate, string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<T>
+Louis.Diagnostics.ReadOnlySpanParamExtensions.extension<T>(Louis.Diagnostics.ReadOnlySpanParam<T>).Empty(string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<T>
+Louis.Diagnostics.ReadOnlySpanParamExtensions.extension<T>(Louis.Diagnostics.ReadOnlySpanParam<T>).HasSizeEqualTo(int size, string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<T>
+Louis.Diagnostics.ReadOnlySpanParamExtensions.extension<T>(Louis.Diagnostics.ReadOnlySpanParam<T>).HasSizeEqualTo(System.ReadOnlySpan<T> other, string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<T>
+Louis.Diagnostics.ReadOnlySpanParamExtensions.extension<T>(Louis.Diagnostics.ReadOnlySpanParam<T>).HasSizeGreaterThan(int size, string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<T>
+Louis.Diagnostics.ReadOnlySpanParamExtensions.extension<T>(Louis.Diagnostics.ReadOnlySpanParam<T>).HasSizeGreaterThanOrEqualTo(int size, string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<T>
+Louis.Diagnostics.ReadOnlySpanParamExtensions.extension<T>(Louis.Diagnostics.ReadOnlySpanParam<T>).HasSizeLessThan(int size, string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<T>
+Louis.Diagnostics.ReadOnlySpanParamExtensions.extension<T>(Louis.Diagnostics.ReadOnlySpanParam<T>).HasSizeLessThanOrEqualTo(int size, string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<T>
+Louis.Diagnostics.ReadOnlySpanParamExtensions.extension<T>(Louis.Diagnostics.ReadOnlySpanParam<T>).HasSizeLessThanOrEqualTo(System.ReadOnlySpan<T> other, string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<T>
+Louis.Diagnostics.ReadOnlySpanParamExtensions.extension<T>(Louis.Diagnostics.ReadOnlySpanParam<T>).HasSizeNotEqualTo(int size, string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<T>
+Louis.Diagnostics.ReadOnlySpanParamExtensions.extension<T>(Louis.Diagnostics.ReadOnlySpanParam<T>).NotEmpty(string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<T>
+Louis.Diagnostics.SpanParam<T>
+Louis.Diagnostics.SpanParam<T>.Name.get -> string!
+Louis.Diagnostics.SpanParam<T>.SpanParam() -> void
+Louis.Diagnostics.SpanParam<T>.Value.get -> System.Span<T>
+Louis.Diagnostics.SpanParamExtensions
+Louis.Diagnostics.SpanParamExtensions.extension(Louis.Diagnostics.SpanParam<char>)
+Louis.Diagnostics.SpanParamExtensions.extension(Louis.Diagnostics.SpanParam<char>).NotWhiteSpace(string? message = null) -> Louis.Diagnostics.SpanParam<char>
+Louis.Diagnostics.SpanParamExtensions.extension(Louis.Diagnostics.SpanParam<char>).WhiteSpace(string? message = null) -> Louis.Diagnostics.SpanParam<char>
+Louis.Diagnostics.SpanParamExtensions.extension<T>(Louis.Diagnostics.SpanParam<T>)
+Louis.Diagnostics.SpanParamExtensions.extension<T>(Louis.Diagnostics.SpanParam<T>).Checked(Louis.ReadOnlySpanPredicate<T>! predicate, string? message = null) -> Louis.Diagnostics.SpanParam<T>
+Louis.Diagnostics.SpanParamExtensions.extension<T>(Louis.Diagnostics.SpanParam<T>).Empty(string? message = null) -> Louis.Diagnostics.SpanParam<T>
+Louis.Diagnostics.SpanParamExtensions.extension<T>(Louis.Diagnostics.SpanParam<T>).HasSizeEqualTo(int size, string? message = null) -> Louis.Diagnostics.SpanParam<T>
+Louis.Diagnostics.SpanParamExtensions.extension<T>(Louis.Diagnostics.SpanParam<T>).HasSizeEqualTo(System.ReadOnlySpan<T> other, string? message = null) -> Louis.Diagnostics.SpanParam<T>
+Louis.Diagnostics.SpanParamExtensions.extension<T>(Louis.Diagnostics.SpanParam<T>).HasSizeGreaterThan(int size, string? message = null) -> Louis.Diagnostics.SpanParam<T>
+Louis.Diagnostics.SpanParamExtensions.extension<T>(Louis.Diagnostics.SpanParam<T>).HasSizeGreaterThanOrEqualTo(int size, string? message = null) -> Louis.Diagnostics.SpanParam<T>
+Louis.Diagnostics.SpanParamExtensions.extension<T>(Louis.Diagnostics.SpanParam<T>).HasSizeLessThan(int size, string? message = null) -> Louis.Diagnostics.SpanParam<T>
+Louis.Diagnostics.SpanParamExtensions.extension<T>(Louis.Diagnostics.SpanParam<T>).HasSizeLessThanOrEqualTo(int size, string? message = null) -> Louis.Diagnostics.SpanParam<T>
+Louis.Diagnostics.SpanParamExtensions.extension<T>(Louis.Diagnostics.SpanParam<T>).HasSizeLessThanOrEqualTo(System.ReadOnlySpan<T> other, string? message = null) -> Louis.Diagnostics.SpanParam<T>
+Louis.Diagnostics.SpanParamExtensions.extension<T>(Louis.Diagnostics.SpanParam<T>).HasSizeNotEqualTo(int size, string? message = null) -> Louis.Diagnostics.SpanParam<T>
+Louis.Diagnostics.SpanParamExtensions.extension<T>(Louis.Diagnostics.SpanParam<T>).NotEmpty(string? message = null) -> Louis.Diagnostics.SpanParam<T>
 Louis.Diagnostics.StringBuilderExtensions.extension(System.Text.StringBuilder!)
 Louis.Diagnostics.StringBuilderExtensions.extension(System.Text.StringBuilder!).AppendFormattedObject(object? obj, string? format = null) -> System.Text.StringBuilder!
 Louis.Fluency.FluentExtensions.extension<T>(T)
@@ -221,6 +365,7 @@ Louis.IO.TextFileContent.TextFileContent(string! text, System.Text.Encoding! enc
 Louis.IO.TextFileUtility
 Louis.Processes.CommandLineFormatter
 Louis.Processes.ConsoleUtility
+Louis.ReadOnlySpanPredicate<T>
 Louis.Text.CharReadOnlySpanExtensions.extension(System.ReadOnlySpan<char>)
 Louis.Text.CharReadOnlySpanExtensions.extension(System.ReadOnlySpan<char>).ApplyEdits(System.Collections.Generic.IEnumerable<Louis.Text.TextEdit>! edits) -> string!
 Louis.Text.CharReadOnlySpanExtensions.extension(System.ReadOnlySpan<char>).ComputeLineClipping(int headLines, int tailLines) -> Louis.Text.LineClipping
@@ -285,6 +430,8 @@ Louis.Text.TextEdit.Text.get -> string!
 Louis.Text.TextEdit.Text.init -> void
 Louis.Text.TextEdit.TextEdit() -> void
 Louis.Text.TextEdit.TextEdit(int start, int length, string! text) -> void
+static Louis.Diagnostics.Param.Check<T>(System.ReadOnlySpan<T> value, string! name = "") -> Louis.Diagnostics.ReadOnlySpanParam<T>
+static Louis.Diagnostics.Param.Check<T>(System.Span<T> value, string! name = "") -> Louis.Diagnostics.SpanParam<T>
 static Louis.Diagnostics.Param.Check<T>(T value, string! name = "") -> Louis.Diagnostics.Param<T>
 static Louis.Diagnostics.Param.CheckNotNull<T>(T? value, string! name = "") -> Louis.Diagnostics.Param<T>
 static Louis.Diagnostics.Param.NotEmpty(System.ReadOnlySpan<char> value, string! name = "") -> System.ReadOnlySpan<char>
@@ -313,6 +460,14 @@ static Louis.Diagnostics.ParamExtensions.Completed<T>(this Louis.Diagnostics.Par
 static Louis.Diagnostics.ParamExtensions.CompletedSuccessfully<T>(this Louis.Diagnostics.Param<T!> this, string? message = null) -> Louis.Diagnostics.Param<T!>
 static Louis.Diagnostics.ParamExtensions.Default<T>(this Louis.Diagnostics.Param<T> this, string? message = null) -> Louis.Diagnostics.Param<T>
 static Louis.Diagnostics.ParamExtensions.Empty(this Louis.Diagnostics.Param<string!> this, string? message = null) -> Louis.Diagnostics.Param<string!>
+static Louis.Diagnostics.ParamExtensions.Empty<T>(this Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!> this, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>
+static Louis.Diagnostics.ParamExtensions.Empty<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!> this, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>
+static Louis.Diagnostics.ParamExtensions.Empty<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!> this, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>
+static Louis.Diagnostics.ParamExtensions.Empty<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!> this, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>
+static Louis.Diagnostics.ParamExtensions.Empty<T>(this Louis.Diagnostics.Param<System.Collections.Generic.List<T>!> this, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>
+static Louis.Diagnostics.ParamExtensions.Empty<T>(this Louis.Diagnostics.Param<System.Memory<T>> this, string? message = null) -> Louis.Diagnostics.Param<System.Memory<T>>
+static Louis.Diagnostics.ParamExtensions.Empty<T>(this Louis.Diagnostics.Param<System.ReadOnlyMemory<T>> this, string? message = null) -> Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>
+static Louis.Diagnostics.ParamExtensions.Empty<T>(this Louis.Diagnostics.Param<T[]!> this, string? message = null) -> Louis.Diagnostics.Param<T[]!>
 static Louis.Diagnostics.ParamExtensions.EqualTo<T>(this Louis.Diagnostics.Param<T> this, T target, string? message = null) -> Louis.Diagnostics.Param<T>
 static Louis.Diagnostics.ParamExtensions.False(this Louis.Diagnostics.Param<bool> this, string? message = null) -> Louis.Diagnostics.Param<bool>
 static Louis.Diagnostics.ParamExtensions.Faulted<T>(this Louis.Diagnostics.Param<T!> this, string? message = null) -> Louis.Diagnostics.Param<T!>
@@ -320,16 +475,88 @@ static Louis.Diagnostics.ParamExtensions.GreaterThan<T>(this Louis.Diagnostics.P
 static Louis.Diagnostics.ParamExtensions.GreaterThanOrEqualTo<T>(this Louis.Diagnostics.Param<T> this, T threshold, string? message = null) -> Louis.Diagnostics.Param<T>
 static Louis.Diagnostics.ParamExtensions.HasSizeEqualTo(this Louis.Diagnostics.Param<string!> this, int size, string? message = null) -> Louis.Diagnostics.Param<string!>
 static Louis.Diagnostics.ParamExtensions.HasSizeEqualTo(this Louis.Diagnostics.Param<string!> this, string! other, string? message = null) -> Louis.Diagnostics.Param<string!>
+static Louis.Diagnostics.ParamExtensions.HasSizeEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!> this, System.Collections.Generic.ICollection<T>! other, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!> this, System.Collections.Generic.ICollection<T>! other, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!> this, System.Collections.Generic.ICollection<T>! other, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!> this, System.Collections.Generic.ICollection<T>! other, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.List<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.List<T>!> this, System.Collections.Generic.ICollection<T>! other, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeEqualTo<T>(this Louis.Diagnostics.Param<System.Memory<T>> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Memory<T>>
+static Louis.Diagnostics.ParamExtensions.HasSizeEqualTo<T>(this Louis.Diagnostics.Param<System.Memory<T>> this, System.ReadOnlyMemory<T> other, string? message = null) -> Louis.Diagnostics.Param<System.Memory<T>>
+static Louis.Diagnostics.ParamExtensions.HasSizeEqualTo<T>(this Louis.Diagnostics.Param<System.ReadOnlyMemory<T>> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>
+static Louis.Diagnostics.ParamExtensions.HasSizeEqualTo<T>(this Louis.Diagnostics.Param<System.ReadOnlyMemory<T>> this, System.ReadOnlyMemory<T> other, string? message = null) -> Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>
+static Louis.Diagnostics.ParamExtensions.HasSizeEqualTo<T>(this Louis.Diagnostics.Param<T[]!> this, int size, string? message = null) -> Louis.Diagnostics.Param<T[]!>
+static Louis.Diagnostics.ParamExtensions.HasSizeEqualTo<T>(this Louis.Diagnostics.Param<T[]!> this, T[]! other, string? message = null) -> Louis.Diagnostics.Param<T[]!>
 static Louis.Diagnostics.ParamExtensions.HasSizeGreaterThan(this Louis.Diagnostics.Param<string!> this, int size, string? message = null) -> Louis.Diagnostics.Param<string!>
+static Louis.Diagnostics.ParamExtensions.HasSizeGreaterThan<T>(this Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeGreaterThan<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeGreaterThan<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeGreaterThan<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeGreaterThan<T>(this Louis.Diagnostics.Param<System.Collections.Generic.List<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeGreaterThan<T>(this Louis.Diagnostics.Param<System.Memory<T>> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Memory<T>>
+static Louis.Diagnostics.ParamExtensions.HasSizeGreaterThan<T>(this Louis.Diagnostics.Param<System.ReadOnlyMemory<T>> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>
+static Louis.Diagnostics.ParamExtensions.HasSizeGreaterThan<T>(this Louis.Diagnostics.Param<T[]!> this, int size, string? message = null) -> Louis.Diagnostics.Param<T[]!>
 static Louis.Diagnostics.ParamExtensions.HasSizeGreaterThanOrEqualTo(this Louis.Diagnostics.Param<string!> this, int size, string? message = null) -> Louis.Diagnostics.Param<string!>
+static Louis.Diagnostics.ParamExtensions.HasSizeGreaterThanOrEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeGreaterThanOrEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeGreaterThanOrEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeGreaterThanOrEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeGreaterThanOrEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.List<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeGreaterThanOrEqualTo<T>(this Louis.Diagnostics.Param<System.Memory<T>> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Memory<T>>
+static Louis.Diagnostics.ParamExtensions.HasSizeGreaterThanOrEqualTo<T>(this Louis.Diagnostics.Param<System.ReadOnlyMemory<T>> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>
+static Louis.Diagnostics.ParamExtensions.HasSizeGreaterThanOrEqualTo<T>(this Louis.Diagnostics.Param<T[]!> this, int size, string? message = null) -> Louis.Diagnostics.Param<T[]!>
 static Louis.Diagnostics.ParamExtensions.HasSizeLessThan(this Louis.Diagnostics.Param<string!> this, int size, string? message = null) -> Louis.Diagnostics.Param<string!>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThan<T>(this Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThan<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThan<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThan<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThan<T>(this Louis.Diagnostics.Param<System.Collections.Generic.List<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThan<T>(this Louis.Diagnostics.Param<System.Memory<T>> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Memory<T>>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThan<T>(this Louis.Diagnostics.Param<System.ReadOnlyMemory<T>> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThan<T>(this Louis.Diagnostics.Param<T[]!> this, int size, string? message = null) -> Louis.Diagnostics.Param<T[]!>
 static Louis.Diagnostics.ParamExtensions.HasSizeLessThanOrEqualTo(this Louis.Diagnostics.Param<string!> this, int size, string? message = null) -> Louis.Diagnostics.Param<string!>
 static Louis.Diagnostics.ParamExtensions.HasSizeLessThanOrEqualTo(this Louis.Diagnostics.Param<string!> this, string! other, string? message = null) -> Louis.Diagnostics.Param<string!>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThanOrEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThanOrEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!> this, System.Collections.Generic.ICollection<T>! other, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThanOrEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThanOrEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!> this, System.Collections.Generic.ICollection<T>! other, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThanOrEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThanOrEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!> this, System.Collections.Generic.ICollection<T>! other, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThanOrEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThanOrEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!> this, System.Collections.Generic.ICollection<T>! other, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThanOrEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.List<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThanOrEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.List<T>!> this, System.Collections.Generic.ICollection<T>! other, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThanOrEqualTo<T>(this Louis.Diagnostics.Param<System.Memory<T>> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Memory<T>>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThanOrEqualTo<T>(this Louis.Diagnostics.Param<System.Memory<T>> this, System.ReadOnlyMemory<T> other, string? message = null) -> Louis.Diagnostics.Param<System.Memory<T>>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThanOrEqualTo<T>(this Louis.Diagnostics.Param<System.ReadOnlyMemory<T>> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThanOrEqualTo<T>(this Louis.Diagnostics.Param<System.ReadOnlyMemory<T>> this, System.ReadOnlyMemory<T> other, string? message = null) -> Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThanOrEqualTo<T>(this Louis.Diagnostics.Param<T[]!> this, int size, string? message = null) -> Louis.Diagnostics.Param<T[]!>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThanOrEqualTo<T>(this Louis.Diagnostics.Param<T[]!> this, T[]! other, string? message = null) -> Louis.Diagnostics.Param<T[]!>
 static Louis.Diagnostics.ParamExtensions.HasSizeNotEqualTo(this Louis.Diagnostics.Param<string!> this, int size, string? message = null) -> Louis.Diagnostics.Param<string!>
+static Louis.Diagnostics.ParamExtensions.HasSizeNotEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeNotEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeNotEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeNotEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeNotEqualTo<T>(this Louis.Diagnostics.Param<System.Collections.Generic.List<T>!> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>
+static Louis.Diagnostics.ParamExtensions.HasSizeNotEqualTo<T>(this Louis.Diagnostics.Param<System.Memory<T>> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.Memory<T>>
+static Louis.Diagnostics.ParamExtensions.HasSizeNotEqualTo<T>(this Louis.Diagnostics.Param<System.ReadOnlyMemory<T>> this, int size, string? message = null) -> Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>
+static Louis.Diagnostics.ParamExtensions.HasSizeNotEqualTo<T>(this Louis.Diagnostics.Param<T[]!> this, int size, string? message = null) -> Louis.Diagnostics.Param<T[]!>
 static Louis.Diagnostics.ParamExtensions.HasStatusEqualTo<T>(this Louis.Diagnostics.Param<T!> this, System.Threading.Tasks.TaskStatus status, string? message = null) -> Louis.Diagnostics.Param<T!>
 static Louis.Diagnostics.ParamExtensions.HasStatusNotEqualTo<T>(this Louis.Diagnostics.Param<T!> this, System.Threading.Tasks.TaskStatus status, string? message = null) -> Louis.Diagnostics.Param<T!>
 static Louis.Diagnostics.ParamExtensions.InRange<T>(this Louis.Diagnostics.Param<T> this, T minimum, T maximum, string? message = null) -> Louis.Diagnostics.Param<T>
 static Louis.Diagnostics.ParamExtensions.InRangeFor(this Louis.Diagnostics.Param<int> this, string! text, string? message = null) -> Louis.Diagnostics.Param<int>
+static Louis.Diagnostics.ParamExtensions.InRangeFor<T>(this Louis.Diagnostics.Param<int> this, System.Collections.Generic.ICollection<T>! collection, string? message = null) -> Louis.Diagnostics.Param<int>
+static Louis.Diagnostics.ParamExtensions.InRangeFor<T>(this Louis.Diagnostics.Param<int> this, System.Collections.Generic.IReadOnlyCollection<T>! collection, string? message = null) -> Louis.Diagnostics.Param<int>
+static Louis.Diagnostics.ParamExtensions.InRangeFor<T>(this Louis.Diagnostics.Param<int> this, System.Collections.Generic.List<T>! list, string? message = null) -> Louis.Diagnostics.Param<int>
+static Louis.Diagnostics.ParamExtensions.InRangeFor<T>(this Louis.Diagnostics.Param<int> this, System.Memory<T> memory, string? message = null) -> Louis.Diagnostics.Param<int>
+static Louis.Diagnostics.ParamExtensions.InRangeFor<T>(this Louis.Diagnostics.Param<int> this, System.ReadOnlyMemory<T> memory, string? message = null) -> Louis.Diagnostics.Param<int>
+static Louis.Diagnostics.ParamExtensions.InRangeFor<T>(this Louis.Diagnostics.Param<int> this, System.ReadOnlySpan<T> span, string? message = null) -> Louis.Diagnostics.Param<int>
+static Louis.Diagnostics.ParamExtensions.InRangeFor<T>(this Louis.Diagnostics.Param<int> this, System.Span<T> span, string? message = null) -> Louis.Diagnostics.Param<int>
+static Louis.Diagnostics.ParamExtensions.InRangeFor<T>(this Louis.Diagnostics.Param<int> this, T[]! array, string? message = null) -> Louis.Diagnostics.Param<int>
 static Louis.Diagnostics.ParamExtensions.LessThan<T>(this Louis.Diagnostics.Param<T> this, T threshold, string? message = null) -> Louis.Diagnostics.Param<T>
 static Louis.Diagnostics.ParamExtensions.LessThanOrEqualTo<T>(this Louis.Diagnostics.Param<T> this, T threshold, string? message = null) -> Louis.Diagnostics.Param<T>
 static Louis.Diagnostics.ParamExtensions.NotAssignableTo<T>(this Louis.Diagnostics.Param<T> this, System.Type! type, string? message = null) -> Louis.Diagnostics.Param<T>
@@ -346,10 +573,26 @@ static Louis.Diagnostics.ParamExtensions.NotCompleted<T>(this Louis.Diagnostics.
 static Louis.Diagnostics.ParamExtensions.NotCompletedSuccessfully<T>(this Louis.Diagnostics.Param<T!> this, string? message = null) -> Louis.Diagnostics.Param<T!>
 static Louis.Diagnostics.ParamExtensions.NotDefault<T>(this Louis.Diagnostics.Param<T> this, string? message = null) -> Louis.Diagnostics.Param<T>
 static Louis.Diagnostics.ParamExtensions.NotEmpty(this Louis.Diagnostics.Param<string!> this, string? message = null) -> Louis.Diagnostics.Param<string!>
+static Louis.Diagnostics.ParamExtensions.NotEmpty<T>(this Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!> this, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.ICollection<T>!>
+static Louis.Diagnostics.ParamExtensions.NotEmpty<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!> this, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IList<T>!>
+static Louis.Diagnostics.ParamExtensions.NotEmpty<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!> this, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyCollection<T>!>
+static Louis.Diagnostics.ParamExtensions.NotEmpty<T>(this Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!> this, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.IReadOnlyList<T>!>
+static Louis.Diagnostics.ParamExtensions.NotEmpty<T>(this Louis.Diagnostics.Param<System.Collections.Generic.List<T>!> this, string? message = null) -> Louis.Diagnostics.Param<System.Collections.Generic.List<T>!>
+static Louis.Diagnostics.ParamExtensions.NotEmpty<T>(this Louis.Diagnostics.Param<System.Memory<T>> this, string? message = null) -> Louis.Diagnostics.Param<System.Memory<T>>
+static Louis.Diagnostics.ParamExtensions.NotEmpty<T>(this Louis.Diagnostics.Param<System.ReadOnlyMemory<T>> this, string? message = null) -> Louis.Diagnostics.Param<System.ReadOnlyMemory<T>>
+static Louis.Diagnostics.ParamExtensions.NotEmpty<T>(this Louis.Diagnostics.Param<T[]!> this, string? message = null) -> Louis.Diagnostics.Param<T[]!>
 static Louis.Diagnostics.ParamExtensions.NotEqualTo<T>(this Louis.Diagnostics.Param<T> this, T target, string? message = null) -> Louis.Diagnostics.Param<T>
 static Louis.Diagnostics.ParamExtensions.NotFaulted<T>(this Louis.Diagnostics.Param<T!> this, string? message = null) -> Louis.Diagnostics.Param<T!>
 static Louis.Diagnostics.ParamExtensions.NotInRange<T>(this Louis.Diagnostics.Param<T> this, T minimum, T maximum, string? message = null) -> Louis.Diagnostics.Param<T>
 static Louis.Diagnostics.ParamExtensions.NotInRangeFor(this Louis.Diagnostics.Param<int> this, string! text, string? message = null) -> Louis.Diagnostics.Param<int>
+static Louis.Diagnostics.ParamExtensions.NotInRangeFor<T>(this Louis.Diagnostics.Param<int> this, System.Collections.Generic.ICollection<T>! collection, string? message = null) -> Louis.Diagnostics.Param<int>
+static Louis.Diagnostics.ParamExtensions.NotInRangeFor<T>(this Louis.Diagnostics.Param<int> this, System.Collections.Generic.IReadOnlyCollection<T>! collection, string? message = null) -> Louis.Diagnostics.Param<int>
+static Louis.Diagnostics.ParamExtensions.NotInRangeFor<T>(this Louis.Diagnostics.Param<int> this, System.Collections.Generic.List<T>! list, string? message = null) -> Louis.Diagnostics.Param<int>
+static Louis.Diagnostics.ParamExtensions.NotInRangeFor<T>(this Louis.Diagnostics.Param<int> this, System.Memory<T> memory, string? message = null) -> Louis.Diagnostics.Param<int>
+static Louis.Diagnostics.ParamExtensions.NotInRangeFor<T>(this Louis.Diagnostics.Param<int> this, System.ReadOnlyMemory<T> memory, string? message = null) -> Louis.Diagnostics.Param<int>
+static Louis.Diagnostics.ParamExtensions.NotInRangeFor<T>(this Louis.Diagnostics.Param<int> this, System.ReadOnlySpan<T> span, string? message = null) -> Louis.Diagnostics.Param<int>
+static Louis.Diagnostics.ParamExtensions.NotInRangeFor<T>(this Louis.Diagnostics.Param<int> this, System.Span<T> span, string? message = null) -> Louis.Diagnostics.Param<int>
+static Louis.Diagnostics.ParamExtensions.NotInRangeFor<T>(this Louis.Diagnostics.Param<int> this, T[]! array, string? message = null) -> Louis.Diagnostics.Param<int>
 static Louis.Diagnostics.ParamExtensions.NotOfType<T>(this Louis.Diagnostics.Param<T> this, System.Type! type, string? message = null) -> Louis.Diagnostics.Param<T>
 static Louis.Diagnostics.ParamExtensions.NotOfType<TTarget>(this Louis.Diagnostics.Param<object!> this, string? message = null) -> Louis.Diagnostics.Param<object!>
 static Louis.Diagnostics.ParamExtensions.NotWhiteSpace(this Louis.Diagnostics.Param<string!> this, string? message = null) -> Louis.Diagnostics.Param<string!>
@@ -362,6 +605,32 @@ static Louis.Diagnostics.ParamExtensions.ReferenceEqualTo<T>(this Louis.Diagnost
 static Louis.Diagnostics.ParamExtensions.ReferenceNotEqualTo<T>(this Louis.Diagnostics.Param<T!> this, T! target, string? message = null) -> Louis.Diagnostics.Param<T!>
 static Louis.Diagnostics.ParamExtensions.True(this Louis.Diagnostics.Param<bool> this, string? message = null) -> Louis.Diagnostics.Param<bool>
 static Louis.Diagnostics.ParamExtensions.WhiteSpace(this Louis.Diagnostics.Param<string!> this, string? message = null) -> Louis.Diagnostics.Param<string!>
+static Louis.Diagnostics.ReadOnlySpanParamExtensions.Checked<T>(this Louis.Diagnostics.ReadOnlySpanParam<T> this, Louis.ReadOnlySpanPredicate<T>! predicate, string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<T>
+static Louis.Diagnostics.ReadOnlySpanParamExtensions.Empty<T>(this Louis.Diagnostics.ReadOnlySpanParam<T> this, string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<T>
+static Louis.Diagnostics.ReadOnlySpanParamExtensions.HasSizeEqualTo<T>(this Louis.Diagnostics.ReadOnlySpanParam<T> this, int size, string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<T>
+static Louis.Diagnostics.ReadOnlySpanParamExtensions.HasSizeEqualTo<T>(this Louis.Diagnostics.ReadOnlySpanParam<T> this, System.ReadOnlySpan<T> other, string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<T>
+static Louis.Diagnostics.ReadOnlySpanParamExtensions.HasSizeGreaterThan<T>(this Louis.Diagnostics.ReadOnlySpanParam<T> this, int size, string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<T>
+static Louis.Diagnostics.ReadOnlySpanParamExtensions.HasSizeGreaterThanOrEqualTo<T>(this Louis.Diagnostics.ReadOnlySpanParam<T> this, int size, string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<T>
+static Louis.Diagnostics.ReadOnlySpanParamExtensions.HasSizeLessThan<T>(this Louis.Diagnostics.ReadOnlySpanParam<T> this, int size, string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<T>
+static Louis.Diagnostics.ReadOnlySpanParamExtensions.HasSizeLessThanOrEqualTo<T>(this Louis.Diagnostics.ReadOnlySpanParam<T> this, int size, string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<T>
+static Louis.Diagnostics.ReadOnlySpanParamExtensions.HasSizeLessThanOrEqualTo<T>(this Louis.Diagnostics.ReadOnlySpanParam<T> this, System.ReadOnlySpan<T> other, string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<T>
+static Louis.Diagnostics.ReadOnlySpanParamExtensions.HasSizeNotEqualTo<T>(this Louis.Diagnostics.ReadOnlySpanParam<T> this, int size, string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<T>
+static Louis.Diagnostics.ReadOnlySpanParamExtensions.NotEmpty<T>(this Louis.Diagnostics.ReadOnlySpanParam<T> this, string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<T>
+static Louis.Diagnostics.ReadOnlySpanParamExtensions.NotWhiteSpace(this Louis.Diagnostics.ReadOnlySpanParam<char> this, string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<char>
+static Louis.Diagnostics.ReadOnlySpanParamExtensions.WhiteSpace(this Louis.Diagnostics.ReadOnlySpanParam<char> this, string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<char>
+static Louis.Diagnostics.SpanParamExtensions.Checked<T>(this Louis.Diagnostics.SpanParam<T> this, Louis.ReadOnlySpanPredicate<T>! predicate, string? message = null) -> Louis.Diagnostics.SpanParam<T>
+static Louis.Diagnostics.SpanParamExtensions.Empty<T>(this Louis.Diagnostics.SpanParam<T> this, string? message = null) -> Louis.Diagnostics.SpanParam<T>
+static Louis.Diagnostics.SpanParamExtensions.HasSizeEqualTo<T>(this Louis.Diagnostics.SpanParam<T> this, int size, string? message = null) -> Louis.Diagnostics.SpanParam<T>
+static Louis.Diagnostics.SpanParamExtensions.HasSizeEqualTo<T>(this Louis.Diagnostics.SpanParam<T> this, System.ReadOnlySpan<T> other, string? message = null) -> Louis.Diagnostics.SpanParam<T>
+static Louis.Diagnostics.SpanParamExtensions.HasSizeGreaterThan<T>(this Louis.Diagnostics.SpanParam<T> this, int size, string? message = null) -> Louis.Diagnostics.SpanParam<T>
+static Louis.Diagnostics.SpanParamExtensions.HasSizeGreaterThanOrEqualTo<T>(this Louis.Diagnostics.SpanParam<T> this, int size, string? message = null) -> Louis.Diagnostics.SpanParam<T>
+static Louis.Diagnostics.SpanParamExtensions.HasSizeLessThan<T>(this Louis.Diagnostics.SpanParam<T> this, int size, string? message = null) -> Louis.Diagnostics.SpanParam<T>
+static Louis.Diagnostics.SpanParamExtensions.HasSizeLessThanOrEqualTo<T>(this Louis.Diagnostics.SpanParam<T> this, int size, string? message = null) -> Louis.Diagnostics.SpanParam<T>
+static Louis.Diagnostics.SpanParamExtensions.HasSizeLessThanOrEqualTo<T>(this Louis.Diagnostics.SpanParam<T> this, System.ReadOnlySpan<T> other, string? message = null) -> Louis.Diagnostics.SpanParam<T>
+static Louis.Diagnostics.SpanParamExtensions.HasSizeNotEqualTo<T>(this Louis.Diagnostics.SpanParam<T> this, int size, string? message = null) -> Louis.Diagnostics.SpanParam<T>
+static Louis.Diagnostics.SpanParamExtensions.NotEmpty<T>(this Louis.Diagnostics.SpanParam<T> this, string? message = null) -> Louis.Diagnostics.SpanParam<T>
+static Louis.Diagnostics.SpanParamExtensions.NotWhiteSpace(this Louis.Diagnostics.SpanParam<char> this, string? message = null) -> Louis.Diagnostics.SpanParam<char>
+static Louis.Diagnostics.SpanParamExtensions.WhiteSpace(this Louis.Diagnostics.SpanParam<char> this, string? message = null) -> Louis.Diagnostics.SpanParam<char>
 static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, System.Collections.Generic.IEqualityComparer<TValue>! comparer, TValue value, System.Action<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
 static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, TValue value, System.Action<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
 static Louis.IO.TextFileUtility.ReadAllText(string! path, System.Text.Encoding? fallbackEncoding = null) -> Louis.IO.TextFileContent!
@@ -386,3 +655,4 @@ static Louis.Text.TextEdit.operator !=(Louis.Text.TextEdit a, Louis.Text.TextEdi
 static Louis.Text.TextEdit.operator ==(Louis.Text.TextEdit a, Louis.Text.TextEdit b) -> bool
 static Louis.Text.Utf8Utility.ComputeMaxCharsInBytes(System.ReadOnlySpan<char> chars, int maxBytes) -> int
 static Louis.Text.Utf8Utility.ComputeMaxCharsInBytes(string! str, int maxBytes) -> int
+virtual Louis.ReadOnlySpanPredicate<T>.Invoke(System.ReadOnlySpan<T> span) -> bool

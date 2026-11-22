@@ -20,8 +20,10 @@ namespace Louis.Diagnostics;
 /// <para>A check throws an exception if its argument is not valid.</para>
 /// <para>A direct check, such as <c>NotNull</c>, returns the argument,
 /// so that a check and an assignment fit in one expression.</para>
-/// <para><see cref="Check{T}(T, string)"/> and the <c>CheckNotNull</c> methods start a chain of checks on an argument.
-/// The <see cref="Param{T}.Value"/> property ends the chain.</para>
+/// <para>The <c>Check</c> and <c>CheckNotNull</c> methods start a chain of checks on an argument,
+/// and return a <see cref="Param{T}"/>.
+/// For a span, <c>Check</c> returns a <see cref="ReadOnlySpanParam{T}"/> or a <see cref="SpanParam{T}"/>.
+/// The <c>Value</c> property of each of these types ends the chain.</para>
 /// <para>Every method takes the name of the parameter as its last argument.
 /// If you omit it, the compiler supplies the expression passed as the argument to check.</para>
 /// </remarks>
@@ -200,6 +202,51 @@ public static class Param
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Param<T> Check<T>(T value, [CallerArgumentExpression(nameof(value))] string name = "")
         => new(value, name);
+
+    /// <summary>
+    /// Starts a chain of checks on a read-only span argument.
+    /// </summary>
+    /// <typeparam name="T">The type of the items of <paramref name="value"/>.</typeparam>
+    /// <param name="value">The argument to check.</param>
+    /// <param name="name">The name of the parameter with which <paramref name="value"/> corresponds.
+    /// If you omit this argument, the compiler supplies the expression passed as <paramref name="value"/>.</param>
+    /// <returns>A <see cref="ReadOnlySpanParam{T}"/> that holds <paramref name="value"/> and <paramref name="name"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static ReadOnlySpanParam<T> Check<T>(
+        ReadOnlySpan<T> value,
+        [CallerArgumentExpression(nameof(value))] string name = "")
+        => new(value, name);
+
+    /// <summary>
+    /// Starts a chain of checks on a span argument.
+    /// </summary>
+    /// <typeparam name="T">The type of the items of <paramref name="value"/>.</typeparam>
+    /// <param name="value">The argument to check.</param>
+    /// <param name="name">The name of the parameter with which <paramref name="value"/> corresponds.
+    /// If you omit this argument, the compiler supplies the expression passed as <paramref name="value"/>.</param>
+    /// <returns>A <see cref="SpanParam{T}"/> that holds <paramref name="value"/> and <paramref name="name"/>.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static SpanParam<T> Check<T>(Span<T> value, [CallerArgumentExpression(nameof(value))] string name = "")
+        => new(value, name);
+
+#if NET9_0_OR_GREATER
+    /// <summary>
+    /// Starts a chain of checks on an argument whose type can be a ref struct.
+    /// </summary>
+    /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
+    /// <param name="value">The argument to check.</param>
+    /// <param name="name">The name of the parameter with which <paramref name="value"/> corresponds.
+    /// If you omit this argument, the compiler supplies the expression passed as <paramref name="value"/>.</param>
+    /// <returns>A <see cref="RefParam{T}"/> that holds <paramref name="value"/> and <paramref name="name"/>.</returns>
+    /// <remarks>
+    /// <para>This method is not available in the <c>netstandard</c> and .NET Framework builds of Louis,
+    /// because their BCL has no <see cref="RuntimeFeature.ByRefLikeGenerics"/>.</para>
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static RefParam<T> CheckRef<T>(T value, [CallerArgumentExpression(nameof(value))] string name = "")
+        where T : allows ref struct
+        => new(value, name);
+#endif
 
     /// <summary>
     /// Starts a chain of checks on an argument that must not be <see langword="null"/>.

@@ -93,6 +93,10 @@ internal static class ParamThrow
         => throw new ArgumentException(Format(message, "{0} ({1}) is not valid.", name, value), name);
 
     [DoesNotReturn]
+    public static void Invalid(string name, string? message)
+        => throw new ArgumentException(Format(message, "{0} is not valid.", name), name);
+
+    [DoesNotReturn]
     public static void NotDefault<T>(string name, T value, string? message)
         => throw new ArgumentException(Format(message, "{0} ({1}) must be the default value of its type.", name, value), name);
 
@@ -223,6 +227,10 @@ internal static class ParamThrow
         => throw new ArgumentException(
             Format(message, "{0} ({1}) must be empty or consist only of white-space characters.", name, value),
             name);
+
+    [DoesNotReturn]
+    public static void CollectionNotEmpty<T>(string name, T value, int size, string? message)
+        => throw new ArgumentException(Format(message, "{0} must be empty, and its size is {2}.", name, value, size), name);
 
     [DoesNotReturn]
     public static void SizeNotEqualTo<T>(string name, T value, int size, int actualSize, string? message)
