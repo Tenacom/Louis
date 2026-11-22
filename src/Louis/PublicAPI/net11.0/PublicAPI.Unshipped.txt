@@ -80,6 +80,11 @@ Louis.Diagnostics.ExceptionExtensions.extension(System.Exception!).AnyCausingExc
 Louis.Diagnostics.ExceptionExtensions.extension(System.Exception!).GetCausingExceptions() -> System.Collections.Generic.IEnumerable<System.Exception!>!
 Louis.Diagnostics.ExceptionExtensions.extension(System.Exception!).IsCriticalError() -> bool
 Louis.Diagnostics.ExceptionExtensions.extension(System.Exception!).Rethrow() -> void
+Louis.Diagnostics.Param
+Louis.Diagnostics.Param<T>
+Louis.Diagnostics.Param<T>.Name.get -> string!
+Louis.Diagnostics.Param<T>.Param() -> void
+Louis.Diagnostics.Param<T>.Value.get -> T
 Louis.Diagnostics.StringBuilderExtensions.extension(System.Text.StringBuilder!)
 Louis.Diagnostics.StringBuilderExtensions.extension(System.Text.StringBuilder!).AppendFormattedObject(object? obj, string? format = null) -> System.Text.StringBuilder!
 Louis.Fluency.FluentExtensions.extension<T>(T)
@@ -257,6 +262,13 @@ Louis.Text.TrueConditionInterpolatedStringHandler.AppendLiteral(string! value) -
 Louis.Text.TrueConditionInterpolatedStringHandler.ToStringAndClear() -> string!
 Louis.Text.TrueConditionInterpolatedStringHandler.TrueConditionInterpolatedStringHandler() -> void
 Louis.Text.TrueConditionInterpolatedStringHandler.TrueConditionInterpolatedStringHandler(int literalLength, int formattedCount, bool condition, out bool shouldAppend) -> void
+static Louis.Diagnostics.Param.Check<T>(T value, string! name = "") -> Louis.Diagnostics.Param<T>
+static Louis.Diagnostics.Param.CheckNotNull<T>(T? value, string! name = "") -> Louis.Diagnostics.Param<T>
+static Louis.Diagnostics.Param.NotEmpty(System.ReadOnlySpan<char> value, string! name = "") -> System.ReadOnlySpan<char>
+static Louis.Diagnostics.Param.NotNull<T>(T? value, string! name = "") -> T
+static Louis.Diagnostics.Param.NotNullOrEmpty(string? value, string! name = "") -> string!
+static Louis.Diagnostics.Param.NotNullOrWhiteSpace(string? value, string! name = "") -> string!
+static Louis.Diagnostics.Param.NotWhiteSpace(System.ReadOnlySpan<char> value, string! name = "") -> System.ReadOnlySpan<char>
 static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, System.Collections.Generic.IEqualityComparer<TValue>! comparer, TValue value, System.Action<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
 static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, TValue value, System.Action<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
 static Louis.IO.TextFileUtility.ReadAllText(string! path, System.Text.Encoding? fallbackEncoding = null) -> Louis.IO.TextFileContent!
