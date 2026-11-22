@@ -37,6 +37,62 @@ internal sealed class ParamStackTraceTests
         await Assert.That(stackTrace).DoesNotContain("ParamThrow");
         await Assert.That(stackTrace).DoesNotContain("ParamExtensions");
     }
+
+    [Test]
+    public async Task FailedReadOnlySpanCheck_HidesCheckAndThrowMethodFromStackTrace()
+    {
+        // No optimization, so that the JIT compiler does not inline the chain check, and the check has a frame of its own.
+        [MethodImpl(MethodImplOptions.NoOptimization)]
+        static void Act()
+        {
+            ReadOnlySpan<int> items = [];
+            Param.Check(items).NotEmpty();
+        }
+
+        var exception = Assert.Throws<ArgumentException>(Act);
+
+        var stackTrace = await Assert.That(exception.StackTrace).IsNotNull();
+        await Assert.That(stackTrace).DoesNotContain("ParamThrow");
+        await Assert.That(stackTrace).DoesNotContain("ReadOnlySpanParamExtensions");
+    }
+
+    [Test]
+    public async Task FailedSpanCheck_HidesCheckAndThrowMethodFromStackTrace()
+    {
+        // No optimization, so that the JIT compiler does not inline the chain check, and the check has a frame of its own.
+        [MethodImpl(MethodImplOptions.NoOptimization)]
+        static void Act()
+        {
+            Span<int> items = [];
+            Param.Check(items).NotEmpty();
+        }
+
+        var exception = Assert.Throws<ArgumentException>(Act);
+
+        var stackTrace = await Assert.That(exception.StackTrace).IsNotNull();
+        await Assert.That(stackTrace).DoesNotContain("ParamThrow");
+        await Assert.That(stackTrace).DoesNotContain("SpanParamExtensions");
+    }
+
+#if NET9_0_OR_GREATER
+    [Test]
+    public async Task FailedRefParamCheck_HidesCheckAndThrowMethodFromStackTrace()
+    {
+        // No optimization, so that the JIT compiler does not inline the chain check, and the check has a frame of its own.
+        [MethodImpl(MethodImplOptions.NoOptimization)]
+        static void Act()
+        {
+            ReadOnlySpan<int> items = [];
+            Param.CheckRef(items).Checked(static span => !span.IsEmpty);
+        }
+
+        var exception = Assert.Throws<ArgumentException>(Act);
+
+        var stackTrace = await Assert.That(exception.StackTrace).IsNotNull();
+        await Assert.That(stackTrace).DoesNotContain("ParamThrow");
+        await Assert.That(stackTrace).DoesNotContain("RefParamExtensions");
+    }
+#endif
 }
 
 #endif
