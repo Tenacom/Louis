@@ -3,8 +3,8 @@ title: L.o.U.I.S.
 description: L.o.U.I.S. is a collection of types commonly needed in the development of .NET libraries and applications.
 ---
 
-L.o.U.I.S. (Lots of Useful and Interesting Stuff) is a collection of types commonly needed in the development of .NET libraries and applications.
-It is pronounced _LOO-iss_, like the name Louis.
+L.o.U.I.S. is a collection of types commonly needed in the development of .NET libraries and applications.
+The name stands for "Lots of Useful and Interesting Stuff", and is pronounced _LOO-iss_, like the name Louis.
 
 The API reference describes every type of the packages listed below.
 A member that only some target frameworks have shows its target frameworks.
