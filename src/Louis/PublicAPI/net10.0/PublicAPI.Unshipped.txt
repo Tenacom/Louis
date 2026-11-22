@@ -99,7 +99,9 @@ Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<float>).Clos
 Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<float>).NotCloseTo(float target, float delta, string? message = null) -> Louis.Diagnostics.Param<float>
 Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<int>)
 Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<int>).CloseTo(int target, uint delta, string? message = null) -> Louis.Diagnostics.Param<int>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<int>).InRangeFor(string! text, string? message = null) -> Louis.Diagnostics.Param<int>
 Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<int>).NotCloseTo(int target, uint delta, string? message = null) -> Louis.Diagnostics.Param<int>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<int>).NotInRangeFor(string! text, string? message = null) -> Louis.Diagnostics.Param<int>
 Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<long>)
 Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<long>).CloseTo(long target, ulong delta, string? message = null) -> Louis.Diagnostics.Param<long>
 Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<long>).NotCloseTo(long target, ulong delta, string? message = null) -> Louis.Diagnostics.Param<long>
@@ -111,7 +113,38 @@ Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<object!>).As
 Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<object!>).NotAssignableTo<TTarget>(string? message = null) -> Louis.Diagnostics.Param<object!>
 Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<object!>).NotOfType<TTarget>(string? message = null) -> Louis.Diagnostics.Param<object!>
 Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<object!>).OfType<TTarget>(string? message = null) -> Louis.Diagnostics.Param<TTarget>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<string!>)
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<string!>).Empty(string? message = null) -> Louis.Diagnostics.Param<string!>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<string!>).HasSizeEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<string!>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<string!>).HasSizeEqualTo(string! other, string? message = null) -> Louis.Diagnostics.Param<string!>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<string!>).HasSizeGreaterThan(int size, string? message = null) -> Louis.Diagnostics.Param<string!>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<string!>).HasSizeGreaterThanOrEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<string!>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<string!>).HasSizeLessThan(int size, string? message = null) -> Louis.Diagnostics.Param<string!>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<string!>).HasSizeLessThanOrEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<string!>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<string!>).HasSizeLessThanOrEqualTo(string! other, string? message = null) -> Louis.Diagnostics.Param<string!>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<string!>).HasSizeNotEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<string!>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<string!>).NotEmpty(string? message = null) -> Louis.Diagnostics.Param<string!>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<string!>).NotWhiteSpace(string? message = null) -> Louis.Diagnostics.Param<string!>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<string!>).WhiteSpace(string? message = null) -> Louis.Diagnostics.Param<string!>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<string?>)
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<string?>).NullOrEmpty(string? message = null) -> Louis.Diagnostics.Param<string?>
+Louis.Diagnostics.ParamExtensions.extension(Louis.Diagnostics.Param<string?>).NullOrWhiteSpace(string? message = null) -> Louis.Diagnostics.Param<string?>
 Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T!>)
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T!>).AtEndPosition(string? message = null) -> Louis.Diagnostics.Param<T!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T!>).AtStartPosition(string? message = null) -> Louis.Diagnostics.Param<T!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T!>).Canceled(string? message = null) -> Louis.Diagnostics.Param<T!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T!>).CanRead(string? message = null) -> Louis.Diagnostics.Param<T!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T!>).CanSeek(string? message = null) -> Louis.Diagnostics.Param<T!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T!>).CanWrite(string? message = null) -> Louis.Diagnostics.Param<T!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T!>).Completed(string? message = null) -> Louis.Diagnostics.Param<T!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T!>).CompletedSuccessfully(string? message = null) -> Louis.Diagnostics.Param<T!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T!>).Faulted(string? message = null) -> Louis.Diagnostics.Param<T!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T!>).HasStatusEqualTo(System.Threading.Tasks.TaskStatus status, string? message = null) -> Louis.Diagnostics.Param<T!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T!>).HasStatusNotEqualTo(System.Threading.Tasks.TaskStatus status, string? message = null) -> Louis.Diagnostics.Param<T!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T!>).NotCanceled(string? message = null) -> Louis.Diagnostics.Param<T!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T!>).NotCompleted(string? message = null) -> Louis.Diagnostics.Param<T!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T!>).NotCompletedSuccessfully(string? message = null) -> Louis.Diagnostics.Param<T!>
+Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T!>).NotFaulted(string? message = null) -> Louis.Diagnostics.Param<T!>
 Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T!>).ReferenceEqualTo(T! target, string? message = null) -> Louis.Diagnostics.Param<T!>
 Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T!>).ReferenceNotEqualTo(T! target, string? message = null) -> Louis.Diagnostics.Param<T!>
 Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T>)
@@ -324,45 +357,76 @@ static Louis.Diagnostics.Param.NotNullOrWhiteSpace(string? value, string! name =
 static Louis.Diagnostics.Param.NotWhiteSpace(System.ReadOnlySpan<char> value, string! name = "") -> System.ReadOnlySpan<char>
 static Louis.Diagnostics.ParamExtensions.AssignableTo<T>(this Louis.Diagnostics.Param<T> this, System.Type! type, string? message = null) -> Louis.Diagnostics.Param<T>
 static Louis.Diagnostics.ParamExtensions.AssignableTo<TTarget>(this Louis.Diagnostics.Param<object!> this, string? message = null) -> Louis.Diagnostics.Param<TTarget>
+static Louis.Diagnostics.ParamExtensions.AtEndPosition<T>(this Louis.Diagnostics.Param<T!> this, string? message = null) -> Louis.Diagnostics.Param<T!>
+static Louis.Diagnostics.ParamExtensions.AtStartPosition<T>(this Louis.Diagnostics.Param<T!> this, string? message = null) -> Louis.Diagnostics.Param<T!>
 static Louis.Diagnostics.ParamExtensions.Between<T>(this Louis.Diagnostics.Param<T> this, T minimum, T maximum, string? message = null) -> Louis.Diagnostics.Param<T>
 static Louis.Diagnostics.ParamExtensions.BetweenOrEqualTo<T>(this Louis.Diagnostics.Param<T> this, T minimum, T maximum, string? message = null) -> Louis.Diagnostics.Param<T>
 static Louis.Diagnostics.ParamExtensions.BitwiseEqualTo<T>(this Louis.Diagnostics.Param<T> this, T target, string? message = null) -> Louis.Diagnostics.Param<T>
+static Louis.Diagnostics.ParamExtensions.Canceled<T>(this Louis.Diagnostics.Param<T!> this, string? message = null) -> Louis.Diagnostics.Param<T!>
+static Louis.Diagnostics.ParamExtensions.CanRead<T>(this Louis.Diagnostics.Param<T!> this, string? message = null) -> Louis.Diagnostics.Param<T!>
+static Louis.Diagnostics.ParamExtensions.CanSeek<T>(this Louis.Diagnostics.Param<T!> this, string? message = null) -> Louis.Diagnostics.Param<T!>
+static Louis.Diagnostics.ParamExtensions.CanWrite<T>(this Louis.Diagnostics.Param<T!> this, string? message = null) -> Louis.Diagnostics.Param<T!>
 static Louis.Diagnostics.ParamExtensions.Checked<T>(this Louis.Diagnostics.Param<T> this, System.Func<T, bool>! predicate, string? message = null) -> Louis.Diagnostics.Param<T>
 static Louis.Diagnostics.ParamExtensions.CloseTo(this Louis.Diagnostics.Param<double> this, double target, double delta, string? message = null) -> Louis.Diagnostics.Param<double>
 static Louis.Diagnostics.ParamExtensions.CloseTo(this Louis.Diagnostics.Param<float> this, float target, float delta, string? message = null) -> Louis.Diagnostics.Param<float>
 static Louis.Diagnostics.ParamExtensions.CloseTo(this Louis.Diagnostics.Param<int> this, int target, uint delta, string? message = null) -> Louis.Diagnostics.Param<int>
 static Louis.Diagnostics.ParamExtensions.CloseTo(this Louis.Diagnostics.Param<long> this, long target, ulong delta, string? message = null) -> Louis.Diagnostics.Param<long>
 static Louis.Diagnostics.ParamExtensions.CloseTo(this Louis.Diagnostics.Param<nint> this, nint target, nuint delta, string? message = null) -> Louis.Diagnostics.Param<nint>
+static Louis.Diagnostics.ParamExtensions.Completed<T>(this Louis.Diagnostics.Param<T!> this, string? message = null) -> Louis.Diagnostics.Param<T!>
+static Louis.Diagnostics.ParamExtensions.CompletedSuccessfully<T>(this Louis.Diagnostics.Param<T!> this, string? message = null) -> Louis.Diagnostics.Param<T!>
 static Louis.Diagnostics.ParamExtensions.Default<T>(this Louis.Diagnostics.Param<T> this, string? message = null) -> Louis.Diagnostics.Param<T>
+static Louis.Diagnostics.ParamExtensions.Empty(this Louis.Diagnostics.Param<string!> this, string? message = null) -> Louis.Diagnostics.Param<string!>
 static Louis.Diagnostics.ParamExtensions.EqualTo<T>(this Louis.Diagnostics.Param<T> this, T target, string? message = null) -> Louis.Diagnostics.Param<T>
 static Louis.Diagnostics.ParamExtensions.False(this Louis.Diagnostics.Param<bool> this, ref Louis.Text.TrueConditionInterpolatedStringHandler message) -> Louis.Diagnostics.Param<bool>
 static Louis.Diagnostics.ParamExtensions.False(this Louis.Diagnostics.Param<bool> this, string? message = null) -> Louis.Diagnostics.Param<bool>
+static Louis.Diagnostics.ParamExtensions.Faulted<T>(this Louis.Diagnostics.Param<T!> this, string? message = null) -> Louis.Diagnostics.Param<T!>
 static Louis.Diagnostics.ParamExtensions.GreaterThan<T>(this Louis.Diagnostics.Param<T> this, T threshold, string? message = null) -> Louis.Diagnostics.Param<T>
 static Louis.Diagnostics.ParamExtensions.GreaterThanOrEqualTo<T>(this Louis.Diagnostics.Param<T> this, T threshold, string? message = null) -> Louis.Diagnostics.Param<T>
+static Louis.Diagnostics.ParamExtensions.HasSizeEqualTo(this Louis.Diagnostics.Param<string!> this, int size, string? message = null) -> Louis.Diagnostics.Param<string!>
+static Louis.Diagnostics.ParamExtensions.HasSizeEqualTo(this Louis.Diagnostics.Param<string!> this, string! other, string? message = null) -> Louis.Diagnostics.Param<string!>
+static Louis.Diagnostics.ParamExtensions.HasSizeGreaterThan(this Louis.Diagnostics.Param<string!> this, int size, string? message = null) -> Louis.Diagnostics.Param<string!>
+static Louis.Diagnostics.ParamExtensions.HasSizeGreaterThanOrEqualTo(this Louis.Diagnostics.Param<string!> this, int size, string? message = null) -> Louis.Diagnostics.Param<string!>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThan(this Louis.Diagnostics.Param<string!> this, int size, string? message = null) -> Louis.Diagnostics.Param<string!>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThanOrEqualTo(this Louis.Diagnostics.Param<string!> this, int size, string? message = null) -> Louis.Diagnostics.Param<string!>
+static Louis.Diagnostics.ParamExtensions.HasSizeLessThanOrEqualTo(this Louis.Diagnostics.Param<string!> this, string! other, string? message = null) -> Louis.Diagnostics.Param<string!>
+static Louis.Diagnostics.ParamExtensions.HasSizeNotEqualTo(this Louis.Diagnostics.Param<string!> this, int size, string? message = null) -> Louis.Diagnostics.Param<string!>
+static Louis.Diagnostics.ParamExtensions.HasStatusEqualTo<T>(this Louis.Diagnostics.Param<T!> this, System.Threading.Tasks.TaskStatus status, string? message = null) -> Louis.Diagnostics.Param<T!>
+static Louis.Diagnostics.ParamExtensions.HasStatusNotEqualTo<T>(this Louis.Diagnostics.Param<T!> this, System.Threading.Tasks.TaskStatus status, string? message = null) -> Louis.Diagnostics.Param<T!>
 static Louis.Diagnostics.ParamExtensions.InRange<T>(this Louis.Diagnostics.Param<T> this, T minimum, T maximum, string? message = null) -> Louis.Diagnostics.Param<T>
+static Louis.Diagnostics.ParamExtensions.InRangeFor(this Louis.Diagnostics.Param<int> this, string! text, string? message = null) -> Louis.Diagnostics.Param<int>
 static Louis.Diagnostics.ParamExtensions.LessThan<T>(this Louis.Diagnostics.Param<T> this, T threshold, string? message = null) -> Louis.Diagnostics.Param<T>
 static Louis.Diagnostics.ParamExtensions.LessThanOrEqualTo<T>(this Louis.Diagnostics.Param<T> this, T threshold, string? message = null) -> Louis.Diagnostics.Param<T>
 static Louis.Diagnostics.ParamExtensions.NotAssignableTo<T>(this Louis.Diagnostics.Param<T> this, System.Type! type, string? message = null) -> Louis.Diagnostics.Param<T>
 static Louis.Diagnostics.ParamExtensions.NotAssignableTo<TTarget>(this Louis.Diagnostics.Param<object!> this, string? message = null) -> Louis.Diagnostics.Param<object!>
 static Louis.Diagnostics.ParamExtensions.NotBetween<T>(this Louis.Diagnostics.Param<T> this, T minimum, T maximum, string? message = null) -> Louis.Diagnostics.Param<T>
 static Louis.Diagnostics.ParamExtensions.NotBetweenOrEqualTo<T>(this Louis.Diagnostics.Param<T> this, T minimum, T maximum, string? message = null) -> Louis.Diagnostics.Param<T>
+static Louis.Diagnostics.ParamExtensions.NotCanceled<T>(this Louis.Diagnostics.Param<T!> this, string? message = null) -> Louis.Diagnostics.Param<T!>
 static Louis.Diagnostics.ParamExtensions.NotCloseTo(this Louis.Diagnostics.Param<double> this, double target, double delta, string? message = null) -> Louis.Diagnostics.Param<double>
 static Louis.Diagnostics.ParamExtensions.NotCloseTo(this Louis.Diagnostics.Param<float> this, float target, float delta, string? message = null) -> Louis.Diagnostics.Param<float>
 static Louis.Diagnostics.ParamExtensions.NotCloseTo(this Louis.Diagnostics.Param<int> this, int target, uint delta, string? message = null) -> Louis.Diagnostics.Param<int>
 static Louis.Diagnostics.ParamExtensions.NotCloseTo(this Louis.Diagnostics.Param<long> this, long target, ulong delta, string? message = null) -> Louis.Diagnostics.Param<long>
 static Louis.Diagnostics.ParamExtensions.NotCloseTo(this Louis.Diagnostics.Param<nint> this, nint target, nuint delta, string? message = null) -> Louis.Diagnostics.Param<nint>
+static Louis.Diagnostics.ParamExtensions.NotCompleted<T>(this Louis.Diagnostics.Param<T!> this, string? message = null) -> Louis.Diagnostics.Param<T!>
+static Louis.Diagnostics.ParamExtensions.NotCompletedSuccessfully<T>(this Louis.Diagnostics.Param<T!> this, string? message = null) -> Louis.Diagnostics.Param<T!>
 static Louis.Diagnostics.ParamExtensions.NotDefault<T>(this Louis.Diagnostics.Param<T> this, string? message = null) -> Louis.Diagnostics.Param<T>
+static Louis.Diagnostics.ParamExtensions.NotEmpty(this Louis.Diagnostics.Param<string!> this, string? message = null) -> Louis.Diagnostics.Param<string!>
 static Louis.Diagnostics.ParamExtensions.NotEqualTo<T>(this Louis.Diagnostics.Param<T> this, T target, string? message = null) -> Louis.Diagnostics.Param<T>
+static Louis.Diagnostics.ParamExtensions.NotFaulted<T>(this Louis.Diagnostics.Param<T!> this, string? message = null) -> Louis.Diagnostics.Param<T!>
 static Louis.Diagnostics.ParamExtensions.NotInRange<T>(this Louis.Diagnostics.Param<T> this, T minimum, T maximum, string? message = null) -> Louis.Diagnostics.Param<T>
+static Louis.Diagnostics.ParamExtensions.NotInRangeFor(this Louis.Diagnostics.Param<int> this, string! text, string? message = null) -> Louis.Diagnostics.Param<int>
 static Louis.Diagnostics.ParamExtensions.NotOfType<T>(this Louis.Diagnostics.Param<T> this, System.Type! type, string? message = null) -> Louis.Diagnostics.Param<T>
 static Louis.Diagnostics.ParamExtensions.NotOfType<TTarget>(this Louis.Diagnostics.Param<object!> this, string? message = null) -> Louis.Diagnostics.Param<object!>
+static Louis.Diagnostics.ParamExtensions.NotWhiteSpace(this Louis.Diagnostics.Param<string!> this, string? message = null) -> Louis.Diagnostics.Param<string!>
 static Louis.Diagnostics.ParamExtensions.Null<T>(this Louis.Diagnostics.Param<T> this, string? message = null) -> Louis.Diagnostics.Param<T>
+static Louis.Diagnostics.ParamExtensions.NullOrEmpty(this Louis.Diagnostics.Param<string?> this, string? message = null) -> Louis.Diagnostics.Param<string?>
+static Louis.Diagnostics.ParamExtensions.NullOrWhiteSpace(this Louis.Diagnostics.Param<string?> this, string? message = null) -> Louis.Diagnostics.Param<string?>
 static Louis.Diagnostics.ParamExtensions.OfType<T>(this Louis.Diagnostics.Param<T> this, System.Type! type, string? message = null) -> Louis.Diagnostics.Param<T>
 static Louis.Diagnostics.ParamExtensions.OfType<TTarget>(this Louis.Diagnostics.Param<object!> this, string? message = null) -> Louis.Diagnostics.Param<TTarget>
 static Louis.Diagnostics.ParamExtensions.ReferenceEqualTo<T>(this Louis.Diagnostics.Param<T!> this, T! target, string? message = null) -> Louis.Diagnostics.Param<T!>
 static Louis.Diagnostics.ParamExtensions.ReferenceNotEqualTo<T>(this Louis.Diagnostics.Param<T!> this, T! target, string? message = null) -> Louis.Diagnostics.Param<T!>
 static Louis.Diagnostics.ParamExtensions.True(this Louis.Diagnostics.Param<bool> this, ref Louis.Text.FalseConditionInterpolatedStringHandler message) -> Louis.Diagnostics.Param<bool>
 static Louis.Diagnostics.ParamExtensions.True(this Louis.Diagnostics.Param<bool> this, string? message = null) -> Louis.Diagnostics.Param<bool>
+static Louis.Diagnostics.ParamExtensions.WhiteSpace(this Louis.Diagnostics.Param<string!> this, string? message = null) -> Louis.Diagnostics.Param<string!>
 static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, System.Collections.Generic.IEqualityComparer<TValue>! comparer, TValue value, System.Action<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
 static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, TValue value, System.Action<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
 static Louis.IO.TextFileUtility.ReadAllText(string! path, System.Text.Encoding? fallbackEncoding = null) -> Louis.IO.TextFileContent!

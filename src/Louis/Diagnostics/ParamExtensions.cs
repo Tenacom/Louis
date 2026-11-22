@@ -18,6 +18,8 @@ namespace Louis.Diagnostics;
 /// that <see cref="string.Format(IFormatProvider, string, object[])"/> processes only if the check fails.
 /// The format item <c>{0}</c> is the name of the parameter, and <c>{1}</c> is its value.
 /// The format items from <c>{2}</c> on are the arguments of the check, in their order.
+/// A check that tests a property of the value, such as the length of a string, adds that property as the last format item.
+/// The description of the <c>message</c> parameter of each check lists its format items.
 /// <see cref="ExceptionHelper.FormatObject"/> converts each value to text.
 /// A message that is not a valid composite format string is used as it is.</para>
 /// </remarks>
