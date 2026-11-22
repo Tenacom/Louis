@@ -118,32 +118,30 @@ The reader then meets the high-level method first and reads down into its callee
 
 ## Extension blocks
 
-Always use this template, adjusting names and access modifier as needed:
+Declare every extension member in an extension block. "Classic extension methods" below holds the one exception.
 
-```csharp
-/// <summary>
-/// Provides extension methods for `MyClass` instances.
-/// </summary>
-public static class MyClassExtensions
-{
-    extension(MyClass @this)
-    {
-        // ...
-    }
-}
-```
-
-The receiver parameter must be named `@this`.
-
-Add `partial` only when the class is split across files, as described in "Partial classes" above and "Extension classes" below. ReSharper's `PartialTypeWithSinglePart` flags a partial class with a single part, and every warning is an error here.
-
-Do not mix extension blocks with regular static methods in the same class. "Partial classes" above and "Extension classes" below say how to split an extension class into files.
+- Name the receiver parameter `@this`.
+- A block that declares static members alone names no receiver, as in `extension(DateTime)`.
+- The XML comment of the receiver goes on the block, as `<param name="this">`. So does the `<typeparam>` comment of each type parameter of the block. The members refer to them with `<paramref name="this"/>` and `<typeparamref>`.
+- When a class has several blocks for one receiver, every block carries these comments. The compiler reports nothing when a block has none.
+- A member calls another extension member of its class through the receiver, as in `@this.GetEndOfWeek(culture)`. It does not call the static method the compiler generates, as in `GetEndOfWeek(@this, culture)`.
+- A file that holds extension blocks holds no other member of the class. "Partial classes" above and "Extension classes" below say how to split an extension class into files.
+- Add `partial` only when the class is split across files. ReSharper's `PartialTypeWithSinglePart` flags a partial class with a single part, and every warning is an error here.
 
 Do not infer the convention from existing files. This section is the convention.
 
-## Extension classes
+### Classic extension methods
 
-Prefer one extension block per class. Use multiple blocks only when they provide related functionality and share private helpers, and split them into separate files as the rules below describe.
+A classic extension method is a static method whose first parameter has the `this` modifier. Write one only when a block cannot hold the member, or when a tool fails on the block. A documentation generator that gives two block members the same anchor is an example.
+
+- Classic extension methods go in a file of their own, with no block.
+- The file says why in a comment above its class declaration, after the XML comment when the declaration has one. Use this form, so that a search finds every such file:
+
+```csharp
+// Classic extension methods: <reason>.
+```
+
+## Extension classes
 
 ### Classes that extend a single type
 
