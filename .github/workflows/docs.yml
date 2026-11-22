@@ -90,6 +90,7 @@ jobs:
     # so the path of the packages is absolute.
     # A release that predates docgen.json gets the docgen.json and the pages of the checkout of this run.
     # Such a release may lack a package that the file names, so its build documents every package of the release.
+    # It may also lack a type that a page links, so its build reports a cref: link to no API as a warning, with --allow-invalid-cref.
     # A collection on the command line replaces the whole collection of docgen.json.
     # Each build therefore passes the header links of docgen.json, followed by the link to the other part.
     # jq reads docgen.json, so the file holds no comment.
@@ -103,6 +104,7 @@ jobs:
         build_part() {
           local sources=".buildvana-temp/docgen-sources/$1"
           local packages
+          local -a cref_options=()
           if [[ -f "$sources/docgen.json" ]]; then
             packages="$(PACKAGES_PATH="$GITHUB_WORKSPACE/.buildvana-temp/docgen-packages/$1" \
               jq -c '(.packages // []) | map(. + {path: env.PACKAGES_PATH})' "$sources/docgen.json")"
@@ -110,6 +112,7 @@ jobs:
             sources=.
             packages="$(PACKAGES_PATH="$GITHUB_WORKSPACE/.buildvana-temp/docgen-packages/$1" \
               jq -nc '[{path: env.PACKAGES_PATH}]')"
+            cref_options=(--allow-invalid-cref)
           fi
 
           local header_links
@@ -120,7 +123,8 @@ jobs:
             --packages "$packages" \
             --output ".buildvana-temp/docgen-site${2:+/$2}" \
             --base-path "$BASE_PATH/${2:+$2/}" \
-            --site-header-links "$header_links"
+            --site-header-links "$header_links" \
+            "${cref_options[@]}"
         }
 
         build_part stable '' 'Preview release' preview
