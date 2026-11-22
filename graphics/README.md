@@ -20,7 +20,7 @@ All the graphic elements listed below, except where otherwise specified, are Cop
 
 ### `SquareLogo.svg`
 
-Reference logo, basic square logo. Used as NuGet package icon, favicon for web-based documentation, and anywhere a square-shaped logo is needed or preferred.
+Reference logo, basic square logo. Used as NuGet package icon, favicon and logo for web-based documentation, and anywhere a square-shaped logo is needed or preferred.
 
 This is a modified version of [Happy](../THIRD-PARTY-GRAPHICS.md#happy). Modified by [@rdeago](https://github.com/rdeago).
 
@@ -43,7 +43,7 @@ Related files:
 
 ### `SocialCard.svg`
 
-Social card for GitHub project.
+Social card for the GitHub repository and the documentation site.
 
 Uses the following materials: [SquareLogo.svg](#squarelogosvg); [Repo](../THIRD-PARTY-GRAPHICS.md#repo); [Pragati Narrow](../THIRD-PARTY-GRAPHICS.md#pragati-narrow); [Courier Prime](../THIRD-PARTY-GRAPHICS.md#courier-prime).
 
