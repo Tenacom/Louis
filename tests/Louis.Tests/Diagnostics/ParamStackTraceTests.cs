@@ -6,7 +6,7 @@
 using System.Runtime.CompilerServices;
 using Louis.Diagnostics;
 
-// Param, and the class that throws, have StackTraceHiddenAttribute in every build of Louis.
+// Param, ParamExtensions, and the class that throws, have StackTraceHiddenAttribute in every build of Louis.
 // The runtime honors the attribute in the builds for .NET 6 and later alone.
 internal sealed class ParamStackTraceTests
 {
@@ -22,6 +22,20 @@ internal sealed class ParamStackTraceTests
         var stackTrace = await Assert.That(exception.StackTrace).IsNotNull();
         await Assert.That(stackTrace).DoesNotContain("ParamThrow");
         await Assert.That(stackTrace).DoesNotContain("Param.NotNull");
+    }
+
+    [Test]
+    public async Task FailedChainCheck_HidesCheckAndThrowMethodFromStackTrace()
+    {
+        // No optimization, so that the JIT compiler does not inline the chain check, and the check has a frame of its own.
+        [MethodImpl(MethodImplOptions.NoOptimization)]
+        static void Act(int number) => Param.Check(number).GreaterThan(0);
+
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => Act(0));
+
+        var stackTrace = await Assert.That(exception.StackTrace).IsNotNull();
+        await Assert.That(stackTrace).DoesNotContain("ParamThrow");
+        await Assert.That(stackTrace).DoesNotContain("ParamExtensions");
     }
 }
 

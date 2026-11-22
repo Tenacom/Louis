@@ -4,6 +4,7 @@
 #if NET6_0_OR_GREATER
 
 using System.Runtime.CompilerServices;
+using Louis.Diagnostics;
 using Louis.Text;
 
 internal sealed class TrueConditionInterpolatedStringHandlerTests
@@ -39,6 +40,24 @@ internal sealed class TrueConditionInterpolatedStringHandlerTests
 
         _ = FormatIf(false, $"{Next()}");
 
+        await Assert.That(calls).IsEqualTo(0);
+    }
+
+    [Test]
+    public async Task Constructor_WithParamOfTrue_EnablesFormatting()
+    {
+        await Assert.That(FormatIf(Param.Check(true), $"a{1}b")).IsEqualTo("a1b");
+    }
+
+    [Test]
+    public async Task Constructor_WithParamOfFalse_SkipsHoles()
+    {
+        var calls = 0;
+        int Next() => ++calls;
+
+        var result = FormatIf(Param.Check(false), $"{Next()}");
+
+        await Assert.That(result).IsEqualTo(string.Empty);
         await Assert.That(calls).IsEqualTo(0);
     }
 
@@ -117,6 +136,12 @@ internal sealed class TrueConditionInterpolatedStringHandlerTests
     private static string FormatIf(
         bool condition,
         [InterpolatedStringHandlerArgument(nameof(condition))] ref TrueConditionInterpolatedStringHandler message)
+        => message.ToStringAndClear();
+
+    // ReSharper disable once EntityNameCapturedOnly.Local // InterpolatedStringHandlerArgument passes param to the handler
+    private static string FormatIf(
+        Param<bool> param,
+        [InterpolatedStringHandlerArgument(nameof(param))] ref TrueConditionInterpolatedStringHandler message)
         => message.ToStringAndClear();
 
     // ReSharper disable once EntityNameCapturedOnly.Local // InterpolatedStringHandlerArgument passes condition to the handler

@@ -4,6 +4,7 @@
 #if NET6_0_OR_GREATER
 
 using System.Runtime.CompilerServices;
+using Louis.Diagnostics;
 using Louis.Text;
 
 internal sealed class FalseConditionInterpolatedStringHandlerTests
@@ -39,6 +40,24 @@ internal sealed class FalseConditionInterpolatedStringHandlerTests
 
         _ = FormatUnless(true, $"{Next()}");
 
+        await Assert.That(calls).IsEqualTo(0);
+    }
+
+    [Test]
+    public async Task Constructor_WithParamOfFalse_EnablesFormatting()
+    {
+        await Assert.That(FormatUnless(Param.Check(false), $"a{1}b")).IsEqualTo("a1b");
+    }
+
+    [Test]
+    public async Task Constructor_WithParamOfTrue_SkipsHoles()
+    {
+        var calls = 0;
+        int Next() => ++calls;
+
+        var result = FormatUnless(Param.Check(true), $"{Next()}");
+
+        await Assert.That(result).IsEqualTo(string.Empty);
         await Assert.That(calls).IsEqualTo(0);
     }
 
@@ -117,6 +136,12 @@ internal sealed class FalseConditionInterpolatedStringHandlerTests
     private static string FormatUnless(
         bool condition,
         [InterpolatedStringHandlerArgument(nameof(condition))] ref FalseConditionInterpolatedStringHandler message)
+        => message.ToStringAndClear();
+
+    // ReSharper disable once EntityNameCapturedOnly.Local // InterpolatedStringHandlerArgument passes param to the handler
+    private static string FormatUnless(
+        Param<bool> param,
+        [InterpolatedStringHandlerArgument(nameof(param))] ref FalseConditionInterpolatedStringHandler message)
         => message.ToStringAndClear();
 
     // ReSharper disable once EntityNameCapturedOnly.Local // InterpolatedStringHandlerArgument passes condition to the handler

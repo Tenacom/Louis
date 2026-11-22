@@ -6,6 +6,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Louis.Diagnostics;
 
 namespace Louis.Text;
 
@@ -66,6 +67,28 @@ public struct TrueConditionInterpolatedStringHandler
             _handler = new(literalLength, formattedCount, builder);
             _builder = builder;
         }
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="TrueConditionInterpolatedStringHandler"/> struct,
+    /// with the value of a Boolean parameter as the condition.
+    /// </summary>
+    /// <param name="literalLength">The number of constant characters outside of interpolation expressions
+    /// in the interpolated string.</param>
+    /// <param name="formattedCount">The number of interpolation expressions in the interpolated string.</param>
+    /// <param name="param">The <see cref="Param{T}"/> whose value determines whether formatting will actually take place.</param>
+    /// <param name="shouldAppend">A value indicating whether formatting should proceed.</param>
+    /// <remarks>
+    /// <para>This constructor is only intended to be called by compiler-generated code.
+    /// As such, it doesn't perform argument validation.</para>
+    /// </remarks>
+    public TrueConditionInterpolatedStringHandler(
+        int literalLength,
+        int formattedCount,
+        Param<bool> param,
+        out bool shouldAppend)
+        : this(literalLength, formattedCount, param.Value, out shouldAppend)
+    {
     }
 
     /// <summary>
