@@ -19,6 +19,11 @@
     "root": "docs",
     "editUrl": "https://github.com/Tenacom/Louis/edit/main/docs/{path}"
   },
+  "packages": [
+    { "id": "Louis", "version": "*-*", "path": "artifacts/Release" },
+    { "id": "Louis.Hosting", "version": "*-*", "path": "artifacts/Release" },
+    { "id": "Louis.Testing", "version": "*-*", "path": "artifacts/Release" }
+  ],
   "references": [
     { "id": "Microsoft.NETCore.App.Ref", "version": "11.0.0" }
   ]
