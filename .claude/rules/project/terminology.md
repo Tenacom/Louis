@@ -19,6 +19,7 @@ One name per thing, in every kind of prose: documentation, chat, commit messages
 | A C# string literal that `ToLiteral` and `AppendLiteral` produce, in a `StringLiteralKind`    | string literal             | quoted string, escaped string            |
 | The replacement of a range of a text with another text, as a `TextEdit` describes it          | edit                       | text change, patch                       |
 | The bytes at the start of a text file that identify its encoding                              | byte order mark            | BOM, preamble                            |
+| A line that is empty, or holds white space alone, as `char.IsWhiteSpace` defines it           | blank line                 | white line, void line                    |
 | The run mode in which `ProcessRunner` redirects the standard streams of the child process     | capture mode               | captured mode, redirected mode           |
 | The run mode in which the child process shares the standard streams of the current process    | inherited mode             | inherit mode, pass-through mode          |
 | A `PublicAPI.Shipped.txt` or `PublicAPI.Unshipped.txt` file                                   | public API file            | API file                                 |
@@ -27,5 +28,8 @@ One name per thing, in every kind of prose: documentation, chat, commit messages
 | A test project that targets the frameworks its package runs on, such as `tests/Louis.Tests`   | main test project          | test project proper, full test project   |
 | A test project that compiles the files of a main test project against a `netstandard` build   | `netstandard` test project | flavor project, mirror project           |
 | The documentation of the public API, generated from the XML comments of the code              | API reference              | API documentation, API docs              |
-| The part of the API reference that describes the stable release with the highest version      | stable part                | stable site, release documentation       |
-| The part of the API reference that describes the highest release, stable or prerelease        | preview part               | preview site, prerelease documentation   |
+| The site that holds the API reference and the pages under `docs/`                             | documentation site         | docs site, website                       |
+| The page of the documentation site that `docs/index.md` holds                                 | home page                  | index, landing page                      |
+| The part of the documentation site that describes the stable release with the highest version | stable part                | stable site, release documentation       |
+| The part of the documentation site that describes the highest release, stable or prerelease   | preview part               | preview site, prerelease documentation   |
+| A documentation file in the register of `output-styles/informal-tech.md`                      | informal document          | non-technical documentation, article     |
