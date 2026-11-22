@@ -31,7 +31,9 @@ namespace Louis.Text;
 ///     // Write a message to the console only if condition is true.
 ///     // Usage example: ConsoleUtility.WriteLineIf(score > 100, $"Your score is {score}. That's awesome!");
 ///     // String interpolation will only take place if necessary.
-///     public static void WriteLineIf(bool condition, [InterpolatedStringHandlerArgument(nameof(condition))] ref TrueConditionInterpolatedStringHandler message)
+///     public static void WriteLineIf(
+///         bool condition,
+///         [InterpolatedStringHandlerArgument(nameof(condition))] ref TrueConditionInterpolatedStringHandler message)
 ///     {
 ///         if (condition)
 ///         {
@@ -50,7 +52,8 @@ public struct TrueConditionInterpolatedStringHandler
     /// <summary>
     /// Initializes a new instance of the <see cref="TrueConditionInterpolatedStringHandler"/> struct.
     /// </summary>
-    /// <param name="literalLength">The number of constant characters outside of interpolation expressions in the interpolated string.</param>
+    /// <param name="literalLength">The number of constant characters outside of interpolation expressions
+    /// in the interpolated string.</param>
     /// <param name="formattedCount">The number of interpolation expressions in the interpolated string.</param>
     /// <param name="condition">The condition that determines whether formatting will actually take place.</param>
     /// <param name="shouldAppend">A value indicating whether formatting should proceed.</param>
@@ -58,7 +61,11 @@ public struct TrueConditionInterpolatedStringHandler
     /// <para>This constructor is only intended to be called by compiler-generated code.
     /// As such, it doesn't perform argument validation.</para>
     /// </remarks>
-    public TrueConditionInterpolatedStringHandler(int literalLength, int formattedCount, bool condition, out bool shouldAppend)
+    public TrueConditionInterpolatedStringHandler(
+        int literalLength,
+        int formattedCount,
+        bool condition,
+        out bool shouldAppend)
     {
         shouldAppend = condition;
         if (shouldAppend)
@@ -120,24 +127,28 @@ public struct TrueConditionInterpolatedStringHandler
     public void AppendFormatted<T>(T value, int alignment) => _handler.AppendFormatted(value, alignment);
 
     /// <inheritdoc cref="StringBuilder.AppendInterpolatedStringHandler.AppendFormatted{T}(T, int, string?)"/>
-    public void AppendFormatted<T>(T value, int alignment, string? format) => _handler.AppendFormatted(value, alignment, format);
+    public void AppendFormatted<T>(T value, int alignment, string? format)
+        => _handler.AppendFormatted(value, alignment, format);
 
     /// <inheritdoc cref="StringBuilder.AppendInterpolatedStringHandler.AppendFormatted(ReadOnlySpan{char})"/>
     public void AppendFormatted(ReadOnlySpan<char> value) => _handler.AppendFormatted(value);
 
     /// <inheritdoc cref="StringBuilder.AppendInterpolatedStringHandler.AppendFormatted(ReadOnlySpan{char}, int, string?)"/>
     // ReSharper disable once MethodOverloadWithOptionalParameter // the compiler reaches it with named arguments, as in the BCL
-    public void AppendFormatted(ReadOnlySpan<char> value, int alignment = 0, string? format = null) => _handler.AppendFormatted(value, alignment, format);
+    public void AppendFormatted(ReadOnlySpan<char> value, int alignment = 0, string? format = null)
+        => _handler.AppendFormatted(value, alignment, format);
 
     /// <inheritdoc cref="StringBuilder.AppendInterpolatedStringHandler.AppendFormatted(string?)"/>
     public void AppendFormatted(string? value) => _handler.AppendFormatted(value);
 
     /// <inheritdoc cref="StringBuilder.AppendInterpolatedStringHandler.AppendFormatted(string?, int, string?)"/>
     // ReSharper disable once MethodOverloadWithOptionalParameter // the compiler reaches it with named arguments, as in the BCL
-    public void AppendFormatted(string? value, int alignment = 0, string? format = null) => _handler.AppendFormatted(value, alignment, format);
+    public void AppendFormatted(string? value, int alignment = 0, string? format = null)
+        => _handler.AppendFormatted(value, alignment, format);
 
     /// <inheritdoc cref="StringBuilder.AppendInterpolatedStringHandler.AppendFormatted(object?, int, string?)"/>
-    public void AppendFormatted(object? value, int alignment = 0, string? format = null) => _handler.AppendFormatted(value, alignment, format);
+    public void AppendFormatted(object? value, int alignment = 0, string? format = null)
+        => _handler.AppendFormatted(value, alignment, format);
 }
 
 #endif
