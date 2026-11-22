@@ -84,9 +84,12 @@ jobs:
         path: .buildvana-temp/docgen-sources/preview
     # The stable part is the site directory, and the preview part its preview subdirectory.
     # Neither build treats a warning as an error. ci.yml rejects a warning, and a release that predates that check may have some.
-    # A release that predates docgen.json gets the docgen.json and the pages of the checkout of this run.
+    # docgen.json names the packages of the API reference, and the directory where bv pack leaves them.
+    # Each build reads those packages from the assets of its release, so it passes them with the directory of the assets as their path.
     # The generator resolves a path of the command line against the directory of docgen.json, except the output path,
     # so the path of the packages is absolute.
+    # A release that predates docgen.json gets the docgen.json and the pages of the checkout of this run.
+    # Such a release may lack a package that the file names, so its build documents every package of the release.
     # A collection on the command line replaces the whole collection of docgen.json.
     # Each build therefore passes the header links of docgen.json, followed by the link to the other part.
     # jq reads docgen.json, so the file holds no comment.
@@ -99,8 +102,14 @@ jobs:
         # Arguments: the part, its subdirectory in the site, the text of the link to the other part, and the subdirectory of the other part.
         build_part() {
           local sources=".buildvana-temp/docgen-sources/$1"
-          if [[ ! -f "$sources/docgen.json" ]]; then
+          local packages
+          if [[ -f "$sources/docgen.json" ]]; then
+            packages="$(PACKAGES_PATH="$GITHUB_WORKSPACE/.buildvana-temp/docgen-packages/$1" \
+              jq -c '(.packages // []) | map(. + {path: env.PACKAGES_PATH})' "$sources/docgen.json")"
+          else
             sources=.
+            packages="$(PACKAGES_PATH="$GITHUB_WORKSPACE/.buildvana-temp/docgen-packages/$1" \
+              jq -nc '[{path: env.PACKAGES_PATH}]')"
           fi
 
           local header_links
@@ -108,7 +117,7 @@ jobs:
             jq -c '.site.headerLinks + [{text: env.OTHER_TEXT, url: env.OTHER_URL}]' "$sources/docgen.json")"
           dotnet Meziantou.DocumentationGenerator build \
             --config "$sources/docgen.json" \
-            --packages "[{\"path\":\"$GITHUB_WORKSPACE/.buildvana-temp/docgen-packages/$1\"}]" \
+            --packages "$packages" \
             --output ".buildvana-temp/docgen-site${2:+/$2}" \
             --base-path "$BASE_PATH/${2:+$2/}" \
             --site-header-links "$header_links"
