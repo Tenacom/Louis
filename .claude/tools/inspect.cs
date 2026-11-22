@@ -7,11 +7,12 @@
  * needs no build, so it runs whatever the build does. Inspection only runs if the build reported nothing,
  * because it analyzes the build output.
  *
- * With --gate, and when the home directory holds `docgen.json`, the generator of the API reference runs between
- * the build and the inspection, on the packages the build left in the artifacts directory. It writes the site to
- * `.buildvana-temp`, and every warning it reports is an error, such as a `cref` that names no member. The
- * generator is the local tool Meziantou.DocumentationGenerator, pinned in `dotnet-tools.json`. "API reference" in
- * `.claude/rules/common/documentation.md` describes the site.
+ * With --gate, and when the home directory holds `docgen.json`, the generator of the documentation site runs
+ * between the build and the inspection. `docgen.json` names the packages of the API reference, and the directory
+ * where the build left them. The generator writes the site to `.buildvana-temp`, and every warning it reports is an
+ * error, such as a `cref` that names no member. The generator is the local tool Meziantou.DocumentationGenerator,
+ * pinned in `dotnet-tools.json`. "Published documentation" in `.claude/rules/common/documentation.md` describes
+ * the site.
  *
  * Run from the repo root:
  *   `dotnet run .claude/tools/inspect.cs --gate`  pre-push gate: builds with `bv pack`, so that tests run and
@@ -46,10 +47,10 @@ using System.Text.RegularExpressions;
 
 const int TailLineCount = 40;
 
-// The configuration `bv` builds in. It names the directory of the packages, and the build inspectcode reads.
+// The configuration `bv` builds in, which is the build inspectcode reads.
 const string BuildConfiguration = "Release";
 
-// The configuration file of the generator of the API reference. A repository without the file has no site.
+// The configuration file of the generator of the documentation site. A repository without the file has no site.
 const string DocgenConfigFileName = "docgen.json";
 
 const string Usage = "Usage: dotnet run .claude/tools/inspect.cs [--gate | --all]";
@@ -218,20 +219,17 @@ if (!buildIsClean)
         : 2;
 }
 
-// The generator reads the packages, which only `bv pack` produces, so it runs in the gate alone. Its findings do
-// not stop the inspection: the gate reports everything it can in one run.
+// The generator reads the packages that `docgen.json` names, which only `bv pack` produces, so it runs in the gate
+// alone. Its findings do not stop the inspection: the gate reports everything it can in one run.
 var docgenDiagnostics = new List<string>();
 var runDocgen = gate && File.Exists(Path.Combine(repoRoot, DocgenConfigFileName));
 if (runDocgen)
 {
-    Console.Error.WriteLine("info: running the generator of the API reference...");
+    Console.Error.WriteLine("info: running the generator of the documentation site...");
 
-    // The generator takes its collections as JSON. A relative path with forward slashes needs no escaping.
     string[] docgenArguments = [
         "Meziantou.DocumentationGenerator",
         "build",
-        "--packages",
-        $$"""[{"path":"artifacts/{{BuildConfiguration}}"}]""",
         "--output",
         Path.Combine(scratchPath, "docgen-site"),
         "--warnaserror",
@@ -260,7 +258,7 @@ if (runDocgen)
     // the tool is not in the manifest. Without a diagnostic, nothing was checked.
     if (docgen.ExitCode != 0 && docgenDiagnostics.Count == 0)
     {
-        Console.Error.WriteLine($"The generator of the API reference failed with exit code {docgen.ExitCode}.");
+        Console.Error.WriteLine($"The generator of the documentation site failed with exit code {docgen.ExitCode}.");
         Console.Error.WriteLine($"Last {TailLineCount} lines of {Path.Combine(scratchPath, "docgen.log")}:");
         foreach (var line in docgen.Lines.TakeLast(TailLineCount))
         {
@@ -402,7 +400,7 @@ var gatePassed = gate && docsDiagnostics.Count == 0 && docgenDiagnostics.Count =
 if (gatePassed)
 {
     var phases = runDocgen
-        ? $"lint-docs, bv {buildCommand}, the generator of the API reference, nor inspectcode"
+        ? $"lint-docs, bv {buildCommand}, the generator of the documentation site, nor inspectcode"
         : $"lint-docs, bv {buildCommand}, nor inspectcode";
     Console.Error.WriteLine($"=== gate passed: neither {phases} reported anything ===");
 }
