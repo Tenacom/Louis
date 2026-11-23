@@ -267,6 +267,15 @@ Pick the form that shows the content most clearly. No form wins in every case, s
 - **Verbatim** (`@"..."`) for content heavy in backslashes and free of quotes, such as Windows paths. Raw strings cover every other case it used to serve.
 - Prefer **consistency with adjacent literals** over the shortest form for each. Where several literals form a group, matching forms read better than one odd member, even when that member would compile as a plain `"..."`.
 
+### Concatenation
+
+Do not build a string with a chain of `+`. In a chain, the quotes and the operators hide the text that the code produces.
+
+- Use an interpolated string in place of a chain.
+- Use a multi-line raw literal for content of several lines, interpolated when it holds values.
+- One `+` is fine, and two at most.
+- A file name, a path, and an identifier always use interpolation, even where one `+` would do.
+
 ## Comments
 
 ### Code comments
