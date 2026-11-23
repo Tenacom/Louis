@@ -1054,4 +1054,8 @@ static Louis.Text.TextEdit.operator !=(Louis.Text.TextEdit a, Louis.Text.TextEdi
 static Louis.Text.TextEdit.operator ==(Louis.Text.TextEdit a, Louis.Text.TextEdit b) -> bool
 static Louis.Text.Utf8Utility.ComputeMaxCharsInBytes(System.ReadOnlySpan<char> chars, int maxBytes) -> int
 static Louis.Text.Utf8Utility.ComputeMaxCharsInBytes(string! str, int maxBytes) -> int
+System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute (forwarded, contained in System.Runtime)
+System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute.DoesNotReturnAttribute() -> void (forwarded, contained in System.Runtime)
+System.Diagnostics.StackTraceHiddenAttribute (forwarded, contained in System.Runtime)
+System.Diagnostics.StackTraceHiddenAttribute.StackTraceHiddenAttribute() -> void (forwarded, contained in System.Runtime)
 virtual Louis.ReadOnlySpanPredicate<T>.Invoke(System.ReadOnlySpan<T> span) -> bool
