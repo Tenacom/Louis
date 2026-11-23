@@ -556,6 +556,7 @@ Louis.Threading.Deadline.IsEternal.get -> bool
 Louis.Threading.Deadline.RemainingTime.get -> System.TimeSpan
 Louis.Threading.Deadline.ThrowIfExpired() -> void
 Louis.Threading.Deadline.TimeProvider.get -> System.TimeProvider!
+Louis.Threading.Deadline.WaitAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
 static Louis.Diagnostics.ArgumentExceptionExtensions.extension(System.ArgumentException!).ThrowNew() -> void
 static Louis.Diagnostics.ArgumentExceptionExtensions.extension(System.ArgumentException!).ThrowNew(string? message) -> void
 static Louis.Diagnostics.ArgumentExceptionExtensions.extension(System.ArgumentException!).ThrowNew(string? message, string? paramName) -> void
