@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
+using JetBrains.Annotations;
 using Louis.Diagnostics.Internal;
 
 namespace Louis.Diagnostics;
@@ -55,7 +56,7 @@ public static class Param
     /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T NotNull<T>(
-        [ValidatedNotNull, NotNull] T? value,
+        [ValidatedNotNull, NotNull, NoEnumeration] T? value,
         [CallerArgumentExpression(nameof(value))] string name = "")
     {
         if (value is null)
@@ -200,7 +201,7 @@ public static class Param
     /// If you omit this argument, the compiler supplies the expression passed as <paramref name="value"/>.</param>
     /// <returns>A <see cref="Param{T}"/> that holds <paramref name="value"/> and <paramref name="name"/>.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Param<T> Check<T>(T value, [CallerArgumentExpression(nameof(value))] string name = "")
+    public static Param<T> Check<T>([NoEnumeration] T value, [CallerArgumentExpression(nameof(value))] string name = "")
         => new(value, name);
 
     /// <summary>
@@ -243,7 +244,9 @@ public static class Param
     /// because their BCL has no <see cref="RuntimeFeature.ByRefLikeGenerics"/>.</para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static RefParam<T> CheckRef<T>(T value, [CallerArgumentExpression(nameof(value))] string name = "")
+    public static RefParam<T> CheckRef<T>(
+        [NoEnumeration] T value,
+        [CallerArgumentExpression(nameof(value))] string name = "")
         where T : allows ref struct
         => new(value, name);
 #endif
@@ -259,7 +262,7 @@ public static class Param
     /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Param<T> CheckNotNull<T>(
-        [ValidatedNotNull, NotNull] T? value,
+        [ValidatedNotNull, NotNull, NoEnumeration] T? value,
         [CallerArgumentExpression(nameof(value))] string name = "")
     {
         if (value is null)
