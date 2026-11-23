@@ -3,6 +3,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+using JetBrains.Annotations;
 using Louis.Diagnostics.Internal;
 
 namespace Louis.Diagnostics;
@@ -26,7 +27,7 @@ partial class ParamExtensions
         /// <exception cref="ArgumentException">The value of <paramref name="this"/>
         /// is not the same instance as <paramref name="target"/>.</exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Param<T> ReferenceEqualTo(T target, string? message = null)
+        public Param<T> ReferenceEqualTo([NoEnumeration] T target, string? message = null)
         {
             if (!ReferenceEquals(@this.Value, target))
             {
@@ -48,7 +49,7 @@ partial class ParamExtensions
         /// <exception cref="ArgumentException">The value of <paramref name="this"/>
         /// is the same instance as <paramref name="target"/>.</exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Param<T> ReferenceNotEqualTo(T target, string? message = null)
+        public Param<T> ReferenceNotEqualTo([NoEnumeration] T target, string? message = null)
         {
             if (ReferenceEquals(@this.Value, target))
             {
