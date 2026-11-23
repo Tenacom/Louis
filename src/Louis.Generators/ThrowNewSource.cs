@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
@@ -58,17 +59,29 @@ internal static class ThrowNewSource
     /// <param name="context">The context of the constructor.</param>
     /// <returns>The methods, or <see langword="null"/> if the constructor gets none.</returns>
     public static ConstructorSource? ForConstructor(GeneratorAttributeSyntaxContext context)
-    {
-        var constructor = (IMethodSymbol)context.TargetSymbol;
-        var compilation = (CSharpCompilation)context.SemanticModel.Compilation;
-        if (ThrowNewRules.CheckConstructor(constructor, compilation) != ThrowNewProblem.None)
-        {
-            return null;
-        }
+        => ForConstructorSymbol((IMethodSymbol)context.TargetSymbol, (CSharpCompilation)context.SemanticModel.Compilation);
 
-        var type = constructor.ContainingType;
-        var accessibility = SyntaxFacts.GetText(constructor.DeclaredAccessibility);
-        return CreateConstructorSource(type, extendedType: null, constructor, accessibility, compilation);
+    /// <summary>
+    /// Writes the <c>ThrowNew</c> methods of the primary constructor of a class,
+    /// if the constructor has <c>ThrowNewAttribute</c>.
+    /// </summary>
+    /// <param name="context">The context of the class declaration.</param>
+    /// <param name="cancellationToken">A token to cancel the operation.</param>
+    /// <returns>The methods, or <see langword="null"/> if the primary constructor gets none.</returns>
+    public static ConstructorSource? ForPrimaryConstructor(GeneratorSyntaxContext context, CancellationToken cancellationToken)
+    {
+        var declaration = context.Node;
+        var compilation = (CSharpCompilation)context.SemanticModel.Compilation;
+        var attributeType = compilation.GetTypeByMetadataName(WellKnownNames.ThrowNewAttribute);
+
+        // GetDeclaredSymbol has a nullable return type, and OfType leaves a null out.
+        // The primary constructor is the one constructor that the class declaration itself declares.
+        ISymbol?[] declaredSymbols = [context.SemanticModel.GetDeclaredSymbol(declaration, cancellationToken)];
+        var constructor = declaredSymbols
+            .OfType<INamedTypeSymbol>()
+            .SelectMany(static type => type.InstanceConstructors)
+            .FirstOrDefault(candidate => IsDeclaredBy(candidate, declaration) && HasAttribute(candidate, attributeType));
+        return constructor is null ? null : ForConstructorSymbol(constructor, compilation);
     }
 
     /// <summary>
@@ -100,6 +113,28 @@ internal static class ThrowNewSource
     /// <returns>One source file for each class, with the methods in a stable order.</returns>
     public static IEnumerable<GeneratedFile> Combine(IEnumerable<ConstructorSource> sources)
         => sources.GroupBy(static source => (source.HintName, source.Opening, source.Closing), CreateFile);
+
+    private static ConstructorSource? ForConstructorSymbol(IMethodSymbol constructor, CSharpCompilation compilation)
+    {
+        if (ThrowNewRules.CheckConstructor(constructor, compilation) != ThrowNewProblem.None)
+        {
+            return null;
+        }
+
+        var type = constructor.ContainingType;
+        var accessibility = SyntaxFacts.GetText(constructor.DeclaredAccessibility);
+        return CreateConstructorSource(type, extendedType: null, constructor, accessibility, compilation);
+    }
+
+    private static bool IsDeclaredBy(IMethodSymbol constructor, SyntaxNode declaration)
+        => constructor.DeclaringSyntaxReferences.Any(reference
+            => reference.SyntaxTree == declaration.SyntaxTree && reference.Span == declaration.Span);
+
+    // The attribute type is null in a project that does not reference Louis.
+    private static bool HasAttribute(IMethodSymbol constructor, INamedTypeSymbol? attributeType)
+        => attributeType is not null
+            && constructor.GetAttributes()
+                .Any(attribute => SymbolEqualityComparer.Default.Equals(attribute.AttributeClass, attributeType));
 
     private static GeneratedFile CreateFile(
         (string HintName, string Opening, string Closing) file,

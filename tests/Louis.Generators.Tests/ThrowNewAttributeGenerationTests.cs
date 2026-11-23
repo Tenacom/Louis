@@ -125,6 +125,86 @@ internal sealed class ThrowNewAttributeGenerationTests
     }
 
     [Test]
+    public async Task PrimaryConstructor_GetsTwoMethods()
+    {
+        const string source = """
+            using System;
+            using Louis.Diagnostics;
+
+            [method: ThrowNew]
+            public sealed partial class E(string message) : Exception(message);
+            """;
+
+        var run = TestCompiler.RunGenerator(TestCompiler.Compile(source));
+
+        await Assert.That(run.Problems).IsEmpty();
+        await Assert.That(run.Files.Keys).IsEquivalentTo(["E.ThrowNew.g.cs"]);
+        var text = run.Files["E.ThrowNew.g.cs"];
+        await Assert.That(text).Contains("public static void ThrowNew(string message)");
+        await Assert.That(text).Contains("public static T ThrowNew<T>(string message)");
+        await Assert.That(text).Contains("=> throw new global::E(message);");
+    }
+
+    [Test]
+    public async Task PrimaryConstructorAndDeclaredConstructors_GetMethodsInOneFile()
+    {
+        const string firstPart = """
+            using System;
+            using Louis.Diagnostics;
+
+            [method: ThrowNew]
+            public partial class E(string message) : Exception(message)
+            {
+                public E(int code)
+                    : this(code.ToString())
+                {
+                }
+            }
+            """;
+
+        const string secondPart = """
+            using Louis.Diagnostics;
+
+            public partial class E
+            {
+                [ThrowNew]
+                public E()
+                    : this("No message.")
+                {
+                }
+            }
+            """;
+
+        var compilation = TestCompiler.CompileForNetStandard20(TestCompiler.AttributeSource, firstPart, secondPart);
+        var run = TestCompiler.RunGenerator(compilation);
+
+        await Assert.That(run.Problems).IsEmpty();
+        await Assert.That(run.Files.Keys).IsEquivalentTo(["E.ThrowNew.g.cs"]);
+        var text = run.Files["E.ThrowNew.g.cs"];
+        await Assert.That(text).Contains("public static void ThrowNew()");
+        await Assert.That(text).Contains("public static void ThrowNew(string message)");
+        await Assert.That(text).DoesNotContain("int code");
+    }
+
+    [Test]
+    public async Task PrimaryConstructorWithOtherAttributes_GetsNoMethod()
+    {
+        const string source = """
+            using System;
+
+            [Serializable]
+            [type: Obsolete]
+            [method: Obsolete]
+            public partial class E(string message) : Exception(message);
+            """;
+
+        var run = TestCompiler.RunGenerator(TestCompiler.Compile(source));
+
+        await Assert.That(run.Problems).IsEmpty();
+        await Assert.That(run.Files).IsEmpty();
+    }
+
+    [Test]
     [Arguments("public")]
     [Arguments("internal")]
     [Arguments("protected")]

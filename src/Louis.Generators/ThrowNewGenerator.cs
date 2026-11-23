@@ -1,7 +1,9 @@
 // Copyright (c) Tenacom and contributors. Licensed under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
+using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Louis.Generators;
@@ -30,14 +32,26 @@ public sealed class ThrowNewGenerator : IIncrementalGenerator
     /// <inheritdoc/>
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        // A class gets one source file, with the methods of every constructor that has the attribute.
-        var memberFiles = context.SyntaxProvider
+        var declaredConstructors = context.SyntaxProvider
             .ForAttributeWithMetadataName(
                 WellKnownNames.ThrowNewAttribute,
                 static (node, _) => node is ConstructorDeclarationSyntax,
                 static (attributeContext, _) => ThrowNewSource.ForConstructor(attributeContext))
-            .Collect()
-            .SelectMany(static (sources, _) => ThrowNewSource.Combine(sources.OfType<ConstructorSource>()))
+            .Collect();
+
+        // ForAttributeWithMetadataName does not yield an attribute list with the method target on a class declaration.
+        // The compiler gives the attributes of such a list to the primary constructor of the class.
+        var primaryConstructors = context.SyntaxProvider
+            .CreateSyntaxProvider(
+                static (node, _) => HasAttributeListForPrimaryConstructor(node),
+                static (syntaxContext, cancellationToken) => ThrowNewSource.ForPrimaryConstructor(syntaxContext, cancellationToken))
+            .Collect();
+
+        // A class gets one source file, with the methods of every constructor that has the attribute.
+        var memberFiles = declaredConstructors
+            .Combine(primaryConstructors)
+            .SelectMany(static (sources, _)
+                => ThrowNewSource.Combine(sources.Left.Concat(sources.Right).OfType<ConstructorSource>()))
             .WithTrackingName(MemberFilesStepName);
 
         var extensionFiles = context.SyntaxProvider
@@ -52,4 +66,8 @@ public sealed class ThrowNewGenerator : IIncrementalGenerator
         context.RegisterSourceOutput(memberFiles, static (output, file) => output.AddSource(file.HintName, file.Text));
         context.RegisterSourceOutput(extensionFiles, static (output, file) => output.AddSource(file.HintName, file.Text));
     }
+
+    private static bool HasAttributeListForPrimaryConstructor(SyntaxNode node)
+        => node is ClassDeclarationSyntax { ParameterList: not null } declaration
+            && declaration.AttributeLists.Any(static list => list.Target?.Identifier.IsKind(SyntaxKind.MethodKeyword) is true);
 }
