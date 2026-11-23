@@ -549,6 +549,7 @@ Louis.Text.TrueConditionInterpolatedStringHandler.TrueConditionInterpolatedStrin
 Louis.Text.TrueConditionInterpolatedStringHandler.TrueConditionInterpolatedStringHandler(int literalLength, int formattedCount, bool condition, out bool shouldAppend) -> void
 Louis.Text.TrueConditionInterpolatedStringHandler.TrueConditionInterpolatedStringHandler(int literalLength, int formattedCount, Louis.Diagnostics.Param<bool> param, out bool shouldAppend) -> void
 Louis.Threading.Deadline
+Louis.Threading.Deadline.CreateCancellationTokenSource() -> System.Threading.CancellationTokenSource!
 Louis.Threading.Deadline.Deadline() -> void
 Louis.Threading.Deadline.Equals(Louis.Threading.Deadline other) -> bool
 Louis.Threading.Deadline.HasExpired.get -> bool
