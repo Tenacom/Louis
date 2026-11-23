@@ -23,10 +23,9 @@
     <PackageReference Include="TUnit" />
     <PackageReference Include="PolySharp" PrivateAssets="all" />
     <!--
-        The netstandard2.0 build of Louis references Microsoft.Bcl.AsyncInterfaces, Microsoft.Bcl.Memory,
-        and Microsoft.Bcl.TimeProvider.
+        The netstandard2.0 build of Louis references some BCL polyfill packages.
         NuGet restore ignores SetTargetFramework and follows the build nearest to the framework of this project.
-        That build references none of these packages, so this project references them itself.
+        That build references none of them, so this project references them itself.
     -->
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" />
     <PackageReference Include="Microsoft.Bcl.Memory" />
