@@ -480,6 +480,11 @@ Louis.Threading.Deadline.RemainingTime.get -> System.TimeSpan
 Louis.Threading.Deadline.ThrowIfExpired() -> void
 Louis.Threading.Deadline.TimeProvider.get -> System.TimeProvider!
 Louis.Threading.Deadline.WaitAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+Louis.Threading.TaskExtensions
+Louis.Threading.TaskExtensions.extension(System.Threading.Tasks.Task!)
+Louis.Threading.TaskExtensions.extension(System.Threading.Tasks.Task!).WaitAsync(Louis.Threading.Deadline deadline, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+Louis.Threading.TaskExtensions.extension<TResult>(System.Threading.Tasks.Task<TResult>!)
+Louis.Threading.TaskExtensions.extension<TResult>(System.Threading.Tasks.Task<TResult>!).WaitAsync(Louis.Threading.Deadline deadline, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TResult>!
 override Louis.Text.LineClipping.Equals(object? obj) -> bool
 override Louis.Text.LineClipping.GetHashCode() -> int
 override Louis.Text.TextEdit.Equals(object? obj) -> bool
@@ -1011,6 +1016,8 @@ static Louis.Threading.Deadline.SetAt(System.DateTimeOffset instant, System.Time
 static Louis.Threading.Deadline.SetBefore(Louis.Threading.Deadline deadline, System.TimeSpan duration) -> Louis.Threading.Deadline
 static Louis.Threading.Deadline.SetIn(System.TimeSpan duration) -> Louis.Threading.Deadline
 static Louis.Threading.Deadline.SetIn(System.TimeSpan duration, System.TimeProvider! timeProvider) -> Louis.Threading.Deadline
+static Louis.Threading.TaskExtensions.WaitAsync(this System.Threading.Tasks.Task! this, Louis.Threading.Deadline deadline, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task!
+static Louis.Threading.TaskExtensions.WaitAsync<TResult>(this System.Threading.Tasks.Task<TResult>! this, Louis.Threading.Deadline deadline, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.Task<TResult>!
 System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute
 System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute.DoesNotReturnAttribute() -> void
 System.Diagnostics.StackTraceHiddenAttribute
