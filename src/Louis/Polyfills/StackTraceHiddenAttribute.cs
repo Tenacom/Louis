@@ -25,6 +25,9 @@ internal sealed class StackTraceHiddenAttribute : Attribute;
 /// The BCL of the .NET builds has it, and the <c>netstandard2.1</c> build keeps it internal.</para>
 /// <para>No runtime that loads one of these two builds looks for the attribute.
 /// It is of use to code that formats a stack trace and looks for the attribute by name.</para>
+/// <para>The .NET builds of Louis forward this type to the attribute of the BCL.
+/// When an application loads a library that uses this type together with one of those builds,
+/// the runtime honors the attribute.</para>
 /// </remarks>
 // The type is public for the source generators that run on a project that references Louis, ThrowNewGenerator included.
 // A generator gives a method this attribute only when the project can name the attribute, and it does not see
@@ -36,5 +39,11 @@ internal sealed class StackTraceHiddenAttribute : Attribute;
 public sealed class StackTraceHiddenAttribute : Attribute;
 
 #endif
+
+#else
+
+// A library for .NET Standard 2.0 that uses the attribute refers to it as a type of the Louis assembly.
+// An application may load such a library together with this build, which does not declare the type.
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Diagnostics.StackTraceHiddenAttribute))]
 
 #endif

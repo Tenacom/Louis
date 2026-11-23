@@ -15,8 +15,8 @@ internal sealed class PolyfillAttributesTests
 
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
     [Test]
-    public async Task DoesNotReturnAttribute_IsNotDeclaredWhereBclHasIt()
-        => await Assert.That(LouisAssembly.GetType(DoesNotReturn)).IsNull();
+    public async Task DoesNotReturnAttribute_IsForwardedToBclWhereBclHasIt()
+        => await AssertForwardedToBcl(DoesNotReturn);
 #else
     [Test]
     public async Task DoesNotReturnAttribute_IsPublicAttributeForMethods()
@@ -29,8 +29,8 @@ internal sealed class PolyfillAttributesTests
 
 #if NET6_0_OR_GREATER
     [Test]
-    public async Task StackTraceHiddenAttribute_IsNotDeclaredWhereBclHasIt()
-        => await Assert.That(LouisAssembly.GetType(StackTraceHidden)).IsNull();
+    public async Task StackTraceHiddenAttribute_IsForwardedToBclWhereBclHasIt()
+        => await AssertForwardedToBcl(StackTraceHidden);
 #else
     [Test]
     public async Task StackTraceHiddenAttribute_IsPublicUnlessBuildServesFrameworkThatHasIt()
@@ -57,6 +57,17 @@ internal sealed class PolyfillAttributesTests
         await Assert.That(usage.ValidOn).IsEqualTo(validOn);
         await Assert.That(usage.Inherited).IsFalse();
         return type;
+    }
+#endif
+
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
+    // A library for .NET Standard 2.0 that uses an attribute refers to it as a type of the Louis assembly.
+    // Assembly.GetType follows a type forwarder, as the runtime does when it resolves that reference.
+    private static async Task AssertForwardedToBcl(string name)
+    {
+        var type = await Assert.That(LouisAssembly.GetType(name)).IsNotNull();
+
+        await Assert.That(type.Assembly).IsEqualTo(typeof(object).Assembly);
     }
 #endif
 }
