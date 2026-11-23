@@ -1,0 +1,25 @@
+// Copyright (c) Tenacom and contributors. Licensed under the MIT license.
+// See the LICENSE file in the project root for full license information.
+
+#if !(NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER)
+
+// ReSharper disable once CheckNamespace // The compiler knows the attribute by its namespace and its name.
+namespace System.Diagnostics.CodeAnalysis;
+
+/// <summary>
+/// Indicates that a method never returns to its caller.
+/// </summary>
+/// <remarks>
+/// <para>This type is available in the <c>netstandard2.0</c> and .NET Framework builds of Louis alone,
+/// because the BCL of every other build has it.</para>
+/// <para>The compiler takes this type for the attribute of the BCL.
+/// A project that references Louis can therefore apply it to its own methods.</para>
+/// </remarks>
+// The type is public for the source generators that run on a project that references Louis, ThrowNewGenerator included.
+// A generator gives a method this attribute only when the project can name the attribute, and it does not see
+// the output of another generator. An attribute that a generator of polyfills adds to the project would not count.
+// A generator of polyfills, such as PolySharp, adds no type that the project can already name.
+[AttributeUsage(AttributeTargets.Method, Inherited = false)]
+public sealed class DoesNotReturnAttribute : Attribute;
+
+#endif
