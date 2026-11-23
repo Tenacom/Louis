@@ -3,7 +3,7 @@
 
 using System;
 using System.Text;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 using Louis.Text.Internal;
 
 namespace Louis.Text;
@@ -36,9 +36,9 @@ partial class StringBuilderExtensions
         /// </remarks>
         public StringBuilder AppendClippedQuotedLiteral(string? str, int headLength, int tailLength)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsGreaterThanOrEqualTo(headLength, 0);
-            Guard.IsGreaterThanOrEqualTo(tailLength, 0);
+            Param.NotNull(@this, nameof(@this));
+            Param.Check(headLength).GreaterThanOrEqualTo(0);
+            Param.Check(tailLength).GreaterThanOrEqualTo(0);
 
             return str is null
                     ? @this.Append(InternalConstants.QuotedNull)
@@ -77,9 +77,9 @@ partial class StringBuilderExtensions
             int tailLength,
             bool useUnicodeEllipsis)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsGreaterThanOrEqualTo(headLength, 0);
-            Guard.IsGreaterThanOrEqualTo(tailLength, 0);
+            Param.NotNull(@this, nameof(@this));
+            Param.Check(headLength).GreaterThanOrEqualTo(0);
+            Param.Check(tailLength).GreaterThanOrEqualTo(0);
 
             return str is null
                     ? @this.Append(InternalConstants.QuotedNull)
@@ -105,9 +105,9 @@ partial class StringBuilderExtensions
         /// </exception>
         public StringBuilder AppendClippedQuotedLiteral(ReadOnlySpan<char> chars, int headLength, int tailLength)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsGreaterThanOrEqualTo(headLength, 0);
-            Guard.IsGreaterThanOrEqualTo(tailLength, 0);
+            Param.NotNull(@this, nameof(@this));
+            Param.Check(headLength).GreaterThanOrEqualTo(0);
+            Param.Check(tailLength).GreaterThanOrEqualTo(0);
 
             return @this.UnsafeAppendClippedQuotedLiteral(chars, headLength, tailLength, false);
         }
@@ -140,9 +140,9 @@ partial class StringBuilderExtensions
             int tailLength,
             bool useUnicodeEllipsis)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsGreaterThanOrEqualTo(headLength, 0);
-            Guard.IsGreaterThanOrEqualTo(tailLength, 0);
+            Param.NotNull(@this, nameof(@this));
+            Param.Check(headLength).GreaterThanOrEqualTo(0);
+            Param.Check(tailLength).GreaterThanOrEqualTo(0);
 
             return @this.UnsafeAppendClippedQuotedLiteral(chars, headLength, tailLength, useUnicodeEllipsis);
         }
@@ -170,9 +170,9 @@ partial class StringBuilderExtensions
         /// </remarks>
         public StringBuilder AppendClippedVerbatimLiteral(string? str, int headLength, int tailLength)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsGreaterThanOrEqualTo(headLength, 0);
-            Guard.IsGreaterThanOrEqualTo(tailLength, 0);
+            Param.NotNull(@this, nameof(@this));
+            Param.Check(headLength).GreaterThanOrEqualTo(0);
+            Param.Check(tailLength).GreaterThanOrEqualTo(0);
 
             return str is null
                     ? @this.Append(InternalConstants.QuotedNull)
@@ -211,9 +211,9 @@ partial class StringBuilderExtensions
             int tailLength,
             bool useUnicodeEllipsis)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsGreaterThanOrEqualTo(headLength, 0);
-            Guard.IsGreaterThanOrEqualTo(tailLength, 0);
+            Param.NotNull(@this, nameof(@this));
+            Param.Check(headLength).GreaterThanOrEqualTo(0);
+            Param.Check(tailLength).GreaterThanOrEqualTo(0);
 
             return str is null
                     ? @this.Append(InternalConstants.QuotedNull)
@@ -239,9 +239,9 @@ partial class StringBuilderExtensions
         /// </exception>
         public StringBuilder AppendClippedVerbatimLiteral(ReadOnlySpan<char> chars, int headLength, int tailLength)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsGreaterThanOrEqualTo(headLength, 0);
-            Guard.IsGreaterThanOrEqualTo(tailLength, 0);
+            Param.NotNull(@this, nameof(@this));
+            Param.Check(headLength).GreaterThanOrEqualTo(0);
+            Param.Check(tailLength).GreaterThanOrEqualTo(0);
 
             return @this.UnsafeAppendClippedVerbatimLiteral(chars, headLength, tailLength, false);
         }
@@ -274,9 +274,9 @@ partial class StringBuilderExtensions
             int tailLength,
             bool useUnicodeEllipsis)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsGreaterThanOrEqualTo(headLength, 0);
-            Guard.IsGreaterThanOrEqualTo(tailLength, 0);
+            Param.NotNull(@this, nameof(@this));
+            Param.Check(headLength).GreaterThanOrEqualTo(0);
+            Param.Check(tailLength).GreaterThanOrEqualTo(0);
 
             return @this.UnsafeAppendClippedVerbatimLiteral(chars, headLength, tailLength, useUnicodeEllipsis);
         }
@@ -312,10 +312,10 @@ partial class StringBuilderExtensions
             int headLength,
             int tailLength)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            InternalGuard.IsDefinedStringLiteralKind(literalKind);
-            Guard.IsGreaterThanOrEqualTo(headLength, 0);
-            Guard.IsGreaterThanOrEqualTo(tailLength, 0);
+            Param.NotNull(@this, nameof(@this));
+            Param.Check(literalKind).Defined();
+            Param.Check(headLength).GreaterThanOrEqualTo(0);
+            Param.Check(tailLength).GreaterThanOrEqualTo(0);
 
             return str is null
                 ? @this.Append(InternalConstants.QuotedNull)
@@ -359,10 +359,10 @@ partial class StringBuilderExtensions
             int tailLength,
             bool useUnicodeEllipsis)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            InternalGuard.IsDefinedStringLiteralKind(literalKind);
-            Guard.IsGreaterThanOrEqualTo(headLength, 0);
-            Guard.IsGreaterThanOrEqualTo(tailLength, 0);
+            Param.NotNull(@this, nameof(@this));
+            Param.Check(literalKind).Defined();
+            Param.Check(headLength).GreaterThanOrEqualTo(0);
+            Param.Check(tailLength).GreaterThanOrEqualTo(0);
 
             return str is null
                 ? @this.Append(InternalConstants.QuotedNull)
@@ -396,10 +396,10 @@ partial class StringBuilderExtensions
             int headLength,
             int tailLength)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            InternalGuard.IsDefinedStringLiteralKind(literalKind);
-            Guard.IsGreaterThanOrEqualTo(headLength, 0);
-            Guard.IsGreaterThanOrEqualTo(tailLength, 0);
+            Param.NotNull(@this, nameof(@this));
+            Param.Check(literalKind).Defined();
+            Param.Check(headLength).GreaterThanOrEqualTo(0);
+            Param.Check(tailLength).GreaterThanOrEqualTo(0);
 
             return @this.UnsafeAppendClippedLiteral(literalKind, chars, headLength, tailLength, false);
         }
@@ -437,10 +437,10 @@ partial class StringBuilderExtensions
             int tailLength,
             bool useUnicodeEllipsis)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            InternalGuard.IsDefinedStringLiteralKind(literalKind);
-            Guard.IsGreaterThanOrEqualTo(headLength, 0);
-            Guard.IsGreaterThanOrEqualTo(tailLength, 0);
+            Param.NotNull(@this, nameof(@this));
+            Param.Check(literalKind).Defined();
+            Param.Check(headLength).GreaterThanOrEqualTo(0);
+            Param.Check(tailLength).GreaterThanOrEqualTo(0);
 
             return @this.UnsafeAppendClippedLiteral(literalKind, chars, headLength, tailLength, useUnicodeEllipsis);
         }

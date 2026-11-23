@@ -2,7 +2,7 @@
 // See the LICENSE file in the project root for full license information.
 
 using System;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis.Text;
 
@@ -45,8 +45,8 @@ partial class CharReadOnlySpanExtensions
         /// <seealso cref="StringExtensions.ComputeLineClipping"/>
         public LineClipping ComputeLineClipping(int headLines, int tailLines)
         {
-            Guard.IsGreaterThanOrEqualTo(headLines, 0);
-            Guard.IsGreaterThanOrEqualTo(tailLines, 0);
+            Param.Check(headLines).GreaterThanOrEqualTo(0);
+            Param.Check(tailLines).GreaterThanOrEqualTo(0);
 
             var start = FindStartOfFirstNonBlankLine(@this);
             if (start < 0)

@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis.Processes;
 
@@ -33,8 +33,8 @@ public static class CommandLineFormatter
     /// </remarks>
     public static string Format(string executable, IEnumerable<string> arguments)
     {
-        Guard.IsNotNull(executable);
-        Guard.IsNotNull(arguments);
+        Param.NotNull(executable);
+        Param.NotNull(arguments);
 
         var result = new StringBuilder();
         AppendItem(result, executable);

@@ -2,7 +2,7 @@
 // See the LICENSE file in the project root for full license information.
 
 using System;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis.Fluency;
 
@@ -31,9 +31,9 @@ partial class FluentExtensions
         /// </exception>
         public T IfElse(bool condition, FluentAction<T> then, FluentAction<T> @else)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(then);
-            Guard.IsNotNull(@else, nameof(@else));
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(then);
+            Param.NotNull(@else, nameof(@else));
 
             return condition ? then(@this) : @else(@this);
         }
@@ -57,9 +57,9 @@ partial class FluentExtensions
         /// </exception>
         public T IfElse(bool condition, Action<T> then, Action<T> @else)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(then);
-            Guard.IsNotNull(@else, nameof(@else));
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(then);
+            Param.NotNull(@else, nameof(@else));
 
             if (condition)
             {

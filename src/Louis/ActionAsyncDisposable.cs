@@ -4,7 +4,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis;
 
@@ -24,8 +24,7 @@ public class ActionAsyncDisposable : IAsyncDisposable, IDisposable
     /// <seealso cref="LocalActionDisposable"/>
     public ActionAsyncDisposable(Func<ValueTask> onDisposeAsync)
     {
-        Guard.IsNotNull(onDisposeAsync);
-        _onDisposeAsync = onDisposeAsync;
+        _onDisposeAsync = Param.NotNull(onDisposeAsync);
     }
 
     /// <summary>

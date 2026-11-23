@@ -3,7 +3,7 @@
 
 using System;
 using System.Text;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 using Louis.Text.Internal;
 
 namespace Louis.Text;
@@ -38,8 +38,8 @@ partial class StringExtensions
         /// <seealso cref="ToClippedLiteral"/>
         public string ToClippedQuotedLiteral(int headLength, int tailLength, bool useUnicodeEllipsis = false)
         {
-            Guard.IsGreaterThanOrEqualTo(headLength, 0);
-            Guard.IsGreaterThanOrEqualTo(tailLength, 0);
+            Param.Check(headLength).GreaterThanOrEqualTo(0);
+            Param.Check(tailLength).GreaterThanOrEqualTo(0);
 
             return @this is null
                 ? InternalConstants.QuotedNull
@@ -73,8 +73,8 @@ partial class StringExtensions
         /// <seealso cref="ToClippedLiteral"/>
         public string ToClippedVerbatimLiteral(int headLength, int tailLength, bool useUnicodeEllipsis = false)
         {
-            Guard.IsGreaterThanOrEqualTo(headLength, 0);
-            Guard.IsGreaterThanOrEqualTo(tailLength, 0);
+            Param.Check(headLength).GreaterThanOrEqualTo(0);
+            Param.Check(tailLength).GreaterThanOrEqualTo(0);
 
             return @this is null
                 ? InternalConstants.QuotedNull
@@ -115,9 +115,9 @@ partial class StringExtensions
             int tailLength,
             bool useUnicodeEllipsis = false)
         {
-            InternalGuard.IsDefinedStringLiteralKind(literalKind);
-            Guard.IsGreaterThanOrEqualTo(headLength, 0);
-            Guard.IsGreaterThanOrEqualTo(tailLength, 0);
+            Param.Check(literalKind).Defined();
+            Param.Check(headLength).GreaterThanOrEqualTo(0);
+            Param.Check(tailLength).GreaterThanOrEqualTo(0);
 
             return @this is null
                     ? InternalConstants.QuotedNull

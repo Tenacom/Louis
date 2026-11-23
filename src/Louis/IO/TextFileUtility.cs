@@ -6,7 +6,7 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 using Louis.Text;
 
 namespace Louis.IO;
@@ -53,7 +53,7 @@ public static class TextFileUtility
     /// <seealso cref="WriteAllTextIfChanged"/>
     public static TextFileContent ReadAllText(string path, Encoding? fallbackEncoding = null)
     {
-        Guard.IsNotNull(path);
+        Param.NotNull(path);
 
         return Read(path, fallbackEncoding ?? Utf8Utility.Utf8NoBomEncoding, detectEncoding: true);
     }
@@ -94,7 +94,7 @@ public static class TextFileUtility
         Encoding? fallbackEncoding = null,
         CancellationToken cancellationToken = default)
     {
-        Guard.IsNotNull(path);
+        Param.NotNull(path);
 
         return ReadAsync(path, fallbackEncoding ?? Utf8Utility.Utf8NoBomEncoding, detectEncoding: true, cancellationToken);
     }
@@ -130,8 +130,8 @@ public static class TextFileUtility
     /// <seealso cref="ReadAllText"/>
     public static bool WriteAllTextIfChanged(string path, string text, Encoding? encoding = null)
     {
-        Guard.IsNotNull(path);
-        Guard.IsNotNull(text);
+        Param.NotNull(path);
+        Param.NotNull(text);
 
         encoding ??= Utf8Utility.Utf8NoBomEncoding;
         if (HasText(path, text, encoding))
@@ -182,8 +182,8 @@ public static class TextFileUtility
         Encoding? encoding = null,
         CancellationToken cancellationToken = default)
     {
-        Guard.IsNotNull(path);
-        Guard.IsNotNull(text);
+        Param.NotNull(path);
+        Param.NotNull(text);
 
         return WriteAllTextIfChangedCoreAsync(path, text, encoding ?? Utf8Utility.Utf8NoBomEncoding, cancellationToken);
     }

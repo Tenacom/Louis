@@ -3,7 +3,7 @@
 
 using System;
 using System.Text;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 using Louis.Text.Internal;
 
 namespace Louis.Text;
@@ -28,7 +28,7 @@ partial class StringBuilderExtensions
         /// <seealso cref="AppendLiteral(StringBuilder,StringLiteralKind,string?)"/>
         public StringBuilder AppendQuotedLiteral(string? str)
         {
-            Guard.IsNotNull(@this, nameof(@this));
+            Param.NotNull(@this, nameof(@this));
 
             return str is null
                 ? @this.Append(InternalConstants.QuotedNull)
@@ -46,7 +46,7 @@ partial class StringBuilderExtensions
         /// <seealso cref="AppendLiteral(StringBuilder,StringLiteralKind,ReadOnlySpan{char})"/>
         public StringBuilder AppendQuotedLiteral(ReadOnlySpan<char> chars)
         {
-            Guard.IsNotNull(@this, nameof(@this));
+            Param.NotNull(@this, nameof(@this));
 
             return @this.UnsafeAppendQuotedLiteral(chars);
         }
@@ -66,7 +66,7 @@ partial class StringBuilderExtensions
         /// <seealso cref="AppendLiteral(StringBuilder,StringLiteralKind,string?)"/>
         public StringBuilder AppendVerbatimLiteral(string? str)
         {
-            Guard.IsNotNull(@this, nameof(@this));
+            Param.NotNull(@this, nameof(@this));
 
             return str is null
                 ? @this.Append(InternalConstants.QuotedNull)
@@ -84,7 +84,7 @@ partial class StringBuilderExtensions
         /// <seealso cref="AppendLiteral(StringBuilder,StringLiteralKind,ReadOnlySpan{char})"/>
         public StringBuilder AppendVerbatimLiteral(ReadOnlySpan<char> chars)
         {
-            Guard.IsNotNull(@this, nameof(@this));
+            Param.NotNull(@this, nameof(@this));
 
             return @this.UnsafeAppendVerbatimLiteral(chars);
         }
@@ -108,8 +108,8 @@ partial class StringBuilderExtensions
         /// <seealso cref="StringLiteralKind"/>
         public StringBuilder AppendLiteral(StringLiteralKind literalKind, string? str)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            InternalGuard.IsDefinedStringLiteralKind(literalKind);
+            Param.NotNull(@this, nameof(@this));
+            Param.Check(literalKind).Defined();
 
             return str is null
                 ? @this.Append(InternalConstants.QuotedNull)
@@ -131,8 +131,8 @@ partial class StringBuilderExtensions
         /// <seealso cref="StringLiteralKind"/>
         public StringBuilder AppendLiteral(StringLiteralKind literalKind, ReadOnlySpan<char> chars)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            InternalGuard.IsDefinedStringLiteralKind(literalKind);
+            Param.NotNull(@this, nameof(@this));
+            Param.Check(literalKind).Defined();
 
             return @this.UnsafeAppendLiteral(literalKind, chars);
         }

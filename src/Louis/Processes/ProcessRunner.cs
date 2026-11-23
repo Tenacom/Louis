@@ -12,7 +12,7 @@ using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis.Processes;
 
@@ -59,8 +59,8 @@ public sealed class ProcessRunner : IProcessRunner
         ProcessRunOptions? options = null,
         CancellationToken cancellationToken = default)
     {
-        Guard.IsNotNull(executable);
-        Guard.IsNotNull(arguments);
+        Param.NotNull(executable);
+        Param.NotNull(arguments);
 
         // Enumerate the arguments once, so that the command line and the child get the same ones.
         string[] argumentArray = [.. arguments];

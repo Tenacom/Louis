@@ -5,7 +5,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CommunityToolkit.Diagnostics;
 using Louis.Diagnostics;
 
 namespace Louis.Collections;
@@ -31,7 +30,7 @@ partial class EnumerableExtensions
         /// </remarks>
         public async ValueTask DisposeAllAsync()
         {
-            Guard.IsNotNull(@this, nameof(@this));
+            Param.NotNull(@this, nameof(@this));
 
             List<Exception>? exceptions = null;
             List<Task>? pendingTasks = null;
@@ -99,7 +98,7 @@ partial class EnumerableExtensions
         /// </remarks>
         public void DisposeAll()
         {
-            Guard.IsNotNull(@this, nameof(@this));
+            Param.NotNull(@this, nameof(@this));
 
             List<Exception>? exceptions = null;
             List<Task>? pendingTasks = null;

@@ -2,7 +2,7 @@
 // See the LICENSE file in the project root for full license information.
 
 using System;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis.Fluency;
 
@@ -25,8 +25,8 @@ partial class FluentExtensions
         /// </exception>
         public T InvokeIf(bool condition, Action<T> action)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(action);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(action);
 
             if (condition)
             {
@@ -51,8 +51,8 @@ partial class FluentExtensions
         /// </exception>
         public T InvokeIf<TArg>(bool condition, TArg arg, Action<T, TArg> action)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(action);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(action);
 
             if (condition)
             {
@@ -79,8 +79,8 @@ partial class FluentExtensions
         /// </exception>
         public T InvokeIf<TArg1, TArg2>(bool condition, TArg1 arg1, TArg2 arg2, Action<T, TArg1, TArg2> action)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(action);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(action);
 
             if (condition)
             {
@@ -114,8 +114,8 @@ partial class FluentExtensions
             TArg3 arg3,
             Action<T, TArg1, TArg2, TArg3> action)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(action);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(action);
 
             if (condition)
             {
@@ -152,8 +152,8 @@ partial class FluentExtensions
             TArg4 arg4,
             Action<T, TArg1, TArg2, TArg3, TArg4> action)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(action);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(action);
 
             if (condition)
             {

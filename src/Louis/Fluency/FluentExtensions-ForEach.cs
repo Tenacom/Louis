@@ -3,7 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis.Fluency;
 
@@ -33,9 +33,9 @@ partial class FluentExtensions
         /// <seealso cref="ForEach{T,TElement}(T,ReadOnlySpan{TElement},FluentAction{T,TElement})"/>
         public T ForEach<TElement>(IEnumerable<TElement> sequence, FluentAction<T, TElement> action)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(action);
-            Guard.IsNotNull(sequence);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(action);
+            Param.NotNull(sequence);
 
             foreach (var item in sequence)
             {
@@ -64,9 +64,9 @@ partial class FluentExtensions
         /// <seealso cref="ForEach{T,TElement}(T,ReadOnlySpan{TElement},Action{T,TElement})"/>
         public T ForEach<TElement>(IEnumerable<TElement> sequence, Action<T, TElement> action)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(action);
-            Guard.IsNotNull(sequence);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(action);
+            Param.NotNull(sequence);
 
             foreach (var item in sequence)
             {
@@ -102,9 +102,9 @@ partial class FluentExtensions
         /// <seealso cref="ForEach{T,TElement}(T,ReadOnlySpan{TElement},FluentAction{T,TElement,int})"/>
         public T ForEach<TElement>(IEnumerable<TElement> sequence, FluentAction<T, TElement, int> action)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(action);
-            Guard.IsNotNull(sequence);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(action);
+            Param.NotNull(sequence);
 
             var index = 0;
             foreach (var item in sequence)
@@ -139,9 +139,9 @@ partial class FluentExtensions
         /// <seealso cref="ForEach{T,TElement}(T,ReadOnlySpan{TElement},Action{T,TElement,int})"/>
         public T ForEach<TElement>(IEnumerable<TElement> sequence, Action<T, TElement, int> action)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(action);
-            Guard.IsNotNull(sequence);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(action);
+            Param.NotNull(sequence);
 
             var index = 0;
             foreach (var item in sequence)
@@ -170,8 +170,8 @@ partial class FluentExtensions
         /// <seealso cref="ForEach{T,TElement}(T,IEnumerable{TElement},FluentAction{T,TElement})"/>
         public T ForEach<TElement>(ReadOnlySpan<TElement> span, FluentAction<T, TElement> action)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(action);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(action);
 
             foreach (var item in span)
             {
@@ -198,8 +198,8 @@ partial class FluentExtensions
         /// <seealso cref="ForEach{T,TElement}(T,IEnumerable{TElement},Action{T,TElement})"/>
         public T ForEach<TElement>(ReadOnlySpan<TElement> span, Action<T, TElement> action)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(action);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(action);
 
             foreach (var item in span)
             {
@@ -232,8 +232,8 @@ partial class FluentExtensions
         /// <seealso cref="ForEach{T,TElement}(T,IEnumerable{TElement},FluentAction{T,TElement,int})"/>
         public T ForEach<TElement>(ReadOnlySpan<TElement> span, FluentAction<T, TElement, int> action)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(action);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(action);
 
             for (var i = 0; i < span.Length; i++)
             {
@@ -264,8 +264,8 @@ partial class FluentExtensions
         /// <seealso cref="ForEach{T,TElement}(T,IEnumerable{TElement},Action{T,TElement,int})"/>
         public T ForEach<TElement>(ReadOnlySpan<TElement> span, Action<T, TElement, int> action)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(action);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(action);
 
             for (var i = 0; i < span.Length; i++)
             {

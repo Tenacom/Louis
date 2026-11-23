@@ -3,7 +3,7 @@
 
 using System;
 using System.Text;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis.Text;
 
@@ -39,8 +39,8 @@ public static partial class Utf8Utility
     /// </remarks>
     public static int ComputeMaxCharsInBytes(string str, int maxBytes)
     {
-        Guard.IsNotNull(str);
-        Guard.IsGreaterThanOrEqualTo(maxBytes, 0);
+        Param.NotNull(str);
+        Param.Check(maxBytes).GreaterThanOrEqualTo(0);
 
         return MaxCharsInBytesHelper.Compute(str.AsSpan(), maxBytes);
     }
@@ -66,7 +66,7 @@ public static partial class Utf8Utility
     /// </remarks>
     public static int ComputeMaxCharsInBytes(ReadOnlySpan<char> chars, int maxBytes)
     {
-        Guard.IsGreaterThanOrEqualTo(maxBytes, 0);
+        Param.Check(maxBytes).GreaterThanOrEqualTo(0);
 
         return MaxCharsInBytesHelper.Compute(chars, maxBytes);
     }

@@ -3,7 +3,7 @@
 
 using System;
 using System.Globalization;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis;
 
@@ -36,7 +36,7 @@ partial class DateUtility
     /// <seealso cref="DateTimeFormatInfo.FirstDayOfWeek"/>
     public static int GetDaysFromStartOfWeek(DayOfWeek today, CultureInfo culture)
     {
-        Guard.IsNotNull(culture);
+        Param.NotNull(culture);
         return GetDaysFromStartOfWeek(today, culture.DateTimeFormat.FirstDayOfWeek);
     }
 
@@ -52,7 +52,7 @@ partial class DateUtility
     /// <seealso cref="DateTimeFormatInfo.FirstDayOfWeek"/>
     public static int GetDaysFromStartOfWeek(DayOfWeek today, DateTimeFormatInfo dateTimeFormat)
     {
-        Guard.IsNotNull(dateTimeFormat);
+        Param.NotNull(dateTimeFormat);
         return GetDaysFromStartOfWeek(today, dateTimeFormat.FirstDayOfWeek);
     }
 

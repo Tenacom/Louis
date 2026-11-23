@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis.Text.Internal;
 
@@ -27,7 +27,7 @@ internal static class TextEditHelper
             var isInsideText = edit is { Start: >= 0, Length: >= 0 } && edit.Length <= textLength - edit.Start;
             if (!isInsideText)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(
+                ArgumentOutOfRangeException.ThrowNew(
                     name,
                     FormattableString.Invariant(
                         $"The edit of {edit.Length} characters at index {edit.Start} is outside a text of {textLength} characters."));
@@ -35,10 +35,10 @@ internal static class TextEditHelper
 
             if (edit.Start < previousEnd)
             {
-                ThrowHelper.ThrowArgumentException(
-                    name,
+                ArgumentException.ThrowNew(
                     FormattableString.Invariant(
-                        $"The edit of {edit.Length} characters at index {edit.Start} overlaps an edit that ends at index {previousEnd}."));
+                        $"The edit of {edit.Length} characters at index {edit.Start} overlaps an edit that ends at index {previousEnd}."),
+                    name);
             }
 
             previousEnd = edit.Start + edit.Length;

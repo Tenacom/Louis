@@ -3,7 +3,7 @@
 
 using System;
 using System.Text;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis.Text;
 
@@ -24,8 +24,8 @@ partial class StringBuilderExtensions
         /// </exception>
         public StringBuilder AppendResult(Func<string?> provider)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(provider);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(provider);
 
             return @this.Append(provider());
         }
@@ -42,8 +42,8 @@ partial class StringBuilderExtensions
         /// </exception>
         public StringBuilder AppendResult(ReadOnlySpanFunc<char> func)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(func);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(func);
 
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_1_OR_GREATER
             return @this.Append(func());

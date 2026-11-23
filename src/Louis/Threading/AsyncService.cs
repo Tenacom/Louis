@@ -5,7 +5,6 @@ using System;
 using System.Runtime.ExceptionServices;
 using System.Threading;
 using System.Threading.Tasks;
-using CommunityToolkit.Diagnostics;
 using Louis.Diagnostics;
 
 namespace Louis.Threading;
@@ -464,7 +463,7 @@ public abstract class AsyncService : IAsyncDisposable, IDisposable
                     return false;
 
                 default:
-                    return ThrowHelper.ThrowInvalidOperationException<bool>("An async service cannot be started more than once.");
+                    return InvalidOperationException.ThrowNew<bool>("An async service cannot be started more than once.");
             }
         }
     }

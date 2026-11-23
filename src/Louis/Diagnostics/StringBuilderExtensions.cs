@@ -3,7 +3,6 @@
 
 using System;
 using System.Text;
-using CommunityToolkit.Diagnostics;
 
 namespace Louis.Diagnostics;
 
@@ -26,7 +25,7 @@ public static class StringBuilderExtensions
         /// <exception cref="ArgumentNullException"><paramref name="this"/> is <see langword="null"/>.</exception>
         public StringBuilder AppendFormattedObject(object? obj, string? format = null)
         {
-            Guard.IsNotNull(@this, nameof(@this));
+            Param.NotNull(@this, nameof(@this));
 
             return @this.Append(ExceptionHelper.FormatObject(obj, format));
         }

@@ -2,7 +2,7 @@
 // See the LICENSE file in the project root for full license information.
 
 using System;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis.Fluency;
 
@@ -28,8 +28,8 @@ partial class FluentExtensions
         /// <seealso cref="If{T}(T,bool,Action{T})"/>
         public T If(bool condition, FluentAction<T> then)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(then);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(then);
 
             return condition ? then(@this) : @this;
         }
@@ -49,8 +49,8 @@ partial class FluentExtensions
         /// <seealso cref="If{T}(T,bool,FluentAction{T})"/>
         public T If(bool condition, Action<T> then)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(then);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(then);
 
             if (condition)
             {

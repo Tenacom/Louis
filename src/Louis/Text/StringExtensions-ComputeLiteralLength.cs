@@ -2,6 +2,7 @@
 // See the LICENSE file in the project root for full license information.
 
 using System;
+using Louis.Diagnostics;
 using Louis.Text.Internal;
 
 namespace Louis.Text;
@@ -41,7 +42,7 @@ partial class StringExtensions
         /// nor <see cref="StringLiteralKind.Verbatim"/>.</exception>
         public int ComputeLiteralLength(StringLiteralKind literalKind)
         {
-            InternalGuard.IsDefinedStringLiteralKind(literalKind);
+            Param.Check(literalKind).Defined();
 
             return @this is null ? InternalConstants.QuotedNullLength : @this.AsSpan().ComputeLiteralLength(literalKind);
         }

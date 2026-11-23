@@ -3,7 +3,7 @@
 
 using System;
 using System.Threading;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis;
 
@@ -25,8 +25,7 @@ public ref struct LocalActionDisposable
     /// <seealso cref="ActionAsyncDisposable"/>
     public LocalActionDisposable(Action onDispose)
     {
-        Guard.IsNotNull(onDispose);
-        _onDispose = onDispose;
+        _onDispose = Param.NotNull(onDispose);
     }
 
     /// <summary>

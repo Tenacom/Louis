@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis.Collections;
 
@@ -22,7 +22,7 @@ partial class EnumerableExtensions
     public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> @this)
         where T : class
     {
-        Guard.IsNotNull(@this, nameof(@this));
+        Param.NotNull(@this, nameof(@this));
         return @this.Where(IsNotNull) as IEnumerable<T>;
 
         static bool IsNotNull(T? x) => x is not null;
@@ -39,7 +39,7 @@ partial class EnumerableExtensions
     public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> @this)
         where T : struct
     {
-        Guard.IsNotNull(@this, nameof(@this));
+        Param.NotNull(@this, nameof(@this));
         return @this.Where(IsNotNull).Select(GetValue);
 
         static bool IsNotNull(T? x) => x.HasValue;

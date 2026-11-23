@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using CommunityToolkit.Diagnostics;
 
 namespace Louis.Diagnostics;
 
@@ -35,7 +34,7 @@ partial class ExceptionExtensions
         /// </remarks>
         public IEnumerable<Exception> GetCausingExceptions()
         {
-            Guard.IsNotNull(@this, nameof(@this));
+            Param.NotNull(@this, nameof(@this));
 
             return new CausingExceptions(@this);
         }
