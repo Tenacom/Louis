@@ -11,7 +11,7 @@ Louis is a library of general-purpose types for .NET libraries and applications.
 - `src/Louis`: the `Louis` package. It depends on the BCL alone. On a target framework that lacks a type it needs, it also references a polyfill from Microsoft, such as `System.Memory` or `Microsoft.Bcl.Memory`. It references `src/Louis.Generators` as an analyzer, and packs the assembly of that project in its `analyzers` folder.
 - `src/Louis.Hosting`: the `Louis.Hosting` package. It runs a long-running service of `Louis` under the `IHostedService` contract of `Microsoft.Extensions.Hosting.Abstractions`, and logs through `Microsoft.Extensions.Logging.Abstractions`. It references `src/Louis` as a project.
 - `src/Louis.Testing`: the `Louis.Testing` package. It holds the test doubles of the contracts of `Louis`. It references `src/Louis` as a project, and nothing else. Its `RootNamespace` is `Louis`, because a test double goes in the namespace of its contract.
-- `src/Louis.Generators`: the source generator and the analyzers of the `Louis` package. It is not packable, and no package depends on it. It targets `netstandard2.0`, because the compiler loads a generator of no other target framework. `guest-code.md` governs the code it generates.
+- `src/Louis.Generators`: the source generator and the analyzers of the `Louis` package. It is not packable, and no package depends on it. It targets `netstandard2.0`, because the compiler loads a source generator of no other target framework. `guest-code.md` governs the code it generates.
 
 The references of `src/Louis.Hosting` and `src/Louis.Testing` to `src/Louis` set `PrivateAssets` to `contentfiles;build`. A project that references one of those two packages alone then gets the source generator and the analyzers.
 

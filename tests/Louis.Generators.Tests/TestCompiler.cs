@@ -13,7 +13,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 
 /// <summary>
-/// Compiles the source of a test, and runs the generator and the analyzers on it.
+/// Compiles the source of a test, and runs the source generator and the analyzers on it.
 /// </summary>
 internal static class TestCompiler
 {
@@ -41,7 +41,7 @@ internal static class TestCompiler
     private static readonly ImmutableArray<MetadataReference> CurrentReferences = GetCurrentReferences();
 
     /// <summary>
-    /// Gets the version that the generator states in the <c>GeneratedCodeAttribute</c> of each method:
+    /// Gets the version that the source generator states in the <c>GeneratedCodeAttribute</c> of each method:
     /// the informational version of its assembly.
     /// </summary>
     public static string GeneratorVersion { get; } = GetGeneratorVersion();
@@ -103,7 +103,7 @@ internal static class TestCompiler
             driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
         driver = driver.RunGeneratorsAndUpdateCompilation(compilation, out var output, out _);
 
-        // The source of a test has no XML comments, so a missing comment counts only in the code that the generator added.
+        // The source of a test has no XML comments, so a missing comment counts only in the code that the source generator added.
         IEnumerable<SyntaxTree> sourceTrees = compilation.SyntaxTrees;
         var problems = output.GetDiagnostics()
             .Where(static diagnostic => diagnostic.Severity >= DiagnosticSeverity.Warning)
@@ -113,7 +113,7 @@ internal static class TestCompiler
     }
 
     /// <summary>
-    /// Runs the generator on a compilation, then an analyzer on the result.
+    /// Runs the source generator on a compilation, then an analyzer on the result.
     /// </summary>
     /// <param name="compilation">The compilation.</param>
     /// <param name="analyzer">The analyzer.</param>

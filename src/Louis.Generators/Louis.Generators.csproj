@@ -7,7 +7,7 @@
 
   <PropertyGroup>
     <Description>The source generator and the analyzers of L.o.U.I.S.</Description>
-    <!-- The compiler loads a generator or an analyzer that targets .NET Standard 2.0, and no other target framework. -->
+    <!-- The compiler loads a source generator or an analyzer that targets .NET Standard 2.0, and no other target framework. -->
     <TargetFramework>netstandard2.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <IsRoslynComponent>true</IsRoslynComponent>

@@ -4,12 +4,12 @@
 namespace Louis.Generators;
 
 /// <summary>
-/// Holds the names that the generator and the analyzers look for, and the names that the generator writes.
+/// Holds the names that the source generator and the analyzers look for, and the names that the source generator writes.
 /// </summary>
 internal static class WellKnownNames
 {
     /// <summary>
-    /// The name of the methods that the generator adds, and that <see cref="ThrowNewCallAnalyzer"/> looks for.
+    /// The name of the methods that the source generator adds, and that <see cref="ThrowNewCallAnalyzer"/> looks for.
     /// </summary>
     public const string ThrowNew = "ThrowNew";
 

@@ -4,17 +4,17 @@
 namespace Louis.Generators;
 
 /// <summary>
-/// Tells why the generator adds no <c>ThrowNew</c> method for an attribute.
+/// Tells why the source generator adds no <c>ThrowNew</c> method for an attribute.
 /// </summary>
 internal enum ThrowNewProblem
 {
     /// <summary>
-    /// The generator adds the methods.
+    /// The source generator adds the methods.
     /// </summary>
     None,
 
     /// <summary>
-    /// The language version of the project is older than the code of the generator needs.
+    /// The language version of the project is older than the code of the source generator needs.
     /// </summary>
     LanguageVersion,
 

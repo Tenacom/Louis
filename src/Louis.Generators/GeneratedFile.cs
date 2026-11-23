@@ -4,7 +4,7 @@
 namespace Louis.Generators;
 
 /// <summary>
-/// Holds a source file that the generator adds to a compilation.
+/// Holds a source file that the source generator adds to a compilation.
 /// </summary>
 /// <param name="HintName">The name of the file, unique within the compilation.</param>
 /// <param name="Text">The C# text of the file.</param>

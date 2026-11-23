@@ -13,7 +13,7 @@ namespace Louis.Generators;
 /// and <c>ThrowNew</c> extension methods to the static classes that have <c>ThrowNewForAttribute</c>.
 /// </summary>
 /// <remarks>
-/// <para>The generator reports no diagnostic. When an attribute gets no method,
+/// <para>The source generator reports no diagnostic. When an attribute gets no method,
 /// <see cref="ThrowNewAttributeAnalyzer"/> reports the reason.</para>
 /// </remarks>
 [Generator(LanguageNames.CSharp)]

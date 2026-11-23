@@ -67,7 +67,7 @@ Buildvana SDK adds the analyzers to every project, so `Directory.Packages.props`
 
 `PolySharp` is a development dependency of `Louis`. Its generated code is compiled into `Louis.dll`, so `THIRD-PARTY-NOTICES.md` carries its MIT notice.
 
-`Microsoft.CodeAnalysis.CSharp` and `Microsoft.CodeAnalysis.Analyzers` are development dependencies of `Louis.Generators`. The compiler supplies the Roslyn assemblies when it loads a generator, so the pin of `Microsoft.CodeAnalysis.CSharp` names the oldest compiler that can load `Louis.Generators`. `buildvana.jsonc` sets the `disable` policy on that pin, and `Louis.csproj` packs the assembly in the `roslyn<version>` folder of the same version. A move of the pin leaves out every older compiler, so the maintainer decides it, and the folder moves in the same commit.
+`Microsoft.CodeAnalysis.CSharp` and `Microsoft.CodeAnalysis.Analyzers` are development dependencies of `Louis.Generators`. The compiler supplies the Roslyn assemblies when it loads a source generator, so the pin of `Microsoft.CodeAnalysis.CSharp` names the oldest compiler that can load `Louis.Generators`. `buildvana.jsonc` sets the `disable` policy on that pin, and `Louis.csproj` packs the assembly in the `roslyn<version>` folder of the same version. A move of the pin leaves out every older compiler, so the maintainer decides it, and the folder moves in the same commit.
 
 ## Test dependencies
 
