@@ -210,12 +210,21 @@ internal static class ThrowNewSource
         return string.Concat(lines.Select(line => line.Length == 0 ? "\n" : $"{indent}{line}\n"));
     }
 
-    // A method gets an attribute only when the project can name it:
-    // the attribute is public in a reference, or the project declares its own, as with PolySharp.
     private static IEnumerable<string> GetAvailableAttributes(Compilation compilation)
         => MethodAttributes
-            .Where(attribute => compilation
-                .GetTypesByMetadataName(attribute.Name)
-                .Any(type => compilation.IsSymbolAccessibleWithin(type, compilation.Assembly)))
+            .Where(attribute => CanName(compilation, attribute.Name))
             .Select(static attribute => $"global::{attribute.Name}{attribute.Arguments}");
+
+    // A method gets an attribute only when the name of the attribute means one type in the project.
+    // A type that the project declares wins over a type of a reference.
+    // With no such type, the references must hold one accessible type of that name:
+    // the compiler rejects a name that two references declare, with CS0433.
+    private static bool CanName(Compilation compilation, string metadataName)
+    {
+        var accessibleTypes = compilation.GetTypesByMetadataName(metadataName)
+            .Where(type => compilation.IsSymbolAccessibleWithin(type, compilation.Assembly))
+            .ToList();
+        return accessibleTypes.Count == 1
+            || accessibleTypes.Exists(type => SymbolEqualityComparer.Default.Equals(type.ContainingAssembly, compilation.Assembly));
+    }
 }
