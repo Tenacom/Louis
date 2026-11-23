@@ -2,15 +2,18 @@
 
 This file is specific to this repository. Rewrite it when `.claude` is copied to another repository.
 
-Louis is a library of general-purpose types for .NET libraries and applications. It ships as three NuGet packages, `Louis`, `Louis.Hosting`, and `Louis.Testing`, built from the three projects under `src/`. There is no application, no tool, and no source generator.
+Louis is a library of general-purpose types for .NET libraries and applications. It ships as three NuGet packages, `Louis`, `Louis.Hosting`, and `Louis.Testing`, each built from the project of its name under `src/`. The `Louis` package also holds a source generator and analyzers, built from `src/Louis.Generators`. There is no application and no tool.
 
 ## Project structure
 
 `Louis.slnx` is the authoritative list of projects.
 
-- `src/Louis`: the `Louis` package. It depends on `CommunityToolkit.Diagnostics`, for argument checks.
+- `src/Louis`: the `Louis` package. It depends on the BCL alone. On a target framework that lacks a type it needs, it also references a polyfill from Microsoft, such as `System.Memory` or `Microsoft.Bcl.Memory`. It references `src/Louis.Generators` as an analyzer, and packs the assembly of that project in its `analyzers` folder.
 - `src/Louis.Hosting`: the `Louis.Hosting` package. It runs a long-running service of `Louis` under the `IHostedService` contract of `Microsoft.Extensions.Hosting.Abstractions`, and logs through `Microsoft.Extensions.Logging.Abstractions`. It references `src/Louis` as a project.
 - `src/Louis.Testing`: the `Louis.Testing` package. It holds the test doubles of the contracts of `Louis`. It references `src/Louis` as a project, and nothing else. Its `RootNamespace` is `Louis`, because a test double goes in the namespace of its contract.
+- `src/Louis.Generators`: the source generator and the analyzers of the `Louis` package. It is not packable, and no package depends on it. It targets `netstandard2.0`, because the compiler loads a generator of no other target framework. `guest-code.md` governs the code it generates.
+
+The references of `src/Louis.Hosting` and `src/Louis.Testing` to `src/Louis` set `PrivateAssets` to `contentfiles;build`. A project that references one of those two packages alone then gets the source generator and the analyzers.
 
 ### Test projects
 
@@ -20,6 +23,10 @@ Louis is a library of general-purpose types for .NET libraries and applications.
 - `<Package>.Tests.NetStandard20` and `<Package>.Tests.NetStandard21` are the `netstandard` test projects. They turn `DisableImplicitFrameworkDefines` on and define the symbols of the build they test: `NETSTANDARD`, `NETSTANDARD2_0`, and `NETSTANDARD2_0_OR_GREATER` for a `NetStandard20` project, and `NETSTANDARD`, `NETSTANDARD2_1`, `NETSTANDARD2_0_OR_GREATER`, and `NETSTANDARD2_1_OR_GREATER` for a `NetStandard21` project. A test of framework-specific code then copies the `#if` of the member it tests, in every test project. A `NetStandard20` project references `Microsoft.Bcl.AsyncInterfaces` and `Microsoft.Bcl.Memory`, because the `netstandard2.0` build of `Louis` does. No `netstandard` test project references `System.Text.Encoding.CodePages`, because the runtime it runs on has that assembly.
 
 `Louis.Testing` has one test project, `Louis.Testing.Tests`, on the target frameworks of the package.
+
+`Louis.Generators` has one test project, `Louis.Generators.Tests`, on the newest target framework alone. Its tests compile source text with the version of Roslyn that `Louis.Generators` references, and run the source generator and the analyzers on it.
+
+The test projects of `Louis` reference `src/Louis.Generators` as an analyzer, as a project that references the `Louis` package does. Their tests call generated methods on every build of `Louis`.
 
 `tests/Louis.Tests.ChildProcess` is not a test project. It is the program that the tests of `Louis.Processes` run as a child process, from the output directory. `Louis.Tests` references it on its `net<major>.<minor>` target frameworks, because the types that run a child process are in those builds of `Louis` alone. The coverage collector follows a test into its child processes, so `Program` has `[ExcludeFromCodeCoverage]`.
 
@@ -62,6 +69,7 @@ The `TargetFrameworks` property of each project file is the authority on the tar
 - `ci.yml` and `release.yml` install the .NET SDK of `global.json` through `global-json-file`. Their `dotnet-version` input lists the older `net<major>.<minor>` frameworks alone, so that the tests of each have a runtime. It never lists the major version of the SDK.
 - The projects reference `System.Memory`, `System.Threading.Tasks.Extensions`, `Microsoft.Bcl.AsyncInterfaces`, `Microsoft.Bcl.Memory`, and `System.Text.Encoding.CodePages` only on the frameworks that lack the types. `Louis.csproj` holds one `ItemGroup` per such framework. `Microsoft.Bcl.Memory` supplies `Range`, which the public surface of `Louis` exposes. `System.Text.Encoding.CodePages` supplies `CodePagesEncodingProvider`, the source of the OEM code page encoding.
 - PolySharp generates every other polyfill, as internal types. A public BCL type that an older framework lacks and no Microsoft package supplies, such as `DateOnly`, gets no polyfill, because a consumer's own polyfill of the type would conflict with it. A member that uses such a type goes under `#if`.
+- `src/Louis/Polyfills` declares `DoesNotReturnAttribute` and `StackTraceHiddenAttribute` itself, as public types, on the target frameworks that lack them. They are the one exception to the rule above. A source generator gives a method one of these attributes only when the project can name it, and it does not see a type that PolySharp generates. `StackTraceHiddenAttribute` is internal in the `netstandard2.1` build, because that build also serves .NET versions whose BCL has the attribute.
 
 ### Public API files
 
