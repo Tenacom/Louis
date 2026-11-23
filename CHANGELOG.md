@@ -23,6 +23,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `TextFileUtility.ReadAllText` and `ReadAllTextAsync`, in namespace `Louis.IO`, return a `TextFileContent` with the text of a file and the encoding to write the file back with.
 - `TextFileUtility.WriteAllTextIfChanged` and `WriteAllTextIfChangedAsync` write a text to a file, unless the file holds that text already.
 - The `net10.0` and `net11.0` builds of L.o.U.I.S. packages declare compatibility with [native AOT deployment](https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/), through the `IsAotCompatible` assembly metadata.
+- `Param`, in namespace `Louis.Diagnostics`, has checks for the arguments of a method, such as `NotNull` and `NotNullOrWhiteSpace`, that return the checked value.
+- `Param.Check` and `Param.CheckNotNull` start a chain of checks on an argument, as in `Param.Check(port).GreaterThan(0).LessThan(65536).Value`.
+- `Param.CheckRef`, in the `net10.0` and `net11.0` builds of `Louis` alone, starts a chain of checks on a ref struct.
+- Static extension methods named `ThrowNew`, which need C# 14, throw a new exception of one of 19 BCL types, as in `InvalidOperationException.ThrowNew(message)`.
+- A `ThrowNew<T>` method throws where the code needs an expression of type `T`, as in `text ?? ArgumentException.ThrowNew<string>(message)`.
+- `ThrowNewAttribute`, on a constructor of a partial exception class, makes the source generator of the `Louis` package add `ThrowNew` methods to the class.
+- `ThrowNewForAttribute`, on a static partial class, makes the source generator add `ThrowNew` extension methods for an exception type of another assembly.
+- The analyzers of the `Louis` package report a misuse of `ThrowNew` and of its attributes, with [diagnostics `LOUIS0001` to `LOUIS0007`](docs/diagnostics.md).
+- A project that references the `netstandard2.0` or .NET Framework build of `Louis` can use `DoesNotReturnAttribute` and `StackTraceHiddenAttribute`, which `Louis` declares there as public types.
 
 ### Changes to existing features
 
@@ -39,9 +48,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **BREAKING CHANGE**: `StringExtensions.GetVerbatimLiteralLength` and `CharReadOnlySpanExtensions.GetVerbatimLiteralLength` are renamed to `ComputeVerbatimLiteralLength`.
 - **BREAKING CHANGE**: `Utf8Utility.GetMaxCharsInBytes` is renamed to `ComputeMaxCharsInBytes`.
 - **BREAKING CHANGE**: `Louis.IO.ReadOnlyMemoryStream` is removed, and `System.IO.ReadOnlyMemoryStream` of .NET 11 replaces it.
+- **BREAKING CHANGE**: `Louis` and `Louis.Hosting` no longer depend on `CommunityToolkit.Diagnostics`, so a project that used `Guard` or `ThrowHelper` through them must reference the package itself.
 - The `netstandard2.0` and .NET Framework builds of `Louis` depend on `Microsoft.Bcl.Memory`, which supplies the `Range` of `LineClipping`.
 - The `netstandard` and .NET Framework builds of `Louis` depend on `System.Text.Encoding.CodePages`, which supplies the encoding of `ConsoleUtility.SystemDefaultEncoding`.
 - L.o.U.I.S. packages depend on version 11.0.0 of `Microsoft.Bcl.AsyncInterfaces`, `Microsoft.Bcl.Memory`, `Microsoft.Extensions.Hosting.Abstractions`, `Microsoft.Extensions.Logging.Abstractions`, and `System.Text.Encoding.CodePages`.
+- The exceptions that the argument checks of L.o.U.I.S. throw have new messages, which name the parameter first, such as `name cannot be null.` for a null argument.
 
 ### Bugs fixed in this release
 
