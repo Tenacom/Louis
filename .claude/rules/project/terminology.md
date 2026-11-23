@@ -22,6 +22,8 @@ One name per thing, in every kind of prose: documentation, chat, commit messages
 | A line that is empty, or holds white space alone, as `char.IsWhiteSpace` defines it           | blank line                 | white line, void line                    |
 | The run mode in which `ProcessRunner` redirects the standard streams of the child process     | capture mode               | captured mode, redirected mode           |
 | The run mode in which the child process shares the standard streams of the current process    | inherited mode             | inherit mode, pass-through mode          |
+| The `TimeProvider` that a `Deadline` measures time with                                       | clock                      | time provider, time source               |
+| An instant on a clock after which an operation gives up, as a `Deadline` represents it        | deadline                   | timeout, expiry time                     |
 | A method of `Param` that checks an argument and returns its value, such as `NotNull`          | direct check               | simple check, guard                      |
 | A check that follows `Param.Check` in a chain, as a member of an extension block              | chain check                | fluent check, chained check              |
 | A method named `ThrowNew`, which throws a new exception built from its arguments              | `ThrowNew` method          | throw helper, thrower                    |

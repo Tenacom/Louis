@@ -23,9 +23,9 @@
     <PackageReference Include="TUnit" />
     <PackageReference Include="PolySharp" PrivateAssets="all" />
     <!--
-        The netstandard2.1 build of Louis references Microsoft.Bcl.TimeProvider.
+        The netstandard2.1 build of Louis references some BCL polyfill packages.
         NuGet restore ignores SetTargetFramework and follows the build nearest to the framework of this project.
-        That build does not reference the package, so this project references it itself.
+        That build references none of them, so this project references them itself.
     -->
     <PackageReference Include="Microsoft.Bcl.TimeProvider" />
   </ItemGroup>
