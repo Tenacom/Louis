@@ -151,6 +151,8 @@ An extension class that extends a single type is named after the extended type:
 - Use the .NET class name, not the C# keyword: "String", not "string".
 - Add an "Extensions" suffix.
 
+A class of the BCL, or of another library, with the same name is no reason for another name. Code calls an extension member through its receiver, and seldom names the class.
+
 The name works in both directions. Where `<name>` is the name of a type, or `I<name>` the name of an interface, a class named `<name>Extensions` holds extension members for these types only:
 
 - the type `<name>`, the interface `I<name>`, or both;
@@ -301,7 +303,7 @@ The most frequent shapes:
 
 - A summary starts with a verb in the present tense and the third person, as in "Determines whether ...". It does not restate the name of the member.
 - The summary of a constructor is "Initializes a new instance of the `<see cref="..."/>` class."
-- The summary of a property starts with "Gets or sets", or with "Gets" when the property has no setter. For a Boolean property, "a value that indicates whether ..." follows.
+- The summary of a property starts with "Gets or sets", or with "Gets" when the property has no setter. For a Boolean property, "a value indicating whether ..." follows. StyleCop SA1623 requires these words, and every warning is an error here. The guidelines have "a value that indicates whether", which SA1623 rejects.
 - The summary of a method that returns a task starts with "Asynchronously", then the verb.
 - A parameter and a return value are noun phrases that start with an article and leave out the type.
 - A Boolean parameter is "`true` to ...; otherwise, `false`." A Boolean return value is "`true` if ...; otherwise, `false`."
