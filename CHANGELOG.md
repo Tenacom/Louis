@@ -32,6 +32,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `ThrowNewForAttribute`, on a static partial class, makes the source generator add `ThrowNew` extension methods for an exception type of another assembly.
 - The analyzers of the `Louis` package report a misuse of `ThrowNew` and of its attributes, with [diagnostics `LOUIS0001` to `LOUIS0007`](docs/diagnostics.md).
 - A project that references the `netstandard2.0` or .NET Framework build of `Louis` can use `DoesNotReturnAttribute` and `StackTraceHiddenAttribute`, which `Louis` declares there as public types.
+- `Deadline`, in namespace `Louis.Threading`, represents the instant on a `TimeProvider` after which an operation gives up, and reports the time that remains.
+- `TaskExtensions.WaitAsync` waits for a `Task` or a `Task<TResult>` to complete, until a `Deadline` expires.
+- `Deadline.CreateCancellationTokenSource` creates a `CancellationTokenSource` that is canceled when the deadline expires.
 
 ### Changes to existing features
 
@@ -51,7 +54,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **BREAKING CHANGE**: `Louis` and `Louis.Hosting` no longer depend on `CommunityToolkit.Diagnostics`, so a project that used `Guard` or `ThrowHelper` through them must reference the package itself.
 - The `netstandard2.0` and .NET Framework builds of `Louis` depend on `Microsoft.Bcl.Memory`, which supplies the `Range` of `LineClipping`.
 - The `netstandard` and .NET Framework builds of `Louis` depend on `System.Text.Encoding.CodePages`, which supplies the encoding of `ConsoleUtility.SystemDefaultEncoding`.
-- L.o.U.I.S. packages depend on version 11.0.0 of `Microsoft.Bcl.AsyncInterfaces`, `Microsoft.Bcl.Memory`, `Microsoft.Extensions.Hosting.Abstractions`, `Microsoft.Extensions.Logging.Abstractions`, and `System.Text.Encoding.CodePages`.
+- The `netstandard` and .NET Framework builds of `Louis` depend on `Microsoft.Bcl.TimeProvider`, which supplies the `TimeProvider` of `Deadline`.
+- L.o.U.I.S. packages depend on version 11.0.0 of `Microsoft.Bcl.AsyncInterfaces`, `Microsoft.Bcl.Memory`, `Microsoft.Bcl.TimeProvider`, `Microsoft.Extensions.Hosting.Abstractions`, `Microsoft.Extensions.Logging.Abstractions`, and `System.Text.Encoding.CodePages`.
 - The exceptions that the argument checks of L.o.U.I.S. throw have new messages, which name the parameter first, such as `name cannot be null.` for a null argument.
 
 ### Bugs fixed in this release
