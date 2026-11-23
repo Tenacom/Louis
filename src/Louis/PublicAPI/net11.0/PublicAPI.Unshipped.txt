@@ -75,11 +75,41 @@ Louis.DateTimeExtensions.extension(System.DateTime).GetStartOfWeek() -> System.D
 Louis.DateTimeExtensions.extension(System.DateTime).GetStartOfWeek(System.DayOfWeek firstDayOfWeek) -> System.DateTime
 Louis.DateTimeExtensions.extension(System.DateTime).GetStartOfWeek(System.Globalization.CultureInfo! culture) -> System.DateTime
 Louis.DateTimeExtensions.extension(System.DateTime).GetStartOfWeek(System.Globalization.DateTimeFormatInfo! dateTimeFormat) -> System.DateTime
+Louis.Diagnostics.ArgumentExceptionExtensions
+Louis.Diagnostics.ArgumentExceptionExtensions.extension(System.ArgumentException!)
+Louis.Diagnostics.ArgumentNullExceptionExtensions
+Louis.Diagnostics.ArgumentNullExceptionExtensions.extension(System.ArgumentNullException!)
+Louis.Diagnostics.ArgumentOutOfRangeExceptionExtensions
+Louis.Diagnostics.ArgumentOutOfRangeExceptionExtensions.extension(System.ArgumentOutOfRangeException!)
+Louis.Diagnostics.DirectoryNotFoundExceptionExtensions
+Louis.Diagnostics.DirectoryNotFoundExceptionExtensions.extension(System.IO.DirectoryNotFoundException!)
+Louis.Diagnostics.EndOfStreamExceptionExtensions
+Louis.Diagnostics.EndOfStreamExceptionExtensions.extension(System.IO.EndOfStreamException!)
 Louis.Diagnostics.ExceptionExtensions.extension(System.Exception!)
 Louis.Diagnostics.ExceptionExtensions.extension(System.Exception!).AnyCausingException(System.Func<System.Exception!, bool>! predicate) -> bool
 Louis.Diagnostics.ExceptionExtensions.extension(System.Exception!).GetCausingExceptions() -> System.Collections.Generic.IEnumerable<System.Exception!>!
 Louis.Diagnostics.ExceptionExtensions.extension(System.Exception!).IsCriticalError() -> bool
 Louis.Diagnostics.ExceptionExtensions.extension(System.Exception!).Rethrow() -> void
+Louis.Diagnostics.FileNotFoundExceptionExtensions
+Louis.Diagnostics.FileNotFoundExceptionExtensions.extension(System.IO.FileNotFoundException!)
+Louis.Diagnostics.FormatExceptionExtensions
+Louis.Diagnostics.FormatExceptionExtensions.extension(System.FormatException!)
+Louis.Diagnostics.InvalidDataExceptionExtensions
+Louis.Diagnostics.InvalidDataExceptionExtensions.extension(System.IO.InvalidDataException!)
+Louis.Diagnostics.InvalidOperationExceptionExtensions
+Louis.Diagnostics.InvalidOperationExceptionExtensions.extension(System.InvalidOperationException!)
+Louis.Diagnostics.IOExceptionExtensions
+Louis.Diagnostics.IOExceptionExtensions.extension(System.IO.IOException!)
+Louis.Diagnostics.KeyNotFoundExceptionExtensions
+Louis.Diagnostics.KeyNotFoundExceptionExtensions.extension(System.Collections.Generic.KeyNotFoundException!)
+Louis.Diagnostics.NotImplementedExceptionExtensions
+Louis.Diagnostics.NotImplementedExceptionExtensions.extension(System.NotImplementedException!)
+Louis.Diagnostics.NotSupportedExceptionExtensions
+Louis.Diagnostics.NotSupportedExceptionExtensions.extension(System.NotSupportedException!)
+Louis.Diagnostics.ObjectDisposedExceptionExtensions
+Louis.Diagnostics.ObjectDisposedExceptionExtensions.extension(System.ObjectDisposedException!)
+Louis.Diagnostics.OperationCanceledExceptionExtensions
+Louis.Diagnostics.OperationCanceledExceptionExtensions.extension(System.OperationCanceledException!)
 Louis.Diagnostics.Param
 Louis.Diagnostics.Param<T>
 Louis.Diagnostics.Param<T>.Name.get -> string!
@@ -273,6 +303,8 @@ Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T[]!>).Ha
 Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T[]!>).HasSizeLessThanOrEqualTo(T[]! other, string? message = null) -> Louis.Diagnostics.Param<T[]!>
 Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T[]!>).HasSizeNotEqualTo(int size, string? message = null) -> Louis.Diagnostics.Param<T[]!>
 Louis.Diagnostics.ParamExtensions.extension<T>(Louis.Diagnostics.Param<T[]!>).NotEmpty(string? message = null) -> Louis.Diagnostics.Param<T[]!>
+Louis.Diagnostics.PlatformNotSupportedExceptionExtensions
+Louis.Diagnostics.PlatformNotSupportedExceptionExtensions.extension(System.PlatformNotSupportedException!)
 Louis.Diagnostics.ReadOnlySpanParam<T>
 Louis.Diagnostics.ReadOnlySpanParam<T>.Name.get -> string!
 Louis.Diagnostics.ReadOnlySpanParam<T>.ReadOnlySpanParam() -> void
@@ -329,6 +361,12 @@ Louis.Diagnostics.ThrowNewForAttribute.ExceptionType.get -> System.Type!
 Louis.Diagnostics.ThrowNewForAttribute.Public.get -> bool
 Louis.Diagnostics.ThrowNewForAttribute.Public.set -> void
 Louis.Diagnostics.ThrowNewForAttribute.ThrowNewForAttribute(System.Type! exceptionType) -> void
+Louis.Diagnostics.TimeoutExceptionExtensions
+Louis.Diagnostics.TimeoutExceptionExtensions.extension(System.TimeoutException!)
+Louis.Diagnostics.UnauthorizedAccessExceptionExtensions
+Louis.Diagnostics.UnauthorizedAccessExceptionExtensions.extension(System.UnauthorizedAccessException!)
+Louis.Diagnostics.Win32ExceptionExtensions
+Louis.Diagnostics.Win32ExceptionExtensions.extension(System.ComponentModel.Win32Exception!)
 Louis.Fluency.FluentExtensions.extension<T>(T)
 Louis.Fluency.FluentExtensions.extension<T>(T).Chain(Louis.Fluency.FluentAction<T>! func) -> T
 Louis.Fluency.FluentExtensions.extension<T>(T).Chain<TArg1, TArg2, TArg3, TArg4>(TArg1 arg1, TArg2 arg2, TArg3 arg3, TArg4 arg4, Louis.Fluency.FluentAction<T, TArg1, TArg2, TArg3, TArg4>! func) -> T
@@ -507,6 +545,238 @@ Louis.Text.TrueConditionInterpolatedStringHandler.ToStringAndClear() -> string!
 Louis.Text.TrueConditionInterpolatedStringHandler.TrueConditionInterpolatedStringHandler() -> void
 Louis.Text.TrueConditionInterpolatedStringHandler.TrueConditionInterpolatedStringHandler(int literalLength, int formattedCount, bool condition, out bool shouldAppend) -> void
 Louis.Text.TrueConditionInterpolatedStringHandler.TrueConditionInterpolatedStringHandler(int literalLength, int formattedCount, Louis.Diagnostics.Param<bool> param, out bool shouldAppend) -> void
+static Louis.Diagnostics.ArgumentExceptionExtensions.extension(System.ArgumentException!).ThrowNew() -> void
+static Louis.Diagnostics.ArgumentExceptionExtensions.extension(System.ArgumentException!).ThrowNew(string? message) -> void
+static Louis.Diagnostics.ArgumentExceptionExtensions.extension(System.ArgumentException!).ThrowNew(string? message, string? paramName) -> void
+static Louis.Diagnostics.ArgumentExceptionExtensions.extension(System.ArgumentException!).ThrowNew(string? message, string? paramName, System.Exception? innerException) -> void
+static Louis.Diagnostics.ArgumentExceptionExtensions.extension(System.ArgumentException!).ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.ArgumentExceptionExtensions.extension(System.ArgumentException!).ThrowNew<T>() -> T
+static Louis.Diagnostics.ArgumentExceptionExtensions.extension(System.ArgumentException!).ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.ArgumentExceptionExtensions.extension(System.ArgumentException!).ThrowNew<T>(string? message, string? paramName) -> T
+static Louis.Diagnostics.ArgumentExceptionExtensions.extension(System.ArgumentException!).ThrowNew<T>(string? message, string? paramName, System.Exception? innerException) -> T
+static Louis.Diagnostics.ArgumentExceptionExtensions.extension(System.ArgumentException!).ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.ArgumentExceptionExtensions.ThrowNew() -> void
+static Louis.Diagnostics.ArgumentExceptionExtensions.ThrowNew(string? message) -> void
+static Louis.Diagnostics.ArgumentExceptionExtensions.ThrowNew(string? message, string? paramName) -> void
+static Louis.Diagnostics.ArgumentExceptionExtensions.ThrowNew(string? message, string? paramName, System.Exception? innerException) -> void
+static Louis.Diagnostics.ArgumentExceptionExtensions.ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.ArgumentExceptionExtensions.ThrowNew<T>() -> T
+static Louis.Diagnostics.ArgumentExceptionExtensions.ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.ArgumentExceptionExtensions.ThrowNew<T>(string? message, string? paramName) -> T
+static Louis.Diagnostics.ArgumentExceptionExtensions.ThrowNew<T>(string? message, string? paramName, System.Exception? innerException) -> T
+static Louis.Diagnostics.ArgumentExceptionExtensions.ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.ArgumentNullExceptionExtensions.extension(System.ArgumentNullException!).ThrowNew() -> void
+static Louis.Diagnostics.ArgumentNullExceptionExtensions.extension(System.ArgumentNullException!).ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.ArgumentNullExceptionExtensions.extension(System.ArgumentNullException!).ThrowNew(string? paramName) -> void
+static Louis.Diagnostics.ArgumentNullExceptionExtensions.extension(System.ArgumentNullException!).ThrowNew(string? paramName, string? message) -> void
+static Louis.Diagnostics.ArgumentNullExceptionExtensions.extension(System.ArgumentNullException!).ThrowNew<T>() -> T
+static Louis.Diagnostics.ArgumentNullExceptionExtensions.extension(System.ArgumentNullException!).ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.ArgumentNullExceptionExtensions.extension(System.ArgumentNullException!).ThrowNew<T>(string? paramName) -> T
+static Louis.Diagnostics.ArgumentNullExceptionExtensions.extension(System.ArgumentNullException!).ThrowNew<T>(string? paramName, string? message) -> T
+static Louis.Diagnostics.ArgumentNullExceptionExtensions.ThrowNew() -> void
+static Louis.Diagnostics.ArgumentNullExceptionExtensions.ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.ArgumentNullExceptionExtensions.ThrowNew(string? paramName) -> void
+static Louis.Diagnostics.ArgumentNullExceptionExtensions.ThrowNew(string? paramName, string? message) -> void
+static Louis.Diagnostics.ArgumentNullExceptionExtensions.ThrowNew<T>() -> T
+static Louis.Diagnostics.ArgumentNullExceptionExtensions.ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.ArgumentNullExceptionExtensions.ThrowNew<T>(string? paramName) -> T
+static Louis.Diagnostics.ArgumentNullExceptionExtensions.ThrowNew<T>(string? paramName, string? message) -> T
+static Louis.Diagnostics.ArgumentOutOfRangeExceptionExtensions.extension(System.ArgumentOutOfRangeException!).ThrowNew() -> void
+static Louis.Diagnostics.ArgumentOutOfRangeExceptionExtensions.extension(System.ArgumentOutOfRangeException!).ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.ArgumentOutOfRangeExceptionExtensions.extension(System.ArgumentOutOfRangeException!).ThrowNew(string? paramName) -> void
+static Louis.Diagnostics.ArgumentOutOfRangeExceptionExtensions.extension(System.ArgumentOutOfRangeException!).ThrowNew(string? paramName, object? actualValue, string? message) -> void
+static Louis.Diagnostics.ArgumentOutOfRangeExceptionExtensions.extension(System.ArgumentOutOfRangeException!).ThrowNew(string? paramName, string? message) -> void
+static Louis.Diagnostics.ArgumentOutOfRangeExceptionExtensions.extension(System.ArgumentOutOfRangeException!).ThrowNew<T>() -> T
+static Louis.Diagnostics.ArgumentOutOfRangeExceptionExtensions.extension(System.ArgumentOutOfRangeException!).ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.ArgumentOutOfRangeExceptionExtensions.extension(System.ArgumentOutOfRangeException!).ThrowNew<T>(string? paramName) -> T
+static Louis.Diagnostics.ArgumentOutOfRangeExceptionExtensions.extension(System.ArgumentOutOfRangeException!).ThrowNew<T>(string? paramName, object? actualValue, string? message) -> T
+static Louis.Diagnostics.ArgumentOutOfRangeExceptionExtensions.extension(System.ArgumentOutOfRangeException!).ThrowNew<T>(string? paramName, string? message) -> T
+static Louis.Diagnostics.ArgumentOutOfRangeExceptionExtensions.ThrowNew() -> void
+static Louis.Diagnostics.ArgumentOutOfRangeExceptionExtensions.ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.ArgumentOutOfRangeExceptionExtensions.ThrowNew(string? paramName) -> void
+static Louis.Diagnostics.ArgumentOutOfRangeExceptionExtensions.ThrowNew(string? paramName, object? actualValue, string? message) -> void
+static Louis.Diagnostics.ArgumentOutOfRangeExceptionExtensions.ThrowNew(string? paramName, string? message) -> void
+static Louis.Diagnostics.ArgumentOutOfRangeExceptionExtensions.ThrowNew<T>() -> T
+static Louis.Diagnostics.ArgumentOutOfRangeExceptionExtensions.ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.ArgumentOutOfRangeExceptionExtensions.ThrowNew<T>(string? paramName) -> T
+static Louis.Diagnostics.ArgumentOutOfRangeExceptionExtensions.ThrowNew<T>(string? paramName, object? actualValue, string? message) -> T
+static Louis.Diagnostics.ArgumentOutOfRangeExceptionExtensions.ThrowNew<T>(string? paramName, string? message) -> T
+static Louis.Diagnostics.DirectoryNotFoundExceptionExtensions.extension(System.IO.DirectoryNotFoundException!).ThrowNew() -> void
+static Louis.Diagnostics.DirectoryNotFoundExceptionExtensions.extension(System.IO.DirectoryNotFoundException!).ThrowNew(string? message) -> void
+static Louis.Diagnostics.DirectoryNotFoundExceptionExtensions.extension(System.IO.DirectoryNotFoundException!).ThrowNew(string? message, string? directoryPath) -> void
+static Louis.Diagnostics.DirectoryNotFoundExceptionExtensions.extension(System.IO.DirectoryNotFoundException!).ThrowNew(string? message, string? directoryPath, System.Exception? innerException) -> void
+static Louis.Diagnostics.DirectoryNotFoundExceptionExtensions.extension(System.IO.DirectoryNotFoundException!).ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.DirectoryNotFoundExceptionExtensions.extension(System.IO.DirectoryNotFoundException!).ThrowNew<T>() -> T
+static Louis.Diagnostics.DirectoryNotFoundExceptionExtensions.extension(System.IO.DirectoryNotFoundException!).ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.DirectoryNotFoundExceptionExtensions.extension(System.IO.DirectoryNotFoundException!).ThrowNew<T>(string? message, string? directoryPath) -> T
+static Louis.Diagnostics.DirectoryNotFoundExceptionExtensions.extension(System.IO.DirectoryNotFoundException!).ThrowNew<T>(string? message, string? directoryPath, System.Exception? innerException) -> T
+static Louis.Diagnostics.DirectoryNotFoundExceptionExtensions.extension(System.IO.DirectoryNotFoundException!).ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.DirectoryNotFoundExceptionExtensions.ThrowNew() -> void
+static Louis.Diagnostics.DirectoryNotFoundExceptionExtensions.ThrowNew(string? message) -> void
+static Louis.Diagnostics.DirectoryNotFoundExceptionExtensions.ThrowNew(string? message, string? directoryPath) -> void
+static Louis.Diagnostics.DirectoryNotFoundExceptionExtensions.ThrowNew(string? message, string? directoryPath, System.Exception? innerException) -> void
+static Louis.Diagnostics.DirectoryNotFoundExceptionExtensions.ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.DirectoryNotFoundExceptionExtensions.ThrowNew<T>() -> T
+static Louis.Diagnostics.DirectoryNotFoundExceptionExtensions.ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.DirectoryNotFoundExceptionExtensions.ThrowNew<T>(string? message, string? directoryPath) -> T
+static Louis.Diagnostics.DirectoryNotFoundExceptionExtensions.ThrowNew<T>(string? message, string? directoryPath, System.Exception? innerException) -> T
+static Louis.Diagnostics.DirectoryNotFoundExceptionExtensions.ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.EndOfStreamExceptionExtensions.extension(System.IO.EndOfStreamException!).ThrowNew() -> void
+static Louis.Diagnostics.EndOfStreamExceptionExtensions.extension(System.IO.EndOfStreamException!).ThrowNew(string? message) -> void
+static Louis.Diagnostics.EndOfStreamExceptionExtensions.extension(System.IO.EndOfStreamException!).ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.EndOfStreamExceptionExtensions.extension(System.IO.EndOfStreamException!).ThrowNew<T>() -> T
+static Louis.Diagnostics.EndOfStreamExceptionExtensions.extension(System.IO.EndOfStreamException!).ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.EndOfStreamExceptionExtensions.extension(System.IO.EndOfStreamException!).ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.EndOfStreamExceptionExtensions.ThrowNew() -> void
+static Louis.Diagnostics.EndOfStreamExceptionExtensions.ThrowNew(string? message) -> void
+static Louis.Diagnostics.EndOfStreamExceptionExtensions.ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.EndOfStreamExceptionExtensions.ThrowNew<T>() -> T
+static Louis.Diagnostics.EndOfStreamExceptionExtensions.ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.EndOfStreamExceptionExtensions.ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.FileNotFoundExceptionExtensions.extension(System.IO.FileNotFoundException!).ThrowNew() -> void
+static Louis.Diagnostics.FileNotFoundExceptionExtensions.extension(System.IO.FileNotFoundException!).ThrowNew(string? message) -> void
+static Louis.Diagnostics.FileNotFoundExceptionExtensions.extension(System.IO.FileNotFoundException!).ThrowNew(string? message, string? fileName) -> void
+static Louis.Diagnostics.FileNotFoundExceptionExtensions.extension(System.IO.FileNotFoundException!).ThrowNew(string? message, string? fileName, System.Exception? innerException) -> void
+static Louis.Diagnostics.FileNotFoundExceptionExtensions.extension(System.IO.FileNotFoundException!).ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.FileNotFoundExceptionExtensions.extension(System.IO.FileNotFoundException!).ThrowNew<T>() -> T
+static Louis.Diagnostics.FileNotFoundExceptionExtensions.extension(System.IO.FileNotFoundException!).ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.FileNotFoundExceptionExtensions.extension(System.IO.FileNotFoundException!).ThrowNew<T>(string? message, string? fileName) -> T
+static Louis.Diagnostics.FileNotFoundExceptionExtensions.extension(System.IO.FileNotFoundException!).ThrowNew<T>(string? message, string? fileName, System.Exception? innerException) -> T
+static Louis.Diagnostics.FileNotFoundExceptionExtensions.extension(System.IO.FileNotFoundException!).ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.FileNotFoundExceptionExtensions.ThrowNew() -> void
+static Louis.Diagnostics.FileNotFoundExceptionExtensions.ThrowNew(string? message) -> void
+static Louis.Diagnostics.FileNotFoundExceptionExtensions.ThrowNew(string? message, string? fileName) -> void
+static Louis.Diagnostics.FileNotFoundExceptionExtensions.ThrowNew(string? message, string? fileName, System.Exception? innerException) -> void
+static Louis.Diagnostics.FileNotFoundExceptionExtensions.ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.FileNotFoundExceptionExtensions.ThrowNew<T>() -> T
+static Louis.Diagnostics.FileNotFoundExceptionExtensions.ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.FileNotFoundExceptionExtensions.ThrowNew<T>(string? message, string? fileName) -> T
+static Louis.Diagnostics.FileNotFoundExceptionExtensions.ThrowNew<T>(string? message, string? fileName, System.Exception? innerException) -> T
+static Louis.Diagnostics.FileNotFoundExceptionExtensions.ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.FormatExceptionExtensions.extension(System.FormatException!).ThrowNew() -> void
+static Louis.Diagnostics.FormatExceptionExtensions.extension(System.FormatException!).ThrowNew(string? message) -> void
+static Louis.Diagnostics.FormatExceptionExtensions.extension(System.FormatException!).ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.FormatExceptionExtensions.extension(System.FormatException!).ThrowNew<T>() -> T
+static Louis.Diagnostics.FormatExceptionExtensions.extension(System.FormatException!).ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.FormatExceptionExtensions.extension(System.FormatException!).ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.FormatExceptionExtensions.ThrowNew() -> void
+static Louis.Diagnostics.FormatExceptionExtensions.ThrowNew(string? message) -> void
+static Louis.Diagnostics.FormatExceptionExtensions.ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.FormatExceptionExtensions.ThrowNew<T>() -> T
+static Louis.Diagnostics.FormatExceptionExtensions.ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.FormatExceptionExtensions.ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.InvalidDataExceptionExtensions.extension(System.IO.InvalidDataException!).ThrowNew() -> void
+static Louis.Diagnostics.InvalidDataExceptionExtensions.extension(System.IO.InvalidDataException!).ThrowNew(string? message) -> void
+static Louis.Diagnostics.InvalidDataExceptionExtensions.extension(System.IO.InvalidDataException!).ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.InvalidDataExceptionExtensions.extension(System.IO.InvalidDataException!).ThrowNew<T>() -> T
+static Louis.Diagnostics.InvalidDataExceptionExtensions.extension(System.IO.InvalidDataException!).ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.InvalidDataExceptionExtensions.extension(System.IO.InvalidDataException!).ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.InvalidDataExceptionExtensions.ThrowNew() -> void
+static Louis.Diagnostics.InvalidDataExceptionExtensions.ThrowNew(string? message) -> void
+static Louis.Diagnostics.InvalidDataExceptionExtensions.ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.InvalidDataExceptionExtensions.ThrowNew<T>() -> T
+static Louis.Diagnostics.InvalidDataExceptionExtensions.ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.InvalidDataExceptionExtensions.ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.InvalidOperationExceptionExtensions.extension(System.InvalidOperationException!).ThrowNew() -> void
+static Louis.Diagnostics.InvalidOperationExceptionExtensions.extension(System.InvalidOperationException!).ThrowNew(string? message) -> void
+static Louis.Diagnostics.InvalidOperationExceptionExtensions.extension(System.InvalidOperationException!).ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.InvalidOperationExceptionExtensions.extension(System.InvalidOperationException!).ThrowNew<T>() -> T
+static Louis.Diagnostics.InvalidOperationExceptionExtensions.extension(System.InvalidOperationException!).ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.InvalidOperationExceptionExtensions.extension(System.InvalidOperationException!).ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.InvalidOperationExceptionExtensions.ThrowNew() -> void
+static Louis.Diagnostics.InvalidOperationExceptionExtensions.ThrowNew(string? message) -> void
+static Louis.Diagnostics.InvalidOperationExceptionExtensions.ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.InvalidOperationExceptionExtensions.ThrowNew<T>() -> T
+static Louis.Diagnostics.InvalidOperationExceptionExtensions.ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.InvalidOperationExceptionExtensions.ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.IOExceptionExtensions.extension(System.IO.IOException!).ThrowNew() -> void
+static Louis.Diagnostics.IOExceptionExtensions.extension(System.IO.IOException!).ThrowNew(string? message) -> void
+static Louis.Diagnostics.IOExceptionExtensions.extension(System.IO.IOException!).ThrowNew(string? message, int hresult) -> void
+static Louis.Diagnostics.IOExceptionExtensions.extension(System.IO.IOException!).ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.IOExceptionExtensions.extension(System.IO.IOException!).ThrowNew<T>() -> T
+static Louis.Diagnostics.IOExceptionExtensions.extension(System.IO.IOException!).ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.IOExceptionExtensions.extension(System.IO.IOException!).ThrowNew<T>(string? message, int hresult) -> T
+static Louis.Diagnostics.IOExceptionExtensions.extension(System.IO.IOException!).ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.IOExceptionExtensions.ThrowNew() -> void
+static Louis.Diagnostics.IOExceptionExtensions.ThrowNew(string? message) -> void
+static Louis.Diagnostics.IOExceptionExtensions.ThrowNew(string? message, int hresult) -> void
+static Louis.Diagnostics.IOExceptionExtensions.ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.IOExceptionExtensions.ThrowNew<T>() -> T
+static Louis.Diagnostics.IOExceptionExtensions.ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.IOExceptionExtensions.ThrowNew<T>(string? message, int hresult) -> T
+static Louis.Diagnostics.IOExceptionExtensions.ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.KeyNotFoundExceptionExtensions.extension(System.Collections.Generic.KeyNotFoundException!).ThrowNew() -> void
+static Louis.Diagnostics.KeyNotFoundExceptionExtensions.extension(System.Collections.Generic.KeyNotFoundException!).ThrowNew(string? message) -> void
+static Louis.Diagnostics.KeyNotFoundExceptionExtensions.extension(System.Collections.Generic.KeyNotFoundException!).ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.KeyNotFoundExceptionExtensions.extension(System.Collections.Generic.KeyNotFoundException!).ThrowNew<T>() -> T
+static Louis.Diagnostics.KeyNotFoundExceptionExtensions.extension(System.Collections.Generic.KeyNotFoundException!).ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.KeyNotFoundExceptionExtensions.extension(System.Collections.Generic.KeyNotFoundException!).ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.KeyNotFoundExceptionExtensions.ThrowNew() -> void
+static Louis.Diagnostics.KeyNotFoundExceptionExtensions.ThrowNew(string? message) -> void
+static Louis.Diagnostics.KeyNotFoundExceptionExtensions.ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.KeyNotFoundExceptionExtensions.ThrowNew<T>() -> T
+static Louis.Diagnostics.KeyNotFoundExceptionExtensions.ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.KeyNotFoundExceptionExtensions.ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.NotImplementedExceptionExtensions.extension(System.NotImplementedException!).ThrowNew() -> void
+static Louis.Diagnostics.NotImplementedExceptionExtensions.extension(System.NotImplementedException!).ThrowNew(string? message) -> void
+static Louis.Diagnostics.NotImplementedExceptionExtensions.extension(System.NotImplementedException!).ThrowNew(string? message, System.Exception? inner) -> void
+static Louis.Diagnostics.NotImplementedExceptionExtensions.extension(System.NotImplementedException!).ThrowNew<T>() -> T
+static Louis.Diagnostics.NotImplementedExceptionExtensions.extension(System.NotImplementedException!).ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.NotImplementedExceptionExtensions.extension(System.NotImplementedException!).ThrowNew<T>(string? message, System.Exception? inner) -> T
+static Louis.Diagnostics.NotImplementedExceptionExtensions.ThrowNew() -> void
+static Louis.Diagnostics.NotImplementedExceptionExtensions.ThrowNew(string? message) -> void
+static Louis.Diagnostics.NotImplementedExceptionExtensions.ThrowNew(string? message, System.Exception? inner) -> void
+static Louis.Diagnostics.NotImplementedExceptionExtensions.ThrowNew<T>() -> T
+static Louis.Diagnostics.NotImplementedExceptionExtensions.ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.NotImplementedExceptionExtensions.ThrowNew<T>(string? message, System.Exception? inner) -> T
+static Louis.Diagnostics.NotSupportedExceptionExtensions.extension(System.NotSupportedException!).ThrowNew() -> void
+static Louis.Diagnostics.NotSupportedExceptionExtensions.extension(System.NotSupportedException!).ThrowNew(string? message) -> void
+static Louis.Diagnostics.NotSupportedExceptionExtensions.extension(System.NotSupportedException!).ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.NotSupportedExceptionExtensions.extension(System.NotSupportedException!).ThrowNew<T>() -> T
+static Louis.Diagnostics.NotSupportedExceptionExtensions.extension(System.NotSupportedException!).ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.NotSupportedExceptionExtensions.extension(System.NotSupportedException!).ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.NotSupportedExceptionExtensions.ThrowNew() -> void
+static Louis.Diagnostics.NotSupportedExceptionExtensions.ThrowNew(string? message) -> void
+static Louis.Diagnostics.NotSupportedExceptionExtensions.ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.NotSupportedExceptionExtensions.ThrowNew<T>() -> T
+static Louis.Diagnostics.NotSupportedExceptionExtensions.ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.NotSupportedExceptionExtensions.ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.ObjectDisposedExceptionExtensions.extension(System.ObjectDisposedException!).ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.ObjectDisposedExceptionExtensions.extension(System.ObjectDisposedException!).ThrowNew(string? objectName) -> void
+static Louis.Diagnostics.ObjectDisposedExceptionExtensions.extension(System.ObjectDisposedException!).ThrowNew(string? objectName, string? message) -> void
+static Louis.Diagnostics.ObjectDisposedExceptionExtensions.extension(System.ObjectDisposedException!).ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.ObjectDisposedExceptionExtensions.extension(System.ObjectDisposedException!).ThrowNew<T>(string? objectName) -> T
+static Louis.Diagnostics.ObjectDisposedExceptionExtensions.extension(System.ObjectDisposedException!).ThrowNew<T>(string? objectName, string? message) -> T
+static Louis.Diagnostics.ObjectDisposedExceptionExtensions.ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.ObjectDisposedExceptionExtensions.ThrowNew(string? objectName) -> void
+static Louis.Diagnostics.ObjectDisposedExceptionExtensions.ThrowNew(string? objectName, string? message) -> void
+static Louis.Diagnostics.ObjectDisposedExceptionExtensions.ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.ObjectDisposedExceptionExtensions.ThrowNew<T>(string? objectName) -> T
+static Louis.Diagnostics.ObjectDisposedExceptionExtensions.ThrowNew<T>(string? objectName, string? message) -> T
+static Louis.Diagnostics.OperationCanceledExceptionExtensions.extension(System.OperationCanceledException!).ThrowNew() -> void
+static Louis.Diagnostics.OperationCanceledExceptionExtensions.extension(System.OperationCanceledException!).ThrowNew(string? message) -> void
+static Louis.Diagnostics.OperationCanceledExceptionExtensions.extension(System.OperationCanceledException!).ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.OperationCanceledExceptionExtensions.extension(System.OperationCanceledException!).ThrowNew(string? message, System.Exception? innerException, System.Threading.CancellationToken token) -> void
+static Louis.Diagnostics.OperationCanceledExceptionExtensions.extension(System.OperationCanceledException!).ThrowNew(string? message, System.Threading.CancellationToken token) -> void
+static Louis.Diagnostics.OperationCanceledExceptionExtensions.extension(System.OperationCanceledException!).ThrowNew(System.Threading.CancellationToken token) -> void
+static Louis.Diagnostics.OperationCanceledExceptionExtensions.extension(System.OperationCanceledException!).ThrowNew<T>() -> T
+static Louis.Diagnostics.OperationCanceledExceptionExtensions.extension(System.OperationCanceledException!).ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.OperationCanceledExceptionExtensions.extension(System.OperationCanceledException!).ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.OperationCanceledExceptionExtensions.extension(System.OperationCanceledException!).ThrowNew<T>(string? message, System.Exception? innerException, System.Threading.CancellationToken token) -> T
+static Louis.Diagnostics.OperationCanceledExceptionExtensions.extension(System.OperationCanceledException!).ThrowNew<T>(string? message, System.Threading.CancellationToken token) -> T
+static Louis.Diagnostics.OperationCanceledExceptionExtensions.extension(System.OperationCanceledException!).ThrowNew<T>(System.Threading.CancellationToken token) -> T
+static Louis.Diagnostics.OperationCanceledExceptionExtensions.ThrowNew() -> void
+static Louis.Diagnostics.OperationCanceledExceptionExtensions.ThrowNew(string? message) -> void
+static Louis.Diagnostics.OperationCanceledExceptionExtensions.ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.OperationCanceledExceptionExtensions.ThrowNew(string? message, System.Exception? innerException, System.Threading.CancellationToken token) -> void
+static Louis.Diagnostics.OperationCanceledExceptionExtensions.ThrowNew(string? message, System.Threading.CancellationToken token) -> void
+static Louis.Diagnostics.OperationCanceledExceptionExtensions.ThrowNew(System.Threading.CancellationToken token) -> void
+static Louis.Diagnostics.OperationCanceledExceptionExtensions.ThrowNew<T>() -> T
+static Louis.Diagnostics.OperationCanceledExceptionExtensions.ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.OperationCanceledExceptionExtensions.ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.OperationCanceledExceptionExtensions.ThrowNew<T>(string? message, System.Exception? innerException, System.Threading.CancellationToken token) -> T
+static Louis.Diagnostics.OperationCanceledExceptionExtensions.ThrowNew<T>(string? message, System.Threading.CancellationToken token) -> T
+static Louis.Diagnostics.OperationCanceledExceptionExtensions.ThrowNew<T>(System.Threading.CancellationToken token) -> T
 static Louis.Diagnostics.Param.Check<T>(System.ReadOnlySpan<T> value, string! name = "") -> Louis.Diagnostics.ReadOnlySpanParam<T>
 static Louis.Diagnostics.Param.Check<T>(System.Span<T> value, string! name = "") -> Louis.Diagnostics.SpanParam<T>
 static Louis.Diagnostics.Param.Check<T>(T value, string! name = "") -> Louis.Diagnostics.Param<T>
@@ -685,6 +955,18 @@ static Louis.Diagnostics.ParamExtensions.ReferenceNotEqualTo<T>(this Louis.Diagn
 static Louis.Diagnostics.ParamExtensions.True(this Louis.Diagnostics.Param<bool> this, ref Louis.Text.FalseConditionInterpolatedStringHandler message) -> Louis.Diagnostics.Param<bool>
 static Louis.Diagnostics.ParamExtensions.True(this Louis.Diagnostics.Param<bool> this, string? message = null) -> Louis.Diagnostics.Param<bool>
 static Louis.Diagnostics.ParamExtensions.WhiteSpace(this Louis.Diagnostics.Param<string!> this, string? message = null) -> Louis.Diagnostics.Param<string!>
+static Louis.Diagnostics.PlatformNotSupportedExceptionExtensions.extension(System.PlatformNotSupportedException!).ThrowNew() -> void
+static Louis.Diagnostics.PlatformNotSupportedExceptionExtensions.extension(System.PlatformNotSupportedException!).ThrowNew(string? message) -> void
+static Louis.Diagnostics.PlatformNotSupportedExceptionExtensions.extension(System.PlatformNotSupportedException!).ThrowNew(string? message, System.Exception? inner) -> void
+static Louis.Diagnostics.PlatformNotSupportedExceptionExtensions.extension(System.PlatformNotSupportedException!).ThrowNew<T>() -> T
+static Louis.Diagnostics.PlatformNotSupportedExceptionExtensions.extension(System.PlatformNotSupportedException!).ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.PlatformNotSupportedExceptionExtensions.extension(System.PlatformNotSupportedException!).ThrowNew<T>(string? message, System.Exception? inner) -> T
+static Louis.Diagnostics.PlatformNotSupportedExceptionExtensions.ThrowNew() -> void
+static Louis.Diagnostics.PlatformNotSupportedExceptionExtensions.ThrowNew(string? message) -> void
+static Louis.Diagnostics.PlatformNotSupportedExceptionExtensions.ThrowNew(string? message, System.Exception? inner) -> void
+static Louis.Diagnostics.PlatformNotSupportedExceptionExtensions.ThrowNew<T>() -> T
+static Louis.Diagnostics.PlatformNotSupportedExceptionExtensions.ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.PlatformNotSupportedExceptionExtensions.ThrowNew<T>(string? message, System.Exception? inner) -> T
 static Louis.Diagnostics.ReadOnlySpanParamExtensions.Checked<T>(this Louis.Diagnostics.ReadOnlySpanParam<T> this, Louis.ReadOnlySpanPredicate<T>! predicate, string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<T>
 static Louis.Diagnostics.ReadOnlySpanParamExtensions.Empty<T>(this Louis.Diagnostics.ReadOnlySpanParam<T> this, string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<T>
 static Louis.Diagnostics.ReadOnlySpanParamExtensions.HasSizeEqualTo<T>(this Louis.Diagnostics.ReadOnlySpanParam<T> this, int size, string? message = null) -> Louis.Diagnostics.ReadOnlySpanParam<T>
@@ -712,6 +994,50 @@ static Louis.Diagnostics.SpanParamExtensions.HasSizeNotEqualTo<T>(this Louis.Dia
 static Louis.Diagnostics.SpanParamExtensions.NotEmpty<T>(this Louis.Diagnostics.SpanParam<T> this, string? message = null) -> Louis.Diagnostics.SpanParam<T>
 static Louis.Diagnostics.SpanParamExtensions.NotWhiteSpace(this Louis.Diagnostics.SpanParam<char> this, string? message = null) -> Louis.Diagnostics.SpanParam<char>
 static Louis.Diagnostics.SpanParamExtensions.WhiteSpace(this Louis.Diagnostics.SpanParam<char> this, string? message = null) -> Louis.Diagnostics.SpanParam<char>
+static Louis.Diagnostics.TimeoutExceptionExtensions.extension(System.TimeoutException!).ThrowNew() -> void
+static Louis.Diagnostics.TimeoutExceptionExtensions.extension(System.TimeoutException!).ThrowNew(string? message) -> void
+static Louis.Diagnostics.TimeoutExceptionExtensions.extension(System.TimeoutException!).ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.TimeoutExceptionExtensions.extension(System.TimeoutException!).ThrowNew<T>() -> T
+static Louis.Diagnostics.TimeoutExceptionExtensions.extension(System.TimeoutException!).ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.TimeoutExceptionExtensions.extension(System.TimeoutException!).ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.TimeoutExceptionExtensions.ThrowNew() -> void
+static Louis.Diagnostics.TimeoutExceptionExtensions.ThrowNew(string? message) -> void
+static Louis.Diagnostics.TimeoutExceptionExtensions.ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.TimeoutExceptionExtensions.ThrowNew<T>() -> T
+static Louis.Diagnostics.TimeoutExceptionExtensions.ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.TimeoutExceptionExtensions.ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.UnauthorizedAccessExceptionExtensions.extension(System.UnauthorizedAccessException!).ThrowNew() -> void
+static Louis.Diagnostics.UnauthorizedAccessExceptionExtensions.extension(System.UnauthorizedAccessException!).ThrowNew(string? message) -> void
+static Louis.Diagnostics.UnauthorizedAccessExceptionExtensions.extension(System.UnauthorizedAccessException!).ThrowNew(string? message, System.Exception? inner) -> void
+static Louis.Diagnostics.UnauthorizedAccessExceptionExtensions.extension(System.UnauthorizedAccessException!).ThrowNew<T>() -> T
+static Louis.Diagnostics.UnauthorizedAccessExceptionExtensions.extension(System.UnauthorizedAccessException!).ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.UnauthorizedAccessExceptionExtensions.extension(System.UnauthorizedAccessException!).ThrowNew<T>(string? message, System.Exception? inner) -> T
+static Louis.Diagnostics.UnauthorizedAccessExceptionExtensions.ThrowNew() -> void
+static Louis.Diagnostics.UnauthorizedAccessExceptionExtensions.ThrowNew(string? message) -> void
+static Louis.Diagnostics.UnauthorizedAccessExceptionExtensions.ThrowNew(string? message, System.Exception? inner) -> void
+static Louis.Diagnostics.UnauthorizedAccessExceptionExtensions.ThrowNew<T>() -> T
+static Louis.Diagnostics.UnauthorizedAccessExceptionExtensions.ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.UnauthorizedAccessExceptionExtensions.ThrowNew<T>(string? message, System.Exception? inner) -> T
+static Louis.Diagnostics.Win32ExceptionExtensions.extension(System.ComponentModel.Win32Exception!).ThrowNew() -> void
+static Louis.Diagnostics.Win32ExceptionExtensions.extension(System.ComponentModel.Win32Exception!).ThrowNew(int error) -> void
+static Louis.Diagnostics.Win32ExceptionExtensions.extension(System.ComponentModel.Win32Exception!).ThrowNew(int error, string? message) -> void
+static Louis.Diagnostics.Win32ExceptionExtensions.extension(System.ComponentModel.Win32Exception!).ThrowNew(string? message) -> void
+static Louis.Diagnostics.Win32ExceptionExtensions.extension(System.ComponentModel.Win32Exception!).ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.Win32ExceptionExtensions.extension(System.ComponentModel.Win32Exception!).ThrowNew<T>() -> T
+static Louis.Diagnostics.Win32ExceptionExtensions.extension(System.ComponentModel.Win32Exception!).ThrowNew<T>(int error) -> T
+static Louis.Diagnostics.Win32ExceptionExtensions.extension(System.ComponentModel.Win32Exception!).ThrowNew<T>(int error, string? message) -> T
+static Louis.Diagnostics.Win32ExceptionExtensions.extension(System.ComponentModel.Win32Exception!).ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.Win32ExceptionExtensions.extension(System.ComponentModel.Win32Exception!).ThrowNew<T>(string? message, System.Exception? innerException) -> T
+static Louis.Diagnostics.Win32ExceptionExtensions.ThrowNew() -> void
+static Louis.Diagnostics.Win32ExceptionExtensions.ThrowNew(int error) -> void
+static Louis.Diagnostics.Win32ExceptionExtensions.ThrowNew(int error, string? message) -> void
+static Louis.Diagnostics.Win32ExceptionExtensions.ThrowNew(string? message) -> void
+static Louis.Diagnostics.Win32ExceptionExtensions.ThrowNew(string? message, System.Exception? innerException) -> void
+static Louis.Diagnostics.Win32ExceptionExtensions.ThrowNew<T>() -> T
+static Louis.Diagnostics.Win32ExceptionExtensions.ThrowNew<T>(int error) -> T
+static Louis.Diagnostics.Win32ExceptionExtensions.ThrowNew<T>(int error, string? message) -> T
+static Louis.Diagnostics.Win32ExceptionExtensions.ThrowNew<T>(string? message) -> T
+static Louis.Diagnostics.Win32ExceptionExtensions.ThrowNew<T>(string? message, System.Exception? innerException) -> T
 static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, System.Collections.Generic.IEqualityComparer<TValue>! comparer, TValue value, System.Action<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
 static Louis.Fluency.FluentExtensions.Switch<T, TValue>(this T this, TValue value, System.Action<T>? default, params (TValue Comparand, System.Action<T>? Action)[]! cases) -> T
 static Louis.IO.TextFileUtility.ReadAllText(string! path, System.Text.Encoding? fallbackEncoding = null) -> Louis.IO.TextFileContent!
