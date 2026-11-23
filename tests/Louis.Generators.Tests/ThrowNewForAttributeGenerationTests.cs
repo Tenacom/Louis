@@ -1,8 +1,28 @@
 // Copyright (c) Tenacom and contributors. Licensed under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
+using Microsoft.CodeAnalysis;
+
 internal sealed class ThrowNewForAttributeGenerationTests
 {
+    // A class that gets methods, for the tests on what the references of a project declare.
+    private const string ExtensionClassSource = """
+        using System;
+        using Louis.Diagnostics;
+
+        [ThrowNewFor(typeof(ArgumentException))]
+        internal static partial class X;
+        """;
+
+    // A library that declares DoesNotReturnAttribute as a public type, for a framework that lacks it.
+    private const string PublicDoesNotReturnAttribute = """
+        namespace System.Diagnostics.CodeAnalysis
+        {
+            [AttributeUsage(AttributeTargets.Method, Inherited = false)]
+            public sealed class DoesNotReturnAttribute : Attribute;
+        }
+        """;
+
     [Test]
     public async Task Class_GetsTwoExtensionMethodsForEachPublicConstructor()
     {
@@ -297,5 +317,55 @@ internal sealed class ThrowNewForAttributeGenerationTests
         var text = run.Files["X.ThrowNew.g.cs"];
         await Assert.That(text).Contains("[global::System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute]");
         await Assert.That(text).DoesNotContain("StackTraceHidden");
+    }
+
+    // The runtime that runs the tests declares the attribute too. The compiler takes the type of the project, with CS0436.
+    [Test]
+    public async Task AttributeDeclaredByProjectAndByReference_GoesOnMethods()
+    {
+        const string source = """
+            using System;
+            using Louis.Diagnostics;
+
+            namespace System.Diagnostics.CodeAnalysis
+            {
+                [AttributeUsage(AttributeTargets.Method, Inherited = false)]
+                internal sealed class DoesNotReturnAttribute : Attribute;
+            }
+
+            [ThrowNewFor(typeof(ArgumentException))]
+            internal static partial class X;
+            """;
+
+        var run = TestCompiler.RunGenerator(TestCompiler.Compile(source));
+
+        await Assert.That(run.Problems).ContainsOnly(static problem => problem.Contains("CS0436", StringComparison.Ordinal));
+        await Assert.That(run.Files["X.ThrowNew.g.cs"]).Contains("[global::System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute]");
+    }
+
+    [Test]
+    public async Task AttributeDeclaredByOneReference_GoesOnMethods()
+    {
+        var library = TestCompiler.CompileLibraryForNetStandard20("First", PublicDoesNotReturnAttribute);
+
+        var run = TestCompiler.RunGenerator(TestCompiler.CompileForNetStandard20([library], ExtensionClassSource, TestCompiler.AttributeSource));
+
+        await Assert.That(run.Problems).IsEmpty();
+        await Assert.That(run.Files["X.ThrowNew.g.cs"]).Contains("[global::System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute]");
+    }
+
+    // The compiler rejects the name of a type that two references declare, with CS0433.
+    [Test]
+    public async Task AttributeDeclaredByTwoReferences_IsLeftOut()
+    {
+        MetadataReference[] libraries = [
+            TestCompiler.CompileLibraryForNetStandard20("First", PublicDoesNotReturnAttribute),
+            TestCompiler.CompileLibraryForNetStandard20("Second", PublicDoesNotReturnAttribute),
+        ];
+
+        var run = TestCompiler.RunGenerator(TestCompiler.CompileForNetStandard20(libraries, ExtensionClassSource, TestCompiler.AttributeSource));
+
+        await Assert.That(run.Problems).IsEmpty();
+        await Assert.That(run.Files["X.ThrowNew.g.cs"]).DoesNotContain("DoesNotReturn");
     }
 }

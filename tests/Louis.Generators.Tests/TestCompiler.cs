@@ -64,6 +64,33 @@ internal static class TestCompiler
         => Compile(sources, [.. NetStandard20.References.All], LanguageVersion.CSharp14);
 
     /// <summary>
+    /// Compiles source text against .NET Standard 2.0 and a set of libraries, with no reference to Louis.
+    /// </summary>
+    /// <param name="libraries">The libraries, as <see cref="CompileLibraryForNetStandard20"/> returns them.</param>
+    /// <param name="sources">The source texts. <see cref="AttributeSource"/> stands in for Louis.</param>
+    /// <returns>The compilation.</returns>
+    public static CSharpCompilation CompileForNetStandard20(IEnumerable<MetadataReference> libraries, params string[] sources)
+        => Compile(sources, [.. NetStandard20.References.All, .. libraries], LanguageVersion.CSharp14);
+
+    /// <summary>
+    /// Compiles source text into a library for .NET Standard 2.0.
+    /// </summary>
+    /// <param name="assemblyName">The name of the assembly of the library.</param>
+    /// <param name="source">The source text.</param>
+    /// <returns>A reference to the library.</returns>
+    public static MetadataReference CompileLibraryForNetStandard20(string assemblyName, string source)
+    {
+        using var image = new MemoryStream();
+        var result = Compile([source], [.. NetStandard20.References.All], LanguageVersion.CSharp14, assemblyName).Emit(image);
+        if (!result.Success)
+        {
+            throw new InvalidOperationException($"The library {assemblyName} does not compile: {result.Diagnostics[0]}");
+        }
+
+        return MetadataReference.CreateFromImage(image.ToArray());
+    }
+
+    /// <summary>
     /// Runs <see cref="ThrowNewGenerator"/> on a compilation.
     /// </summary>
     /// <param name="compilation">The compilation.</param>
@@ -122,7 +149,8 @@ internal static class TestCompiler
     private static CSharpCompilation Compile(
         IEnumerable<string> sources,
         ImmutableArray<MetadataReference> references,
-        LanguageVersion languageVersion)
+        LanguageVersion languageVersion,
+        string assemblyName = "TestAssembly")
     {
         // The compiler checks XML comments only in this documentation mode, which a project with a documentation file has.
         var parseOptions = new CSharpParseOptions(languageVersion, DocumentationMode.Diagnose);
@@ -131,7 +159,7 @@ internal static class TestCompiler
             nullableContextOptions: NullableContextOptions.Enable,
             allowUnsafe: true);
         return CSharpCompilation.Create(
-            "TestAssembly",
+            assemblyName,
             sources.Select(source => CSharpSyntaxTree.ParseText(source, parseOptions)),
             references,
             options);
