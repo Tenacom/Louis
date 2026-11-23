@@ -24,7 +24,7 @@ namespace Louis.Diagnostics;
 /// because their BCL has no <see cref="RuntimeFeature.ByRefLikeGenerics"/>.</para>
 /// </remarks>
 // The runtime honors StackTraceHiddenAttribute in the builds for .NET 6 and later alone.
-// In the other builds the attribute is the type that PolySharp generates, which no runtime looks for.
+// In the other builds the attribute is the type that src/Louis/Polyfills declares, which no runtime looks for.
 // On older runtimes, StackTraceHiddenAttribute can only be detected by a custom stack trace formatter
 // that looks for it by name.
 [StackTraceHidden]

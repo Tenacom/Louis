@@ -10,7 +10,7 @@ namespace Louis.Text.Internal;
 
 // Holds the chain checks that the members of Louis.Text need, and that Louis.Diagnostics.ParamExtensions does not have.
 // The runtime honors StackTraceHiddenAttribute in the builds for .NET 6 and later alone.
-// In the other builds the attribute is the type that PolySharp generates, which no runtime looks for.
+// In the other builds the attribute is the type that src/Louis/Polyfills declares, which no runtime looks for.
 // On older runtimes, StackTraceHiddenAttribute can only be detected by a custom stack trace formatter
 // that looks for it by name.
 [StackTraceHidden]
