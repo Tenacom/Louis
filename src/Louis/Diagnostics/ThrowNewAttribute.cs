@@ -18,6 +18,8 @@ namespace Louis.Diagnostics;
 /// Call it where the code needs an expression of that type.</para>
 /// <para>The class must be partial, must not be abstract, and must derive from <see cref="Exception"/>.
 /// If the class is nested, the types that contain it must be partial too.</para>
+/// <para>For a primary constructor, apply this attribute to the class declaration with the <c>method</c> target,
+/// as in <c>[method: ThrowNew]</c>.</para>
 /// <para>The code that the source generator adds needs C# 8 or later.</para>
 /// </remarks>
 /// <example>

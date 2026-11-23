@@ -40,7 +40,25 @@ internal sealed class ThrowNewAttributeAnalyzerTests
     }
 
     [Test]
+    public async Task ValidPrimaryConstructor_GetsNoDiagnostic()
+    {
+        const string source = """
+            using System;
+            using Louis.Diagnostics;
+
+            [method: ThrowNew]
+            public partial class E(string message) : Exception(message);
+            """;
+
+        var compilation = TestCompiler.Compile(source);
+
+        await Assert.That(await TestCompiler.AnalyzeAsync(compilation, new ThrowNewAttributeAnalyzer())).IsEmpty();
+        await Assert.That(TestCompiler.RunGenerator(compilation).Files).Count().IsEqualTo(1);
+    }
+
+    [Test]
     [Arguments("public class E : Exception { [ThrowNew] public E() { } }", "E")]
+    [Arguments("[method: ThrowNew] public class E(string m) : Exception(m);", "E")]
     [Arguments("public class Outer { public partial class E : Exception { [ThrowNew] public E() { } } }", "Outer.E")]
     [Arguments("public partial class Outer { public class E : Exception { [ThrowNew] public E() { } } }", "Outer.E")]
     public async Task ClassThatIsNotPartial_GetsLouis0002_AndNoMethod(string declaration, string className)
@@ -65,7 +83,16 @@ internal sealed class ThrowNewAttributeAnalyzerTests
         "public partial struct S { [ThrowNew] public S(int a) { } }",
         "S",
         "the type is not a class that derives from 'System.Exception'")]
+    [Arguments(
+        "[method: ThrowNew] public partial struct S(int a);",
+        "S",
+        "the type is not a class that derives from 'System.Exception'")]
+    [Arguments(
+        "[method: ThrowNew] public partial record R(int A);",
+        "R",
+        "the type is not a class that derives from 'System.Exception'")]
     [Arguments("public abstract partial class E : Exception { [ThrowNew] protected E() { } }", "E", "the class is abstract")]
+    [Arguments("[method: ThrowNew] public abstract partial class E(string m) : Exception(m);", "E", "the class is abstract")]
     [Arguments(
         "public unsafe partial class E : Exception { [ThrowNew] public E(int* pointer) { } }",
         "E",
@@ -157,6 +184,9 @@ internal sealed class ThrowNewAttributeAnalyzerTests
                 {
                 }
             }
+
+            [method: ThrowNew]
+            public partial class F(string message) : Exception(message);
             """;
 
         var compilation = TestCompiler.CompileForNetStandard20(source);

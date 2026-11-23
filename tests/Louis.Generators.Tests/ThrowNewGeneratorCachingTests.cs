@@ -41,6 +41,28 @@ internal sealed class ThrowNewGeneratorCachingTests
     }
 
     [Test]
+    public async Task ChangeToOtherCode_LeavesSourceFileOfPrimaryConstructorUnchanged()
+    {
+        const string source = """
+            using System;
+            using Louis.Diagnostics;
+
+            [method: ThrowNew]
+            public partial class E(string message) : Exception(message);
+            """;
+
+        var compilation = TestCompiler.Compile(source);
+        var firstRun = TestCompiler.RunGenerator(compilation);
+        var otherTree = CSharpSyntaxTree.ParseText("internal static class Unrelated;", GetParseOptions(compilation));
+
+        var result = firstRun.Driver.RunGenerators(compilation.AddSyntaxTrees(otherTree)).GetRunResult().Results.Single();
+
+        var memberReasons = GetReasons(result, ThrowNewGenerator.MemberFilesStepName);
+        await Assert.That(memberReasons).Count().IsEqualTo(1);
+        await Assert.That(memberReasons).ContainsOnly(IsUnchanged);
+    }
+
+    [Test]
     public async Task ChangeToConstructor_ChangesSourceFileOfItsClass()
     {
         var compilation = TestCompiler.Compile(Source);

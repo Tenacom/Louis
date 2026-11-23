@@ -49,6 +49,14 @@ internal sealed partial class ThrowNewAttributeTests
         await Assert.That(() => GetValue(null)).ThrowsExactly<TestException>().WithMessage("No value.", StringComparison.Ordinal);
     }
 
+    [Test]
+    public async Task ThrowNew_OfPrimaryConstructor_ThrowsExceptionOfTheClass()
+    {
+        static void Act() => PrimaryTestException.ThrowNew("Something failed.");
+
+        await Assert.That(Act).ThrowsExactly<PrimaryTestException>().WithMessage("Something failed.", StringComparison.Ordinal);
+    }
+
 #if NET6_0_OR_GREATER
     // The generated methods have StackTraceHiddenAttribute, which the runtime honors in .NET 6 and later.
     [Test]
