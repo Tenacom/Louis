@@ -9,6 +9,9 @@ namespace Louis.Threading;
 
 partial struct Deadline
 {
+    // The longest time a timer waits for, in milliseconds. Task.Delay of .NET Framework accepts no longer delay.
+    internal const long MaxTimerMilliseconds = int.MaxValue;
+
     /// <summary>
     /// Asynchronously waits until this deadline expires.
     /// </summary>
@@ -31,17 +34,11 @@ partial struct Deadline
             : IsEternal ? Task.Delay(Timeout.InfiniteTimeSpan, cancellationToken)
             : Task.CompletedTask;
 
-    // Returns the delay of the timer that waits for a remaining time.
-    // Task.Delay truncates a delay to a millisecond, so this method rounds the remaining time up:
-    // a timer set to a shorter time fires before the instant, and a delay of zero makes the caller loop without a wait.
-    // Task.Delay of .NET Framework accepts int.MaxValue milliseconds at most.
-    private static TimeSpan GetTimerDelay(TimeSpan remainingTime)
-    {
-        const ulong MaxMilliseconds = int.MaxValue;
-
-        var milliseconds = DivideRoundingUp((ulong)remainingTime.Ticks, TimeSpan.TicksPerMillisecond);
-        return new((long)Math.Min(milliseconds, MaxMilliseconds) * TimeSpan.TicksPerMillisecond);
-    }
+    // Returns the milliseconds a timer waits for a remaining time, which is greater than zero.
+    // Task.Delay and Task.WaitAsync truncate a time to a millisecond. This method rounds the remaining time up,
+    // because a timer set to a shorter time fires before the instant of the deadline.
+    internal static long GetTimerMilliseconds(TimeSpan remainingTime)
+        => (long)DivideRoundingUp((ulong)remainingTime.Ticks, TimeSpan.TicksPerMillisecond);
 
     private async Task WaitOnClockAsync(TimeProvider timeProvider, CancellationToken cancellationToken)
     {
@@ -49,7 +46,8 @@ partial struct Deadline
         // to its timestamps, so a timer can fire before the clock reaches the instant.
         for (var remainingTime = RemainingTime; remainingTime > TimeSpan.Zero; remainingTime = RemainingTime)
         {
-            var delay = GetTimerDelay(remainingTime);
+            var milliseconds = Math.Min(GetTimerMilliseconds(remainingTime), MaxTimerMilliseconds);
+            var delay = new TimeSpan(milliseconds * TimeSpan.TicksPerMillisecond);
 #if NET8_0_OR_GREATER
             await Task.Delay(delay, timeProvider, cancellationToken).ConfigureAwait(false);
 #else
