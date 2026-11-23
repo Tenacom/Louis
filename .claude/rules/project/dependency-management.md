@@ -6,7 +6,7 @@ This file is specific to this repository. Rewrite it when `.claude` is copied to
 
 Every consumer of a package inherits its run-time dependencies, so each one is a decision the maintainer takes, never a convenience.
 
-- `Louis` depends on `CommunityToolkit.Diagnostics`, and on nothing else that every target framework gets. `System.Memory`, `System.Threading.Tasks.Extensions`, `Microsoft.Bcl.AsyncInterfaces`, `Microsoft.Bcl.Memory`, and `System.Text.Encoding.CodePages` are polyfills, referenced only on the target frameworks that lack the types. "Target frameworks" in `architecture.md` says which.
+- `Louis` depends on nothing but the BCL. `System.Memory`, `System.Threading.Tasks.Extensions`, `Microsoft.Bcl.AsyncInterfaces`, `Microsoft.Bcl.Memory`, and `System.Text.Encoding.CodePages` are polyfills, referenced only on the target frameworks that lack the types. "Target frameworks" in `architecture.md` says which.
 - `Louis.Hosting` depends on `Microsoft.Extensions.Hosting.Abstractions` and `Microsoft.Extensions.Logging.Abstractions`.
 - Five pins name packages that Microsoft releases with each major version of .NET. "Packages released with .NET" below says how they are pinned.
 - `Louis.Testing` depends on `Louis`, and on nothing else, so that a test project gets no test framework by referencing it.
@@ -63,13 +63,15 @@ The policy does not cover these packages:
 
 ## Development dependencies
 
-Buildvana SDK adds the analyzers to every project, so `Directory.Packages.props` pins no analyzer package. The .NET SDK bundles SourceLink, so `src/Common.props` references no SourceLink package. `buildvana.jsonc` sets the `minor-` policy on `StyleCop.Analyzers`, the one SDK-injected package pinned to a prerelease line.
+Buildvana SDK adds the analyzers to every project, so `Directory.Packages.props` pins none of them. The .NET SDK bundles SourceLink, so `src/Common.props` references no SourceLink package. `buildvana.jsonc` sets the `minor-` policy on `StyleCop.Analyzers`, the one SDK-injected package pinned to a prerelease line.
 
 `PolySharp` is a development dependency of `Louis`. Its generated code is compiled into `Louis.dll`, so `THIRD-PARTY-NOTICES.md` carries its MIT notice.
 
+`Microsoft.CodeAnalysis.CSharp` and `Microsoft.CodeAnalysis.Analyzers` are development dependencies of `Louis.Generators`. The compiler supplies the Roslyn assemblies when it loads a generator, so the pin of `Microsoft.CodeAnalysis.CSharp` names the oldest compiler that can load `Louis.Generators`. `buildvana.jsonc` sets the `disable` policy on that pin, and `Louis.csproj` packs the assembly in the `roslyn<version>` folder of the same version. A move of the pin leaves out every older compiler, so the maintainer decides it, and the folder moves in the same commit.
+
 ## Test dependencies
 
-The "Test dependencies" group of `Directory.Packages.props` pins `TUnit`, the test framework `testing.md` names. `TUnit` depends on `TUnit.Engine`, `TUnit.Assertions`, and `Microsoft.Testing.Extensions.CodeCoverage`, so the group pins nothing else. The `netstandard2.0` test projects reference `Microsoft.Bcl.AsyncInterfaces` and `Microsoft.Bcl.Memory` through their run-time pins, because the `netstandard2.0` build of `Louis` needs them and NuGet restore does not follow that build. "Every build of a package gets tested" in `testing.md` says why.
+The "Test dependencies" group of `Directory.Packages.props` pins `TUnit`, the test framework `testing.md` names. `TUnit` depends on `TUnit.Engine`, `TUnit.Assertions`, and `Microsoft.Testing.Extensions.CodeCoverage`, so the group pins no other package of the test framework. The group also pins `Basic.Reference.Assemblies.NetStandard20`, the reference assemblies that `Louis.Generators.Tests` compiles source text against. The `netstandard2.0` test projects reference `Microsoft.Bcl.AsyncInterfaces` and `Microsoft.Bcl.Memory` through their run-time pins, because the `netstandard2.0` build of `Louis` needs them and NuGet restore does not follow that build. "Every build of a package gets tested" in `testing.md` says why.
 
 ## The Buildvana family
 

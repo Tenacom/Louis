@@ -47,4 +47,6 @@ The repository has a documentation site on GitHub Pages, with an API reference o
 
 ## Pinned reference pages
 
-None. No page under `docs/` lists a code surface, and the API reference comes from the code itself.
+`docs/diagnostics.md` lists the diagnostics of the analyzers in `src/Louis.Generators`. `DiagnosticsPageTests`, in `tests/Louis.Generators.Tests`, compares the table and the sections of the page with the descriptors of the analyzers. The help link of each diagnostic names its section of that page, in the preview part of the documentation site.
+
+No other page under `docs/` lists a code surface, and the API reference comes from the code itself.
