@@ -1065,8 +1065,17 @@ static Louis.Text.TextEdit.operator !=(Louis.Text.TextEdit a, Louis.Text.TextEdi
 static Louis.Text.TextEdit.operator ==(Louis.Text.TextEdit a, Louis.Text.TextEdit b) -> bool
 static Louis.Text.Utf8Utility.ComputeMaxCharsInBytes(System.ReadOnlySpan<char> chars, int maxBytes) -> int
 static Louis.Text.Utf8Utility.ComputeMaxCharsInBytes(string! str, int maxBytes) -> int
+static Louis.Threading.Deadline.Compare(Louis.Threading.Deadline first, Louis.Threading.Deadline second) -> int
+static Louis.Threading.Deadline.EarliestOf(Louis.Threading.Deadline first, Louis.Threading.Deadline second) -> Louis.Threading.Deadline
+static Louis.Threading.Deadline.EarliestOf(Louis.Threading.Deadline first, Louis.Threading.Deadline second, Louis.Threading.Deadline third) -> Louis.Threading.Deadline
+static Louis.Threading.Deadline.EarliestOf(Louis.Threading.Deadline first, Louis.Threading.Deadline second, Louis.Threading.Deadline third, Louis.Threading.Deadline fourth) -> Louis.Threading.Deadline
+static Louis.Threading.Deadline.EarliestOf(params System.Collections.Generic.IEnumerable<Louis.Threading.Deadline>! deadlines) -> Louis.Threading.Deadline
 static Louis.Threading.Deadline.Eternal.get -> Louis.Threading.Deadline
 static Louis.Threading.Deadline.Expired.get -> Louis.Threading.Deadline
+static Louis.Threading.Deadline.LatestOf(Louis.Threading.Deadline first, Louis.Threading.Deadline second) -> Louis.Threading.Deadline
+static Louis.Threading.Deadline.LatestOf(Louis.Threading.Deadline first, Louis.Threading.Deadline second, Louis.Threading.Deadline third) -> Louis.Threading.Deadline
+static Louis.Threading.Deadline.LatestOf(Louis.Threading.Deadline first, Louis.Threading.Deadline second, Louis.Threading.Deadline third, Louis.Threading.Deadline fourth) -> Louis.Threading.Deadline
+static Louis.Threading.Deadline.LatestOf(params System.Collections.Generic.IEnumerable<Louis.Threading.Deadline>! deadlines) -> Louis.Threading.Deadline
 static Louis.Threading.Deadline.operator !=(Louis.Threading.Deadline a, Louis.Threading.Deadline b) -> bool
 static Louis.Threading.Deadline.operator ==(Louis.Threading.Deadline a, Louis.Threading.Deadline b) -> bool
 static Louis.Threading.Deadline.SetAfter(Louis.Threading.Deadline deadline, System.TimeSpan duration) -> Louis.Threading.Deadline

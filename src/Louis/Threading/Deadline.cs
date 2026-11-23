@@ -23,7 +23,7 @@ namespace Louis.Threading;
 /// <see cref="Eternal"/> and <see cref="Expired"/> have no instant, and each is equal to itself alone.
 /// A deadline that has expired on a clock is not equal to <see cref="Expired"/>.</para>
 /// </remarks>
-public readonly struct Deadline : IEquatable<Deadline>
+public readonly partial struct Deadline : IEquatable<Deadline>
 {
     private const ulong TicksPerSecond = TimeSpan.TicksPerSecond;
 
@@ -308,6 +308,37 @@ public readonly struct Deadline : IEquatable<Deadline>
             : deadline;
     }
 
+    /// <summary>
+    /// Compares two deadlines and returns an integer that indicates whether the first expires before,
+    /// together with, or after the second.
+    /// </summary>
+    /// <param name="first">The first deadline to compare.</param>
+    /// <param name="second">The second deadline to compare.</param>
+    /// <returns>A negative number if <paramref name="first"/> expires before <paramref name="second"/>;
+    /// zero if the two deadlines expire together;
+    /// a positive number if <paramref name="first"/> expires after <paramref name="second"/>.</returns>
+    /// <remarks>
+    /// <para>If the two deadlines have the same clock, this method compares their instants, and does not read the clock.
+    /// The result is zero only if the two deadlines are equal.</para>
+    /// <para>If the two deadlines have different clocks, this method reads both clocks, and compares
+    /// the <see cref="RemainingTime"/> of the two deadlines. The result is zero if the remaining times are the same,
+    /// although the two deadlines are not equal. In particular, it is zero if both deadlines have expired.
+    /// The result is correct at a later time only if both clocks run at the same rate.</para>
+    /// <para><see cref="Eternal"/> expires after every other deadline.
+    /// <see cref="Expired"/> expires before every other deadline, even one that has expired on a clock.</para>
+    /// </remarks>
+    public static int Compare(Deadline first, Deadline second)
+    {
+        if (first._timeProvider is not { } firstClock || second._timeProvider is not { } secondClock)
+        {
+            return GetClockIndependentOrder(first).CompareTo(GetClockIndependentOrder(second));
+        }
+
+        return ReferenceEquals(firstClock, secondClock)
+            ? first._timestamp.CompareTo(second._timestamp)
+            : first.RemainingTime.CompareTo(second.RemainingTime);
+    }
+
     /// <inheritdoc/>
     public override bool Equals(object? obj) => obj is Deadline other && Equals(other);
 
@@ -375,6 +406,13 @@ public readonly struct Deadline : IEquatable<Deadline>
             ? new(timeProvider, unchecked(timestamp - (long)units))
             : Expired;
     }
+
+    // Returns the place of a deadline in the order of Compare, as far as it depends on no clock:
+    // -1 for Expired, 0 for a deadline on a clock, and 1 for Eternal.
+    private static int GetClockIndependentOrder(Deadline deadline)
+        => deadline._timeProvider is not null ? 0
+            : deadline._timestamp == 0 ? 1
+            : -1;
 
     // Converts a duration from ticks to the units of a clock, and rounds it up, so that the duration never gets shorter.
     // Returns false when the result exceeds maxUnits.
