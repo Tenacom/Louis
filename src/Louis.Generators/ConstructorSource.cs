@@ -14,7 +14,7 @@ namespace Louis.Generators;
 /// <param name="Text">The C# text of the methods.</param>
 /// <remarks>
 /// <para>An instance holds strings and a number alone, and no symbol, so that two instances compare by value.
-/// The compiler then runs a step of the generator again only when the text it works on changes.</para>
+/// The compiler then runs a step of the source generator again only when the text it works on changes.</para>
 /// </remarks>
 internal sealed record ConstructorSource(
     string HintName,

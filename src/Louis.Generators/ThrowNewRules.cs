@@ -10,7 +10,7 @@ namespace Louis.Generators;
 
 /// <summary>
 /// Decides whether an attribute gets <c>ThrowNew</c> methods.
-/// The generator and <see cref="ThrowNewAttributeAnalyzer"/> both ask this class, so that they always agree.
+/// The source generator and <see cref="ThrowNewAttributeAnalyzer"/> both ask this class, so that they always agree.
 /// </summary>
 internal static class ThrowNewRules
 {

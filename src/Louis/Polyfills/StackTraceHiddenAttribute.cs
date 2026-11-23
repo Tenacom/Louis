@@ -30,9 +30,9 @@ internal sealed class StackTraceHiddenAttribute : Attribute;
 /// the runtime honors the attribute.</para>
 /// </remarks>
 // The type is public for the source generators that run on a project that references Louis, ThrowNewGenerator included.
-// A generator gives a method this attribute only when the project can name the attribute, and it does not see
-// the output of another generator. An attribute that a generator of polyfills adds to the project would not count.
-// A generator of polyfills, such as PolySharp, adds no type that the project can already name.
+// A source generator gives a method this attribute only when the project can name the attribute, and it does not see
+// the output of another source generator. An attribute that PolySharp adds to the project would not count.
+// PolySharp, a source generator of polyfills, adds no type that the project can already name.
 [AttributeUsage(
     AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Struct,
     Inherited = false)]

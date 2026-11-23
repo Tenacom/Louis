@@ -4,16 +4,16 @@
 using Microsoft.CodeAnalysis;
 
 /// <summary>
-/// Holds the result of a run of the generator.
+/// Holds the result of a run of the source generator.
 /// </summary>
 /// <param name="Driver">The driver, after the run.</param>
-/// <param name="Output">The compilation, with the source files that the generator added.</param>
+/// <param name="Output">The compilation, with the source files that the source generator added.</param>
 /// <param name="Problems">The warnings and the errors that the compiler reports on <paramref name="Output"/>.
 /// A missing XML comment in the source of the test does not count: only the generated code has to have its comments.</param>
 internal sealed record GeneratorRun(GeneratorDriver Driver, Compilation Output, IReadOnlyList<string> Problems)
 {
     /// <summary>
-    /// Gets the source files that the generator added, by hint name.
+    /// Gets the source files that the source generator added, by hint name.
     /// </summary>
     public IReadOnlyDictionary<string, string> Files { get; } = Driver.GetRunResult().Results
         .SelectMany(static result => result.GeneratedSources)

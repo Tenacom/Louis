@@ -83,7 +83,7 @@ internal sealed class ThrowNewGeneratorCachingTests
     private static CSharpParseOptions GetParseOptions(CSharpCompilation compilation)
         => (CSharpParseOptions)compilation.SyntaxTrees[0].Options;
 
-    // The reason why the generator kept or replaced each output of a step.
+    // The reason why the source generator kept or replaced each output of a step.
     private static IncrementalStepRunReason[] GetReasons(GeneratorRunResult result, string stepName)
         => [.. result.TrackedSteps[stepName].SelectMany(static step => step.Outputs).Select(static output => output.Reason)];
 

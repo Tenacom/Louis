@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis.CSharp;
 namespace Louis.Generators;
 
 /// <summary>
-/// Turns symbols into the C# text that the generator writes.
+/// Turns symbols into the C# text that the source generator writes.
 /// </summary>
 internal static class SymbolText
 {
