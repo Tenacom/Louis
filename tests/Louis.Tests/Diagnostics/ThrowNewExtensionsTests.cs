@@ -126,6 +126,18 @@ internal sealed class ThrowNewExtensionsTests
         }
     }
 
+    [Test]
+    [MethodDataSource(nameof(ExceptionTypes))]
+    public async Task ThrowNew_HasAttributesForCompilerAndStackTraces(Type exceptionType)
+    {
+        const string doesNotReturn = "System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute";
+        const string stackTraceHidden = "System.Diagnostics.StackTraceHiddenAttribute";
+        var methods = GetThrowNewMethods(GetExtensionClass(exceptionType));
+
+        await Assert.That(methods).ContainsOnly(static method => HasAttribute(method, doesNotReturn));
+        await Assert.That(methods).ContainsOnly(static method => HasAttribute(method, stackTraceHidden));
+    }
+
     private static Type GetExtensionClass(Type exceptionType)
     {
         var name = $"Louis.Diagnostics.{exceptionType.Name}Extensions";
@@ -139,6 +151,10 @@ internal sealed class ThrowNewExtensionsTests
         const BindingFlags anyStatic = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
         return [.. extensionClass.GetMethods(anyStatic).Where(static method => method.Name == "ThrowNew")];
     }
+
+    // The test compares names, because a build of Louis for an older framework declares the attribute itself.
+    private static bool HasAttribute(MethodInfo method, string attributeName)
+        => method.CustomAttributes.Any(attribute => attribute.AttributeType.FullName == attributeName);
 
     private static bool HaveSameParameters(MethodBase first, MethodBase second)
         => GetParameterTypes(first).SequenceEqual(GetParameterTypes(second));
