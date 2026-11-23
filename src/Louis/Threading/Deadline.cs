@@ -429,9 +429,9 @@ public readonly partial struct Deadline : IEquatable<Deadline>
         var subsecondTicks = ticks % TicksPerSecond;
         var unitsPerTick = frequency / TicksPerSecond;
         var subtickFrequency = frequency % TicksPerSecond;
-        var subsecondUnits = (subsecondTicks * unitsPerTick) + DivideRoundingUp(subsecondTicks * subtickFrequency, TicksPerSecond);
+        var subsecondUnits = subsecondTicks * unitsPerTick + DivideRoundingUp(subsecondTicks * subtickFrequency, TicksPerSecond);
         var fits = subsecondUnits <= maxUnits && seconds <= (maxUnits - subsecondUnits) / frequency;
-        units = fits ? (seconds * frequency) + subsecondUnits : 0;
+        units = fits ? seconds * frequency + subsecondUnits : 0;
         return fits;
     }
 
@@ -451,7 +451,7 @@ public readonly partial struct Deadline : IEquatable<Deadline>
             : (ulong)decimal.Ceiling((decimal)subsecondUnits * TicksPerSecond / frequency);
 
         var fits = seconds <= (MaxTicks - subsecondTicks) / TicksPerSecond;
-        return fits ? new((long)((seconds * TicksPerSecond) + subsecondTicks)) : TimeSpan.MaxValue;
+        return fits ? new((long)(seconds * TicksPerSecond + subsecondTicks)) : TimeSpan.MaxValue;
     }
 
     private static ulong DivideRoundingUp(ulong dividend, ulong divisor)

@@ -130,8 +130,7 @@ internal sealed class DeadlineComparisonTests
         var distantClock = new TestTimeProvider(TimeSpan.TicksPerSecond) { Timestamp = long.MaxValue };
         var distant = Deadline.SetIn(TimeSpan.Zero, distantClock);
         distantClock.Timestamp = long.MinValue;
-        Deadline[] others =
-        [
+        Deadline[] others = [
             Deadline.SetIn(TimeSpan.FromSeconds(5), clock),
             Deadline.SetIn(TimeSpan.Zero, clock),
             distant,
@@ -152,8 +151,7 @@ internal sealed class DeadlineComparisonTests
     public async Task Compare_WithExpired_ReportsExpiredAsEarlierThanEveryOtherDeadline()
     {
         var clock = new FakeTimeProvider();
-        Deadline[] others =
-        [
+        Deadline[] others = [
             Deadline.SetIn(TimeSpan.FromSeconds(5), clock),
             Deadline.SetIn(TimeSpan.Zero, clock),
             Deadline.SetBefore(Deadline.SetIn(TimeSpan.Zero, clock), TimeSpan.FromSeconds(5)),
