@@ -8,8 +8,12 @@
     <UseTfmSpecificPublicApiFiles>false</UseTfmSpecificPublicApiFiles>
   </PropertyGroup>
 
+  <!--
+      PrivateAssets leaves the analyzers out of its default value, so that the dependency on the Louis package
+      brings the source generator and the analyzers of Louis to a project that references this package alone.
+  -->
   <ItemGroup>
-    <ProjectReference Include="..\Louis\Louis.csproj" />
+    <ProjectReference Include="..\Louis\Louis.csproj" PrivateAssets="contentfiles;build" />
   </ItemGroup>
 
 </Project>

@@ -13,6 +13,22 @@
     <PackageReference Include="PolySharp" PrivateAssets="all" />
   </ItemGroup>
 
+  <!--
+      Louis.Generators holds the source generator and the analyzers of the package.
+      The reference makes the compiler run them on this project, and adds no dependency to the package.
+      The None item packs the assembly in the folder that a compiler of version 5.0 or later loads analyzers from.
+  -->
+  <ItemGroup>
+    <ProjectReference Include="..\Louis.Generators\Louis.Generators.csproj"
+                      OutputItemType="Analyzer"
+                      ReferenceOutputAssembly="false"
+                      PrivateAssets="all" />
+    <None Include="..\Louis.Generators\bin\$(Configuration)\netstandard2.0\Louis.Generators.dll"
+          Pack="true"
+          PackagePath="analyzers/dotnet/roslyn5.0/cs"
+          Visible="false" />
+  </ItemGroup>
+
   <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" />
     <PackageReference Include="Microsoft.Bcl.Memory" />

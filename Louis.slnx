@@ -23,6 +23,7 @@
     <File Path="THIRD-PARTY-NOTICES.md" />
   </Folder>
   <Folder Name="/- Documentation/docs/">
+    <File Path="docs/diagnostics.md" />
     <File Path="docs/index.md" />
   </Folder>
   <Folder Name="/- Documentation/graphics/">
@@ -31,6 +32,7 @@
   <Folder Name="/src/">
     <File Path="src/Common.props" />
     <Project Path="src/Louis/Louis.csproj" />
+    <Project Path="src/Louis.Generators/Louis.Generators.csproj" />
     <Project Path="src/Louis.Hosting/Louis.Hosting.csproj" />
     <Project Path="src/Louis.Testing/Louis.Testing.csproj" />
   </Folder>
@@ -42,6 +44,7 @@
     <Project Path="tests/Louis.Tests.ChildProcess/Louis.Tests.ChildProcess.csproj" />
     <Project Path="tests/Louis.Tests.NetStandard20/Louis.Tests.NetStandard20.csproj" />
     <Project Path="tests/Louis.Tests.NetStandard21/Louis.Tests.NetStandard21.csproj" />
+    <Project Path="tests/Louis.Generators.Tests/Louis.Generators.Tests.csproj" />
     <Project Path="tests/Louis.Hosting.Tests/Louis.Hosting.Tests.csproj" />
     <Project Path="tests/Louis.Hosting.Tests.NetStandard20/Louis.Hosting.Tests.NetStandard20.csproj" />
     <Project Path="tests/Louis.Hosting.Tests.NetStandard21/Louis.Hosting.Tests.NetStandard21.csproj" />

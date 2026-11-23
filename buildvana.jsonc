@@ -46,6 +46,8 @@
   "dependencies": {
     "policies": {
       "StyleCop.Analyzers": "minor-",
+      // The version of the oldest compiler that loads Louis.Generators.
+      "Microsoft.CodeAnalysis.CSharp": "disable",
     },
   },
 

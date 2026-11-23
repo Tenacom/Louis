@@ -14,11 +14,15 @@
 
   <!-- Test dependencies -->
   <ItemGroup>
+    <PackageVersion Include="Basic.Reference.Assemblies.NetStandard20" Version="1.8.15" />
     <PackageVersion Include="TUnit" Version="1.85.0" />
   </ItemGroup>
 
   <!-- Development dependencies -->
   <ItemGroup>
+    <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="5.12.0" />
+    <!-- The oldest compiler that can load Louis.Generators has this version. buildvana.jsonc keeps the pin where it is. -->
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="5.0.0" />
     <PackageVersion Include="PolySharp" Version="1.17.1" />
   </ItemGroup>
 

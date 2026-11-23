@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+      The source generator and the analyzers that the Louis package holds in its analyzers folder.
+      Louis.csproj packs the assembly. No package depends on this project.
+  -->
+
+  <PropertyGroup>
+    <Description>The source generator and the analyzers of L.o.U.I.S.</Description>
+    <!-- The compiler loads a generator or an analyzer that targets .NET Standard 2.0, and no other target framework. -->
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <IsRoslynComponent>true</IsRoslynComponent>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+    <!-- The compiler is the only user of this assembly, so the CLS does not apply. -->
+    <CLSCompliant>false</CLSCompliant>
+    <!-- PolySharp generates the types this project uses, and no other. -->
+    <PolySharpIncludeGeneratedTypes>System.Runtime.CompilerServices.IsExternalInit</PolySharpIncludeGeneratedTypes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="AnalyzerReleases.Shipped.md" />
+    <AdditionalFiles Include="AnalyzerReleases.Unshipped.md" />
+  </ItemGroup>
+
+  <!--
+      The compiler supplies the Roslyn assemblies when it loads this assembly.
+      The version of Microsoft.CodeAnalysis.CSharp is therefore the oldest compiler that can load it.
+  -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
+    <PackageReference Include="PolySharp" PrivateAssets="all" />
+  </ItemGroup>
+
+</Project>
