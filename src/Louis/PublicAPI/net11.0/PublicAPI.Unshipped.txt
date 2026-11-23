@@ -37,6 +37,9 @@ override Louis.Text.LineClipping.Equals(object? obj) -> bool
 override Louis.Text.LineClipping.GetHashCode() -> int
 override Louis.Text.TextEdit.Equals(object? obj) -> bool
 override Louis.Text.TextEdit.GetHashCode() -> int
+override Louis.Threading.Deadline.Equals(object? obj) -> bool
+override Louis.Threading.Deadline.GetHashCode() -> int
+override Louis.Threading.Deadline.ToString() -> string!
 Louis.AsyncDisposableExtensions.extension(System.IAsyncDisposable!)
 Louis.AsyncDisposableExtensions.extension(System.IAsyncDisposable!).DisposeSynchronously() -> void
 Louis.Collections.EnumerableExtensions.extension(System.Collections.Generic.IEnumerable<string?>!)
@@ -545,6 +548,14 @@ Louis.Text.TrueConditionInterpolatedStringHandler.ToStringAndClear() -> string!
 Louis.Text.TrueConditionInterpolatedStringHandler.TrueConditionInterpolatedStringHandler() -> void
 Louis.Text.TrueConditionInterpolatedStringHandler.TrueConditionInterpolatedStringHandler(int literalLength, int formattedCount, bool condition, out bool shouldAppend) -> void
 Louis.Text.TrueConditionInterpolatedStringHandler.TrueConditionInterpolatedStringHandler(int literalLength, int formattedCount, Louis.Diagnostics.Param<bool> param, out bool shouldAppend) -> void
+Louis.Threading.Deadline
+Louis.Threading.Deadline.Deadline() -> void
+Louis.Threading.Deadline.Equals(Louis.Threading.Deadline other) -> bool
+Louis.Threading.Deadline.HasExpired.get -> bool
+Louis.Threading.Deadline.IsEternal.get -> bool
+Louis.Threading.Deadline.RemainingTime.get -> System.TimeSpan
+Louis.Threading.Deadline.ThrowIfExpired() -> void
+Louis.Threading.Deadline.TimeProvider.get -> System.TimeProvider!
 static Louis.Diagnostics.ArgumentExceptionExtensions.extension(System.ArgumentException!).ThrowNew() -> void
 static Louis.Diagnostics.ArgumentExceptionExtensions.extension(System.ArgumentException!).ThrowNew(string? message) -> void
 static Louis.Diagnostics.ArgumentExceptionExtensions.extension(System.ArgumentException!).ThrowNew(string? message, string? paramName) -> void
@@ -1062,6 +1073,14 @@ static Louis.Text.TextEdit.operator !=(Louis.Text.TextEdit a, Louis.Text.TextEdi
 static Louis.Text.TextEdit.operator ==(Louis.Text.TextEdit a, Louis.Text.TextEdit b) -> bool
 static Louis.Text.Utf8Utility.ComputeMaxCharsInBytes(System.ReadOnlySpan<char> chars, int maxBytes) -> int
 static Louis.Text.Utf8Utility.ComputeMaxCharsInBytes(string! str, int maxBytes) -> int
+static Louis.Threading.Deadline.Eternal.get -> Louis.Threading.Deadline
+static Louis.Threading.Deadline.Expired.get -> Louis.Threading.Deadline
+static Louis.Threading.Deadline.operator !=(Louis.Threading.Deadline a, Louis.Threading.Deadline b) -> bool
+static Louis.Threading.Deadline.operator ==(Louis.Threading.Deadline a, Louis.Threading.Deadline b) -> bool
+static Louis.Threading.Deadline.SetAt(System.DateTimeOffset instant) -> Louis.Threading.Deadline
+static Louis.Threading.Deadline.SetAt(System.DateTimeOffset instant, System.TimeProvider! timeProvider) -> Louis.Threading.Deadline
+static Louis.Threading.Deadline.SetIn(System.TimeSpan duration) -> Louis.Threading.Deadline
+static Louis.Threading.Deadline.SetIn(System.TimeSpan duration, System.TimeProvider! timeProvider) -> Louis.Threading.Deadline
 System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute (forwarded, contained in System.Runtime)
 System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute.DoesNotReturnAttribute() -> void (forwarded, contained in System.Runtime)
 System.Diagnostics.StackTraceHiddenAttribute (forwarded, contained in System.Runtime)
