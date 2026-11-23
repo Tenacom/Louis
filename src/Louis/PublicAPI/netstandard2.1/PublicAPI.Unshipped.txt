@@ -479,6 +479,7 @@ Louis.Text.TextEdit.Text.init -> void
 Louis.Text.TextEdit.TextEdit() -> void
 Louis.Text.TextEdit.TextEdit(int start, int length, string! text) -> void
 Louis.Threading.Deadline
+Louis.Threading.Deadline.CreateCancellationTokenSource() -> System.Threading.CancellationTokenSource!
 Louis.Threading.Deadline.Deadline() -> void
 Louis.Threading.Deadline.Equals(Louis.Threading.Deadline other) -> bool
 Louis.Threading.Deadline.HasExpired.get -> bool

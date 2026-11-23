@@ -82,8 +82,13 @@ public readonly partial struct Deadline : IEquatable<Deadline>
     /// <see cref="Timeout.InfiniteTimeSpan"/> if it never expires.
     /// </value>
     /// <remarks>
-    /// <para>The value follows the rules of the BCL for a timeout. It goes as it is to a member that takes a timeout
-    /// and a <see cref="System.TimeProvider"/>, such as <c>Task.Delay</c> and <c>Task.WaitAsync</c>.</para>
+    /// <para>The value follows the rules of the BCL for a timeout: <see cref="TimeSpan.Zero"/> for no wait,
+    /// and <see cref="Timeout.InfiniteTimeSpan"/> for a wait without a time limit.</para>
+    /// <para>A member of the BCL that takes a timeout, such as <c>Task.Delay</c>, truncates the timeout to a millisecond,
+    /// and rejects a timeout above its maximum. With this value as its timeout, such a member can therefore give up
+    /// before this deadline expires, or throw an exception. <see cref="WaitAsync"/>,
+    /// <see cref="CreateCancellationTokenSource"/>, and the <c>WaitAsync</c> methods of <see cref="TaskExtensions"/>
+    /// round the remaining time up, and accept a deadline however far it is.</para>
     /// <para>The value is rounded up to a tick, so it is <see cref="TimeSpan.Zero"/> only if <see cref="HasExpired"/>
     /// is <see langword="true"/>.</para>
     /// <para>A time longer than <see cref="TimeSpan.MaxValue"/> is reported as <see cref="TimeSpan.MaxValue"/>.</para>

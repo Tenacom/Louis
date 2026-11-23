@@ -47,7 +47,7 @@ partial class TaskExtensions
         public Task WaitAsync(Deadline deadline, CancellationToken cancellationToken = default)
         {
             Param.NotNull(@this, nameof(@this));
-            return @this.WaitAsync(GetTimeout(deadline), deadline.TimeProvider, cancellationToken);
+            return @this.WaitAsync(deadline.GetTimeout(), deadline.TimeProvider, cancellationToken);
         }
     }
 
@@ -86,7 +86,7 @@ partial class TaskExtensions
         public Task<TResult> WaitAsync(Deadline deadline, CancellationToken cancellationToken = default)
         {
             Param.NotNull(@this, nameof(@this));
-            return @this.WaitAsync(GetTimeout(deadline), deadline.TimeProvider, cancellationToken);
+            return @this.WaitAsync(deadline.GetTimeout(), deadline.TimeProvider, cancellationToken);
         }
     }
 }
