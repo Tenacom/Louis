@@ -322,6 +322,13 @@ Louis.Diagnostics.SpanParamExtensions.extension<T>(Louis.Diagnostics.SpanParam<T
 Louis.Diagnostics.SpanParamExtensions.extension<T>(Louis.Diagnostics.SpanParam<T>).NotEmpty(string? message = null) -> Louis.Diagnostics.SpanParam<T>
 Louis.Diagnostics.StringBuilderExtensions.extension(System.Text.StringBuilder!)
 Louis.Diagnostics.StringBuilderExtensions.extension(System.Text.StringBuilder!).AppendFormattedObject(object? obj, string? format = null) -> System.Text.StringBuilder!
+Louis.Diagnostics.ThrowNewAttribute
+Louis.Diagnostics.ThrowNewAttribute.ThrowNewAttribute() -> void
+Louis.Diagnostics.ThrowNewForAttribute
+Louis.Diagnostics.ThrowNewForAttribute.ExceptionType.get -> System.Type!
+Louis.Diagnostics.ThrowNewForAttribute.Public.get -> bool
+Louis.Diagnostics.ThrowNewForAttribute.Public.set -> void
+Louis.Diagnostics.ThrowNewForAttribute.ThrowNewForAttribute(System.Type! exceptionType) -> void
 Louis.Fluency.FluentExtensions.extension<T>(T)
 Louis.Fluency.FluentExtensions.extension<T>(T).Chain(Louis.Fluency.FluentAction<T>! func) -> T
 Louis.Fluency.FluentExtensions.extension<T>(T).Chain<TArg1, TArg2, TArg3, TArg4>(TArg1 arg1, TArg2 arg2, TArg3 arg3, TArg4 arg4, Louis.Fluency.FluentAction<T, TArg1, TArg2, TArg3, TArg4>! func) -> T
