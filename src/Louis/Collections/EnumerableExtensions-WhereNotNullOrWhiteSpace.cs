@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis.Collections;
 
@@ -22,7 +22,7 @@ partial class EnumerableExtensions
         /// <exception cref="ArgumentNullException"><paramref name="this"/> is <see langword="null"/>.</exception>
         public IEnumerable<string> WhereNotNullOrWhiteSpace()
         {
-            Guard.IsNotNull(@this, nameof(@this));
+            Param.NotNull(@this, nameof(@this));
             return @this.Where(IsNotNullOrWhiteSpace) as IEnumerable<string>;
 
             static bool IsNotNullOrWhiteSpace(string? x) => !string.IsNullOrWhiteSpace(x);

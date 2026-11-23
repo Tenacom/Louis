@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using CommunityToolkit.Diagnostics;
 using Louis.Diagnostics;
 
 namespace Louis;
@@ -16,8 +15,8 @@ public static partial class RangeCheck
     private static void EnsureValidRange<T>(T min, T max)
         where T : IComparable<T>
     {
-        Guard.IsNotNull(min);
-        Guard.IsNotNull(max);
+        Param.NotNull(min);
+        Param.NotNull(max);
 
         if (min.CompareTo(max) > 0)
         {
@@ -28,9 +27,9 @@ public static partial class RangeCheck
     private static void EnsureValidComparerAndRange<T>(T min, T max, IComparer<T> comparer)
         where T : notnull
     {
-        Guard.IsNotNull(min);
-        Guard.IsNotNull(max);
-        Guard.IsNotNull(comparer);
+        Param.NotNull(min);
+        Param.NotNull(max);
+        Param.NotNull(comparer);
 
         if (comparer.Compare(min, max) > 0)
         {

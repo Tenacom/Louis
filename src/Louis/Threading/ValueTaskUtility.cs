@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis.Threading;
 
@@ -22,7 +22,7 @@ public static class ValueTaskUtility
     /// <exception cref="ArgumentNullException"><paramref name="valueTasks"/> is <see langword="null"/>.</exception>
     public static ValueTask WhenAll(params ValueTask[] valueTasks)
     {
-        Guard.IsNotNull(valueTasks);
+        Param.NotNull(valueTasks);
 
         return UnsafeWhenAll(valueTasks);
     }
@@ -35,7 +35,7 @@ public static class ValueTaskUtility
     /// <exception cref="ArgumentNullException"><paramref name="valueTasks"/> is <see langword="null"/>.</exception>
     public static ValueTask WhenAll(IEnumerable<ValueTask> valueTasks)
     {
-        Guard.IsNotNull(valueTasks);
+        Param.NotNull(valueTasks);
 
         return UnsafeWhenAll(valueTasks);
     }

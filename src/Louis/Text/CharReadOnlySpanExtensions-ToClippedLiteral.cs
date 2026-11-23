@@ -3,7 +3,7 @@
 
 using System;
 using System.Text;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 using Louis.Text.Internal;
 
 namespace Louis.Text;
@@ -39,8 +39,8 @@ partial class CharReadOnlySpanExtensions
         /// <seealso cref="ToClippedLiteral"/>
         public string ToClippedQuotedLiteral(int headLength, int tailLength, bool useUnicodeEllipsis = false)
         {
-            Guard.IsGreaterThanOrEqualTo(headLength, 0);
-            Guard.IsGreaterThanOrEqualTo(tailLength, 0);
+            Param.Check(headLength).GreaterThanOrEqualTo(0);
+            Param.Check(tailLength).GreaterThanOrEqualTo(0);
 
             return new StringBuilder(@this.Length + 2)
                   .AppendClippedQuotedLiteral(@this, headLength, tailLength, useUnicodeEllipsis)
@@ -72,8 +72,8 @@ partial class CharReadOnlySpanExtensions
         /// <seealso cref="ToClippedLiteral"/>
         public string ToClippedVerbatimLiteral(int headLength, int tailLength, bool useUnicodeEllipsis = false)
         {
-            Guard.IsGreaterThanOrEqualTo(headLength, 0);
-            Guard.IsGreaterThanOrEqualTo(tailLength, 0);
+            Param.Check(headLength).GreaterThanOrEqualTo(0);
+            Param.Check(tailLength).GreaterThanOrEqualTo(0);
 
             return new StringBuilder(@this.Length + 3)
                   .AppendClippedVerbatimLiteral(@this, headLength, tailLength, useUnicodeEllipsis)
@@ -112,9 +112,9 @@ partial class CharReadOnlySpanExtensions
             int tailLength,
             bool useUnicodeEllipsis = false)
         {
-            InternalGuard.IsDefinedStringLiteralKind(literalKind);
-            Guard.IsGreaterThanOrEqualTo(headLength, 0);
-            Guard.IsGreaterThanOrEqualTo(tailLength, 0);
+            Param.Check(literalKind).Defined();
+            Param.Check(headLength).GreaterThanOrEqualTo(0);
+            Param.Check(tailLength).GreaterThanOrEqualTo(0);
 
             return new StringBuilder(@this.Length + 2)
                   .AppendClippedLiteral(literalKind, @this, headLength, tailLength, useUnicodeEllipsis)

@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis.Collections;
 
@@ -27,8 +27,8 @@ partial class EnumerableExtensions
         /// </exception>
         public IEnumerable<T> WhereNot(Func<T, bool> predicate)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(predicate);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(predicate);
             return @this.Where(x => !predicate(x));
         }
     }

@@ -3,7 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis.Fluency;
 
@@ -192,9 +192,9 @@ partial class FluentExtensions
             FluentAction<T>? @default,
             params (TValue Comparand, FluentAction<T>? Action)[] cases)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(comparer);
-            Guard.IsNotNull(cases);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(comparer);
+            Param.NotNull(cases);
 
             foreach (var (comparand, action) in cases)
             {
@@ -269,9 +269,9 @@ partial class FluentExtensions
             Action<T>? @default,
             params (TValue Comparand, Action<T>? Action)[] cases)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(comparer);
-            Guard.IsNotNull(cases);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(comparer);
+            Param.NotNull(cases);
 
             foreach (var (comparand, action) in cases)
             {

@@ -2,7 +2,6 @@
 // See the LICENSE file in the project root for full license information.
 
 using System;
-using CommunityToolkit.Diagnostics;
 
 namespace Louis.Diagnostics;
 
@@ -32,8 +31,8 @@ partial class ExceptionExtensions
         /// </remarks>
         public bool AnyCausingException(Func<Exception, bool> predicate)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(predicate);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(predicate);
 
             return AnyCausingExceptionCore(@this, predicate);
         }

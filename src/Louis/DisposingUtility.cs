@@ -3,8 +3,8 @@
 
 using System;
 using System.Threading.Tasks;
-using CommunityToolkit.Diagnostics;
 using Louis.Collections;
+using Louis.Diagnostics;
 
 namespace Louis;
 
@@ -93,7 +93,7 @@ public static class DisposingUtility
     /// <seealso cref="EnumerableExtensions.DisposeAllAsync"/>
     public static ValueTask DisposeAsync(params object?[] items)
     {
-        Guard.IsNotNull(items);
+        Param.NotNull(items);
 
         return items.DisposeAllAsync();
     }
@@ -114,7 +114,7 @@ public static class DisposingUtility
     /// <seealso cref="EnumerableExtensions.DisposeAll"/>
     public static void Dispose(params object?[] items)
     {
-        Guard.IsNotNull(items);
+        Param.NotNull(items);
 
         items.DisposeAll();
     }

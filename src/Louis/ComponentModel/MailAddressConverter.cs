@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Net.Mail;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis.ComponentModel;
 
@@ -40,7 +40,7 @@ public sealed class MailAddressConverter : SimpleStringConverter<MailAddress>
 
         [DoesNotReturn]
         static MailAddress ThrowOnInvalidString(string parameterName, Exception? innerException = null)
-            => ThrowHelper.ThrowArgumentException<MailAddress>(parameterName, "Value should be a valid e-mail address.", innerException);
+            => ArgumentException.ThrowNew<MailAddress>("Value should be a valid e-mail address.", parameterName, innerException);
     }
 
     private static string DoConvertToString(ITypeDescriptorContext? context, CultureInfo? culture, MailAddress value) => value.ToString();

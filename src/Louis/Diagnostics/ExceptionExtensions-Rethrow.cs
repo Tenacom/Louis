@@ -4,7 +4,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.ExceptionServices;
-using CommunityToolkit.Diagnostics;
 
 namespace Louis.Diagnostics;
 
@@ -21,7 +20,7 @@ partial class ExceptionExtensions
 #pragma warning disable CS8763 // A method marked [DoesNotReturn] should not return - ExceptionDispatchInfo.Throw has no DoesNotReturn.
         public void Rethrow()
         {
-            Guard.IsNotNull(@this, nameof(@this));
+            Param.NotNull(@this, nameof(@this));
 
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_0_OR_GREATER
             ExceptionDispatchInfo.Throw(@this);

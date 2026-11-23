@@ -5,7 +5,6 @@ using System;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Threading;
-using CommunityToolkit.Diagnostics;
 
 namespace Louis.Diagnostics;
 
@@ -54,7 +53,7 @@ partial class ExceptionExtensions
         /// </remarks>
         public bool IsCriticalError()
         {
-            Guard.IsNotNull(@this, nameof(@this));
+            Param.NotNull(@this, nameof(@this));
 
             return AnyCausingExceptionCore(@this, IsCriticalErrorCore);
         }

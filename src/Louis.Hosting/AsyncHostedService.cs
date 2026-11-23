@@ -4,7 +4,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 using Louis.Hosting.Internal;
 using Louis.Threading;
 using Microsoft.Extensions.Hosting;
@@ -25,8 +25,7 @@ public abstract partial class AsyncHostedService : AsyncService, IHostedService
     /// <param name="logger">An <see cref="ILogger"/> to use for logging.</param>
     protected AsyncHostedService(ILogger logger)
     {
-        Guard.IsNotNull(logger);
-        _logger = logger;
+        _logger = Param.NotNull(logger);
     }
 
     /// <summary>
@@ -66,10 +65,10 @@ public abstract partial class AsyncHostedService : AsyncService, IHostedService
             case AsyncServiceSetupResult.Unsuccessful when !FailOnSetupUnsuccessful:
                 break;
             case AsyncServiceSetupResult.Canceled:
-                ThrowHelper.ThrowOperationCanceledException("Service start was canceled.", cancellationToken);
+                OperationCanceledException.ThrowNew("Service start was canceled.", cancellationToken);
                 break;
             default:
-                ThrowHelper.ThrowInvalidOperationException($"Service start failed ({setupResult}).");
+                InvalidOperationException.ThrowNew($"Service start failed ({setupResult}).");
                 break;
         }
     }

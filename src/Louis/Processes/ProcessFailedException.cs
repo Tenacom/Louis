@@ -5,7 +5,7 @@
 
 using System;
 using System.Globalization;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis.Processes;
 
@@ -41,7 +41,7 @@ public class ProcessFailedException : Exception
 
     private static string FormatMessage(ProcessResult result)
     {
-        Guard.IsNotNull(result);
+        Param.NotNull(result);
 
         var exitCode = result.ExitCode.ToString(CultureInfo.InvariantCulture);
         return $"Process exited with code {exitCode}: {result.CommandLine}";

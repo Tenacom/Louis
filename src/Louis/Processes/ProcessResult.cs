@@ -4,7 +4,7 @@
 #if NET8_0_OR_GREATER
 
 using System;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis.Processes;
 
@@ -37,14 +37,10 @@ public sealed class ProcessResult
         string standardError,
         TimeSpan elapsed)
     {
-        Guard.IsNotNull(commandLine);
-        Guard.IsNotNull(standardOutput);
-        Guard.IsNotNull(standardError);
-
-        CommandLine = commandLine;
+        CommandLine = Param.NotNull(commandLine);
         ExitCode = exitCode;
-        StandardOutput = standardOutput;
-        StandardError = standardError;
+        StandardOutput = Param.NotNull(standardOutput);
+        StandardError = Param.NotNull(standardError);
         Elapsed = elapsed;
     }
 

@@ -2,7 +2,7 @@
 // See the LICENSE file in the project root for full license information.
 
 using System;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis.Fluency;
 
@@ -28,8 +28,8 @@ partial class FluentExtensions
         /// </exception>
         public T IfNotNullOrEmpty(string? arg, FluentAction<T, string> then)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(then);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(then);
 
             return arg is { Length: > 0 } ? then(@this, arg) : @this;
         }
@@ -48,8 +48,8 @@ partial class FluentExtensions
         /// </exception>
         public T IfNotNullOrEmpty(string? arg, Action<T, string> then)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(then);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(then);
 
             if (arg is { Length: > 0 })
             {

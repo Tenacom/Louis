@@ -2,7 +2,7 @@
 // See the LICENSE file in the project root for full license information.
 
 using System;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis.Fluency;
 
@@ -24,8 +24,8 @@ partial class FluentExtensions
         /// </exception>
         public T Invoke(Action<T> action)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(action);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(action);
 
             action(@this);
             return @this;
@@ -45,8 +45,8 @@ partial class FluentExtensions
         /// </exception>
         public T Invoke<TArg>(TArg arg, Action<T, TArg> action)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(action);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(action);
 
             action(@this, arg);
             return @this;
@@ -68,8 +68,8 @@ partial class FluentExtensions
         /// </exception>
         public T Invoke<TArg1, TArg2>(TArg1 arg1, TArg2 arg2, Action<T, TArg1, TArg2> action)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(action);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(action);
 
             action(@this, arg1, arg2);
             return @this;
@@ -93,8 +93,8 @@ partial class FluentExtensions
         /// </exception>
         public T Invoke<TArg1, TArg2, TArg3>(TArg1 arg1, TArg2 arg2, TArg3 arg3, Action<T, TArg1, TArg2, TArg3> action)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(action);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(action);
 
             action(@this, arg1, arg2, arg3);
             return @this;
@@ -125,8 +125,8 @@ partial class FluentExtensions
             TArg4 arg4,
             Action<T, TArg1, TArg2, TArg3, TArg4> action)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(action);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(action);
 
             action(@this, arg1, arg2, arg3, arg4);
             return @this;

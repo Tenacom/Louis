@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Diagnostics" />
     <PackageReference Include="PolySharp" PrivateAssets="all" />
   </ItemGroup>
 

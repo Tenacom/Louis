@@ -5,7 +5,7 @@ using System;
 using System.ComponentModel;
 using System.Globalization;
 using System.Net.Mail;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis.ComponentModel;
 
@@ -24,7 +24,7 @@ public sealed class MailAddressCollectionConverter : SimpleStringConverter<MailA
 
     private static MailAddressCollection DoConvertFromString(ITypeDescriptorContext? context, CultureInfo? culture, string value)
     {
-        Guard.IsNotEmpty(value);
+        Param.Check(value).NotEmpty();
         var result = new MailAddressCollection();
         try
         {
@@ -32,7 +32,10 @@ public sealed class MailAddressCollectionConverter : SimpleStringConverter<MailA
         }
         catch (FormatException e)
         {
-            ThrowHelper.ThrowArgumentException(nameof(value), "Value should be a valid e-mail address, or valid e-mail addresses separated by commas.", e);
+            ArgumentException.ThrowNew(
+                "Value should be a valid e-mail address, or valid e-mail addresses separated by commas.",
+                nameof(value),
+                e);
         }
 
         return result;

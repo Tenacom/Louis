@@ -2,7 +2,7 @@
 // See the LICENSE file in the project root for full license information.
 
 using System;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis.Fluency;
 
@@ -29,8 +29,8 @@ partial class FluentExtensions
         public T IfNotNull<T1>(T1? arg, FluentAction<T, T1> then)
             where T1 : struct
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(then);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(then);
 
             return arg is null ? @this : then(@this, arg.Value);
         }
@@ -51,8 +51,8 @@ partial class FluentExtensions
         public T IfNotNull<T1>(T1? arg, Action<T, T1> then)
             where T1 : struct
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(then);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(then);
 
             if (arg is not null)
             {

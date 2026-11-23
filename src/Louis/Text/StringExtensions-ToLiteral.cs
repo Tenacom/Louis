@@ -3,6 +3,7 @@
 
 using System;
 using System.Text;
+using Louis.Diagnostics;
 using Louis.Text.Internal;
 
 namespace Louis.Text;
@@ -52,7 +53,7 @@ partial class StringExtensions
         /// <seealso cref="ToVerbatimLiteral"/>
         public string ToLiteral(StringLiteralKind literalKind)
         {
-            InternalGuard.IsDefinedStringLiteralKind(literalKind);
+            Param.Check(literalKind).Defined();
 
             return @this is null
                 ? InternalConstants.QuotedNull

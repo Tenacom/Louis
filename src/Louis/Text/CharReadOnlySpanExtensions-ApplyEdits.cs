@@ -3,7 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 using Louis.Text.Internal;
 
 namespace Louis.Text;
@@ -37,7 +37,7 @@ partial class CharReadOnlySpanExtensions
         /// <seealso cref="StringExtensions.ApplyEdits"/>
         public string ApplyEdits(IEnumerable<TextEdit> edits)
         {
-            Guard.IsNotNull(edits);
+            Param.NotNull(edits);
 
             return TextEditHelper.Apply(@this, TextEditHelper.SortAndCheck(edits, @this.Length));
         }

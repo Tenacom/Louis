@@ -3,7 +3,7 @@
 
 using System;
 using System.Text;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis.IO;
 
@@ -25,11 +25,8 @@ public sealed class TextFileContent
     /// </exception>
     public TextFileContent(string text, Encoding encoding)
     {
-        Guard.IsNotNull(text);
-        Guard.IsNotNull(encoding);
-
-        Text = text;
-        Encoding = encoding;
+        Text = Param.NotNull(text);
+        Encoding = Param.NotNull(encoding);
     }
 
     /// <summary>

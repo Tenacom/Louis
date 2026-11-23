@@ -2,7 +2,7 @@
 // See the LICENSE file in the project root for full license information.
 
 using System;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis.Fluency;
 
@@ -24,8 +24,8 @@ partial class FluentExtensions
         /// </exception>
         public T Chain(FluentAction<T> func)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(func);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(func);
 
             return func(@this);
         }
@@ -44,8 +44,8 @@ partial class FluentExtensions
         /// </exception>
         public T Chain<TArg>(TArg arg, FluentAction<T, TArg> func)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(func);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(func);
 
             return func(@this, arg);
         }
@@ -66,8 +66,8 @@ partial class FluentExtensions
         /// </exception>
         public T Chain<TArg1, TArg2>(TArg1 arg1, TArg2 arg2, FluentAction<T, TArg1, TArg2> func)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(func);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(func);
 
             return func(@this, arg1, arg2);
         }
@@ -94,8 +94,8 @@ partial class FluentExtensions
             TArg3 arg3,
             FluentAction<T, TArg1, TArg2, TArg3> func)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(func);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(func);
 
             return func(@this, arg1, arg2, arg3);
         }
@@ -125,8 +125,8 @@ partial class FluentExtensions
             TArg4 arg4,
             FluentAction<T, TArg1, TArg2, TArg3, TArg4> func)
         {
-            Guard.IsNotNull(@this, nameof(@this));
-            Guard.IsNotNull(func);
+            Param.NotNull(@this, nameof(@this));
+            Param.NotNull(func);
 
             return func(@this, arg1, arg2, arg3, arg4);
         }

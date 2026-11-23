@@ -3,6 +3,7 @@
 
 using System;
 using System.Globalization;
+using Louis.Diagnostics;
 using Louis.Text.Internal;
 
 namespace Louis.Text;
@@ -86,7 +87,7 @@ partial class CharReadOnlySpanExtensions
         /// nor <see cref="StringLiteralKind.Verbatim"/>.</exception>
         public int ComputeLiteralLength(StringLiteralKind literalKind)
         {
-            InternalGuard.IsDefinedStringLiteralKind(literalKind);
+            Param.Check(literalKind).Defined();
 
             return literalKind switch {
                 StringLiteralKind.Quoted => @this.ComputeQuotedLiteralLength(),

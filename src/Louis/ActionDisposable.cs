@@ -3,7 +3,7 @@
 
 using System;
 using System.Threading;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis;
 
@@ -23,8 +23,7 @@ public class ActionDisposable : IDisposable
     /// <seealso cref="ActionAsyncDisposable"/>
     public ActionDisposable(Action onDispose)
     {
-        Guard.IsNotNull(onDispose);
-        _onDispose = onDispose;
+        _onDispose = Param.NotNull(onDispose);
     }
 
     /// <summary>

@@ -3,7 +3,7 @@
 
 using System;
 using System.Globalization;
-using CommunityToolkit.Diagnostics;
+using Louis.Diagnostics;
 
 namespace Louis;
 
@@ -35,7 +35,7 @@ partial class DateTimeExtensions
         /// <seealso cref="DateTimeFormatInfo.FirstDayOfWeek"/>
         public DateTime GetLastDayOfWeek(CultureInfo culture)
         {
-            Guard.IsNotNull(culture);
+            Param.NotNull(culture);
             return @this.GetLastDayOfWeek(culture.DateTimeFormat);
         }
 
@@ -49,7 +49,7 @@ partial class DateTimeExtensions
         /// <seealso cref="DateTimeFormatInfo.FirstDayOfWeek"/>
         public DateTime GetLastDayOfWeek(DateTimeFormatInfo dateTimeFormat)
         {
-            Guard.IsNotNull(dateTimeFormat);
+            Param.NotNull(dateTimeFormat);
             return @this.GetLastDayOfWeek(dateTimeFormat.FirstDayOfWeek);
         }
 
