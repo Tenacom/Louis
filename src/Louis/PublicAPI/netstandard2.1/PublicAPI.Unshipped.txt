@@ -995,8 +995,10 @@ static Louis.Threading.Deadline.Eternal.get -> Louis.Threading.Deadline
 static Louis.Threading.Deadline.Expired.get -> Louis.Threading.Deadline
 static Louis.Threading.Deadline.operator !=(Louis.Threading.Deadline a, Louis.Threading.Deadline b) -> bool
 static Louis.Threading.Deadline.operator ==(Louis.Threading.Deadline a, Louis.Threading.Deadline b) -> bool
+static Louis.Threading.Deadline.SetAfter(Louis.Threading.Deadline deadline, System.TimeSpan duration) -> Louis.Threading.Deadline
 static Louis.Threading.Deadline.SetAt(System.DateTimeOffset instant) -> Louis.Threading.Deadline
 static Louis.Threading.Deadline.SetAt(System.DateTimeOffset instant, System.TimeProvider! timeProvider) -> Louis.Threading.Deadline
+static Louis.Threading.Deadline.SetBefore(Louis.Threading.Deadline deadline, System.TimeSpan duration) -> Louis.Threading.Deadline
 static Louis.Threading.Deadline.SetIn(System.TimeSpan duration) -> Louis.Threading.Deadline
 static Louis.Threading.Deadline.SetIn(System.TimeSpan duration, System.TimeProvider! timeProvider) -> Louis.Threading.Deadline
 System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute (forwarded, contained in netstandard)

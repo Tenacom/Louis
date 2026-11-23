@@ -235,6 +235,79 @@ public readonly struct Deadline : IEquatable<Deadline>
             : Before(timeProvider, timestamp, frequency, (ulong)-timeLeft.Ticks);
     }
 
+    /// <summary>
+    /// Creates a deadline that expires a specified time after a specified deadline, on the same clock.
+    /// </summary>
+    /// <param name="deadline">The deadline that the new deadline follows.</param>
+    /// <param name="duration">The time from the instant of <paramref name="deadline"/> to the instant of the new deadline,
+    /// or <see cref="Timeout.InfiniteTimeSpan"/> for a deadline that never expires.</param>
+    /// <returns>A deadline on the clock of <paramref name="deadline"/>,
+    /// or <see cref="Eternal"/> if <paramref name="duration"/> is <see cref="Timeout.InfiniteTimeSpan"/>.
+    /// If <paramref name="deadline"/> is <see cref="Eternal"/> or <see cref="Expired"/>,
+    /// the return value is <paramref name="deadline"/>.</returns>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="duration"/> is negative,
+    /// and is not <see cref="Timeout.InfiniteTimeSpan"/>.</exception>
+    /// <remarks>
+    /// <para>This method adds <paramref name="duration"/> to the instant of <paramref name="deadline"/>,
+    /// and does not read the clock. If <paramref name="duration"/> is <see cref="TimeSpan.Zero"/>,
+    /// the new deadline is equal to <paramref name="deadline"/>.</para>
+    /// <para><see cref="Eternal"/> and <see cref="Expired"/> have no instant.
+    /// This method returns each of them as it is, even if <paramref name="duration"/>
+    /// is <see cref="Timeout.InfiniteTimeSpan"/>.</para>
+    /// <para>If the clock has no timestamp for the new instant, because <paramref name="duration"/> is too long,
+    /// this method returns <see cref="Eternal"/>.</para>
+    /// <para>For a deadline that expires before <paramref name="deadline"/>, call <see cref="SetBefore"/>.</para>
+    /// </remarks>
+    public static Deadline SetAfter(Deadline deadline, TimeSpan duration)
+    {
+        if (duration == Timeout.InfiniteTimeSpan)
+        {
+            return deadline._timeProvider is null ? deadline : Eternal;
+        }
+
+        Param.Check(duration).GreaterThanOrEqualTo(TimeSpan.Zero, NegativeDurationMessage);
+        return deadline._timeProvider is { } timeProvider
+            ? After(timeProvider, deadline._timestamp, (ulong)timeProvider.TimestampFrequency, (ulong)duration.Ticks)
+            : deadline;
+    }
+
+    /// <summary>
+    /// Creates a deadline that expires a specified time before a specified deadline, on the same clock.
+    /// </summary>
+    /// <param name="deadline">The deadline that the new deadline precedes.</param>
+    /// <param name="duration">The time from the instant of the new deadline to the instant of <paramref name="deadline"/>,
+    /// or <see cref="Timeout.InfiniteTimeSpan"/> for a deadline that has expired.</param>
+    /// <returns>A deadline on the clock of <paramref name="deadline"/>,
+    /// or <see cref="Expired"/> if <paramref name="duration"/> is <see cref="Timeout.InfiniteTimeSpan"/>.
+    /// If <paramref name="deadline"/> is <see cref="Eternal"/> or <see cref="Expired"/>,
+    /// the return value is <paramref name="deadline"/>.</returns>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="duration"/> is negative,
+    /// and is not <see cref="Timeout.InfiniteTimeSpan"/>.</exception>
+    /// <remarks>
+    /// <para>This method subtracts <paramref name="duration"/> from the instant of <paramref name="deadline"/>,
+    /// and does not read the clock. The new deadline may have expired already.
+    /// If <paramref name="duration"/> is <see cref="TimeSpan.Zero"/>,
+    /// the new deadline is equal to <paramref name="deadline"/>.</para>
+    /// <para><see cref="Eternal"/> and <see cref="Expired"/> have no instant.
+    /// This method returns each of them as it is, even if <paramref name="duration"/>
+    /// is <see cref="Timeout.InfiniteTimeSpan"/>.</para>
+    /// <para>If the clock has no timestamp for the new instant, because <paramref name="duration"/> is too long,
+    /// this method returns <see cref="Expired"/>.</para>
+    /// <para>For a deadline that expires after <paramref name="deadline"/>, call <see cref="SetAfter"/>.</para>
+    /// </remarks>
+    public static Deadline SetBefore(Deadline deadline, TimeSpan duration)
+    {
+        if (duration == Timeout.InfiniteTimeSpan)
+        {
+            return deadline._timeProvider is null ? deadline : Expired;
+        }
+
+        Param.Check(duration).GreaterThanOrEqualTo(TimeSpan.Zero, NegativeDurationMessage);
+        return deadline._timeProvider is { } timeProvider
+            ? Before(timeProvider, deadline._timestamp, (ulong)timeProvider.TimestampFrequency, (ulong)duration.Ticks)
+            : deadline;
+    }
+
     /// <inheritdoc/>
     public override bool Equals(object? obj) => obj is Deadline other && Equals(other);
 
@@ -303,7 +376,7 @@ public readonly struct Deadline : IEquatable<Deadline>
             : Expired;
     }
 
-    // Converts a duration from ticks to the units of a clock, and rounds it up, so that no deadline expires early.
+    // Converts a duration from ticks to the units of a clock, and rounds it up, so that the duration never gets shorter.
     // Returns false when the result exceeds maxUnits.
     private static bool TryConvertToUnits(ulong ticks, ulong frequency, ulong maxUnits, out ulong units)
     {
