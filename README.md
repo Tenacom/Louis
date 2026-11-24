@@ -38,6 +38,17 @@ Contributing:
 L.o.U.I.S. is a collection of types commonly needed in the development of .NET libraries and applications.
 It is pronounced _LOO-iss_, like the name Louis.
 
+## Supported frameworks
+
+L.o.U.I.S. supports **.NET versions** that [Microsoft supports](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core).
+
+**.NET Standard 2.0** is supported for toolchain components, such as source generators.  
+_Older .NET versions, Mono, and Unity are explicitly not supported_, even where NuGet gives a project the .NET Standard 2.0 build.
+
+**.NET Framework 4.8** is supported, but L.o.U.I.S. may end its support before the [end-of-life date](https://learn.microsoft.com/en-us/lifecycle/products/microsoft-net-framework) of the framework.
+
+No issue that asks for support of another framework will be accepted.
+
 ## Documentation
 
 The [API reference](https://tenacom.github.io/Louis/) describes every type of the L.o.U.I.S. packages, as of the stable release with the highest version.

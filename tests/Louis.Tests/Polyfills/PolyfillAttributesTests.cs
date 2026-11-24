@@ -33,7 +33,7 @@ internal sealed class PolyfillAttributesTests
         => await AssertForwardedToBcl(StackTraceHidden);
 #else
     [Test]
-    public async Task StackTraceHiddenAttribute_IsPublicUnlessBuildServesFrameworkThatHasIt()
+    public async Task StackTraceHiddenAttribute_IsPublicAttributeForTypesAndMethods()
     {
         const AttributeTargets validOn = AttributeTargets.Class
             | AttributeTargets.Method
@@ -41,11 +41,7 @@ internal sealed class PolyfillAttributesTests
             | AttributeTargets.Struct;
         var type = await AssertAttributeFor(StackTraceHidden, validOn);
 
-#if NETSTANDARD2_1_OR_GREATER
-        await Assert.That(type.IsPublic).IsFalse();
-#else
         await Assert.That(type.IsPublic).IsTrue();
-#endif
     }
 
     private static async Task<Type> AssertAttributeFor(string name, AttributeTargets validOn)
