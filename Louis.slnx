@@ -43,11 +43,9 @@
     <Project Path="tests/Louis.Tests/Louis.Tests.csproj" />
     <Project Path="tests/Louis.Tests.ChildProcess/Louis.Tests.ChildProcess.csproj" />
     <Project Path="tests/Louis.Tests.NetStandard20/Louis.Tests.NetStandard20.csproj" />
-    <Project Path="tests/Louis.Tests.NetStandard21/Louis.Tests.NetStandard21.csproj" />
     <Project Path="tests/Louis.Generators.Tests/Louis.Generators.Tests.csproj" />
     <Project Path="tests/Louis.Hosting.Tests/Louis.Hosting.Tests.csproj" />
     <Project Path="tests/Louis.Hosting.Tests.NetStandard20/Louis.Hosting.Tests.NetStandard20.csproj" />
-    <Project Path="tests/Louis.Hosting.Tests.NetStandard21/Louis.Hosting.Tests.NetStandard21.csproj" />
     <Project Path="tests/Louis.Testing.Tests/Louis.Testing.Tests.csproj" />
   </Folder>
 </Solution>

@@ -268,19 +268,13 @@ public static class TextFileUtility
     {
         cancellationToken.ThrowIfCancellationRequested();
         using var bytes = new MemoryStream();
-        var stream = new FileStream(
+        using (var stream = new FileStream(
             path,
             FileMode.Open,
             FileAccess.Read,
             FileShare.Read,
             FileBufferSize,
-            FileOptions.Asynchronous | FileOptions.SequentialScan);
-
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
-        await using (stream.ConfigureAwait(false))
-#else
-        using (stream)
-#endif
+            FileOptions.Asynchronous | FileOptions.SequentialScan))
         {
             await stream.CopyToAsync(bytes, CopyBufferSize, cancellationToken).ConfigureAwait(false);
         }
