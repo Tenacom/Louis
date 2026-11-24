@@ -82,8 +82,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Known problems introduced by this release
 
-- In a project that targets .NET 8.0 or .NET 9.0, both out of support, a reference to `Louis` makes the name `TimeProvider` ambiguous (CS0433).
-
 ## [2.0.31](https://github.com/Tenacom/Louis/releases/tag/2.0.31) (2024-02-26)
 
 ### New features
