@@ -51,6 +51,21 @@ The namespaces in their own right:
 
 No rule covers any other case yet, such as helpers for types in `Microsoft.Extensions.<name>`. Ask the maintainer when one arises.
 
+## Supported frameworks
+
+Louis supports a project on one of these frameworks, and on no other:
+
+- A .NET version that Microsoft supports. The [.NET Support Policy](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core) lists them.
+- .NET Standard 2.0, when the project is a toolchain component, such as a source generator.
+- .NET Framework 4.8. Louis may end this support before the end-of-life date of the framework.
+
+`README.md` states the same to a user, under "Supported frameworks". Change both texts together.
+
+- NuGet gives a build to a project on an unsupported framework too. A project on .NET 8 gets the `netstandard2.0` build, for example. A successful restore does not make a framework supported.
+- A defect that only a project on an unsupported framework meets is not a defect of Louis. No code works around it, no test covers it, no changelog bullet lists it, and a review does not report it.
+- A finding about such a defect is rejected. The reply quotes the section of `README.md`.
+- An issue that asks for support of another framework is not accepted.
+
 ## Target frameworks
 
 The `TargetFrameworks` property of each project file is the authority on the target frameworks of the project. This file does not list them.
