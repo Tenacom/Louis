@@ -287,6 +287,11 @@ if (Directory.Exists(cachesPath))
 }
 
 Console.Error.WriteLine($"info: running inspectcode at severity {severity} (this takes a while)...");
+
+// The source generator of TUnit writes one file per test class, and one per test that a class inherits. A project
+// has those files once per target framework, and inspectcode spends most of its time on them, where no finding is
+// wanted. With EnableTUnitSourceGeneration set to false, a target of the TUnit package removes the generator from
+// the project. The property goes to inspectcode alone, so the build above keeps the generator.
 string[] inspectArguments = [
     "dnx",
     "JetBrains.ReSharper.GlobalTools",
@@ -296,7 +301,7 @@ string[] inspectArguments = [
     $"--severity={severity}",
     $"--output={sarifPath}",
     "--format=Sarif",
-    $"--properties:Configuration={BuildConfiguration}",
+    $"--properties:Configuration={BuildConfiguration};EnableTUnitSourceGeneration=false",
     "--no-build",
     solutionFileName,
     "--yes",

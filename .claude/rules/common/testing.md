@@ -31,7 +31,6 @@ Framework-specific code can make one call site reach different code per build. A
 - The test framework is TUnit on Microsoft.Testing.Platform. Use TUnit's built-in assertions, `await Assert.That(...)`, never FluentAssertions.
 - A test that swaps process-global state, such as console writers or the current directory, must be marked `[NotInParallel]`.
 - A synchronous method and its asynchronous counterpart share their tests. An abstract base class holds the tests, and calls an abstract method that returns a `Task`. One class per method under test derives from the base class, with `[InheritsTests]`.
-- With `[InheritsTests]`, multiply the number of tests of the base class by the number of classes that derive from it. Keep the product at 60 or below, and never let it exceed 80. TUnit generates one source file for each inherited test of each derived class. With many such files, the ReSharper phase of the sanity check takes an unacceptably long time to complete. Tests over the limit go in one test class with a parameter, which `[Arguments]` on the class supplies to its primary constructor.
 
 ## Tests on more than one platform
 
