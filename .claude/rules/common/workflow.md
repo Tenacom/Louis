@@ -176,7 +176,7 @@ When a finding is reported, it is your responsibility to evaluate it and decide 
 Findings come in two kinds, and they are not verified the same way.
 
 - **Claims about what the code does**, such as a flag's effect, an inheritance rule, a target's execution order. These live in the repo and its dependencies. Verify them there before acting on them.
-- **Claims about what the project needs**, such as "nobody asks for this", "that case never comes up", "the capability is unused". The reviewer might have extrapolated the premise from current code, leaving no room for future needs. Do not take such claims at face value. Let's verify them together. `design-principles.md` settles some of them.
+- **Claims about what the project needs**, such as "nobody asks for this", "that case never comes up", "the capability is unused". The reviewer might have extrapolated the premise from current code, leaving no room for future needs. Do not take such claims at face value. Let's verify them together. `design-principles.md` settles some of them. `architecture.md` settles a claim about a framework: when it states the frameworks the repository supports, a finding about any other framework is rejected with that statement.
 
 A finding about a commit message or about a branch name is not fixed. Present it as a rejection in the plan. The reply names the cost of the change: a rewrite of the history of the branch, or a new PR.
 
